@@ -15,16 +15,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[120px]" />
 
         <div className="relative max-w-4xl mx-auto text-center">
-          {/* Crown Logo */}
-          <div className="flex justify-center mb-6 animate-fade-in">
-            <Image
-              src={siteConfig.logo}
-              alt="Civic Noir"
-              width={48}
-              height={48}
-              className="opacity-60"
-            />
-          </div>
+      
 
           {/* Genre marker */}
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in">
