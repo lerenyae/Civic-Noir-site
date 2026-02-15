@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { siteConfig, navigation } from "@/lib/content";
@@ -15,13 +14,7 @@ export default function Header() {
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo + Name */}
         <Link href="/" className="group flex items-center gap-3">
-          <Image
-            src={siteConfig.logo}
-            alt="Civic Noir"
-            width={28}
-            height={28}
-            className="opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-          />
+          
           <span className="font-serif text-lg text-bone-200 tracking-wide group-hover:text-gold transition-colors duration-300 hidden sm:inline">
             {siteConfig.name}
           </span>
