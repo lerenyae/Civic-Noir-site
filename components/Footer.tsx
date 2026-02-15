@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Social / Newsletter */}
           <div className="flex flex-col gap-4">
             <a
-              href={siteConfig.links.newsletter}
+              href="#newsletter"
               className="nav-link hover:text-gold"
             >
               Newsletter
