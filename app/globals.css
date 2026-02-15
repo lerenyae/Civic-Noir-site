@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-noir-950 text-bone font-sans;
+    font-weight: 300;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-bone;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-noir-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-noir-600;
+  }
+}
+
+@layer components {
+  .section-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .nav-link {
+    @apply text-bone-300/60 text-xs font-sans font-light tracking-ultra uppercase
+      hover:text-gold transition-colors duration-300;
+  }
+
+  .nav-link-active {
+    @apply text-gold;
+  }
+
+  .gold-rule {
+    @apply h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-block px-8 py-3 border border-gold/40 text-gold text-xs font-sans
+      font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold/60
+      transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply inline-block px-8 py-3 border border-bone-300/20 text-bone-300/70 text-xs
+      font-sans font-light tracking-ultra uppercase hover:border-bone-300/40
+      hover:text-bone transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  .delay-600 {
+    animation-delay: 0.6s;
+  }
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+}
