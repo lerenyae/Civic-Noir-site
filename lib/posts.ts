@@ -83,34 +83,5 @@ Fiction lets you trace that distance. Not to expose it — journalism does that.
 
 That's what *Contempt* is built to hold. Not a story about bad people in a broken system. A story about the system itself — how it recruits, how it records, and what happens to the names caught inside it when the structure starts to shift.`,
   },
-  {
-    slug: "progress-update-march-2026",
-    title: "Contempt — Progress Update, March 2026",
-    category: "Progress Update",
-    date: "March 2026",
-    excerpt: "Chapters One and Two are through the full editorial pipeline. The pipeline is working.",
-    content: `Quick status on where things stand.
-
-## The Manuscript
-
-Chapters One and Two are through the full editorial pipeline — structural analysis, legal accuracy review, civic noir voice audit, revision planning. The pipeline is working. It catches things I'd miss on my own: jurisdiction errors, moments where the prose slips into conventional thriller mode, scenes that earn their space versus scenes burning pages on atmosphere that doesn't do work.
-
-Chapter One is tight. The Georgetown graduation, the courthouse sequence in Snow Hill, the collapse — the bones are solid. Revisions are focused on trimming the middle (the driving sequence, lobby descriptions) and keeping the collapse grounded in institutional response rather than internal psychology.
-
-Chapter Two needs more surgery. The funeral sequence works. Vincent's arrival works. But there's an Elaine backstory section that drags and a briefcase description that stalls momentum. The Maya car scene — the sonogram reveal — lands, but the chapter needs to earn that moment faster.
-
-The trial dossier is complete. Full crime timetable for Pinnacle Investments (1987–2005), Antonio's arrest timeline, the Han/Leo tape at Iron Rail Diner, the Davidson & Associates collapse. This is the backbone the plot hangs on. Every chapter has to be consistent with it.
-
-## The Process
-
-I'm running each chapter through a custom analysis pipeline calibrated to editorial standards I actually respect. It checks pacing, dialogue-to-narrative ratio, legal accuracy against Maryland procedures circa 2006, and adherence to civic noir principles — system over hero, observed not explained, atmosphere as argument.
-
-It's slow. It's supposed to be. Every chapter gets tighter because the pipeline doesn't let anything slide. A line like "the floor tipped just enough to erase direction" gets flagged not because it's bad writing but because it's the wrong *kind* of writing for this book. Civic noir doesn't live inside a character's head. It lives in the building around them.
-
-## What's Next
-
-Chapters Three and Four are in draft. Han's return chapter (the EagleEye analysis) is being refined — property crimes, the O'Connell's Boxing scene. Building out the blog with more behind-the-scenes content and thematic essays.
-
-More when there's more to show.`,
-  },
+  ,
 ];
