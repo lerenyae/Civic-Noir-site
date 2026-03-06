@@ -1,11 +1,4 @@
-export type Post = {
-  slug: string;
-  title: string;
-  category: string;
-  date: string;
-  excerpt: string;
-  content: string;
-};
+export type Post = { slug: string; title: string; category: string; date: string; excerpt: string; content: string };
 
 export const posts: Post[] = [
   {
@@ -13,8 +6,7 @@ export const posts: Post[] = [
     title: "Contempt — Publication Update",
     category: "Publication Update",
     date: "March 6, 2026",
-    excerpt:
-      "The manuscript is currently in final editing. Cover art design is in progress. The novel remains on schedule.",
+    excerpt: "The manuscript is currently in final editing. Cover art design is in progress. The novel remains on schedule.",
     content: `The manuscript is currently in final editing with a senior editor specializing in complex fiction, including world-building and multi-layered narratives. Editing is on track for completion by mid-March. Cover art design is in progress concurrently.
 
 The novel remains on schedule for print and circulation by May 1, 2026, with a summer 2026 publication target.`,
@@ -24,8 +16,7 @@ The novel remains on schedule for print and circulation by May 1, 2026, with a s
     title: "The Architecture of Contempt: Building a Civic Noir Novel",
     category: "Behind the Scenes",
     date: "March 2026",
-    excerpt:
-      "I stopped writing about a man and started writing about a system. Shawn Davidson doesn't drive the story. Baltimore does.",
+    excerpt: "I stopped writing about a man and started writing about a system. Shawn Davidson doesn't drive the story. Baltimore does.",
     content: `There's a moment in every draft where the architecture reveals itself. Not the plot — that's scaffolding. I mean the thing underneath. The load-bearing walls.
 
 For *Contempt*, that moment came when I stopped writing about a man and started writing about a system. Shawn Davidson doesn't drive the story. Baltimore does. The courthouse does. The docket, the magnetometer lane, the deputies posted in places that used to be empty wall — those are the real characters. Shawn just happens to be standing inside them when the floor shifts.
@@ -63,8 +54,7 @@ More soon.`,
     title: "Your Name Is Either Clean, or It's Useful",
     category: "Thematic Essay",
     date: "March 2026",
-    excerpt:
-      "The distance between civic power and civic corruption is measured in how many names a decision has to pass through.",
+    excerpt: "The distance between civic power and civic corruption is measured in how many names a decision has to pass through.",
     content: `There's a line in *Contempt* that keeps pulling the rest of the book toward it. A father tells a room full of Georgetown graduates — cameras rolling, applause scheduled — that in the world they're about to enter, your name is either clean, or it's useful. Not both. Not sometimes. That's the deal.
 
 It's the kind of line that sounds like advice. It isn't. It's a confession.
@@ -98,8 +88,7 @@ That's what *Contempt* is built to hold. Not a story about bad people in a broke
     title: "Contempt — Progress Update, March 2026",
     category: "Progress Update",
     date: "March 2026",
-    excerpt:
-      "Chapters One and Two are through the full editorial pipeline. The pipeline is working. It catches things I'd miss on my own.",
+    excerpt: "Chapters One and Two are through the full editorial pipeline. The pipeline is working.",
     content: `Quick status on where things stand.
 
 ## The Manuscript
