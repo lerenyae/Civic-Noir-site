@@ -30,7 +30,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-16 items-start">
             <SectionReveal delay={100}>
               <div className="relative aspect-[2/3] overflow-hidden border border-bone-300/5">
-                <Image src={contempt.cover} alt={contempt.title} fill className="object-cover" priority />
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+                  <source src="/covers/contempt-loop.mp4" type="video/mp4" />
+                </video>
               </div>
             </SectionReveal>
             <SectionReveal delay={200}>
