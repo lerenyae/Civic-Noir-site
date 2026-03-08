@@ -23,11 +23,7 @@ const typeColors: Record<RecordType, string> = {
   evidence: "rgba(200,100,100,0.5)",
 };
 
-export const metadata = {
-  title: "The Record — Contempt",
-  description:
-    "An in-universe archive of documents from the world of Contempt. Court filings, police blotters, internal memos, and press coverage — all of it public record.",
-};
+
 
 export default function TheRecordIndex() {
   return (
