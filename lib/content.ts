@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://lerenyaewatkins.com",
   ogImage: "/covers/contempt-cover.png",
   logo: "/logo-crown.png",
-  links: { instagram: "https://instagram.com/lerenyaewatkins", twitter: "https://x.com/lerenyaewatkins", email: "reigningwordspublishing@gmail.com" },
+links: { instagram: "https://instagram.com/reigningwords", twitter: "https://x.com/lerenyaew", email: "reigningwordspublishing@gmail.com" },
   newsletter: { hookLine: "First chapters. Process notes. No noise.", email: "reigningwordspublishing@gmail.com" },
 };
 
