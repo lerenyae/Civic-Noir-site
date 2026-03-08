@@ -19,7 +19,7 @@ const typeColors: Record<RecordType, string> = {
   article: "rgba(180,200,160,0.5)",
   blotter: "rgba(100,200,100,0.4)",
   memo: "rgba(200,150,100,0.5)",
-  obituary: "rgba(180,160,200,0.5)",
+  commendation: "rgba(180,160,200,0.5)",
   evidence: "rgba(200,100,100,0.5)",
 };
 
