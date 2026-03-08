@@ -16,7 +16,7 @@ export default function Home() {
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in">{siteConfig.tagline}</p>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h1>
           <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
-          <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.<br />Lived-in realism.</p>
+          <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
             <Link href="/books" className="btn-primary">The Work</Link>
             <a href="#newsletter" className="btn-secondary">Stay in the circuit</a>
