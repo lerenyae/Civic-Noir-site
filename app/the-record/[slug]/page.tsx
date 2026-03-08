@@ -1,14 +1,12 @@
+export const dynamic = "force-dynamic";
+
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getRecord, records } from "@/lib/records";
+import { getRecord } from "@/lib/records";
 import { RecordRenderer } from "@/components/records/RecordRenderer";
 
 interface Props {
   params: { slug: string };
-}
-
-export async function generateStaticParams() {
-  return records.map((r) => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
