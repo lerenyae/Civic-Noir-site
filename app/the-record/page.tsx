@@ -10,6 +10,7 @@ const typeLabels: Record<RecordType, string> = {
   article: "Press",
   blotter: "Police Record",
   memo: "Internal Memo",
+  commendation: "Commendation",  // ← add this line
   evidence: "Evidence",
 };
 
