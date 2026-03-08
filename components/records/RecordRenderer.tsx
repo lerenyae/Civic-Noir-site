@@ -3,7 +3,7 @@ import { FilingRenderer } from "./FilingRenderer";
 import { ArticleRenderer } from "./ArticleRenderer";
 import { BlotterRenderer } from "./BlotterRenderer";
 import { MemoRenderer } from "./MemoRenderer";
-import { ObituaryRenderer } from "./ObituaryRenderer";
+import { CommendationRenderer } from "./CommendationRenderer";
 
 export function RecordRenderer({ record }: { record: RecordEntry }) {
   switch (record.type) {
@@ -15,9 +15,13 @@ export function RecordRenderer({ record }: { record: RecordEntry }) {
       return <BlotterRenderer record={record} />;
     case "memo":
       return <MemoRenderer record={record} />;
-    case "obituary":
-      return <ObituaryRenderer record={record} />;
+    case "commendation":
+      return <CommendationRenderer record={record} />;
     default:
-      return <FilingRenderer record={record} />;
+      return (
+        <div style={{ minHeight: "100vh", background: "#0A0A0A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <p style={{ color: "rgba(240,235,227,0.3)", fontFamily: "monospace" }}>Document type not recognized.</p>
+        </div>
+      );
   }
 }
