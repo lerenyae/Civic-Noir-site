@@ -54,10 +54,13 @@ Contempt is forthcoming in 2026.`,
   pressContact: "reigningwordspublishing@gmail.com", pressClippings: [],
 };
 
-export const navigation = [
+export const navigation: { label: string; href: string; cta?: boolean }[] = [
   { label: "Books", href: "/books" },
+  { label: "Read", href: "/chapter-one", cta: true },
+  { label: "The Record", href: "/the-record" },
   { label: "Dispatches", href: "/dispatches" },
   { label: "About", href: "/about" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
+  { label: "Links", href: "/links" },
 ];
