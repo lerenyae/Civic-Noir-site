@@ -3,6 +3,7 @@ import Image from "next/image";
 import { siteConfig, books } from "@/lib/content";
 import Newsletter from "@/components/Newsletter";
 import SectionReveal from "@/components/SectionReveal";
+import QuoteCarousel from "@/components/QuoteCarousel";
 
 const contempt = books[0];
 
@@ -54,6 +55,23 @@ export default function Home() {
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">What is Civic Noir</p>
             <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
+          </div>
+        </SectionReveal>
+      </section>
+
+      <section className="py-24 px-6">
+        <SectionReveal>
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-4 mb-10">
+              <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
+              <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50">Cold Read</p>
+              <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
+            </div>
+            <p className="font-serif text-base text-bone-300/30 font-light italic mb-14">Excerpts from Contempt</p>
+            <QuoteCarousel />
+            <div className="mt-12">
+              <Link href="/chapter-one" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 hover:text-gold/70 transition-colors duration-300">Read Chapter One →</Link>
+            </div>
           </div>
         </SectionReveal>
       </section>
