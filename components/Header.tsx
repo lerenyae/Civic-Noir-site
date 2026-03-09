@@ -14,9 +14,13 @@ export default function Header() {
           <span className="font-serif text-lg text-bone-200 tracking-wide group-hover:text-gold transition-colors duration-300">{siteConfig.name}</span>
         </Link>
         <div className="hidden md:flex items-center gap-10">
-          {navigation.map((item) => (
-            <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
-          ))}
+          {navigation.map((item) =>
+            item.cta ? (
+              <Link key={item.href} href={item.href} className="px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+            ) : (
+              <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
+            )
+          )}
         </div>
         <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
           <span className={`block w-5 h-px bg-bone-300 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`} />
@@ -25,9 +29,13 @@ export default function Header() {
       </nav>
       <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="px-6 pb-8 pt-2 flex flex-col gap-6 border-t border-bone-300/5">
-          {navigation.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`nav-link text-sm ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
-          ))}
+          {navigation.map((item) =>
+            item.cta ? (
+              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="block px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+            ) : (
+              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`nav-link text-sm ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
+            )
+          )}
         </div>
       </div>
     </header>
