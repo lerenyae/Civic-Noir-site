@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/chapter-one",
+      "destination": "/chapter-one.html"
+    }
+  ]
+}
