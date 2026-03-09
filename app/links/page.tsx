@@ -1,41 +1,6 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Links",
-  description: "All links — LeRenyae Lawrence Watkins. Author of Contempt.",
-};
-
-const links = [
-  {
-    label: "Read Chapter One Free",
-    href: "/chapter-one",
-    accent: true,
-  },
-  {
-    label: "CONTEMPT — Pre-Order",
-    href: "#",
-    accent: false,
-    note: "Coming Soon",
-  },
-  {
-    label: "CONTEMPT Soundtrack",
-    href: "#",
-    accent: false,
-    note: "Apple Music — Coming Soon",
-  },
-  {
-    label: "YouTube — @ReigningAudio",
-    href: "https://www.youtube.com/@ReigningAudio",
-    accent: false,
-  },
-  {
     label: "Instagram — @reigningwords",
     href: "https://instagram.com/reigningwords",
-    accent: false,
-  },
-  {
-    label: "Personal Website",
-    href: "https://lerenyaewatkins.com",
     accent: false,
   },
 ];
