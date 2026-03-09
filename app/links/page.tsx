@@ -1,4 +1,34 @@
 import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Links",
+  description: "All links — LeRenyae Lawrence Watkins. Author of Contempt.",
+};
+
+const links = [
+  {
+    label: "Read Chapter One Free",
+    href: "/chapter-one",
+    accent: true,
+  },
+  {
+    label: "CONTEMPT — Pre-Order",
+    href: "#",
+    accent: false,
+    note: "Coming Soon",
+  },
+  {
+    label: "CONTEMPT Soundtrack",
+    href: "#",
+    accent: false,
+    note: "Apple Music — Coming Soon",
+  },
+  {
+    label: "YouTube — @ReigningAudio",
+    href: "https://www.youtube.com/@ReigningAudio",
+    accent: false,
+  },
+  {
     label: "Instagram — @reigningwords",
     href: "https://instagram.com/reigningwords",
     accent: false,
@@ -9,7 +39,6 @@ export default function LinksPage() {
   return (
     <section className="min-h-[80vh] flex items-center justify-center px-6 py-20">
       <div className="w-full max-w-md text-center">
-        {/* Identity */}
         <h1 className="font-serif text-3xl md:text-4xl text-bone font-light tracking-wide mb-2">
           LeRenyae Watkins
         </h1>
@@ -22,7 +51,6 @@ export default function LinksPage() {
 
         <div className="gold-rule mb-10" />
 
-        {/* Links */}
         <div className="flex flex-col gap-4">
           {links.map((link) => (
             <a
