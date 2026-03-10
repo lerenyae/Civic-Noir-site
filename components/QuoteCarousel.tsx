@@ -54,7 +54,7 @@ export default function QuoteCarousel() {
                         className="relative max-w-lg mx-auto"
                       >
                       <Image src={quotes[current].src} alt={quotes[current].alt} width={1080} height={1080} className="w-full" priority />
-              </div>div>
+              </div>
               <div className="flex justify-center items-center gap-3 mt-8">
                 {quotes.map((_, i) => (
                     <button key={i} onClick={() => goTo(i)} aria-label={`Quote ${i + 1}`}
@@ -62,7 +62,7 @@ export default function QuoteCarousel() {
                                   style={{ width: i === current ? '2rem' : '0.5rem', opacity: i === current ? 1 : 0.3, backgroundColor: 'rgb(212 175 55 / 0.6)' }}
                                 />
                   ))}
-              </div>div>
-        </div>div>
+              </div>
+        </div>
       )
-}</div>
+}
