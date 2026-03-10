@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const quotes = [
-  { src: '/act1-01.png', alt: 'Cold Read — Act I'},
+  { src: '/act1-01.png', alt: 'Cold Read — Act I' },
   { src: '/act1-02.png', alt: 'Cold Read — Act I' },
   { src: '/act1-03.png', alt: 'Cold Read — Act I' },
   { src: '/act1-04.png', alt: 'Cold Read — Act I' },
   { src: '/act1-05.png', alt: 'Cold Read — Act I' },
   { src: '/act1-06.png', alt: 'Cold Read — Act I' },
-  { src: '/act2-01.png', alt: 'Cold Read — Act II },
+  { src: '/act2-01.png', alt: 'Cold Read — Act II' },
   { src: '/act2-02.png', alt: 'Cold Read — Act II' },
   { src: '/act2-03.png', alt: 'Cold Read — Act II' },
   { src: '/act2-04.png', alt: 'Cold Read — Act II' },
