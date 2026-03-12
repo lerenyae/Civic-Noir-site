@@ -1,863 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Chapter One — Contempt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400&display=swap');
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
+  /* ========== RESET & BASE ========== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --ink: #1a1814;
-    --page: #faf8f4;
-    --rule: #c8b88a;
-    --muted: #7a7060;
-    --font-body: 'Cormorant Garamond', Georgia, serif;
-    --font-ui: 'Outfit', sans-serif;
-    --body-size: 18.5px;
-    --leading: 1.62;
-    --indent: 1.8em;
-    --page-width: 620px;
+    --bg: #0a0a0a;
+    --paper: #0e0e0e;
+    --cream: #D7D0C3;
+    --cream-dim: #B0A89A;
+    --gold: #C9A84C;
+    --burgundy: #6B1C2A;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --text-size: 18px;
+    --leading: 1.78;
+    --indent: 1.5em;
+    --max-width: 620px;
   }
-
   html {
-    background: #e8e4dc;
-    min-height: 100vh;
-  }
-
-  body {
-    background: #e8e4dc;
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: var(--body-size);
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--serif);
+    font-size: var(--text-size);
     line-height: var(--leading);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-
-  /* ── NAV BAR ── */
-  .site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: #080808;
-    border-bottom: 1px solid #1e1c18;
-    padding: 14px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-brand {
-    font-family: var(--font-ui);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #B8963E;
-    text-decoration: none;
-  }
-
-  .nav-right {
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #4a4438;
-  }
-
-  /* ── PAGE SHELL ── */
-  .page-shell {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding-top: 60px;
-    padding-bottom: 120px;
-  }
-
-  /* ── BOOK PAGE ── */
-  .book-page {
-    background: var(--page);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.06),
-      0 4px 16px rgba(0,0,0,0.08),
-      0 12px 40px rgba(0,0,0,0.06),
-      inset 0 0 0 1px rgba(0,0,0,0.03);
-    padding: 72px 72px 96px;
-    position: relative;
+  body {
+    background: var(--bg);
     min-height: 100vh;
   }
-
-  /* Spine shadow */
-  .book-page::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 6px;
-    background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
-    pointer-events: none;
+  /* ========== PAGE CONTAINER ========== */
+  .page-wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 24px 120px;
   }
-
-  /* ── RUNNING HEADER ── */
+  /* ========== RUNNING HEADER ========== */
   .running-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 72px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #ddd8cc;
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
   }
-
-  .running-header span {
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
+  .running-header .act-label {
+    font-family: var(--serif);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  /* ── CHAPTER OPENING ── */
-  .chapter-opening {
-    margin-bottom: 56px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid #ddd8cc;
-  }
-
-  .chapter-label {
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
-
-  .chapter-number {
-    font-family: var(--font-body);
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1;
-    display: block;
+    color: var(--gold);
+    opacity: 0.7;
     margin-bottom: 6px;
-    letter-spacing: -0.01em;
   }
-
-  /* ── BODY TEXT ── */
-
-  /* ── BODY PARAGRAPHS — zero gap, indent only ── */
-  .chapter-body p {
+  .running-header .chapter-label {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.5;
+  }
+  /* ========== EPIGRAPH / OPENING LINE ========== */
+  .epigraph {
+    font-style: italic;
+    font-size: 1.1em;
+    text-align: center;
+    color: var(--cream);
+    margin-bottom: 48px;
+    padding: 0 20px;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+  /* ========== PROSE PARAGRAPHS ========== */
+  /* Standard paragraph — first-line indent, no extra spacing */
+  .prose p {
     text-indent: var(--indent);
     margin: 0;
-    padding: 0;
-    font-size: var(--body-size);
+    font-size: 1em;
     line-height: var(--leading);
+    color: var(--cream);
     font-weight: 400;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    word-spacing: -0.01em;
   }
-
-  /* First para of chapter: no indent */
-  .chapter-body > p:first-child {
+  /* First paragraph after any break — no indent (drop-cap convention) */
+  .prose p.no-indent {
     text-indent: 0;
   }
-
-  /* First para after scene break or scene header: no indent */
-  .scene-break + p,
-  .scene-header + p,
-  .scene-break + * p:first-child,
-  .scene-header + * p:first-child {
+  /* Beat break: single standalone line (dialogue, action snap) —
+     extra space above/below to separate from prose flow */
+  .prose p.beat {
     text-indent: 0;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
   }
-
-  /* ── BEAT LINES — whitespace opens here only ── */
-  .chapter-body p.beat {
-    text-indent: 0;
-    margin-top: 1em;
-    margin-bottom: 0;
-  }
-
-  /* Body paragraph that follows a beat: no indent (resumes after pause) */
-  .chapter-body p.beat + p {
-    text-indent: 0;
-  }
-
-  /* ── THOUGHT LINES — italic, slight room ── */
-  .chapter-body p.thought {
+  /* Interior thought / italicized internal voice */
+  .prose p.thought {
     text-indent: 0;
     font-style: italic;
-    color: #2a2620;
-    margin-top: 0.85em;
-    margin-bottom: 0;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    color: var(--cream-dim);
   }
-
-  /* Body after a thought: indent resumes */
-  .chapter-body p.thought + p {
+  /* Dialogue paragraph */
+  .prose p.dialogue {
     text-indent: var(--indent);
+    margin: 0;
   }
-
-  /* Consecutive thoughts: no extra gap */
-  .chapter-body p.thought + p.thought {
-    margin-top: 0;
+  /* Scene location / timestamp heading */
+  .prose .scene-heading {
+    text-indent: 0;
+    font-style: italic;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    color: var(--cream-dim);
+    margin-top: 0.4em;
+    margin-bottom: 1.2em;
+    opacity: 0.85;
   }
-
-  /* ── SCENE BREAK ── */
+  /* ========== SCENE BREAK (ASTERISM) ========== */
   .scene-break {
     text-align: center;
-    margin: 2.5em 0;
-    color: var(--muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.5em;
-    font-family: var(--font-ui);
-    font-weight: 300;
+    margin: 2.4em 0;
+    font-size: 1em;
+    letter-spacing: 12px;
+    color: var(--gold);
+    opacity: 0.4;
     user-select: none;
   }
-
-  /* ── SCENE HEADER (timestamp) ── */
-  .scene-header {
-    margin: 3em 0 2.5em;
-    text-align: center;
+  /* ========== TV CRAWL / BREAKING NEWS LINES ========== */
+  .prose p.crawl {
+    text-indent: 0;
+    font-style: italic;
+    font-size: 0.92em;
+    letter-spacing: 0.5px;
+    color: var(--cream-dim);
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    opacity: 0.85;
   }
-
-  .scene-header-rule {
-    width: 40px;
-    height: 1px;
-    background: var(--rule);
-    margin: 0 auto 20px;
-    opacity: 0.6;
+  /* ========== EMPHASIS ========== */
+  .prose em {
+    font-style: italic;
   }
-
-  .scene-header-text {
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  /* ── BROADCAST / CRAWL ── */
-  .broadcast {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin: 0.5em 0 0.5em 2em;
-    color: #2a2620;
-    text-indent: 0 !important;
-  }
-
-  /* ── PAGE NUMBER ── */
-  .page-footer {
-    position: absolute;
-    bottom: 36px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-family: var(--font-ui);
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    color: #c0b8a8;
-    font-weight: 300;
-  }
-
-  /* ── BACK LINK ── */
+  /* ========== BACK LINK ========== */
   .back-link {
     display: block;
     text-align: center;
-    margin: 48px auto 0;
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+  }
+  .back-link a {
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: #7a7060;
+    color: var(--gold);
     text-decoration: none;
-    padding: 16px;
-    transition: color 0.2s;
+    opacity: 0.5;
+    transition: opacity 0.3s;
   }
-
-  .back-link:hover { color: #B8963E; }
-
-  /* ── MOBILE ── */
-  @media (max-width: 680px) {
-    :root { --body-size: 17px; }
-    .book-page { padding: 48px 32px 72px; }
-    .running-header { margin-bottom: 48px; }
+  .back-link a:hover {
+    opacity: 1;
   }
-
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 640px) {
+    :root {
+      --text-size: 16px;
+      --leading: 1.72;
+      --indent: 1.2em;
+    }
+    .page-wrapper {
+      padding: 48px 20px 80px;
+    }
+    .running-header {
+      margin-bottom: 40px;
+    }
+  }
 </style>
 </head>
 <body>
-
-<nav class="site-nav">
-  <a href="/" class="nav-brand">Lerenyae Watkins</a>
-  <span class="nav-right">Contempt</span>
-</nav>
-
-<div class="page-shell">
-  <div class="book-page">
-
-    <div class="running-header">
-      <span>Contempt</span>
-      <span>Chapter One</span>
-    </div>
-
-    <div class="chapter-opening">
-      <span class="chapter-label">Chapter</span>
-      <span class="chapter-number">One</span>
-    </div>
-
-    <div class="chapter-body">
-
-      <p>Most collapses don&#8217;t announce themselves. They keep their appointments.</p>
-
-      <p>&#8220;Class of &#8217;98 &#8212; you&#8217;re leaving with more than credentials. You&#8217;re leaving with responsibility.&#8221;</p>
-
-      <p>Leo Davidson&#8217;s voice carried without effort. Flat, exact, trained in rooms where people pretended to listen while counting exits. Gast&#243;n Hall absorbed it the way old institutions absorb everything: dark beams overhead, air thick with wool and cologne, commencement programs resting in laps like contracts already signed. Georgetown didn&#8217;t need to announce itself either.</p>
-
-      <p>Applause came early. Faculty first, by habit. Alumni next, by obligation. Students last, late enough to learn the order of things.</p>
-
-      <p class="beat">Shawn sat where they&#8217;d put him.</p>
-
-      <p>A chair just off his father&#8217;s shoulder, angled for the cameras if they bothered. Close enough to be seen. Far enough to stay silent. The robe still felt like costume, the hood sitting wrong against his neck, fabric too warm, the seam already chewing skin where sweat had started to gather.</p>
-
-      <p>Maya sat dead center. Her eyes stayed on Leo. Didn&#8217;t drift. Didn&#8217;t look for Shawn. Locs pinned high at the crown, a few strands already working loose at her temple. Pride under control, volume low. She knew what this room was built to do to people who mistook proximity for power.</p>
-
-      <p>Her girls leaned in, whispering. One made a face, tongue out, ridiculous. Maya answered without turning. Lifted her hand just enough for the ring to catch the lights. Quick. Dismissive. Gone.</p>
-
-      <p class="beat">The room caught it anyway.</p>
-
-      <p>&#8220;Discipline doesn&#8217;t fail,&#8221; Leo said. &#8220;It repeats.&#8221;</p>
-
-      <p>Maya&#8217;s lips moved, no sound, just the shape of it, aimed at the stage, carried on air.</p>
-
-      <p class="thought">I wrote that.</p>
-
-      <p>Shawn&#8217;s face did what it had been trained to do. A smile, small, correct. It sat on him like borrowed clothes.</p>
-
-      <p>His mouth went dry and stayed there. The room pressed closer, not louder. Used air, held too long.</p>
-
-      <p>Leo didn&#8217;t look at the crowd when he moved to the next line. He turned his head just enough to trace the row of chairs.</p>
-
-      <p class="beat">His eyes found Shawn.</p>
-
-      <p>Not warm. Not cruel. Precise, like a detail being verified before it went on record.</p>
-
-      <p>&#8220;And the ones who can carry it,&#8221; Leo said, voice still aimed at the class, &#8220;will learn this early: your name is either clean, or it&#8217;s useful.&#8221;</p>
-
-      <p>Shawn&#8217;s head lifted before he decided to let it.</p>
-
-      <p>Cameras clicked. Someone laughed too loud and corrected. A cough. A chair shifting. A program folded, then unfolded again, the paper worrying itself thin.</p>
-
-      <p>Maya&#8217;s eyes caught the light. Wet or wide, he didn&#8217;t stay long enough to decide.</p>
-
-      <p>Leo closed his folder and stepped back from the microphone. Not even a full inch.</p>
-
-      <p>Caps went up. Chairs scraped. The room rose.</p>
-
-      <p class="beat">Shawn stayed where he was.</p>
-
-      <p>Applause came apart, then found its rhythm. Hands meeting hands until the sound lost shape and turned physical. It shook the beams. It crowded his skull. A hard, mechanical pounding that didn&#8217;t care whether he took air.</p>
-
-      <p class="thought">So this is how it works.</p>
-      <p class="thought">You get clapped into your cage.</p>
-
-      <div class="scene-header">
-        <div class="scene-header-rule"></div>
-        <div class="scene-header-text">Tuesday, August 15, 2006 &mdash; Worcester District Court &nbsp;&bull;&nbsp; Snow Hill, MD</div>
-      </div>
-
-      <p>Route 50 ate miles without giving anything back.</p>
-
-      <p>Leo&#8217;s last words kept pace anyway, said at the doorway, said like he was doing Shawn a favor.</p>
-
-      <p>&#8220;Second chair&#8217;s safe. You don&#8217;t have to own the room from there. You can just&#8230; be present.&#8221;</p>
-
-      <p class="beat">The pause was the venom. A permission slip to stay small.</p>
-
-      <p>Rain caught him outside Salisbury, sudden and thick. Visibility dropped to two taillights and whatever Shawn decided was real. The fastback cut through standing water and the wheel went light, just enough to feel the argument leave the pavement and move into his hands. The engine held its pitch. The wipers kept time. The road didn&#8217;t forgive him, and he didn&#8217;t ask it to.</p>
-
-      <p class="thought">Second chair. Safe. Present.</p>
-
-      <p>The words kept their spacing, like they&#8217;d practiced.</p>
-
-      <p>He took 113 on instinct. No decision in it. Just the turn. Gas stations still dark. Railroads holding onto night. Quiet that turned every sound inward, teeth buzzing, pulse loud in his ears.</p>
-
-      <p>Hours burned off behind him without announcing themselves. The dark thinned somewhere past the tracks, not sunrise yet, just gray leaking in where night had given up. Three calls he didn&#8217;t answer. He let the phone exhaust itself, slid it into the glove box, shut it there.</p>
-
-      <p>Snow Hill interrupted everything.</p>
-
-      <p>Flat. Ordered. Awake in a way Baltimore never bothered with this early. Law before coffee. The courthouse lot was already jammed, county plates packed tight, clerk cars angled in like they&#8217;d been there since dawn, a couple of out-of-town sedans creeping slow like they were waiting for permission. Too many uniforms for a routine docket. Temporary barriers set up to make the place look busy on purpose.</p>
-
-      <p>The rain was gone. Pavement still dark. Puddles breaking the sky into pieces.</p>
-
-      <p>Shawn cut the engine, took the briefcase, and joined the line.</p>
-
-      <p>The lobby didn&#8217;t rise to meet the day. It sat there, already irritated.</p>
-
-      <p>Lines where there usually weren&#8217;t lines. Folding tables shoved in crooked. Deputies standing too close to the magnetometer, saying nothing, watching everything. Snow Hill wasn&#8217;t built for attention. It didn&#8217;t disguise that.</p>
-
-      <p>Shawn stepped in and felt the delay at once. People holding space too carefully. Outsiders hesitating, locals annoyed by it.</p>
-
-      <p>The floor still held the rain. Along the far wall, the screens were already claimed. Network graphics, urgent colors, anchors leaning forward like they were bracing for impact. Not local posture. Big-city attention, sharp and impatient, dragging its weight east.</p>
-
-      <p>Shawn didn&#8217;t read the captions. He felt the tempo instead. It only showed up once the damage had already been priced in.</p>
-
-      <p class="thought">Baltimore. Live.</p>
-
-      <p>His father stood on the Mitchell steps, the granite already sweating through the morning. The seal at his back. Uniforms packed tight at the shoulders, city-issued, no slack. Barricades squared off down the block, metal feet planted like they weren&#8217;t moving again today. Microphones crowded in close, foam tips nearly touching, hungry in the way only a first day can be.</p>
-
-      <p>Black suit, no sheen. Absorbed the light instead of catching it. The kind men wear when they expect the room to behave.</p>
-
-      <p>The line wasn&#8217;t moving the way it should.</p>
-
-      <p>Different uniforms. Different counties stitched on sleeves. Radios riding high like they were afraid of losing them. Deputies posted in places that used to be empty wall. The magnetometer lane had two bodies working it, one running hands, one watching faces.</p>
-
-      <p>Shawn watched the front of the line instead of the screens. The way they were doing it. Who they were stopping. How long they held people before letting them through.</p>
-
-      <p class="thought">Short leash. Looking for friction.</p>
-
-      <p>The TVs weren&#8217;t loud, but Leo didn&#8217;t need loud. His voice carried anyway, clean through cheap speakers, the same calm he used at a kitchen table when he&#8217;d already decided the ending.</p>
-
-      <p>&#8220;What broke stays where it broke.&#8221;</p>
-
-      <p>A beat of static. A camera adjustment. Then:</p>
-
-      <p>&#8220;We&#8217;re not moving the mess to make it easier to look at.&#8221;</p>
-
-      <p>Shawn&#8217;s gaze stayed forward. His fingers didn&#8217;t. A small vibration in the hand that held the briefcase, like the nerve couldn&#8217;t pick a channel. He tucked his thumb under the handle and forced it still.</p>
-
-      <p>Onscreen Leo kept going, the words clipped like filings.</p>
-
-      <p>&#8220;Pretrial noise doesn&#8217;t decide cases. Judges do. Motions do.&#8221;</p>
-
-      <p>The bin slid forward. Belt. Keys. Watch. He took his time, just enough to feel the room watching.</p>
-
-      <p>The deputy was mid-forties, county-issued buzz cut gone soft at the edges, tan lines burned into his forearms like the vest had been there too long. Breath smelled faintly of coffee that hadn&#8217;t helped. His eyes kept flicking, not nervous, just scanning for permission.</p>
-
-      <p>Shawn handed over his badge.</p>
-
-      <p class="beat">The smile left first.</p>
-
-      <p>His thumb pressed harder into the badge. Plastic complained. A thin white fracture split the corner.</p>
-
-      <p>&#8220;Who you here for?&#8221; he said. Low. Close enough Shawn could count the words between breaths.</p>
-
-      <p>&#8220;Judge Richard Bates.&#8221;</p>
-
-      <p class="beat">A pause that wasn&#8217;t procedural.</p>
-
-      <p>&#8220;Docket&#8217;s full.&#8221;</p>
-
-      <p>He gave the name anyway. Kept it level. Like it still mattered.</p>
-
-      <p>The guard didn&#8217;t bother turning the screen. His eyes drifted to the televisions first, Leo already stepping away from the microphones, then back to him. Whatever ease had been there slipped. The chair creaked as the guard stood, bringing them eye to eye.</p>
-
-      <p>&#8220;You&#8217;re not on it,&#8221; he said, low and clipped. &#8220;You can step aside or head back to Baltimore.&#8221;</p>
-
-      <p>The guard kept talking, but the words thinned. His father buttoning his jacket on the screen. Finished. Already gone.</p>
-
-      <p>&#8220;He&#8217;s with me!&#8221;</p>
-
-      <p>The shout tore across the lobby. Not close. Carried.</p>
-
-      <p>People moved without looking at each other, bags pulled in, shoulders angled, a clean channel opening like steel on rails. Then Bates came through it. Small man. Compact. Steam rolling off him like he&#8217;d been boiling since sunrise.</p>
-
-      <p>He didn&#8217;t slow. Didn&#8217;t look at the guard.</p>
-
-      <p>Bates reached past him, plucked the badge from the counter, and pressed it into his palm without breaking stride.</p>
-
-      <p>&#8220;He&#8217;s on my docket now,&#8221; Bates said. To the room more than the man. &#8220;I&#8217;ll call your chief after lunch. We still owe each other from that Salisbury mess.&#8221;</p>
-
-      <p>The guard swallowed whatever he&#8217;d been holding. Sat back down.</p>
-
-      <p>Bates finally turned to him, close enough that the words didn&#8217;t need volume.</p>
-
-      <p>&#8220;Open the lane.&#8221;</p>
-
-      <p>Bates didn&#8217;t wait to see if it happened. He was already gone, jacket cutting a line through bodies that hadn&#8217;t finished deciding whether they were allowed to move.</p>
-
-      <p>The turn tightened everything. Old tile dulled to the color of quit. Salt ground so deep into the grout it felt permanent. A door to the left bled numbers, bail, dates, fines, chewed and spit back out like they&#8217;d done something wrong.</p>
-
-      <p class="thought">Always ahead of it.</p>
-
-      <p>&#8220;Forty-one goddamn years,&#8221; he said. &#8220;Every once in a while Baltimore still tosses its shit over the fence and expects the beach to shovel.&#8221;</p>
-
-      <p>Shawn shifted the briefcase. Leather creaked. The latch flashed, L.D., stamped clean, smaller than it should&#8217;ve been.</p>
-
-      <p>&#8220;Baltimore doesn&#8217;t shovel,&#8221; Shawn said. &#8220;It schedules.&#8221;</p>
-
-      <p>They passed a bulletin board sagging under jury summons and last summer&#8217;s notices, crab fest dates still up, curling like nobody bothered to check the calendar.</p>
-
-      <p>Bates kept his eyes ahead.</p>
-
-      <p>&#8220;So you finally told him no.&#8221;</p>
-
-      <p class="beat">Not a question.</p>
-
-      <p>Shawn didn&#8217;t answer. His mouth tasted stale, peppermint burned thin. A habit he hadn&#8217;t earned yet.</p>
-
-      <p class="thought">Don&#8217;t give him something he can reuse.</p>
-
-      <p class="beat">Bates went on.</p>
-
-      <p>&#8220;Let me guess. He offered you second chair. Called it respect.&#8221;</p>
-
-      <p>&#8220;That&#8217;s not it,&#8221; Shawn said. Too quick.</p>
-
-      <p>Bates glanced over once. Enough.</p>
-
-      <p>&#8220;He didn&#8217;t ask,&#8221; Shawn said. &#8220;He placed it. Like I was already seated.&#8221;</p>
-
-      <p>&#8220;Placement,&#8221; Bates said. &#8220;That tracks.&#8221;</p>
-
-      <p>&#8220;It wasn&#8217;t about the case,&#8221; Shawn said. &#8220;It was about my name standing there so nobody could say he&#8217;d lost anything.&#8221;</p>
-
-      <p>They rounded the corner and stopped short.</p>
-
-      <p>Bates&#8217;s door was already stacked, two suits pressed flat to the wall, a charter captain in sun-bleached khakis, a woman with a clean burn across her nose clutching a citation like it might bite back.</p>
-
-      <p>An aide appeared beside the door, late fifties, hair pulled tight, voice carrying a Tidewater drawl worn thin by court hours. A manila folder was tucked under her arm. She slid it into Bates&#8217;s hand as she spoke.</p>
-
-      <p>&#8220;Judge, Annapolis needs your signature by noon, but if I may&#8212;&#8221;</p>
-
-      <p>&#8220;Patty,&#8221; Bates said, eyes still on the door. &#8220;My decision is final. That&#8217;ll be all.&#8221;</p>
-
-      <p>She stopped. Looked at him. Then at Shawn. Flat, familiar.</p>
-
-      <p class="thought">This again.</p>
-
-      <p>She nodded once and moved off down the hall. The space they left behind didn&#8217;t relax. Someone waiting near the wall shifted their weight. Paper whispered. The line held, impatient and watchful.</p>
-
-      <p>Bates stayed where he was, his hand resting on the knob like he wasn&#8217;t finished yet.</p>
-
-      <p>&#8220;He offer Vincent the seat?&#8221;</p>
-
-      <p>Shawn didn&#8217;t answer right away. He felt Leo&#8217;s voice try to step in, the old instinct to clean it up before anyone else could hear the mess.</p>
-
-      <p>&#8220;Vincent doesn&#8217;t want it,&#8221; he said.</p>
-
-      <p>Bates didn&#8217;t turn. He didn&#8217;t press. He waited.</p>
-
-      <p>&#8220;He wants to be close,&#8221; Shawn went on. &#8220;Behind the table. Where Leo can point without stopping the room.&#8221;</p>
-
-      <p class="thought">Close enough to disappear if it goes bad.</p>
-
-      <p>Bates&#8217;s grip shifted. Small. Decisive.</p>
-
-      <p>&#8220;So Leo wanted you up front,&#8221; he said. Not a question. &#8220;Moretti on the docket. Cameras already warmed.&#8221;</p>
-
-      <p>Shawn shook his head. &#8220;He wanted insulation.&#8221;</p>
-
-      <p class="beat">That got Bates to turn.</p>
-
-      <p>&#8220;Don&#8217;t,&#8221; Shawn said, sharper than he meant. &#8220;Don&#8217;t make this about losing.&#8221;</p>
-
-      <p>Bates stopped moving.</p>
-
-      <p>&#8220;He was already deciding where it&#8217;d land,&#8221; Shawn said. &#8220;If it cracked. If the jury wandered. My name was the cleanest place to put it.&#8221;</p>
-
-      <p class="thought">Like I&#8217;d thank him for trusting me.</p>
-
-      <p>A throat cleared behind them. The sound carried.</p>
-
-      <p>Bates looked at the door, then back at Shawn.</p>
-
-      <p>&#8220;Davidson. The name only works if it stays clean,&#8221; Bates said.</p>
-
-      <p>&#8220;His goddamn problem.&#8221;</p>
-
-      <p>Bates opened the door.</p>
-
-      <p>&#8220;Good,&#8221; he said. &#8220;Because I&#8217;m done saying his name in my building.&#8221;</p>
-
-      <p>They stepped inside. The door closed behind them and the noise didn&#8217;t follow.</p>
-
-      <p>Chambers were narrow, overworked. No warmth. No attempt at it. Books leaned where they&#8217;d been left, spines cracked from use instead of age. The law lived here the way it does in smaller counties, practical, repetitive, tired of ceremony.</p>
-
-      <p>The frame on the wall sat straight now. New glass. Cleaned up.</p>
-
-      <p>Shawn noticed it before he meant to.</p>
-
-      <p>&#8220;You fixed it,&#8221; he said.</p>
-
-      <p>Bates didn&#8217;t answer right away. He followed Shawn&#8217;s eyes, then nodded once.</p>
-
-      <p>&#8220;Had to.&#8221;</p>
-
-      <p>Across town, the same photo still leaned crooked. Torn at the edge where someone had once taken themselves out of it by force.</p>
-
-      <p>Black and white. North Avenue. Three men who thought process could outpace consequence. Leo in the middle, already arguing with someone out of frame. Dawson smiling like the job hadn&#8217;t started charging interest yet. Bates at the edge, suit borrowed, posture exact, eyes already somewhere else.</p>
-
-      <p>&#8220;You remember that?&#8221; Bates asked.</p>
-
-      <p>&#8220;My mother made lemonade,&#8221; Shawn said. &#8220;Metal bowl. Real lemons. She told him the house wasn&#8217;t for politics.&#8221;</p>
-
-      <p>&#8220;And he didn&#8217;t listen.&#8221;</p>
-
-      <p>&#8220;No.&#8221;</p>
-
-      <p>Bates turned away first. He always did when memory stopped being useful.</p>
-
-      <p>He set the folder on the desk. Didn&#8217;t open it. Didn&#8217;t slide it over.</p>
-
-      <p>&#8220;You didn&#8217;t call me this morning to complain about your father,&#8221; Bates said. Not accusation. Statement. &#8220;You called because you needed somewhere else to stand.&#8221;</p>
-
-      <p>Shawn didn&#8217;t answer fast enough.</p>
-
-      <p>&#8220;That pause,&#8221; Bates said. &#8220;That&#8217;s the part that worries me.&#8221;</p>
-
-      <p>&#8220;I told him no,&#8221; Shawn said. &#8220;Clear.&#8221;</p>
-
-      <p>&#8220;You said no,&#8221; Bates agreed. &#8220;He heard timing.&#8221;</p>
-
-      <p>Shawn exhaled through his nose. Short. Contained.</p>
-
-      <p>&#8220;He already moved past it,&#8221; Shawn said.</p>
-
-      <p>Bates nodded. &#8220;He always does.&#8221;</p>
-
-      <p class="beat">Silence stretched, then settled.</p>
-
-      <p>&#8220;You didn&#8217;t leave Baltimore for nothing,&#8221; Bates said. &#8220;Eighteen months. That&#8217;s all you gave it.&#8221;</p>
-
-      <p>&#8220;Long enough to see how it eats,&#8221; Shawn said.</p>
-
-      <p>&#8220;And you still circled back today.&#8221;</p>
-
-      <p>Shawn looked at the desk. At the folder he hadn&#8217;t touched.</p>
-
-      <p>&#8220;Maya wanted air,&#8221; he said.</p>
-
-      <p>&#8220;And you followed.&#8221;</p>
-
-      <p>&#8220;I chose,&#8221; Shawn said. Too fast.</p>
-
-      <p>Bates let that sit.</p>
-
-      <p>&#8220;I left because Leo wanted proof,&#8221; Bates said. &#8220;Judges. Councilmen. Mayors. Names lined up like receipts. Power pointing at itself.&#8221;</p>
-
-      <p>&#8220;And now you&#8217;re done,&#8221; Shawn said. &#8220;So you want a replacement.&#8221;</p>
-
-      <p>Bates moved then, past him, not toward him. Crossed to the window. Looked out at the parking lot already filling, people arriving who would be there long after they stopped caring who he was.</p>
-
-      <p>&#8220;This bench doesn&#8217;t give a damn who your father is,&#8221; Bates said. &#8220;No donors. No theater. You sentence the guy you see at the gas station. You explain yourself in the grocery store.&#8221;</p>
-
-      <p>&#8220;And I trade cross-exams for that?&#8221;</p>
-
-      <p>&#8220;You stop surviving,&#8221; Bates said. &#8220;You start deciding.&#8221;</p>
-
-      <p>Shawn didn&#8217;t smile.</p>
-
-      <p>&#8220;I make nothing here,&#8221; he said. &#8220;What I do make goes to a gallery that barely stays open and a lawyer who sends invoices like clockwork.&#8221;</p>
-
-      <p>&#8220;That&#8217;s not poverty,&#8221; Bates said. &#8220;That&#8217;s penance.&#8221;</p>
-
-      <p>Shawn laughed once. It broke wrong.</p>
-
-      <p>Bates slid the folder into the light, still not toward him.</p>
-
-      <p>&#8220;I&#8217;m retiring,&#8221; he said. &#8220;And I asked you because you know how to say no and still walk away.&#8221;</p>
-
-      <p>He finally looked at Shawn.</p>
-
-      <p>&#8220;You just don&#8217;t do it with him.&#8221;</p>
-
-      <p>Shawn picked up the folder. Felt the paper through it. Dates. Letterhead. Weight.</p>
-
-      <p>&#8220;Same page,&#8221; he said.</p>
-
-      <p>Bates didn&#8217;t answer.</p>
-
-      <p>Shawn turned to go.</p>
-
-      <p>&#8220;As for Maya&#8212;&#8221;</p>
-
-      <p class="beat">Shawn stopped.</p>
-
-      <p>They passed each other close. Cloth brushed cloth. Old respect holding its ground.</p>
-
-      <p>The folder cracked against the desk as Shawn opened it.</p>
-
-      <p>Notice of Retirement. Circuit Court. End of month. Signature steady.</p>
-
-      <p>Beneath it, a second page. Different letterhead. One name where a list usually lived.</p>
-
-      <p>His.</p>
-
-      <p>He folded the pages once. Then again. Exact. Set them back where they&#8217;d been. His hand stayed there.</p>
-
-      <p>Bates spoke without looking up. &#8220;Summer calendar&#8217;s thin. Probation revokes. Domestic cleanups that never stay clean.&#8221;</p>
-
-      <p class="beat">A pause.</p>
-
-      <p>&#8220;Baltimore doesn&#8217;t usually leak this far south.&#8221;</p>
-
-      <p>&#8220;Snow Hill handles its own,&#8221; Shawn said.</p>
-
-      <p>&#8220;Most years,&#8221; Bates said. &#8220;This one didn&#8217;t.&#8221;</p>
-
-      <p>Shawn squared the folder to the desk.</p>
-
-      <p>&#8220;You&#8217;re skipping steps.&#8221;</p>
-
-      <p>&#8220;I&#8217;m counting them,&#8221; Bates said. &#8220;Six appearances in two years. No overnights. You argue clean and vanish before anyone asks why.&#8221;</p>
-
-      <p>&#8220;And Baltimore?&#8221;</p>
-
-      <p>&#8220;He&#8217;ll keep filing motions,&#8221; Bates said. &#8220;Vincent will keep barking. Press will keep mistaking noise for gravity.&#8221;</p>
-
-      <p class="beat">None of it landed soft.</p>
-
-      <p>&#8220;You&#8217;re offering me a robe to outrun him.&#8221;</p>
-
-      <p>&#8220;I&#8217;m offering you a room he can&#8217;t enter,&#8221; Bates said. &#8220;Different thing.&#8221;</p>
-
-      <p>Shawn opened his mouth&#8212;</p>
-
-      <p>A knock cut the room clean.</p>
-
-      <p>&#8220;Judge&#8212;&#8221;</p>
-
-      <p class="beat">The moment ended.</p>
-
-      <p>Sound rushed back in. Shoes on marble, voices held low, the soft impatience of people who&#8217;d been waiting longer than they planned. Four of them stood just outside chambers, folders hugged tight, eyes lifting in quick, professional inventory as Shawn stepped through. Whatever had happened inside had gone long. Long enough to bend schedules. Long enough to matter.</p>
-
-      <p>No one spoke. They didn&#8217;t need to. The corridor absorbed him and kept moving.</p>
-
-      <p>The building had already begun to reset, clerks re-forming lines, deputies reclaiming their corners, the courthouse slipping back into its practiced rhythm.</p>
-
-      <p>Maya stood where the corridor narrowed, painted brick at her back like she&#8217;d chosen it. Arms folded, posture settled, not waiting, just present. Bronze locs pinned with a pearl comb, one loose thread at her temple. Ultramarine at the cuff. A faint saffron line at her wrist the sink hadn&#8217;t beaten. Color, brought deliberately into a place that preferred neutral and never apologized for it.</p>
-
-      <p class="beat">She wasn&#8217;t looking for him.</p>
-
-      <p class="beat">That was how he knew she&#8217;d been there the whole time.</p>
-
-      <p class="beat">He stopped.</p>
-
-      <p>&#8220;Another sermon from Bates?&#8221;</p>
-
-      <p>&#8220;Retirement&#8217;s inked,&#8221; he said. &#8220;He wants his docket clean before the Record gets to it.&#8221;</p>
-
-      <p>&#8220;And where did we tour today?&#8221;</p>
-
-      <p>&#8220;Where Bates always goes. The past.&#8221;</p>
-
-      <p>She caught up to him just past the turn, where the corridor pinched and the light went flat.</p>
-
-      <p>&#8220;That&#8217;s it?&#8221; she said. &#8220;You come out with that look and we&#8217;re pretending it was small talk?&#8221;</p>
-
-      <p>He didn&#8217;t slow. The folder rode under his arm like it had weight beyond paper.</p>
-
-      <p>&#8220;It&#8217;s a bench,&#8221; she went on. &#8220;Ocean City. Circuit. You don&#8217;t get asked unless someone&#8217;s already decided you fit.&#8221;</p>
-
-      <p>&#8220;I didn&#8217;t say yes.&#8221;</p>
-
-      <p>&#8220;You didn&#8217;t say no.&#8221;</p>
-
-      <p>That landed closer than she meant. She adjusted, kept pace. &#8220;This is what you&#8217;ve been circling, Shawn. You don&#8217;t run from Baltimore for two years without waiting on something solid.&#8221;</p>
-
-      <p>He stopped short enough that she nearly clipped his shoulder. &#8220;You think this is about waiting?&#8221;</p>
-
-      <p>&#8220;I think it&#8217;s about Leo,&#8221; she said, plain. &#8220;He gets five minutes in a room with you and suddenly you&#8217;re allergic to the future.&#8221;</p>
-
-      <p>His jaw worked. &#8220;You never understood.&#8221;</p>
-
-      <p>She didn&#8217;t flinch. &#8220;I understood why we left. You don&#8217;t get to rewrite that just because it&#8217;s inconvenient.&#8221;</p>
-
-      <p>He turned away from her, started walking again before the argument could take shape. &#8220;I&#8217;m not doing this here.&#8221;</p>
-
-      <p>&#8220;Then do it somewhere,&#8221; she said. &#8220;Just don&#8217;t pretend it&#8217;s his clock you&#8217;re still living on.&#8221;</p>
-
-      <p>They rounded into the lobby.</p>
-
-      <p>Sound lifted all at once, voices climbing, steps stalling, the low hum breaking apart. Screens lined the far wall. WJZ frozen mid-sentence. Channel 11 cut to black, then snapped back with a red banner so sharp it pulled the room upright.</p>
-
-      <blockquote class="broadcast">BREAKING NEWS &mdash; BALTIMORE.</blockquote>
-
-      <p>Phones came up. Conversations died mid-word. Whatever it was, it had already decided the room.</p>
-
-      <p>Maya leaned close, not touching him. &#8220;You didn&#8217;t leave,&#8221; she said. &#8220;You just changed distance.&#8221;</p>
-
-      <p>He started to answer and didn&#8217;t. Something tightened without warning, high and fast, like his body had skipped ahead.</p>
-
-      <p>Fox45 cut in, louder than the rest&#8212;</p>
-
-      <blockquote class="broadcast">&#8230; STEPS OF THE BALTIMORE CITY COURTHOUSE.</blockquote>
-
-      <p>The image shook. A podium. City seal. Barricades pressed tight. Protest signs bobbing at the edge of frame. Someone shouting off-camera. Then the camera lurched, hard, unplanned, caught a body folding where the microphones were.</p>
-
-      <p>A gasp moved through the lobby. Not loud. Collective.</p>
-
-      <p>Another feed came up. Different angle. Same steps. Paramedics already there, hands everywhere, jackets flaring as they dropped to their knees.</p>
-
-      <p>CNN lagged, the crawl dragging behind the picture.</p>
-
-      <blockquote class="broadcast">&#8230; ATTORNEY LEO DAVIDSON COLLAPSES DURING STATEMENT &#8230;</blockquote>
-
-      <p>Shawn didn&#8217;t move. The noise narrowed, tunneled. He felt eyes on him before he understood why.</p>
-
-      <p>&#8220;That&#8217;s him,&#8221; someone said.</p>
-
-      <p>Too close. Too sure.</p>
-
-      <p>&#8220;His son,&#8221; another voice answered, louder, like it needed to be true.</p>
-
-      <p>Maya said his name, but it reached him late, muffled, like it had passed through glass. The crowd had already turned. Not toward the screens anymore.</p>
-
-      <p>Toward him.</p>
-
-      <p>Bates broke from the clerk hall, moving faster than he ever did, robe loose at the shoulder, eyes scanning before his feet caught up. &#8220;Shawn&#8212;&#8221;</p>
-
-      <p>The word missed. Sound stretched thin, then gave way. The air felt wrong, insufficient. The floor tipped just enough to erase direction.</p>
-
-      <p>Another feed cut in along the far wall.</p>
-
-      <blockquote class="broadcast">&#8230; CONDITION UNKNOWN.</blockquote>
-
-      <p>He was moving before thought arrived. The lobby shifted around him, bodies stepping back in small, practiced arcs, clearing a path without being told.</p>
-
-      <p>The briefcase slipped. Tile caught it. The latch snapped. Pages fanned across the floor, motions, notes, names, none of them belonging to anyone now.</p>
-
-      <p>Maya reached him, fingers closing at his wrist. Cold skin where a watch used to be. She didn&#8217;t look down. Didn&#8217;t try to gather anything. She stayed with him.</p>
-
-      <p>Behind them, Bates&#8217;s voice carried through the static, low, steady. &#8220;Turn it off.&#8221;</p>
-
-      <p>A deputy stepped forward, remote in hand.</p>
-
-      <p>Shawn raised his palm.</p>
-
-      <p class="beat">The screen held.</p>
-
-      <p>CNN&#8217;s crawl slowed, deliberate, as if choosing each word.</p>
-
-      <blockquote class="broadcast">&#8230; CONFIRMED.</blockquote>
-
-      <p>The picture cleared. Weather. Traffic. Scheduled programming, right on time.</p>
-
-      <p class="beat">Nothing else moved.</p>
-
-    </div><!-- /.chapter-body -->
-
-    <div class="page-footer">1</div>
-
-  </div><!-- /.book-page -->
-
-  <a href="/links" class="back-link">&#8592; Back</a>
-
-</div><!-- /.page-shell -->
-
+<div class="page-wrapper">
+  <!-- Running Header -->
+  <div class="running-header">
+    <div class="act-label">Act I: Fruit of the Poisonous Tree</div>
+    <div class="chapter-label">Chapter One</div>
+  </div>
+  <!-- Epigraph / Opening -->
+  <p class="epigraph">Most collapses don't announce themselves. They keep their appointments.</p>
+  <!-- PROSE -->
+  <div class="prose">
+    <p class="no-indent">Gastón Hall held heat the way old institutions do. Dark beams overhead. Air thick with wool, cologne, money that didn't need to explain itself. Commencement programs rested on laps like contracts already signed.</p>
+    <p class="beat">Shawn sat where they'd put him.</p>
+    <p class="no-indent">A chair just off his father's shoulder, angled for the cameras if they bothered. Close enough to be seen. Far enough to stay silent. He was young enough that the robe still felt like a costume, the hood sitting wrong against his neck, fabric too warm, the seam already chewing skin where sweat had started to gather.</p>
+    <p>Below, the room carried on. Training. Robes. Alumni rows. Faculty faces held steady, mirror-practiced. Front row: black gowns, white teeth, hands folded, waiting for permission to applaud.</p>
+    <p class="beat">This was the part where Leo always spoke.</p>
+    <p class="no-indent">Shawn knew the order. He'd grown up inside it. The applause would come early. The pauses would land where they were supposed to. His father would say something clean enough to quote and sharp enough to remember. Afterwards, people would shake Shawn's hand and tell him how proud he should be, like pride was transferable.</p>
+    <p class="beat">Leo Davidson stood at the lectern.</p>
+    <p class="beat">Not announced. Already there.</p>
+    <p class="no-indent">The room finished settling around him. Programs flattened. Shoulders squared. Cameras adjusted, finding their frame without being told.</p>
+    <p>His voice carried without effort, flat, exact, trained in rooms where people pretended to listen while counting exits.</p>
+    <p class="dialogue">"Class of '98," Leo said, letting the words sit. "You're leaving with more than credentials. You're leaving with responsibility."</p>
+    <p class="no-indent">Applause came early. Faculty first, by habit. Alumni next, by obligation. Students last, late enough to learn the order of things.</p>
+    <p class="beat">Maya sat dead center.</p>
+    <p class="no-indent">Her eyes stayed on Leo. Didn't drift. Didn't look for Shawn.</p>
+    <p>Locs pinned high at the crown, a few strands already working loose at her temple. Pride under control. Volume turned down on purpose. She knew what this room was built to do to people who mistook proximity for power.</p>
+    <p>Her girls leaned in, whispering. One made a face, tongue out, ridiculous. Maya answered without turning. Lifted her hand just enough for the ring to catch the lights. Quick. Dismissive. Gone.</p>
+    <p class="beat">The room caught it anyway.</p>
+    <p class="no-indent">The programs hadn't closed yet. Applause hadn't started. Still, bodies shifted, small corrections, practiced, as if something had already been cued.</p>
+    <p class="dialogue">"Discipline doesn't fail," Leo said. "It repeats."</p>
+    <p class="no-indent">Maya's lips moved—no sound, just the shape of it, aimed at the stage, carried on air.</p>
+    <p class="thought">I wrote that.</p>
+    <p class="no-indent">Shawn's face did what it had been trained to do. A smile, small, correct. It sat on him like borrowed clothes.</p>
+    <p>His mouth went dry and stayed there. The room pressed closer, not louder. Used air, held too long.</p>
+    <p>Leo didn't look at the crowd when he moved to the next line. He turned his head just enough to trace the row of chairs.</p>
+    <p class="beat">His eyes found Shawn.</p>
+    <p class="no-indent">Not warm. Not cruel. Precise, like a detail being verified before it went on record.</p>
+    <p class="dialogue">"And the ones who can carry it," Leo said, voice still aimed at the class, "will learn this early—your name is either clean, or it's useful."</p>
+    <p class="no-indent">Shawn's head lifted before he decided to let it.</p>
+    <p>Cameras clicked. Someone laughed too loudly and corrected. A cough. A chair shifting. A program folded, then unfolded again, the paper worrying itself thin.</p>
+    <p>Maya's eyes caught the light. Wet or wide—Shawn didn't stay long enough to decide.</p>
+    <p>Leo closed his folder and stepped back from the microphone. Not even a full inch.</p>
+    <p>Caps went up. Chairs scraped. The room rose.</p>
+    <p class="beat">Shawn stayed where he was.</p>
+    <p class="no-indent">Applause came apart, then found its rhythm—hands meeting hands until the sound lost shape and turned physical. It shook the beams. It crowded his skull. A hard, mechanical pounding that didn't care whether he took air.</p>
+    <p class="thought">So this is how it works.</p>
+    <p class="thought">You get clapped into your cage.</p>
+    <!-- ========== SCENE BREAK ========== -->
+    <div class="scene-break">• &nbsp; • &nbsp; •</div>
+    <p class="scene-heading">Tuesday, August 15, 2006 — Worcester District Court &nbsp;|&nbsp; Snow Hill, MD</p>
+    <p class="no-indent">Route 50 stretched east, eating miles without giving anything back.</p>
+    <p>Leo's last words kept pace anyway. The ones said at the doorway, said like he was doing Shawn a favor.</p>
+    <p class="dialogue">"Second chair's safe. You don't have to own the room from there. You can just… be present."</p>
+    <p class="thought">The pause was the venom. A permission slip to stay small.</p>
+    <p class="no-indent">Rain caught him outside Salisbury, sudden and thick. Visibility dropped to two taillights and whatever Shawn decided was real. The fastback cut through standing water, and the wheel went light, just enough to feel the argument leave the pavement and move into his hands. The engine held its pitch. The wipers kept time. The road didn't forgive him, and he didn't ask it to.</p>
+    <p class="thought">Second chair. Safe. Present.</p>
+    <p class="no-indent">The words kept their spacing, like they'd practiced.</p>
+    <p>He took 113 on instinct. No decision in it. Just the turn. Gas stations still dark. Railroads holding onto night. Quiet that turned every sound inward—teeth buzzing, pulse loud in his ears.</p>
+    <p>Hours burned off behind him without announcing themselves. The dark thinned somewhere past the tracks, not sunrise yet, just gray leaking in where night had given up. Three calls went unanswered. He let the phone exhaust itself, slid it into the glove box, and shut it there.</p>
+    <p class="beat">Snow Hill interrupted everything.</p>
+    <p class="no-indent">Flat. Ordered. Awake in a way Baltimore never bothered with this early. Law before coffee. The courthouse lot was already jammed, county plates packed tight, clerk cars angled in like they'd been there since dawn, a couple of out-of-town sedans creeping slow like they were waiting for permission. Too many uniforms for a routine docket. Temporary barriers set up to make the place look busy on purpose.</p>
+    <p>The rain was gone. Pavement still dark. Puddles breaking the sky into pieces.</p>
+    <p>Shawn cut the engine, took the briefcase, and joined the line.</p>
+    <p class="beat">The lobby didn't rise to meet the day. It sat there, already irritated.</p>
+    <p class="no-indent">Lines where there usually weren't lines. Folding tables shoved in crooked. Deputies standing too close to the magnetometer, saying nothing, watching everything. Snow Hill wasn't built for attention. It didn't disguise that.</p>
+    <p>Shawn stepped in and felt the delay at once. People holding space too carefully. Outsiders hesitating, locals annoyed by it.</p>
+    <p>The floor still held the rain. Along the far wall, the screens were already claimed, network graphics, urgent colors, anchors leaning forward like they were bracing for impact. Not local posture. Big-city attention, sharp and impatient, dragging its weight east.</p>
+    <p>Shawn didn't read the captions. He felt the tempo instead, and it only showed up once the damage had already been priced in.</p>
+    <p class="beat">Baltimore. Live.</p>
+    <p class="no-indent">His father stood on the Mitchell steps, the granite already sweating through the morning. The seal at his back. Uniforms packed tight at the shoulders, city-issued, no slack. Barricades squared off down the block, metal feet planted like they weren't moving again today. Microphones crowded in close, foam tips nearly touching, hungry in the way only a first day can be.</p>
+    <p>A black suit with no sheen. Absorbed the light instead of catching it. The kind men wear when they expect the room to behave.</p>
+    <p class="beat">The line wasn't moving the way it should.</p>
+    <p class="no-indent">Different uniforms. Different counties stitched on sleeves. Radios riding high like they were afraid of losing them. Deputies posted in places that used to be empty wall. The magnetometer lane had two bodies working it, one running hands, one watching faces.</p>
+    <p>Shawn watched the front of the line instead of the screens. The way they were doing it. Who they were stopping. How long they held people before letting them through.</p>
+    <p class="thought">Short leash. Looking for friction.</p>
+    <p class="no-indent">The TVs weren't loud, but Leo didn't need loud. His voice carried anyway—clean through cheap speakers, the same calm he used at a kitchen table when he'd already decided the ending.</p>
+    <p class="dialogue">"What broke stays where it broke."</p>
+    <p class="no-indent">A beat of static. A camera adjustment. Then:</p>
+    <p class="dialogue">"We're not moving the mess to make it easier to look at."</p>
+    <p class="no-indent">Shawn's gaze stayed forward. His fingers didn't. A small vibration in the hand that held the briefcase, like the nerve couldn't pick a channel. He tucked his thumb under the handle and forced it still.</p>
+    <p>Onscreen, Leo kept going, the words clipped like filings.</p>
+    <p class="dialogue">"Pretrial noise doesn't decide cases. Judges do. Motions do."</p>
+    <p class="no-indent">The bin slid forward. Belt. Keys. Watch. He took his time, just enough to feel the room watching.</p>
+    <p>The deputy was mid-forties, county-issued buzz cut gone soft at the edges, tan lines burned into his forearms like the vest had been there too long. Breath smelled faintly of coffee that hadn't helped. His eyes kept flicking, not nervous, just scanning for permission.</p>
+    <p class="beat">Shawn handed over his badge.</p>
+    <p class="beat">The smile left first.</p>
+    <p class="no-indent">His thumb pressed harder into the badge. Plastic complained. A thin white fracture split the corner.</p>
+    <p class="dialogue">"Who you here for?" he said. Low. Close enough Shawn could count the words between breaths.</p>
+    <p class="dialogue">"Judge Richard Bates."</p>
+    <p class="beat">A pause that wasn't procedural.</p>
+    <p class="dialogue">"Docket's full."</p>
+    <p class="no-indent">He gave the name anyway. Kept it level. Like it still mattered.</p>
+    <p>The guard didn't bother turning the screen. His eyes drifted to the televisions first—Leo already stepping away from the microphones—then back to him. Whatever ease had been there slipped. The chair creaked as the guard stood, bringing them eye to eye.</p>
+    <p class="dialogue">"You're not on it," he said, low and clipped. "You can step aside or head back to Baltimore."</p>
+    <p class="no-indent">The guard kept talking, but the words thinned. His father buttoning his jacket on the screen. Finished. Already gone.</p>
+    <p class="dialogue">"He's with me!"</p>
+    <p class="no-indent">The shout tore across the lobby. Not close. Carried.</p>
+    <p>People moved without looking at each other, bags pulled in, shoulders angled, a clean channel opening like steel on rails. Then Bates came through it. Small man. Compact. Steam rolling off him like he'd been boiling since sunrise.</p>
+    <p>He didn't slow. Didn't look at the guard.</p>
+    <p>Bates reached past him, plucked the badge from the counter, and pressed it into his palm without breaking stride.</p>
+    <p class="dialogue">"He's on my docket now," Bates said. To the room more than the man. "I'll call your chief after lunch. We still owe each other from that Salisbury mess."</p>
+    <p class="no-indent">The guard swallowed whatever he'd been holding. Sat back down.</p>
+    <p>Bates finally turned to him, close enough that the words didn't need volume.</p>
+    <p class="dialogue">"Open the lane."</p>
+    <p class="no-indent">Bates didn't wait to see if it happened. He was already gone, jacket cutting a line through bodies that hadn't finished deciding whether they were allowed to move.</p>
+    <p>The turn tightened everything. Old tile dulled to the color of quit. Salt ground so deep into the grout it felt permanent. A door to the left bled numbers, bail, dates, fines, chewed and spit back out like they'd done something wrong.</p>
+    <p class="thought">Always ahead of it.</p>
+    <p class="dialogue">"Forty-one goddamn years," he said. "Every once in a while Baltimore still tosses its shit over the fence and expects the beach to shovel."</p>
+    <p class="no-indent">Shawn shifted the briefcase. Leather creaked. The latch flashed—L.D., stamped clean, smaller than it should've been.</p>
+    <p class="dialogue">"Baltimore doesn't shovel," Shawn said. "It schedules."</p>
+    <p class="no-indent">They passed a bulletin board sagging under jury summons and last summer's notices—crab fest dates still up, curling like nobody bothered to check the calendar.</p>
+    <p class="beat">Bates kept his eyes ahead.</p>
+    <p class="dialogue">"So you finally told him no."</p>
+    <p class="beat">Not a question.</p>
+    <p class="no-indent">Shawn didn't answer. His mouth tasted stale—peppermint burned thin. A habit he hadn't earned yet.</p>
+    <p class="thought">Don't give him something he can reuse.</p>
+    <p class="no-indent">Bates went on.</p>
+    <p class="dialogue">"Let me guess. He offered you second chair. Called it respect."</p>
+    <p class="dialogue">"That's not it," Shawn said—too quick.</p>
+    <p class="no-indent">Bates glanced over once. Enough.</p>
+    <p class="dialogue">"He didn't ask," Shawn said. "He placed it. Like I was already seated."</p>
+    <p class="dialogue">"Placement," Bates said. "That tracks."</p>
+    <p class="dialogue">"It wasn't about the case," Shawn said. "It was about my name standing there so nobody could say he'd lost anything."</p>
+    <p class="no-indent">They rounded the corner and stopped short.</p>
+    <p>Bates's door was already stacked, two suits pressed flat to the wall, a charter captain in sun-bleached khakis, a woman with a clean burn across her nose clutching a citation like it might bite back.</p>
+    <p>An aide appeared beside the door, late fifties, hair pulled tight, voice carrying a Tidewater drawl worn thin by court hours. A manila folder was tucked under her arm. She slid it into Bates's hand as she spoke.</p>
+    <p class="dialogue">"Judge—Annapolis needs your signature by noon, but if I may—"</p>
+    <p class="dialogue">"Patty," Bates said, eyes still on the door. "My decision is final. That'll be all."</p>
+    <p class="no-indent">She stopped. Looked at him. Then at Shawn, flat, familiar.</p>
+    <p class="thought">This again.</p>
+    <p class="no-indent">She nodded once and moved off down the hall. The space they left behind didn't relax. Someone waiting near the wall shifted their weight. Paper whispered. The line held, impatient and watchful.</p>
+    <p>Bates stayed where he was, his hand resting on the knob like he wasn't finished yet.</p>
+    <p class="dialogue">"He offer Vincent the seat?"</p>
+    <p class="no-indent">Shawn didn't answer right away. He felt Leo's voice try to step in, the old instinct to clean it up before anyone else could hear the mess.</p>
+    <p class="dialogue">"Vincent doesn't want it," he said.</p>
+    <p class="no-indent">Bates didn't turn. He didn't press. He waited.</p>
+    <p class="dialogue">"He wants to be close," Shawn went on. "Behind the table. Where Leo can point without stopping the room."</p>
+    <p class="thought">Close enough to disappear if it goes bad.</p>
+    <p class="no-indent">Bates's grip shifted. Small. Decisive.</p>
+    <p class="dialogue">"So Leo wanted you up front," he said. Not a question. "Moretti on the docket. Cameras already warmed."</p>
+    <p class="no-indent">Shawn shook his head. "He wanted insulation."</p>
+    <p class="beat">That got Bates to turn.</p>
+    <p class="dialogue">"Don't," Shawn said, sharper than he meant. "Don't make this about losing."</p>
+    <p class="beat">Bates stopped moving.</p>
+    <p class="dialogue">"He was already deciding where it'd land," Shawn said. "If it cracked. If the jury wandered." His hand tightened on the briefcase without him noticing. "My name was the cleanest place to put it."</p>
+    <p class="thought">Like I'd thank him for trusting me…</p>
+    <p class="no-indent">A throat cleared behind them. The sound carried.</p>
+    <p>Bates looked at the door, then back at Shawn.</p>
+    <p class="dialogue">"Davidson. The name only works if it stays clean," Bates said.</p>
+    <p class="dialogue">"His goddamn problem."</p>
+    <p class="no-indent">Bates opened the door.</p>
+    <p class="dialogue">"Good," he said. "Because I'm done saying his name in my building."</p>
+    <p class="no-indent">They stepped inside. The door closed behind them and the noise didn't follow.</p>
+    <p>Chambers were narrow, overworked. No warmth. No attempt at it. Books leaned where they'd been left, spines cracked from use instead of age. The law lived here the way it does in smaller counties, practical, repetitive, tired of ceremony.</p>
+    <p class="beat">The frame on the wall sat straight now. New glass. Cleaned up.</p>
+    <p class="no-indent">Shawn noticed it before he meant to.</p>
+    <p class="dialogue">"You fixed it," he said.</p>
+    <p class="no-indent">Bates didn't answer right away. He followed Shawn's eyes, then nodded once.</p>
+    <p class="dialogue">"Had to."</p>
+    <p class="no-indent">Across town, the same photo still leaned crooked in Leo's study. Torn at the edge where someone had once taken themselves out of it by force.</p>
+    <p>Black and white. North Avenue. Three men who thought process could outpace consequence. Leo in the middle, already arguing with someone out of frame. Dawson smiling like the job hadn't started charging interest yet. Bates at the edge—suit borrowed, posture exact, eyes already somewhere else.</p>
+    <p class="dialogue">"You remember that?" Bates asked.</p>
+    <p class="dialogue">"My mother made lemonade," Shawn said. "Metal bowl. Real lemons. She told him the house wasn't for politics."</p>
+    <p class="dialogue">"And he didn't listen."</p>
+    <p class="dialogue">"No."</p>
+    <p class="no-indent">Bates turned away first. He always did when memory stopped being useful.</p>
+    <p>He set the folder on the desk. Didn't open it. Didn't slide it over.</p>
+    <p class="dialogue">"You didn't call me this morning to complain about your father," Bates said. Not accusation. Statement. "You called because you needed somewhere else to stand."</p>
+    <p class="beat">Shawn didn't answer fast enough.</p>
+    <p class="dialogue">"That pause," Bates said. "That's the part that worries me."</p>
+    <p class="dialogue">"I told him no," Shawn said. "Clear."</p>
+    <p class="dialogue">"You said no," Bates agreed. "He heard timing."</p>
+    <p class="no-indent">Shawn exhaled through his nose. Short. Contained.</p>
+    <p class="dialogue">"He already moved past it," Shawn said. "By the time the words left my mouth."</p>
+    <p class="dialogue">Bates nodded. "He always does."</p>
+    <p class="beat">Silence stretched, then settled.</p>
+    <p class="dialogue">"You didn't leave Baltimore for nothing," Bates said. "Eighteen months. That's all you gave it."</p>
+    <p class="dialogue">"Long enough to see how it eats," Shawn said.</p>
+    <p class="dialogue">"And you still circled back today."</p>
+    <p class="no-indent">Shawn looked at the desk. At the folder he hadn't touched.</p>
+    <p class="dialogue">"Maya wanted air," he said.</p>
+    <p class="dialogue">"And you followed."</p>
+    <p class="dialogue">"I chose," Shawn said. Too fast.</p>
+    <p class="beat">Bates let that sit.</p>
+    <p class="dialogue">"I left because Leo wanted proof," Bates said. "Judges. Councilmen. Mayors. Names lined up like receipts. Power pointing at itself."</p>
+    <p class="dialogue">"And now you're done," Shawn said. "So you want a replacement."</p>
+    <p class="no-indent">Bates moved past him, not toward him. Crossed to the window. Looked out at the parking lot already filling with people who would be there long after they stopped caring who he was.</p>
+    <p class="dialogue">"This bench doesn't give a damn who your father is," Bates said. "No donors. No theater. You sentence the guy you see at the gas station. You explain yourself in the grocery store."</p>
+    <p class="dialogue">"And I trade cross-exams for that?"</p>
+    <p class="dialogue">"You stop surviving," Bates said. "You start deciding."</p>
+    <p class="beat">Shawn didn't smile.</p>
+    <p class="dialogue">"I make nothing here," he said. "What I do make goes to a gallery that barely stays open and a lawyer who sends invoices like clockwork."</p>
+    <p class="dialogue">"That's not poverty," Bates said. "That's penance."</p>
+    <p class="no-indent">Shawn laughed once. It broke wrong.</p>
+    <p>Bates slid the folder into the light, still not toward him.</p>
+    <p class="dialogue">"I'm retiring," he said. "And I asked you because you know how to say no and still walk away."</p>
+    <p class="no-indent">He finally looked at Shawn.</p>
+    <p class="dialogue">"You just don't do it with him."</p>
+    <p class="no-indent">Shawn picked up the folder. Felt the paper through it. Dates. Letterhead. Weight.</p>
+    <p class="dialogue">"Same page," he said.</p>
+    <p class="beat">Bates didn't answer.</p>
+    <p class="beat">Shawn turned to go.</p>
+    <p class="dialogue">"As for Maya—"</p>
+    <p class="beat">Shawn stopped.</p>
+    <p class="no-indent">They passed each other close. Cloth brushed cloth. Old respect holding its ground.</p>
+    <p>The folder cracked against the desk as Shawn opened it.</p>
+    <p>Notice of Retirement. Circuit Court. End of month. Signature steady.</p>
+    <p>Beneath it, a second page. Different letterhead. One name where a list usually lived.</p>
+    <p class="beat">His.</p>
+    <p class="no-indent">He folded the pages once. Then again. Exact. Set them back where they'd been. His hand stayed there.</p>
+    <p>Bates spoke without looking up. "Summer calendar's thin. Probation revokes. Domestic cleanups that never stay clean."</p>
+    <p class="beat">A pause.</p>
+    <p class="dialogue">"Baltimore doesn't usually leak this far south."</p>
+    <p class="dialogue">"Snow Hill handles its own," Shawn said.</p>
+    <p class="dialogue">"Most years," Bates said. "This one didn't."</p>
+    <p class="no-indent">Shawn squared the folder to the desk.</p>
+    <p class="dialogue">"You're skipping steps."</p>
+    <p class="dialogue">"I'm counting them," Bates said. "Six appearances in two years. No overnights. You argue clean and vanish before anyone asks why."</p>
+    <p class="dialogue">"And Baltimore?"</p>
+    <p class="dialogue">"He'll keep filing motions," Bates said. "Vincent will keep barking. Press will keep mistaking noise for gravity."</p>
+    <p class="beat">None of it landed soft.</p>
+    <p class="dialogue">"You're offering me a robe to outrun him."</p>
+    <p class="dialogue">"I'm offering you a room he can't enter," Bates said. "Different thing."</p>
+    <p class="no-indent">Shawn opened his mouth—</p>
+    <p class="beat">A knock cut the room clean.</p>
+    <p class="dialogue">"Judge—"</p>
+    <p class="beat">The moment ended.</p>
+    <p class="no-indent">Sound rushed back in—shoes on marble, voices held low, the soft impatience of people who'd been waiting longer than they planned. Four of them stood just outside chambers, folders hugged tight, eyes lifting in quick, professional inventory as Shawn stepped through. Whatever had happened inside had gone long. Long enough to bend schedules. Long enough to matter.</p>
+    <p>No one spoke. They didn't need to. The corridor absorbed him and kept moving.</p>
+    <p>The building had already begun to reset. Clerks re-forming lines, deputies reclaiming their corners, the courthouse slipping back into its practiced rhythm.</p>
+    <p>Maya stood where the corridor narrowed, painted brick at her back like she'd chosen it. Arms folded, posture settled, not waiting, just present. Bronze locs pinned with a pearl comb, one loose thread at her temple. Ultramarine at the cuff. A faint saffron line at her wrist the sink hadn't beaten. Color, brought deliberately into a place that preferred neutral and never apologized for it.</p>
+    <p class="beat">She wasn't looking for him.</p>
+    <p class="beat">That was how he knew she'd been there the whole time.</p>
+    <p class="beat">He stopped.</p>
+    <p class="dialogue">"Another sermon from Bates?"</p>
+    <p class="dialogue">"Retirement's inked," he said. "He wants his docket clean before the Record gets to it."</p>
+    <p class="dialogue">"And where did we tour today?"</p>
+    <p class="dialogue">"Where Bates always goes. The past."</p>
+    <p class="no-indent">She caught up to him just past the turn, where the corridor pinched and the light went flat.</p>
+    <p class="dialogue">"That's it?" she said. "You come out with that look and we're pretending it was small talk?"</p>
+    <p class="no-indent">He didn't slow. The folder rode under his arm like it had weight beyond paper.</p>
+    <p class="dialogue">"It's a bench," she went on. "Ocean City. Circuit. You don't get asked unless someone's already decided you fit."</p>
+    <p class="dialogue">"I didn't say yes."</p>
+    <p class="dialogue">"You didn't say no."</p>
+    <p class="no-indent">That landed closer than she meant. She adjusted, kept pace. "This is what you've been circling, Shawn. You don't run from Baltimore for two years without waiting on something solid."</p>
+    <p class="no-indent">He stopped short enough that she nearly clipped his shoulder. "You think this is about waiting?"</p>
+    <p class="dialogue">"I think it's about Leo," she said, plain. "He gets five minutes in a room with you and suddenly you're allergic to the future."</p>
+    <p class="no-indent">His jaw worked. "You never understood."</p>
+    <p class="no-indent">She didn't flinch. "I understood why we left. You don't get to rewrite that just because it's inconvenient."</p>
+    <p class="no-indent">He turned away from her, started walking again before the argument could take shape. "I'm not doing this here."</p>
+    <p class="dialogue">"Then do it somewhere," she said. "Just don't pretend it's his clock you're still living on."</p>
+    <p class="beat">They rounded into the lobby.</p>
+    <p class="no-indent">Sound lifted all at once—voices climbing, steps stalling, the low hum breaking apart. Screens lined the far wall. WJZ frozen mid-sentence. Channel 11 cut to black, then snapped back with a red banner so sharp it pulled the room upright.</p>
+    <!-- ========== SCENE BREAK ========== -->
+    <div class="scene-break">• &nbsp; • &nbsp; •</div>
+    <p class="crawl">BREAKING NEWS — BALTIMORE.</p>
+    <p class="no-indent">Phones came up. Conversations died mid-word. Whatever it was, it had already decided the room.</p>
+    <p>Maya leaned close, not touching him. "You didn't leave," she said. "You just changed distance."</p>
+    <p class="no-indent">He started to answer and didn't. Something tightened without warning, high and fast, like his body had skipped ahead.</p>
+    <p class="no-indent">Fox45 cut in, louder than the rest—</p>
+    <p class="crawl">… STEPS OF THE BALTIMORE CITY COURTHOUSE.</p>
+    <p class="no-indent">The image shook. A podium. City seal. Barricades pressed tight. Protest signs bobbing at the edge of frame. Someone shouting off-camera. Then the camera lurched—hard, unplanned, caught a body folding where the microphones were.</p>
+    <p class="beat">A gasp moved through the lobby. Not loud. Collective.</p>
+    <p class="no-indent">Another feed came up. Different angle. Same steps. Paramedics already there, hands everywhere, jackets flaring as they dropped to their knees.</p>
+    <p>CNN lagged, the crawl dragging behind the picture.</p>
+    <p class="crawl">… ATTORNEY LEO DAVIDSON COLLAPSES DURING STATEMENT…</p>
+    <p class="no-indent">Shawn didn't move. The noise narrowed, tunneled. He felt eyes on him before he understood why.</p>
+    <p class="dialogue">"That's him," someone said.</p>
+    <p class="beat">Too close. Too sure.</p>
+    <p class="dialogue">"His son," another voice answered, louder, like it needed to be true.</p>
+    <p class="no-indent">Maya said his name, but it reached him late, muffled, like it had passed through glass. The crowd had already turned. Not toward the screens anymore.</p>
+    <p class="beat">Toward him.</p>
+    <p class="no-indent">Bates broke from the clerk hall, moving faster than he ever did, robe loose at the shoulder, eyes scanning before his feet caught up. "Shawn—"</p>
+    <p class="no-indent">The word missed. Sound stretched thin, then gave way. The air felt wrong, insufficient. The floor tipped just enough to erase direction.</p>
+    <p class="beat">Another feed cut in along the far wall.</p>
+    <p class="crawl">… CONDITION UNKNOWN.</p>
+    <p class="no-indent">He was moving before thought arrived. The lobby shifted around him, bodies stepping back in small, practiced arcs, clearing a path without being told.</p>
+    <p>The briefcase slipped. Tile caught it. The latch snapped. Pages fanned across the floor—motions, notes, names, none of them belonging to anyone now.</p>
+    <p>Maya reached him, fingers closing at his wrist. Cold skin where a watch used to be. She didn't look down. Didn't try to gather anything. She stayed with him.</p>
+    <p>Behind them, Bates's voice carried through the static, low, steady. "Turn it off."</p>
+    <p class="beat">A deputy stepped forward, remote in hand.</p>
+    <p class="beat">Shawn raised his palm.</p>
+    <p class="beat">The screen held.</p>
+    <p class="no-indent">CNN's crawl slowed, deliberate, as if choosing each word.</p>
+    <p class="crawl">… CONFIRMED.</p>
+    <p class="no-indent">The picture cleared. Weather. Traffic. Scheduled programming, right on time.</p>
+    <p class="beat">Nothing else moved.</p>
+  </div><!-- /prose -->
+  <!-- Back Link -->
+  <div class="back-link">
+    <a href="/books/contempt">← Back to Contempt</a>
+  </div>
+</div><!-- /page-wrapper -->
 </body>
 </html>
