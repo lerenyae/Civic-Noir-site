@@ -17,6 +17,8 @@ export default function Header() {
           {navigation.map((item) =>
             item.cta ? (
               <Link key={item.href} href={item.href} className="px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+            ) : item.accent ? (
+              <Link key={item.href} href={item.href} className={`px-4 py-1.5 border text-xs font-sans font-light tracking-ultra uppercase transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : "border-burgundy/40 text-burgundy-light hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone"}`}>{item.label}</Link>
             ) : (
               <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
             )
@@ -32,6 +34,8 @@ export default function Header() {
           {navigation.map((item) =>
             item.cta ? (
               <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="block px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+            ) : item.accent ? (
+              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`block px-4 py-1.5 border border-burgundy/40 text-burgundy-light text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : ""}`}>{item.label}</Link>
             ) : (
               <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`nav-link text-sm ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
             )
