@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-noir-950/90 backdrop-blur-md border-b border-bone-300/5">
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="group">
+        <Link href="/" className="group shrink-0 mr-8">
           <span className="font-serif text-lg text-bone-200 tracking-wide group-hover:text-gold transition-colors duration-300">{siteConfig.name}</span>
         </Link>
         <div className="hidden md:flex items-center gap-10">
