@@ -4,28 +4,28 @@ import SectionReveal from "@/components/SectionReveal";
 
 export const metadata: Metadata = {
   title: "Soundtrack",
-  description: "Sounds of Contempt — 18 tracks. The temperature of the pages in sound. Original novel soundtrack by LeRenyae Watkins.",
+  description: "Sounds of Contempt â 18 tracks. The temperature of the pages in sound. Original novel soundtrack by LeRenyae Watkins.",
 };
 
 const tracks = [
-  { num: "01", title: "Contempt", time: "3:44", character: "Shawn", moment: "Title track. The weight of the word — legal, paternal, civic, self-inflicted. Every layer in one sound." },
-  { num: "02", title: "Father’s Don’t Fade", time: "3:01", character: "Shawn / Leo", moment: "Leo’s collapse on the courthouse steps. The briefcase. The inheritance no one asked for. Ch 1–2." },
-  { num: "03", title: "Leather and Blood", time: "3:18", character: "Shawn", moment: "The briefcase opened. Leo’s case files, the Fedwire voucher, the IA file on Han. Clean on paper. Dirty in daylight. Ch 3." },
+  { num: "01", title: "Contempt", time: "3:44", character: "Shawn", moment: "Title track. The weight of the word â legal, paternal, civic, self-inflicted. Every layer in one sound." },
+  { num: "02", title: "Fatherâs Donât Fade", time: "3:01", character: "Shawn / Leo", moment: "Leoâs collapse on the courthouse steps. The briefcase. The inheritance no one asked for. Ch 1â2." },
+  { num: "03", title: "Leather and Blood", time: "3:18", character: "Shawn", moment: "The briefcase opened. Leoâs case files, the Fedwire voucher, the IA file on Han. Clean on paper. Dirty in daylight. Ch 3." },
   { num: "04", title: "Crimson Fuse", time: "4:05", character: "Han / The City", moment: "The case fractures. Sandtown entry. Gunfire on exit. Parker chained in a basement. The city detonating. Ch 32." },
   { num: "05", title: "All Falls Down", time: "1:59", character: "Antonio", moment: "The rally. The bottle. The shot. Garrick drops. Antonio is underneath. Everything collapses in under two minutes." },
   { num: "06", title: "Letterhead", time: "3:07", character: "The Firm", moment: "Davidson & Associates. The name on the door. The name on the debt. Institutional pressure in stereo." },
-  { num: "07", title: "Cold Trail", time: "3:11", character: "Jordan", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesn’t want exposure. Ch 18–20." },
-  { num: "08", title: "No Sirens", time: "3:24", character: "Han", moment: "Han at the Iron Rail. The favors. The math between the people he loved and the system that held their debts. Ch 4–5." },
-  { num: "09", title: "Maya", time: "3:51", character: "Maya", moment: "The gallery. The divorce. The canvases face-down in glass. She doesn’t argue — she observes. Her accuracy is the weapon. Ch 23." },
+  { num: "07", title: "Cold Trail", time: "3:11", character: "Shawn", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesnât want exposure. Ch 18â20." },
+  { num: "08", title: "No Sirens", time: "3:24", character: "Han", moment: "Han at the Iron Rail. The favors. The math between the people he loved and the system that held their debts. Ch 4â5." },
+  { num: "09", title: "Maya", time: "3:51", character: "Maya", moment: "The gallery. The divorce. The canvases face-down in glass. She doesnât argue â she observes. Her accuracy is the weapon. Ch 23." },
   { num: "10", title: "I Miss the Sun", time: "3:43", character: "Antonio", moment: "Antonio in county. The fluorescent halo. Lights on all night. No window. Stillness cost less than guessing. Ch 6." },
-  { num: "11", title: "Before I Walk In", time: "3:04", character: "Shawn", moment: "The morning of opening statements. Briefcase burned cold in his palm. Leo’s habits borrowing his hands. Ch 24." },
-  { num: "12", title: "Glass Halo", time: "4:14", character: "Antonio", moment: "TRUTH IS A BID carved in the wall. The metal sheet pretending to be a mirror. A boy learning to breathe where no one taught him how." },
-  { num: "13", title: "Hold My Name", time: "4:31", character: "Antonio", moment: "Antonio’s prayer from the inside. Don’t let them make me something I ain’t. The name is all he has left." },
+  { num: "11", title: "Before I Walk In", time: "3:04", character: "Shawn", moment: "The morning of opening statements. Briefcase burned cold in his palm. Leoâs habits borrowing his hands. Ch 24." },
+  { num: "12", title: "Glass Halo", time: "4:14", character: "Han", moment: "TRUTH IS A BID carved in the wall. The metal sheet pretending to be a mirror. A boy learning to breathe where no one taught him how." },
+  { num: "13", title: "Hold My Name", time: "4:31", character: "Antonio", moment: "Antonioâs prayer from the inside. Donât let them make me something I ainât. The name is all he has left." },
   { num: "14", title: "Exits", time: "2:26", character: "Jordan", moment: "Jordan in Central Booking. Charged. Bail denied. The documenter becomes the document. Ch 43." },
   { num: "15", title: "What It Cost", time: "3:27", character: "Shawn / Han / Jordan", moment: "The reckoning. Three men who paid for the truth in different currencies. Nobody got change." },
-  { num: "16", title: "Shame", time: "3:09", character: "Shawn", moment: "Shawn confronting what he became to win. The tools he used. The father he sounds like. The name he can’t return." },
-  { num: "17", title: "Case Closed", time: "3:08", character: "The System", moment: "The split verdict. The system doesn’t give clean wins. It adjusts. Paperwork and silence. Ch 51." },
-  { num: "18", title: "Charm City", time: "3:24", character: "Baltimore", moment: "The closer. The city wakes up the same way it went to sleep. Cranes on the harbor. Domino burns red. Baltimore doesn’t apologize." },
+  { num: "16", title: "Shame", time: "3:09", character: "Shawn", moment: "Shawn confronting what he became to win. The tools he used. The father he sounds like. The name he canât return." },
+  { num: "17", title: "Case Closed", time: "3:08", character: "The System", moment: "The split verdict. The system doesnât give clean wins. It adjusts. Paperwork and silence. Ch 51." },
+  { num: "18", title: "Charm City", time: "3:24", character: "Baltimore", moment: "The closer. The city wakes up the same way it went to sleep. Cranes on the harbor. Domino burns red. Baltimore doesnât apologize." },
 ];
 
 export default function SoundtrackPage() {
@@ -73,11 +73,11 @@ export default function SoundtrackPage() {
           <div className="flex flex-col gap-4">
             <div className="border border-bone-300/8 bg-noir-900/50 rounded-lg p-8 text-center">
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-2">Spotify</p>
-              <p className="text-xs text-bone-300/30 font-light">Full album embed &mdash; awaiting album URI</p>
+              <p className="text-xs text-bone-300/30 font-light"></p>
             </div>
             <div className="border border-bone-300/8 bg-noir-900/50 rounded-lg p-8 text-center">
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-2">Apple Music</p>
-              <p className="text-xs text-bone-300/30 font-light">Album embed &mdash; awaiting album link</p>
+              <p className="text-xs text-bone-300/30 font-light"></p>
             </div>
           </div>
         </SectionReveal>
