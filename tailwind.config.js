@@ -7,6 +7,7 @@ module.exports = {
         noir: { 950: "#0A0A0A", 900: "#111111", 800: "#1A1A1A", 700: "#2A2A2A", 600: "#3A3A3A", 500: "#555555" },
         bone: { DEFAULT: "#F0EBE3", 100: "#FAF8F5", 200: "#F0EBE3", 300: "#E0D8CC" },
         gold: { DEFAULT: "#B8A078", light: "#D4C4A8", dark: "#8A7050", muted: "#9E8E6E" },
+        burgundy: { DEFAULT: "#7A1B2E", light: "#9C2840", dark: "#5A1220" },
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', "Georgia", "serif"],

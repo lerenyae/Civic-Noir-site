@@ -59,6 +59,7 @@ export const navigation: { label: string; href: string; cta?: boolean }[] = [
   { label: "Read", href: "/chapter-one", cta: true },
   { label: "The Record", href: "/the-record" },
   { label: "Dispatches", href: "/dispatches" },
+  { label: "Soundtrack", href: "/soundtrack" },
   { label: "About", href: "/about" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
