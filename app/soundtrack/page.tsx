@@ -14,19 +14,18 @@ const tracks = [
   { num: "04", title: "Crimson Fuse", time: "4:05", character: "Han / The City", moment: "The case fractures. Sandtown entry. Gunfire on exit. Parker chained in a basement. The city detonating. Ch 32." },
   { num: "05", title: "All Falls Down", time: "1:59", character: "Antonio", moment: "The rally. The bottle. The shot. Garrick drops. Antonio is underneath. Everything collapses in under two minutes." },
   { num: "06", title: "Letterhead", time: "3:07", character: "The Firm", moment: "Davidson & Associates. The name on the door. The name on the debt. Institutional pressure in stereo." },
-  { num: "07", title: "Cold Trail", time: "3:11", character: "Jordan", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesn\u2019t want exposure. Ch 18\u201320." },
+  { num: "07", title: "Cold Trail", time: "3:11", character: "Shawn", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesn\u2019t want exposure. Ch 18\u201320." },
   { num: "08", title: "No Sirens", time: "3:24", character: "Han", moment: "Han at the Iron Rail. The favors. The math between the people he loved and the system that held their debts. Ch 4\u20135." },
   { num: "09", title: "Maya", time: "3:51", character: "Maya", moment: "The gallery. The divorce. The canvases face-down in glass. She doesn\u2019t argue \u2014 she observes. Her accuracy is the weapon. Ch 23." },
   { num: "10", title: "I Miss the Sun", time: "3:43", character: "Antonio", moment: "Antonio in county. The fluorescent halo. Lights on all night. No window. Stillness cost less than guessing. Ch 6." },
   { num: "11", title: "Before I Walk In", time: "3:04", character: "Shawn", moment: "The morning of opening statements. Briefcase burned cold in his palm. Leo\u2019s habits borrowing his hands. Ch 24." },
-  { num: "12", title: "Glass Halo", time: "4:14", character: "Antonio", moment: "TRUTH IS A BID carved in the wall. The metal sheet pretending to be a mirror. A boy learning to breathe where no one taught him how." },
+  { num: "12", title: "Glass Halo", time: "4:14", character: "Han", moment: "TRUTH IS A BID carved in the wall. The metal sheet pretending to be a mirror. A boy learning to breathe where no one taught him how." },
   { num: "13", title: "Hold My Name", time: "4:31", character: "Antonio", moment: "Antonio\u2019s prayer from the inside. Don\u2019t let them make me something I ain\u2019t. The name is all he has left." },
   { num: "14", title: "Exits", time: "2:26", character: "Jordan", moment: "Jordan in Central Booking. Charged. Bail denied. The documenter becomes the document. Ch 43." },
   { num: "15", title: "What It Cost", time: "3:27", character: "Shawn / Han / Jordan", moment: "The reckoning. Three men who paid for the truth in different currencies. Nobody got change." },
   { num: "16", title: "Shame", time: "3:09", character: "Shawn", moment: "Shawn confronting what he became to win. The tools he used. The father he sounds like. The name he can\u2019t return." },
   { num: "17", title: "Case Closed", time: "3:08", character: "The System", moment: "The split verdict. The system doesn\u2019t give clean wins. It adjusts. Paperwork and silence. Ch 51." },
-  { num: "18", title: "Charm City", time: "3:24", character: "Baltimore", moment: "The closer. The city wakes up the same way it went to sleep. Cranes on the harbor. Domino burns red. Baltimore doesn\u2019t apologize." },
-];
+  { num: "18", title: "Charm City", time: "3:24", character: "Baltimore", moment: "The closer. The city wakes up the same way it went to sleep. Cranes on the harbor. Domino burns red. Baltimore doesn\u2019t apologize." },];
 
 export default function SoundtrackPage() {
   return (
@@ -71,17 +70,13 @@ export default function SoundtrackPage() {
       <section className="max-w-2xl mx-auto px-6 pb-16">
         <SectionReveal>
           <div className="flex flex-col gap-4">
-            {/* Spotify Embed Placeholder */}
             <div className="border border-bone-300/8 bg-noir-900/50 rounded-lg p-8 text-center">
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-2">Spotify</p>
-              {/* Replace with: <iframe style={{borderRadius: '12px'}} src="https://open.spotify.com/embed/album/YOUR_ALBUM_ID" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" /> */}
-              <p className="text-xs text-bone-300/30 font-light">Full album embed &mdash; awaiting album URI</p>
+              <p className="text-xs text-bone-300/30 font-light"></p>
             </div>
-            {/* Apple Music Embed Placeholder */}
             <div className="border border-bone-300/8 bg-noir-900/50 rounded-lg p-8 text-center">
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-2">Apple Music</p>
-              {/* Replace with: <iframe allow="autoplay *; encrypted-media *;" frameBorder="0" height="450" style={{width: '100%', overflow: 'hidden', background: 'transparent'}} sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/YOUR_ALBUM_ID" /> */}
-              <p className="text-xs text-bone-300/30 font-light">Album embed &mdash; awaiting album link</p>
+              <p className="text-xs text-bone-300/30 font-light"></p>
             </div>
           </div>
         </SectionReveal>
