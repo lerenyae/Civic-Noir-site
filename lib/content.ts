@@ -28,7 +28,7 @@ No heroes. No clean wins. Just pressure and what it makes people do.`,
 export const bio = {
   short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. His debut novel, Contempt, is forthcoming in 2026.",
   long: `I’ve been writing since 6th grade. Poetry first, then short stories, scripts, music, and now novels. I’m a father of three, living in Plano, Texas, just outside of Dallas. That’s my why. Everything I write comes back to systems. Not the hero who breaks through, but the wall itself. How it was built, who benefits, and what it costs the people on both sides. My background is over 15 years in cybersecurity, and now I write full time. Whether it’s a legal thriller or historical fiction, I leave no stone unturned. I want readers to feel like they’re standing in the room. ‘It felt like I was there’ is the compliment I chase. I write for adaptation, structure and visual language that translates from page to screen. CONTEMPT is my debut novel, releasing alongside an 18-track original soundtrack I composed for the book.`,
-  photo: "/covers/contempt-cover.png",
+  photo: "/covers/IMG_2374.JPG",
   howIWrite: [
     "Systems apply pressure. People absorb it.",
     "Dialogue is subtext first â messy, interrupted, defensive.",
