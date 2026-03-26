@@ -28,13 +28,20 @@ No heroes. No clean wins. Just pressure and what it makes people do.`,
 export const bio = {
   short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. A father of three based in Plano, Texas, he spent over 15 years in cybersecurity before transitioning to writing full time. His debut novel, Contempt, is forthcoming in 2026 alongside an 18-track original soundtrack he composed for the book.",
   long: `LeRenyae Lawrence Watkins has been writing since 6th grade. Poetry first, then short stories, scripts, music, and now novels. A father of three living in Plano, Texas, just outside of Dallas, everything he writes comes back to systems. Not the hero who breaks through the wall, but the wall itself. How it was built, who benefits, and what it costs the people on both sides.\n\nHis background spans over 15 years in cybersecurity and enterprise technology sales before he transitioned to writing full time. Whether the work is a legal thriller or historical fiction, he leaves no stone unturned. The courtroom procedure, the zoning law, the chain of custody, the geography. He wants readers to feel like they are standing in the room. It felt like I was there is the compliment he chases.\n\nHe writes for adaptation. Structure, scenes, and visual language that translates from page to screen. CONTEMPT is his debut novel, releasing alongside an 18-track original soundtrack he composed for the book.`,
+  howIWrite: [
+    "Systems apply pressure. People absorb it.",
+    "Dialogue is subtext first - messy, interrupted, defensive.",
+    "Procedure is never background. It's leverage.",
+    "No speeches. No clean endings. Just consequence.",
+  ],
+};
 
 export const mediaKit = {
   authorName: "LeRenyae Lawrence Watkins", genre: "Literary Thriller / Legal Thriller",
   representation: "Reigning Words Publishing",
   bio: `LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence.
 
-His debut novel, Contempt, is set in Baltimore, 2006. After a deputy mayor is killed at a community rally, a eighteen-year-old sits in county awaiting trial. When the defense attorney willing to take the case collapses on the courthouse steps, his son, Shawn Davidson, is forced to inherit the file, the firm, and the cityâs attention â whether heâs ready or not.
+His debut novel, Contempt, is set in Baltimore, 2006. After a deputy mayor is killed at a community rally, an eighteen-year-old sits in county awaiting trial. When the defense attorney willing to take the case collapses on the courthouse steps, his son, Shawn Davidson, is forced to inherit the file, the firm, and the city's attention - whether he's ready or not.
 
 Contempt is forthcoming in 2026.`,
   availableFor: ["Author interviews & profiles", "Podcast appearances", "Panel discussions", "Book club Q&As (virtual and in-person)", "Film & television adaptation inquiries"],
