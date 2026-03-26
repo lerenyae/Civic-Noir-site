@@ -15,7 +15,7 @@ export const books = [{
   hookLine: "A deputy mayor is dead. An eighteen-year-old sits in county because his prints were on a gun that went missing weeks before the murder. And the only lawyer willing to take the case inherited it from his father who died before the trial began.",
   synopsis: `Baltimore, 2006. A deputy mayor is dead. An eighteen-year-old sits in county because his fingerprints were on a gun that vanished from his family’s restaurant weeks before the killing. Old prints. New blame.
 
-By the following summer, he’s still waiting to begin the fight for his innocence. The lawyer with the balls to defend him collapses on the courthouse steps — briefcase in hand, files inside — leaving behind a son who never wanted the name in the first place.
+By the following summer, he’s still waiting to begin the fight for his innocence. The attorney who took his case collapses on the courthouse steps before the trial begins — briefcase in hand, files inside — leaving behind a son who never wanted the name in the first place.
 
 Shawn Davidson spent the last two years trying to outrun Baltimore. Now he’s back holding the file, the firm, and whatever his father was carrying when he went down. The trial doesn’t pause. The docket doesn’t care. And the State already has a version of events it can live with.
 
