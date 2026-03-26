@@ -14,7 +14,7 @@ const tracks = [
   { num: "04", title: "Crimson Fuse", time: "4:05", character: "Han / The City", moment: "The case fractures. Sandtown entry. Gunfire on exit. Parker chained in a basement. The city detonating. Ch 32." },
   { num: "05", title: "All Falls Down", time: "1:59", character: "Antonio", moment: "The rally. The bottle. The shot. Garrick drops. Antonio is underneath. Everything collapses in under two minutes." },
   { num: "06", title: "Letterhead", time: "3:07", character: "The Firm", moment: "Davidson & Associates. The name on the door. The name on the debt. Institutional pressure in stereo." },
-  { num: "07", title: "Cold Trail", time: "3:11", character: "Shawn", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesn\u2019t want exposure. Ch 18\u201320." },
+  { num: "07", title: "Cold Trail", time: "3:11", character: "Jordan", moment: "Jordan chasing the missing witness. Eve behind Red Orchid. The story that doesn\u2019t want exposure. Ch 18\u201320." },
   { num: "08", title: "No Sirens", time: "3:24", character: "Han", moment: "Han at the Iron Rail. The favors. The math between the people he loved and the system that held their debts. Ch 4\u20135." },
   { num: "09", title: "Maya", time: "3:51", character: "Maya", moment: "The gallery. The divorce. The canvases face-down in glass. She doesn\u2019t argue \u2014 she observes. Her accuracy is the weapon. Ch 23." },
   { num: "10", title: "I Miss the Sun", time: "3:43", character: "Antonio", moment: "Antonio in county. The fluorescent halo. Lights on all night. No window. Stillness cost less than guessing. Ch 6." },
