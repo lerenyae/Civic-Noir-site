@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>The City &mdash; Contempt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
       --font-ui: 'Outfit', sans-serif;
     }
 
-    html, body { height: 100%; background: var(--black); color: var(--bone); font-family: var(--font-ui); overflow: hidden; }
+    html, body { height: 100%; background: var(--black); color: var(--bone); font-family: var(--font-ui); overflow: hidden; overflow-x: hidden; max-width: 100vw; }
 
     /* — NAV — */
     .site-nav {
@@ -158,11 +158,11 @@
     /* — MOBILE — */
     @media (max-width: 768px) {
       .site-nav { padding: 10px 16px; height: 44px; }
-      .layout { padding-top: 44px; position: relative; overflow: hidden; }
+      .layout { padding-top: 44px; position: relative; overflow: hidden; width: 100vw; max-width: 100%; }
       .nav-center { display: none; }
 
       /* Map fills entire viewport */
-      #map { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; height: auto; flex: none; z-index: 1; }
+      #map { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; height: auto; flex: none; z-index: 1; width: 100%; max-width: 100vw; }
 
       /* Sidebar = bottom sheet */
       .sidebar {
@@ -200,7 +200,7 @@
       /* Detail panel: full-width overlay */
       .detail-panel {
         left: 0; right: 0; bottom: 0; max-height: 50vh;
-        padding: 20px 20px; z-index: 500;
+        padding: 20px 16px; z-index: 500; width: 100%;
       }
       .detail-name { font-size: 1.25rem; }
       .detail-body { font-size: 0.85rem; }
@@ -208,9 +208,13 @@
       /* Legend floats above sheet */
       .map-legend {
         left: 10px; right: 10px; bottom: 62px;
-        padding: 10px 14px; gap: 12px; flex-wrap: wrap; justify-content: center;
+        padding: 8px 12px; gap: 8px; flex-wrap: wrap; justify-content: center;
+        font-size: 0.55rem;
       }
       .map-legend.pushed { bottom: auto; top: 54px; }
+
+      /* Prevent anything from exceeding viewport */
+      .site-nav { max-width: 100vw; }
     }
   </style>
 </head>
@@ -580,15 +584,21 @@ LOCATIONS.forEach(loc => {
   labels[loc.id] = label;
 });
 
-// Show/hide labels based on zoom
+// Show/hide labels based on zoom — denser clusters need higher zoom
+const baltimoreIds = new Set(LOCATIONS.filter(l => l.filter === 'baltimore').map(l => l.id));
+
 function updateLabels() {
   const z = map.getZoom();
-  Object.values(labels).forEach(label => {
+  LOCATIONS.forEach(loc => {
+    const label = labels[loc.id];
+    if (!label) return;
     const el = label.getElement();
-    if (el) {
-      if (z >= 14) { el.classList.add('visible'); }
-      else { el.classList.remove('visible'); }
-    }
+    if (!el) return;
+    // Baltimore pins are dense — require zoom 16+ to show labels
+    // Ocean City / Snow Hill are spread out — show at 14+
+    const threshold = baltimoreIds.has(loc.id) ? 16 : 14;
+    if (z >= threshold) { el.classList.add('visible'); }
+    else { el.classList.remove('visible'); }
   });
 }
 map.on('zoomend', updateLabels);
