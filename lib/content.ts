@@ -54,7 +54,7 @@ export const navigation: { label: string; href: string; cta?: boolean; accent?: 
   { label: "Books", href: "/books" },
   { label: "Read", href: "/chapter-one", cta: true },
   { label: "The Record", href: "/the-record" },
-  { label: "The City", href: "/the-map.html" },
+  { label: "The City", href: "/the-map" },
   { label: "Dispatches", href: "/dispatches" },
   { label: "About", href: "/about" },
   { label: "Media", href: "/media" },
