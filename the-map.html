@@ -31,7 +31,7 @@
 
     html, body { height: 100%; background: var(--black); color: var(--bone); font-family: var(--font-ui); overflow: hidden; }
 
-    /* — NAV — */
+    /* â NAV â */
     .site-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       background: var(--black); border-bottom: 1px solid var(--border);
@@ -42,10 +42,10 @@
     .nav-center em { font-style: italic; color: #8a8070; }
     .nav-right { font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
 
-    /* — LAYOUT — */
+    /* â LAYOUT â */
     .layout { display: flex; height: 100vh; padding-top: 52px; }
 
-    /* — SIDEBAR — */
+    /* â SIDEBAR â */
     .sidebar {
       width: 360px; flex-shrink: 0; background: var(--panel);
       border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; z-index: 100;
@@ -55,7 +55,7 @@
     .sidebar-title { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300; color: var(--bone-bright); line-height: 1.15; letter-spacing: 0.02em; }
     .sidebar-subtitle { margin-top: 8px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; font-weight: 300; }
 
-    /* — FILTER TABS — */
+    /* â FILTER TABS â */
     .filter-bar { padding: 14px 28px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
     .filter-btn {
       font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
@@ -64,7 +64,7 @@
     }
     .filter-btn:hover, .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184, 150, 62, 0.06); }
 
-    /* — LOCATION LIST — */
+    /* â LOCATION LIST â */
     .location-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
     .location-list::-webkit-scrollbar { width: 4px; }
     .location-list::-webkit-scrollbar-track { background: transparent; }
@@ -93,7 +93,7 @@
     .loc-name { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; color: var(--bone-bright); line-height: 1.2; margin-bottom: 4px; }
     .loc-excerpt { font-size: 0.8rem; color: var(--muted); line-height: 1.5; font-style: italic; font-family: var(--font-serif); }
 
-    /* — DETAIL PANEL — */
+    /* â DETAIL PANEL â */
     .detail-panel {
       position: absolute; bottom: 0; left: 360px; right: 0;
       background: var(--black); border-top: 1px solid var(--border);
@@ -111,7 +111,7 @@
     .detail-body em { color: var(--bone-bright); font-style: italic; }
     .detail-chapter { margin-top: 12px; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); font-weight: 300; }
 
-    /* — MAP — */
+    /* â MAP â */
     #map { flex: 1; height: 100%; background: #0a0908; }
     .leaflet-container { background: #0a0908 !important; font-family: var(--font-ui) !important; }
     .leaflet-control-zoom a { background: var(--panel) !important; color: var(--bone) !important; border-color: var(--border) !important; }
@@ -141,7 +141,7 @@
     .map-popup-name { font-family: var(--font-serif); font-size: 1rem; color: var(--bone-bright); font-weight: 400; margin-bottom: 4px; }
     .map-popup-sub { font-size: 0.7rem; color: var(--muted); font-style: italic; font-family: var(--font-serif); }
 
-    /* — CHARACTER LEGEND — */
+    /* â CHARACTER LEGEND â */
     .map-legend {
       position: absolute; bottom: 20px; left: 380px; z-index: 500;
       background: rgba(15, 14, 11, 0.92); border: 1px solid var(--border);
@@ -152,65 +152,14 @@
     .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
     .legend-label { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
 
-    /* — SHEET HANDLE (hidden on desktop) — */
-    .sheet-handle { display: none; }
-
-    /* — MOBILE — */
+    /* â MOBILE â */
     @media (max-width: 768px) {
-      .site-nav { padding: 10px 16px; height: 44px; }
-      .layout { padding-top: 44px; position: relative; overflow: hidden; }
+      .layout { flex-direction: column; overflow: auto; }
+      .sidebar { width: 100%; height: auto; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border); }
+      #map { height: 55vh; flex: none; }
+      .detail-panel { left: 0; }
       .nav-center { display: none; }
-
-      /* Map fills entire viewport */
-      #map { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; height: auto; flex: none; z-index: 1; }
-
-      /* Sidebar = bottom sheet */
-      .sidebar {
-        position: absolute; bottom: 0; left: 0; right: 0; z-index: 400;
-        width: 100%; height: auto; max-height: 70vh;
-        border-right: none; border-top: 1px solid var(--border);
-        border-radius: 10px 10px 0 0;
-        transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .sidebar.collapsed { max-height: 52px; overflow: hidden; }
-      .sidebar.collapsed .sidebar-header { display: none; }
-      .sidebar.collapsed .location-list { display: none; }
-      .sidebar.collapsed .filter-bar { display: none; }
-
-      .sheet-handle {
-        display: flex; justify-content: center; padding: 8px 0 4px; cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .sheet-handle-bar {
-        width: 32px; height: 3px; background: var(--muted); border-radius: 2px;
-      }
-      .sheet-toggle-label {
-        font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
-        color: var(--muted); text-align: center; padding: 2px 0 6px;
-      }
-
-      .sidebar-header { padding: 16px 20px 12px; }
-      .sidebar-title { font-size: 1.3rem; }
-      .filter-bar { padding: 10px 20px; }
-      .location-list { max-height: 35vh; }
-      .location-item { padding: 14px 20px; }
-      .loc-name { font-size: 1rem; }
-      .loc-excerpt { font-size: 0.75rem; }
-
-      /* Detail panel: full-width overlay */
-      .detail-panel {
-        left: 0; right: 0; bottom: 0; max-height: 50vh;
-        padding: 20px 20px; z-index: 500;
-      }
-      .detail-name { font-size: 1.25rem; }
-      .detail-body { font-size: 0.85rem; }
-
-      /* Legend floats above sheet */
-      .map-legend {
-        left: 10px; right: 10px; bottom: 62px;
-        padding: 10px 14px; gap: 12px; flex-wrap: wrap; justify-content: center;
-      }
-      .map-legend.pushed { bottom: auto; top: 54px; }
+      .map-legend { left: 10px; bottom: 10px; padding: 10px 14px; gap: 14px; flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -222,11 +171,7 @@
   </nav>
 
   <div class="layout">
-    <aside class="sidebar collapsed" id="sidebar">
-      <div class="sheet-handle" id="sheetHandle">
-        <div class="sheet-handle-bar"></div>
-      </div>
-      <div class="sheet-toggle-label" id="sheetLabel">Locations</div>
+    <aside class="sidebar">
       <div class="sidebar-header">
         <span class="sidebar-label">Field Map</span>
         <div class="sidebar-title">The Places<br>That Held Them</div>
@@ -270,7 +215,7 @@ const COLORS = {
 };
 
 const LOCATIONS = [
-  // — BALTIMORE (15) —
+  // â BALTIMORE (15) â
   {
     id: 1, name: "Mitchell Courthouse Steps",
     address: "100 N Calvert St, Baltimore MD 21202",
@@ -392,7 +337,7 @@ const LOCATIONS = [
     chapter: "Referenced \u2014 Contempt"
   },
 
-  // — OCEAN CITY (3) —
+  // â OCEAN CITY (3) â
   {
     id: 16, name: "The Cemetery",
     address: "3700 Coastal Hwy, Ocean City MD 21842",
@@ -418,7 +363,7 @@ const LOCATIONS = [
     chapter: "Referenced \u2014 Contempt"
   },
 
-  // — SNOW HILL (2) —
+  // â SNOW HILL (2) â
   {
     id: 19, name: "Worcester District Court",
     address: "1 W Market St, Snow Hill MD 21863",
@@ -437,7 +382,7 @@ const LOCATIONS = [
   }
 ];
 
-// — SVG Pin Factory —
+// â SVG Pin Factory â
 function pinSVG(color) {
   const hex = COLORS[color].hex;
   return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +402,7 @@ function pinSVGActive(color) {
   </svg>`;
 }
 
-// — Map Init —
+// â Map Init â
 const marylandBounds = L.latLngBounds(
   L.latLng(37.9, -76.8),
   L.latLng(39.55, -74.9)
@@ -481,7 +426,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 
 L.control.zoom({ position: 'topright' }).addTo(map);
 
-// — Markers & Labels —
+// â Markers & Labels â
 const markers = {};
 const labels = {};
 let activeId = null;
@@ -594,7 +539,7 @@ function updateLabels() {
 map.on('zoomend', updateLabels);
 map.whenReady(updateLabels);
 
-// — Sidebar List —
+// â Sidebar List â
 function buildList(filter) {
   const list = document.getElementById('locationList');
   list.innerHTML = '';
@@ -616,7 +561,7 @@ function buildList(filter) {
 }
 buildList('all');
 
-// — Filter Buttons —
+// â Filter Buttons â
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -648,59 +593,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 document.getElementById('detailClose').addEventListener('click', closeDetail);
-map.on('click', () => { closeDetail(); collapseSidebar(); });
-
-// — Mobile Sheet Toggle —
-const sidebar = document.getElementById('sidebar');
-const sheetHandle = document.getElementById('sheetHandle');
-const sheetLabel = document.getElementById('sheetLabel');
-
-function collapseSidebar() {
-  if (window.innerWidth <= 768) {
-    sidebar.classList.add('collapsed');
-    sheetLabel.textContent = 'Locations';
-    document.querySelector('.map-legend').classList.remove('pushed');
-  }
-}
-
-function expandSidebar() {
-  sidebar.classList.remove('collapsed');
-  sheetLabel.textContent = '';
-  document.querySelector('.map-legend').classList.add('pushed');
-}
-
-function toggleSheet() {
-  if (sidebar.classList.contains('collapsed')) {
-    expandSidebar();
-  } else {
-    collapseSidebar();
-  }
-}
-
-sheetHandle.addEventListener('click', toggleSheet);
-sheetLabel.addEventListener('click', toggleSheet);
-
-// On mobile, collapse sidebar after selecting a location
-const origOpenDetail = openDetail;
-openDetail = function(loc) {
-  origOpenDetail(loc);
-  if (window.innerWidth <= 768) collapseSidebar();
-};
-
-// On desktop, remove collapsed class
-function handleResize() {
-  if (window.innerWidth > 768) {
-    sidebar.classList.remove('collapsed');
-  } else if (!sidebar.classList.contains('collapsed')) {
-    // Starting on mobile — default to collapsed
-  }
-}
-window.addEventListener('resize', handleResize);
-
-// Init: if mobile, start collapsed
-if (window.innerWidth <= 768) {
-  sidebar.classList.add('collapsed');
-}
+map.on('click', closeDetail);
 </script>
 </body>
 </html>
