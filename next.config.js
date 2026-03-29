@@ -7,6 +7,10 @@ const nextConfig = {
         source: '/chapter-one',
         destination: '/chapter-one.html',
       },
+      {
+                source: '/the-map',
+                destination: '/the-map.html',
+      },
     ];
   },
 };
