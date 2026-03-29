@@ -4,6 +4,15 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { siteConfig, navigation } from "@/lib/content";
 
+const staticRoutes = new Set(["/chapter-one", "/the-map"]);
+
+function NavItem({ href, className, onClick, children }: { href: string; className: string; onClick?: () => void; children: React.ReactNode }) {
+  if (staticRoutes.has(href)) {
+    return <a href={href} className={className} onClick={onClick}>{children}</a>;
+  }
+  return <Link href={href} className={className} onClick={onClick}>{children}</Link>;
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,11 +25,11 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-10">
           {navigation.map((item) =>
             item.cta ? (
-              <Link key={item.href} href={item.href} className="px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+              <NavItem key={item.href} href={item.href} className="px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</NavItem>
             ) : item.accent ? (
-              <Link key={item.href} href={item.href} className={`px-4 py-1.5 border text-xs font-sans font-light tracking-ultra uppercase transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : "border-burgundy/40 text-burgundy-light hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone"}`}>{item.label}</Link>
+              <NavItem key={item.href} href={item.href} className={`px-4 py-1.5 border text-xs font-sans font-light tracking-ultra uppercase transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : "border-burgundy/40 text-burgundy-light hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone"}`}>{item.label}</NavItem>
             ) : (
-              <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
+              <NavItem key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</NavItem>
             )
           )}
         </div>
@@ -33,11 +42,11 @@ export default function Header() {
         <div className="px-6 pb-8 pt-2 flex flex-col gap-6 border-t border-bone-300/5">
           {navigation.map((item) =>
             item.cta ? (
-              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="block px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</Link>
+              <NavItem key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="block px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</NavItem>
             ) : item.accent ? (
-              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`block px-4 py-1.5 border border-burgundy/40 text-burgundy-light text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : ""}`}>{item.label}</Link>
+              <NavItem key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`block px-4 py-1.5 border border-burgundy/40 text-burgundy-light text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy/10 hover:border-burgundy-light hover:text-bone transition-all duration-300 ${pathname === item.href ? "border-burgundy-light text-bone bg-burgundy/20" : ""}`}>{item.label}</NavItem>
             ) : (
-              <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`nav-link text-sm ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</Link>
+              <NavItem key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`nav-link text-sm ${pathname === item.href ? "nav-link-active" : ""}`}>{item.label}</NavItem>
             )
           )}
         </div>
