@@ -18,11 +18,11 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-noir-950/90 backdrop-blur-md border-b border-bone-300/5">
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="group shrink-0 mr-8">
+      <nav className="max-w-[90rem] mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="group shrink-0 mr-6">
           <span className="font-serif text-lg text-bone-200 tracking-wide group-hover:text-gold transition-colors duration-300">{siteConfig.name}</span>
         </Link>
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-6">
           {navigation.map((item) =>
             item.cta ? (
               <NavItem key={item.href} href={item.href} className="px-4 py-1.5 border border-gold/60 text-gold text-xs font-sans font-light tracking-ultra uppercase hover:bg-gold/10 hover:border-gold transition-all duration-300">{item.label}</NavItem>
