@@ -4,7 +4,7 @@ import { books, siteConfig } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
 import Newsletter from "@/components/Newsletter";
 
-export const metadata: Metadata = { title: "Books", description: `Books by ${siteConfig.name}. Civic Noir fiction.` };
+export const metadata: Metadata = { title: "Books", description: `Contempt — a legal thriller set in Baltimore, 2006. By ${siteConfig.name}.`, openGraph: { title: `Books — ${siteConfig.name}`, description: "Contempt: A deputy mayor is dead. An eighteen-year-old sits in county. The only lawyer willing to take the case inherited it from his father.", images: [siteConfig.ogImage] } };
 
 export default function BooksPage() {
   const contempt = books[0];

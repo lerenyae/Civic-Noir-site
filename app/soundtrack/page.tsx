@@ -4,7 +4,8 @@ import SectionReveal from "@/components/SectionReveal";
 
 export const metadata: Metadata = {
   title: "Soundtrack",
-  description: "Sounds of Contempt - 18 tracks. The temperature of the pages in sound. Original novel soundtrack by LeRenyae Watkins.",
+  description: "Sounds of Contempt — 18 tracks. The temperature of the pages in sound. Original novel soundtrack by LeRenyae Watkins.",
+  openGraph: { title: "Sounds of Contempt — Original Novel Soundtrack", description: "18 tracks composed for the novel Contempt. Character-driven. Chapter-mapped. By LeRenyae Watkins.", images: ["/covers/contempt-cover.png"] },
 };
 
 const tracks = [

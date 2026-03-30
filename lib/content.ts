@@ -31,20 +31,21 @@ export const bio = {
   photo: "/covers/IMG_2374.JPG",
   howIWrite: [
     "Systems apply pressure. People absorb it.",
-    "Dialogue is subtext first - messy, interrupted, defensive.",
-    "Procedure is never background. It's leverage.",
+    "Dialogue is subtext first \u2014 messy, interrupted, defensive.",
+    "Procedure is never background. It\u2019s leverage.",
     "No speeches. No clean endings. Just consequence.",
   ],
 };
 
 export const mediaKit = {
   authorName: "LeRenyae Lawrence Watkins", genre: "Literary Thriller / Legal Thriller",
-  representation: "Reigning Words Publishing",
+  representation: "Unrepresented \u2014 seeking literary representation",
   bio: `LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence.
 
 His debut novel, Contempt, is set in Baltimore, 2006. After a deputy mayor is killed at a community rally, an eighteen-year-old sits in county awaiting trial. When the defense attorney willing to take the case collapses on the courthouse steps, his son, Shawn Davidson, is forced to inherit the file, the firm, and the city's attention - whether he's ready or not.
 
 Contempt is forthcoming in 2026.`,
+  compTitles: "For readers of Attica Locke, S.A. Cosby, and Steph Cha. For viewers of The Wire, Presumed Innocent, and American Crime Story.",
   availableFor: ["Author interviews & profiles", "Podcast appearances", "Panel discussions", "Book club Q&As (virtual and in-person)", "Film & television adaptation inquiries"],
   highResPhotos: null, bookCoverHighRes: "/covers/contempt-cover.png",
   pressContact: "reigningwordspublishing@gmail.com", pressClippings: [],

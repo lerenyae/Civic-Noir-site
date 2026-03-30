@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { mediaKit, siteConfig } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
 
-export const metadata: Metadata = { title: "Media Kit", description: `Press and media resources for ${siteConfig.name}.` };
+export const metadata: Metadata = { title: "Media Kit", description: `Press and media resources for ${siteConfig.name}. Author of Contempt — civic noir fiction.`, openGraph: { title: `Media Kit — ${siteConfig.name}`, description: "Press kit, author bio, and media resources for the author of Contempt.", images: [siteConfig.ogImage] } };
 
 export default function MediaPage() {
   return (
@@ -15,6 +15,7 @@ export default function MediaPage() {
             <SectionReveal><div className="mb-12"><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">Author</p><p className="font-serif text-2xl text-bone-200 font-light mb-2">{mediaKit.authorName}</p><p className="text-xs text-bone-300/40 font-light tracking-wide">{mediaKit.genre}</p></div></SectionReveal>
             <SectionReveal delay={100}><div className="mb-12"><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">Bio</p>{mediaKit.bio.split("\n\n").map((para, i) => (<p key={i} className="text-sm text-bone-300/50 font-light leading-[1.8] mb-4 last:mb-0">{para}</p>))}</div></SectionReveal>
             <SectionReveal delay={200}><div className="mb-12"><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">Representation</p><p className="text-sm text-bone-300/50 font-light italic">{mediaKit.representation}</p></div></SectionReveal>
+            <SectionReveal delay={250}><div className="mb-12"><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">Comp Titles</p><p className="text-sm text-bone-300/50 font-light italic">{(mediaKit as any).compTitles}</p></div></SectionReveal>
             <SectionReveal delay={300}><div><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">Press Contact</p><a href={`mailto:${mediaKit.pressContact}`} className="text-sm text-gold/70 font-light hover:text-gold transition-colors">{mediaKit.pressContact}</a></div></SectionReveal>
           </div>
           <div>

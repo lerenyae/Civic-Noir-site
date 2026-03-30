@@ -4,7 +4,7 @@ import { bio, siteConfig } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
 import Newsletter from "@/components/Newsletter";
 
-export const metadata: Metadata = { title: "About", description: `About ${siteConfig.name}. Civic Noir.` };
+export const metadata: Metadata = { title: "About", description: `${siteConfig.name} writes literary crime fiction and legal thrillers. Systems apply pressure. People absorb it.`, openGraph: { title: `About — ${siteConfig.name}`, description: "Author of Contempt. Systems apply pressure. People absorb it.", images: [siteConfig.ogImage] } };
 
 export default function AboutPage() {
   return (
