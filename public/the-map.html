@@ -155,6 +155,11 @@
     /* — SHEET HANDLE (hidden on desktop) — */
     .sheet-handle { display: none; }
 
+    /* — MOBILE FAB + MENU (hidden on desktop) — */
+    .mobile-fab { display: none; }
+    .mobile-menu-overlay { display: none; }
+    .mobile-menu-panel { display: none; }
+
     /* — MOBILE — */
     @media (max-width: 768px) {
       .site-nav { padding: 10px 16px; height: 44px; }
@@ -164,38 +169,96 @@
       /* Map fills viewport below nav + legend */
       #map { position: absolute; top: 72px; left: 0; right: 0; bottom: 0; height: auto; flex: none; z-index: 1; width: 100%; max-width: 100vw; }
 
-      /* Sidebar = bottom sheet */
-      .sidebar {
-        position: absolute; bottom: 0; left: 0; right: 0; z-index: 400;
-        width: 100%; height: auto; max-height: 70vh;
-        border-right: none; border-top: 1px solid var(--border);
-        border-radius: 10px 10px 0 0;
-        transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .sidebar.collapsed { max-height: 52px; overflow: hidden; }
-      .sidebar.collapsed .sidebar-header { display: none; }
-      .sidebar.collapsed .location-list { display: none; }
-      .sidebar.collapsed .filter-bar { display: none; }
+      /* Hide desktop sidebar on mobile entirely */
+      .sidebar { display: none !important; }
 
-      .sheet-handle {
-        display: flex; justify-content: center; padding: 8px 0 4px; cursor: pointer;
+      /* — Floating Action Button — */
+      .mobile-fab {
+        display: flex; align-items: center; justify-content: center;
+        position: fixed; bottom: 24px; right: 16px; z-index: 450;
+        width: 50px; height: 50px; border-radius: 50%;
+        background: var(--panel); border: 1px solid var(--gold-dim);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        cursor: pointer; -webkit-tap-highlight-color: transparent;
+        transition: transform 0.2s, background 0.2s;
+      }
+      .mobile-fab:active { transform: scale(0.92); }
+      .mobile-fab svg { width: 20px; height: 20px; }
+      .mobile-fab .fab-lines line { stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
+      .mobile-fab .fab-close { display: none; }
+      .mobile-fab.open .fab-lines { display: none; }
+      .mobile-fab.open .fab-close { display: block; color: var(--gold); font-size: 1.4rem; line-height: 1; }
+
+      /* — Menu Overlay — */
+      .mobile-menu-overlay {
+        display: none; position: fixed; inset: 0; z-index: 430;
+        background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+      }
+      .mobile-menu-overlay.visible { display: block; }
+
+      /* — Slide-up Menu Panel — */
+      .mobile-menu-panel {
+        display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 440;
+        background: var(--panel); border-top: 1px solid var(--gold-dim);
+        border-radius: 14px 14px 0 0;
+        max-height: 65vh; overflow: hidden;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
+      }
+      .mobile-menu-panel.open { transform: translateY(0); }
+
+      .mobile-menu-header {
+        padding: 16px 20px 0; display: flex; align-items: center; justify-content: space-between;
+      }
+      .mobile-menu-title {
+        font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300;
+        color: var(--bone-bright); letter-spacing: 0.02em;
+      }
+      .mobile-menu-count {
+        font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--muted); font-weight: 400;
+      }
+      .mobile-menu-filters {
+        padding: 12px 20px; display: flex; gap: 6px; flex-wrap: wrap;
+        border-bottom: 1px solid var(--border);
+      }
+      .mobile-filter-bar { display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 14px; }
+      .mobile-filter-btn {
+        font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
+        padding: 6px 12px; border: 1px solid var(--border); background: transparent; color: var(--muted);
+        cursor: pointer; transition: all 0.2s; font-weight: 400; border-radius: 2px;
         -webkit-tap-highlight-color: transparent;
       }
-      .sheet-handle-bar {
-        width: 32px; height: 3px; background: var(--muted); border-radius: 2px;
-      }
-      .sheet-toggle-label {
-        font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
-        color: var(--muted); text-align: center; padding: 2px 0 6px;
-      }
+      .mobile-filter-btn:active, .mobile-filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184, 150, 62, 0.08); }
 
-      .sidebar-header { padding: 16px 20px 12px; }
-      .sidebar-title { font-size: 1.3rem; }
-      .filter-bar { padding: 10px 20px; }
-      .location-list { max-height: 35vh; }
-      .location-item { padding: 14px 20px; }
-      .loc-name { font-size: 1rem; }
-      .loc-excerpt { font-size: 0.75rem; }
+      .mobile-location-list {
+        overflow-y: auto; max-height: calc(65vh - 110px);
+        scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+      }
+      .mobile-location-list::-webkit-scrollbar { width: 3px; }
+      .mobile-location-list::-webkit-scrollbar-track { background: transparent; }
+      .mobile-location-list::-webkit-scrollbar-thumb { background: var(--border); }
+
+      .mobile-loc-item {
+        padding: 14px 20px; border-bottom: 1px solid var(--border);
+        cursor: pointer; transition: background 0.15s;
+        display: flex; align-items: center; gap: 12px;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-loc-item:active { background: rgba(184, 150, 62, 0.06); }
+      .mobile-loc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+      .mobile-loc-info { flex: 1; min-width: 0; }
+      .mobile-loc-name {
+        font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400;
+        color: var(--bone-bright); line-height: 1.2; margin-bottom: 2px;
+      }
+      .mobile-loc-sub {
+        font-size: 0.65rem; color: var(--muted); font-weight: 300;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .mobile-loc-arrow { color: var(--muted); font-size: 0.7rem; flex-shrink: 0; }
 
       /* Detail panel: centered modal overlay */
       .detail-overlay {
@@ -238,6 +301,9 @@
 
       /* Prevent anything from exceeding viewport */
       .site-nav { max-width: 100vw; }
+
+      /* Hide FAB when detail panel is open */
+      .detail-panel.open ~ .mobile-fab { opacity: 0; pointer-events: none; }
     }
   </style>
 </head>
@@ -289,6 +355,36 @@
     <div class="legend-item"><div class="legend-dot" style="background:#d4cfc4"></div><span class="legend-label">Institutional</span></div>
   </div>
 
+  <!-- Mobile FAB + Menu -->
+  <div class="mobile-fab" id="mobileFab">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </div>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <div class="mobile-menu-panel" id="mobileMenuPanel">
+    <div style="padding: 20px 20px 0; border-bottom: 1px solid var(--border);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div>
+          <div style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--bone-bright); font-weight: 400;">Locations</div>
+          <div style="font-size: 0.6rem; color: var(--muted); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;">The Places That Held Them</div>
+        </div>
+        <button id="mobileMenuClose" style="background: none; border: none; color: var(--muted); font-size: 1.6rem; cursor: pointer; padding: 4px 8px; line-height: 1;">&times;</button>
+      </div>
+      <div class="mobile-filter-bar" id="mobileFilterBar">
+        <button class="mobile-filter-btn active" data-filter="all">All</button>
+        <button class="mobile-filter-btn" data-filter="baltimore">Baltimore</button>
+        <button class="mobile-filter-btn" data-filter="ocean-city">Ocean City</button>
+        <button class="mobile-filter-btn" data-filter="snow-hill">Snow Hill</button>
+      </div>
+    </div>
+    <div class="mobile-location-list" id="mobileLocationList"></div>
+  </div>
+
 <script>
 const COLORS = {
   gold:  { hex: '#B8963E', dim: '#8a6e2a', label: 'Shawn' },
@@ -298,7 +394,7 @@ const COLORS = {
 };
 
 const LOCATIONS = [
-  // — BALTIMORE (15) —
+  // — BALTIMORE (24) —
   {
     id: 1, name: "Mitchell Courthouse Steps",
     address: "100 N Calvert St, Baltimore MD 21202",
@@ -383,7 +479,7 @@ const LOCATIONS = [
     id: 11, name: "Sinai Hospital",
     address: "2401 W Belvedere Ave, Baltimore MD 21215",
     lat: 39.33798, lng: -76.66220, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Where the city learns to keep itself alive.",
+    excerpt: "Where the city sends its damage.",
     body: "The building stands north of Downtown, catching what the city breaks. Doctors move through corridors that have seen more violence than most courtrooms. The hospital doesn\u2019t judge \u2014 it just fixes, bills, and forgets.",
     chapter: "Referenced \u2014 Contempt"
   },
@@ -431,18 +527,75 @@ const LOCATIONS = [
     id: 22, name: "Lexington Market",
     address: "400 W Lexington St, Baltimore MD 21201",
     lat: 39.29170, lng: -76.62100, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "The west wall bench. Where the city sits down and watches itself.",
-    body: "Oldest continuously operating market in the country. The west wall bench holds the people who aren\u2019t shopping \u2014 they\u2019re waiting. For what, the market doesn\u2019t ask. It just stays open.",
+    excerpt: "Knuckles on counters, pigeons bold enough to steal.",
+    body: "Oldest continuously operating market in the country. Knuckles on counters, pigeons bold enough to steal. The west wall bench holds the people who aren\u2019t shopping \u2014 they\u2019re waiting. For what, the market doesn\u2019t ask. It just stays open.",
     chapter: "Chapter Ten"
+  },
+
+  {
+    id: 23, name: "City Hall",
+    address: "100 N Holliday St, Baltimore MD 21202",
+    lat: 39.29101, lng: -76.60968, tag: "Baltimore", filter: "baltimore", color: "bone",
+    excerpt: "Second floor. Close enough to read the signs.",
+    body: "The building sits at the center of everything the city decides. Second floor, close enough to read the signs. What happens here moves through every office, every docket, every neighborhood that can\u2019t afford to watch but can\u2019t afford not to.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 24, name: "Leo\u2019s Brownstone",
+    address: "Thames St area, Fells Point, Baltimore MD 21231",
+    lat: 39.28180, lng: -76.59200, tag: "Baltimore", filter: "baltimore", color: "gold",
+    excerpt: "Same rusting gate. Same warped stoop.",
+    body: "The brownstone sits in Fells Point like an argument no one finished. Same rusting gate. Same warped stoop. Leo built a life here that outlasted everything except the house itself. The door still sticks the same way it did in 1986.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 25, name: "Penn Station",
+    address: "1500 N Charles St, Baltimore MD 21201",
+    lat: 39.30780, lng: -76.61550, tag: "Baltimore", filter: "baltimore", color: "bone",
+    excerpt: "The city had been fixing it for years.",
+    body: "The city had been fixing Penn Station for years. Scaffolding up, scaffolding down, the Beaux-Arts facade holding on like a promise nobody planned to keep. Where Nico arrives in the finale \u2014 stepping off the train into a city that doesn\u2019t explain itself to newcomers.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 26, name: "Domino Sugars",
+    address: "1100 Key Hwy, Baltimore MD 21230",
+    lat: 39.27520, lng: -76.60060, tag: "Baltimore", filter: "baltimore", color: "bone",
+    excerpt: "The red haze over the harbor. First thing you see coming in.",
+    body: "The neon sign bleeds across the harbor at night \u2014 the red haze that tells you where you are before the city does. First thing you see coming in. Last thing you see leaving. The sugar refinery outlasted everything around it because sweetness is the last industry Baltimore abandoned.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 27, name: "BCBIC \u2014 Central Booking",
+    address: "300 E Madison St, Baltimore MD 21202",
+    lat: 39.29600, lng: -76.60700, tag: "Baltimore", filter: "baltimore", color: "steel",
+    excerpt: "Property: wallet, shoelaces. Not listed: recorder device.",
+    body: "Baltimore Central Booking and Intake Center. The line starts before sunrise. Property: wallet, shoelaces. Not listed: recorder device. The building processes people the way the city processes everything \u2014 slowly, impersonally, with paperwork that outlives the sentence.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 28, name: "City Archives / DHCD",
+    address: "396 N Gay St, Baltimore MD 21202",
+    lat: 39.29350, lng: -76.60750, tag: "Baltimore", filter: "baltimore", color: "red",
+    excerpt: "The paper trail starts in the basement.",
+    body: "Department of Housing and Community Development. The paper trail starts in the basement. Deed transfers, zoning variances, permits that moved faster than they should have. Jordan Grey pulls the Westport files here. What the city buries, the archives remember.",
+    chapter: "Referenced \u2014 Contempt"
+  },
+  {
+    id: 29, name: "War Memorial",
+    address: "101 N Gay St, Baltimore MD 21202",
+    lat: 39.29050, lng: -76.60780, tag: "Baltimore", filter: "baltimore", color: "bone",
+    excerpt: "Signs punching through umbrellas that weren\u2019t winning.",
+    body: "The War Memorial stands across from City Hall like a conscience the building tries to ignore. Signs punching through umbrellas that weren\u2019t winning. The protests gather here because the steps face the right direction \u2014 toward the people who are supposed to be listening.",
+    chapter: "Referenced \u2014 Contempt"
   },
 
   // — OCEAN CITY (3) —
   {
-    id: 16, name: "The Cemetery",
-    address: "3700 Coastal Hwy, Ocean City MD 21842",
+    id: 16, name: "Elaine Davidson\u2019s Grave",
+    address: "Coastal Ocean City, MD 21842",
     lat: 38.35247, lng: -75.07807, tag: "Ocean City", filter: "ocean-city", color: "gold",
-    excerpt: "Where the shore holds its own accounting.",
-    body: "The markers lean into the salt wind, names worn smooth by decades of weather. Some stones predate the town itself. The ocean doesn\u2019t distinguish between the remembered and forgotten \u2014 it takes what it takes.",
+    excerpt: "The only piece of Ocean City that ever felt like home.",
+    body: "The markers lean into the salt wind, names worn smooth by decades of weather. Elaine Davidson rests here \u2014 the only piece of Ocean City that ever felt like home. The ocean doesn\u2019t distinguish between the remembered and forgotten. It just keeps arriving.",
     chapter: "Referenced \u2014 Contempt"
   },
   {
@@ -462,7 +615,7 @@ const LOCATIONS = [
     chapter: "Referenced \u2014 Contempt"
   },
 
-  // — SNOW HILL (2) —
+  // — SNOW HILL (3) —
   {
     id: 19, name: "Worcester District Court",
     address: "1 W Market St, Snow Hill MD 21863",
@@ -470,6 +623,14 @@ const LOCATIONS = [
     excerpt: "Shawn transfers his bar. Bates holds his docket.",
     body: "Route 50 eats miles without giving anything back. Snow Hill is flat, ordered, awake in a way Baltimore never bothered with early. Law before coffee. Judge Richard Bates, forty-one years on the bench, retiring end of month. The room he\u2019s offering Shawn is one Leo has never been allowed to enter.",
     chapter: "Chapter One \u2014 Worcester District Court"
+  },
+  {
+    id: 30, name: "Judge Bates Residence",
+    address: "Federal & Market St area, Snow Hill MD 21863",
+    lat: 38.17700, lng: -75.39350, tag: "Snow Hill", filter: "snow-hill", color: "gold",
+    excerpt: "Forty-one years in that courthouse.",
+    body: "The house sits close enough to the courthouse that Bates could walk it in four minutes, and did, every morning for forty-one years. Federal Street to Market, the same route, the same pace. Retirement means the walk stops. The house stays.",
+    chapter: "Referenced \u2014 Chapter One"
   },
   {
     id: 20, name: "The Pocomoke River",
@@ -751,6 +912,89 @@ window.addEventListener('resize', handleResize);
 // Init: if mobile, start collapsed
 if (window.innerWidth <= 768) {
   sidebar.classList.add('collapsed');
+}
+
+// ——— Mobile FAB Menu ———
+const mobileFab = document.getElementById('mobileFab');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+const mobileLocationList = document.getElementById('mobileLocationList');
+let mobileFilter = 'all';
+
+function openMobileMenu() {
+  mobileMenuOverlay.classList.add('open');
+  mobileMenuPanel.classList.add('open');
+  mobileFab.style.display = 'none';
+}
+
+function closeMobileMenu() {
+  mobileMenuOverlay.classList.remove('open');
+  mobileMenuPanel.classList.remove('open');
+  mobileFab.style.display = '';
+}
+
+function buildMobileList(filter) {
+  mobileLocationList.innerHTML = '';
+  const filtered = filter === 'all' ? LOCATIONS : LOCATIONS.filter(l => l.filter === filter);
+  filtered.forEach(loc => {
+    const c = COLORS[loc.color];
+    const item = document.createElement('div');
+    item.className = 'mobile-loc-item';
+    item.innerHTML = `
+      <div class="mobile-loc-dot" style="background:${c.hex}"></div>
+      <div class="mobile-loc-info">
+        <div class="mobile-loc-name">${loc.name}</div>
+        <div class="mobile-loc-sub">${loc.excerpt}</div>
+      </div>
+      <div class="mobile-loc-arrow">&rsaquo;</div>
+    `;
+    item.addEventListener('click', () => {
+      closeMobileMenu();
+      openDetail(loc);
+    });
+    mobileLocationList.appendChild(item);
+  });
+}
+
+if (mobileFab) {
+  mobileFab.addEventListener('click', openMobileMenu);
+  mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+  // Mobile filter buttons
+  document.querySelectorAll('.mobile-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mobileFilter = btn.dataset.filter;
+      buildMobileList(mobileFilter);
+
+      // Also update map markers
+      LOCATIONS.forEach(loc => {
+        if (mobileFilter === 'all' || loc.filter === mobileFilter) {
+          markers[loc.id].addTo(map);
+          labels[loc.id].addTo(map);
+        } else {
+          map.removeLayer(markers[loc.id]);
+          map.removeLayer(labels[loc.id]);
+        }
+      });
+
+      if (mobileFilter === 'baltimore') {
+        map.flyTo([39.295, -76.615], 13, { duration: 1.0 });
+      } else if (mobileFilter === 'ocean-city') {
+        map.flyTo([38.345, -75.078], 14, { duration: 1.0 });
+      } else if (mobileFilter === 'snow-hill') {
+        map.flyTo([38.176, -75.390], 15, { duration: 1.0 });
+      } else {
+        map.flyTo([39.29, -76.615], 13, { duration: 1.0 });
+      }
+    });
+  });
+
+  // Build initial mobile list
+  buildMobileList('all');
 }
 </script>
 </body>
