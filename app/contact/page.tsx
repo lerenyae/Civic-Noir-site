@@ -1,8 +1,3 @@
-        </div>
-      </section>
-    </>
-  );
-}
 "use client";
 import { useState } from "react";
 import { siteConfig } from "@/lib/content";
