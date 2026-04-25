@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 const links = [
   { label: "Read Chapter One Free", href: "/chapter-one", accent: true },
+  { label: "What Is Civic Noir?", href: "/civic-noir", accent: false },
   {
     label: "CONTEMPT Soundtrack",
     href: "https://distrokid.com/hyperfollow/lerenyaewatkins/sounds-of-contempt",
