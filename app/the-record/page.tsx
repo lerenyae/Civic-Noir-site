@@ -18,7 +18,7 @@ const sections = [
     id: "foundation",
     numeral: "I",
     title: "The Foundation",
-    sub: "What the four founders signed in 1982. What grew from it.",
+    sub: "What the four founders signed in 1982. What grew from it. What it cost them all.",
     slugs: [
       "davidson-associates-founding",
       "davidson-associates-founding-press",
@@ -46,25 +46,19 @@ const sections = [
       "daniel-han-richards-assault",
       "shawn-bar-registration",
       "eddies-boxing-club",
+      "antonio-moretti-intake-form",
     ],
   },
   {
-    id: "trial",
-    numeral: "IV",
-    title: "The Trial",
-    sub: "What the State offered. What the defense offered back.",
-    slugs: ["antonio-moretti-intake-form"],
-  },
-  {
     id: "family",
-    numeral: "V",
+    numeral: "IV",
     title: "The Family",
     sub: "What was kept. What was pressed between pages.",
     slugs: ["leo-davidson-obituary"],
   },
   {
     id: "work",
-    numeral: "VI",
+    numeral: "V",
     title: "The Work",
     sub: "Where the title came from. The hand that held the shutter.",
     slugs: ["jordan-grey-pulitzer"],
@@ -157,7 +151,7 @@ export default function TheRecordIndex() {
             textTransform: "uppercase",
           }}
         >
-          — A Working Archive —
+          &mdash; A Working Archive &mdash;
         </div>
         <h1
           style={{
@@ -183,9 +177,13 @@ export default function TheRecordIndex() {
             fontStyle: "italic",
           }}
         >
-          <span style={{ fontStyle: "normal", color: "#c9a961" }}>&ldquo;</span>
+          <span style={{ fontStyle: "normal", color: "#c9a961" }}>
+            &ldquo;
+          </span>
           The record mattered more than the hand holding it.
-          <span style={{ fontStyle: "normal", color: "#c9a961" }}>&rdquo;</span>
+          <span style={{ fontStyle: "normal", color: "#c9a961" }}>
+            &rdquo;
+          </span>
         </p>
         <div
           style={{
@@ -196,9 +194,55 @@ export default function TheRecordIndex() {
             textTransform: "uppercase",
           }}
         >
-          — J. Grey, Sentinel Post · Dhahran, 1996
+          &mdash; J. Grey, Sentinel Post &middot; Dhahran, 1996
         </div>
       </header>
+
+      {/* ===== CURATOR'S NOTE ===== */}
+      <div
+        style={{
+          maxWidth: 700,
+          margin: "0 auto",
+          padding: "64px 40px 0",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Special Elite', monospace",
+            fontSize: 10,
+            letterSpacing: 4,
+            color: "#c9a961",
+            textTransform: "uppercase",
+            marginBottom: 20,
+          }}
+        >
+          Curator&rsquo;s Note
+        </div>
+        <p
+          style={{
+            fontFamily: "'EB Garamond', serif",
+            fontSize: 16,
+            lineHeight: 1.85,
+            color: "#8a8579",
+            fontStyle: "italic",
+          }}
+        >
+          These thirteen artifacts were recovered from court filings, firm
+          archives, newsroom morgues, and one shoebox in a house on Broad
+          Street. They are presented here in the order they were found &mdash;
+          not the order they occurred. Some names have been redacted by the
+          court. Others were redacted by time. The collection remains open.
+        </p>
+        <div
+          style={{
+            width: 40,
+            height: 1,
+            background: "#2a2018",
+            margin: "32px auto 0",
+          }}
+        />
+      </div>
 
       {/* ===== FILTER BAR ===== */}
       <nav
@@ -264,6 +308,93 @@ export default function TheRecordIndex() {
           </span>
         ))}
       </nav>
+
+      {/* ===== HERO IMAGE ===== */}
+      <div
+        style={{
+          maxWidth: 1400,
+          margin: "0 auto 80px",
+          padding: "0 40px",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            cursor: "pointer",
+            boxShadow:
+              "0 16px 60px rgba(0,0,0,0.7), 0 32px 100px rgba(0,0,0,0.5)",
+          }}
+          onClick={() => {
+            const r = records.find(
+              (rec) => rec.slug === "sentinel-editorial-grey-byline"
+            );
+            if (r) openLightbox(r);
+          }}
+        >
+          <img
+            src={getSrc("sentinel-editorial-grey-byline")}
+            srcSet={getSrcSet("sentinel-editorial-grey-byline")}
+            sizes="(max-width: 900px) 100vw, 1400px"
+            alt="The Westport Files — Baltimore Sentinel Post front page, January 9, 2006"
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              aspectRatio: "3/2",
+              objectFit: "cover",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: "80px 48px 40px",
+              background:
+                "linear-gradient(transparent, rgba(0,0,0,0.85))",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Special Elite', monospace",
+                fontSize: 10,
+                letterSpacing: 4,
+                color: "#c9a961",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              Featured Artifact &middot; Record No. 009
+            </div>
+            <div
+              style={{
+                fontFamily: "'EB Garamond', serif",
+                fontSize: 32,
+                fontWeight: 500,
+                color: "#f4f0e6",
+                fontVariant: "small-caps",
+                letterSpacing: 2,
+                lineHeight: 1.2,
+              }}
+            >
+              The Westport Files: What the City Sold and Who Paid
+            </div>
+            <div
+              style={{
+                fontFamily: "'EB Garamond', serif",
+                fontStyle: "italic",
+                fontSize: 16,
+                color: "#a8a39a",
+                marginTop: 8,
+              }}
+            >
+              Baltimore Sentinel Post &middot; January 9, 2006
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ===== SECTIONS ===== */}
       {sections.map((section) => {
@@ -357,7 +488,6 @@ export default function TheRecordIndex() {
               {sectionRecords.map((slug) => {
                 const record = records.find((r) => r.slug === slug);
                 if (!record || !record.image) return null;
-
                 return (
                   <RecordCard
                     key={record.slug}
@@ -385,9 +515,30 @@ export default function TheRecordIndex() {
         }}
       >
         <div style={{ color: "#8a7a5a", marginBottom: 12 }}>
-          — THE RECORD · CONTEMPT UNIVERSE —
+          &mdash; THE RECORD &middot; CONTEMPT UNIVERSE &mdash;
         </div>
-        <div>CURATED FROM SOURCES BOTH OFFICIAL AND OTHERWISE</div>
+        <div style={{ marginBottom: 24 }}>
+          CURATED FROM SOURCES BOTH OFFICIAL AND OTHERWISE
+        </div>
+        <div
+          style={{
+            width: 40,
+            height: 1,
+            background: "#2a2018",
+            margin: "0 auto 24px",
+          }}
+        />
+        <div
+          style={{
+            fontFamily: "'EB Garamond', serif",
+            fontStyle: "italic",
+            fontSize: 14,
+            color: "#6a6560",
+            letterSpacing: 0,
+          }}
+        >
+          Additional artifacts will be unsealed after June 21, 2026.
+        </div>
       </footer>
 
       {/* ===== LIGHTBOX ===== */}
@@ -426,8 +577,9 @@ export default function TheRecordIndex() {
               zIndex: 1010,
             }}
           >
-            ×
+            &times;
           </button>
+
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <img
               src={getSrc(lightbox.image!)}
@@ -442,7 +594,10 @@ export default function TheRecordIndex() {
                 boxShadow: "0 16px 60px rgba(0,0,0,0.8)",
               }}
             />
-            <div style={{ maxWidth: 760, margin: "0 auto", color: "#d4d0c8" }}>
+
+            <div
+              style={{ maxWidth: 760, margin: "0 auto", color: "#d4d0c8" }}
+            >
               <div
                 style={{
                   fontFamily: "'Special Elite', monospace",
@@ -453,7 +608,7 @@ export default function TheRecordIndex() {
                   textTransform: "uppercase",
                 }}
               >
-                {lightbox.institution} · {lightbox.displayDate}
+                {lightbox.institution} &middot; {lightbox.displayDate}
               </div>
               <h2
                 style={{
@@ -529,8 +684,13 @@ export default function TheRecordIndex() {
           to { opacity: 1; }
         }
         @media (max-width: 900px) {
-          header h1 { font-size: 56px !important; letter-spacing: 6px !important; }
-          .gallery-grid { grid-template-columns: 1fr !important; }
+          header h1 {
+            font-size: 56px !important;
+            letter-spacing: 6px !important;
+          }
+          .gallery-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </div>
@@ -629,6 +789,7 @@ function RecordCard({
           }}
         />
       </div>
+
       <div style={{ padding: "28px 4px 4px" }}>
         <div
           style={{
@@ -640,7 +801,7 @@ function RecordCard({
             textTransform: "uppercase",
           }}
         >
-          {record.institution} · {record.displayDate}
+          {record.institution} &middot; {record.displayDate}
         </div>
         <h2
           style={{
