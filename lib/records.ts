@@ -41,7 +41,7 @@ export const records: RecordEntry[] = [
     displayDate: "October 20, 1982",
     institution: "Maryland SDAT · Charter Division",
     excerpt:
-      "The earliest document in The Record. Four wet-ink signatures on the day a firm became real on paper. Leo Arthur Davidson at thirty-four. Harold James Bates at thirty-four. Charles Emmanuel Dawson at thirty-one. Vincent Charles Barber at twenty-eight. The notary's red seal still holds.",
+      "Four signatures. Four men who believed process could outpace consequence. They were wrong, but it took twenty-four years and a body on the courthouse steps to prove it. Dawson would get a community center. A deputy mayor would die inside it. Bates would leave for the Eastern Shore and never come back. And Leo — Leo would build the thing that swallowed them all. The notary's red seal still holds. Everything else cracked.",
     tags: ["Davidson & Associates", "Leo Davidson", "Vincent Barber", "Charles Dawson"],
     featured: false,
     image: "davidson-associates-founding",
@@ -58,7 +58,7 @@ export const records: RecordEntry[] = [
     displayDate: "October 20, 1982",
     institution: "Baltimore Afro-American",
     excerpt:
-      "Four men outside 200 St. Paul Place. Rain on the sidewalk, brass plate beside the door. Dawson's hand on the plate. Bates and Davidson and Barber a step back. Photographed by Marcus Coleman for the Afro-American. Pasted in firm history Volume I, where it has stayed for twenty-four years.",
+      "Rain on the sidewalk, brass plate beside the door. Dawson's hand on the plate. Bates and Davidson and Barber a step back. Twenty-four years later, a copy of this photograph hung crooked in Leo's study — torn at the edge where someone had taken themselves out of it by force. The version in the firm archive is untouched. Someone decided which one to keep whole. (See Chapter One.)",
     tags: ["Davidson & Associates", "Leo Davidson", "Harold Bates", "press"],
     featured: false,
     image: "davidson-associates-founding-press",
@@ -75,7 +75,7 @@ export const records: RecordEntry[] = [
     displayDate: "March 6, 1998",
     institution: "Davidson & Associates LLC — Internal",
     excerpt:
-      "Shawn Davidson's first big closing. Twenty-five years old, signature beside Leo's at the bottom of the deal memo. Parcels 12A, 12B, and 14C in the Harbor East TIF District. The transaction Jordan Grey would later trace, eight years after the ink dried. The Macallan 25 is Leo's. The retrieval slip is V. C. Barber's.",
+      "Shawn was twenty-five. His signature sits beside his father's at the bottom of the deal memo — the first time a Davidson appeared twice on the same closing. Four point two million dollars. Three parcels in the Harbor East TIF District. Eight years later, Jordan Grey would follow this transaction through seventeen shell transfers and arrive at a question no one at the firm wanted asked. The Macallan 25 on the table is Leo's. It always was.",
     tags: ["Shawn Davidson", "Pinnacle Investments", "Davidson & Associates", "Leo Davidson"],
     featured: true,
     image: "pinnacle-merger-announcement",
@@ -92,7 +92,7 @@ export const records: RecordEntry[] = [
     displayDate: "November 14, 2005",
     institution: "The Baltimore Sentinel Post",
     excerpt:
-      "The morning after. The Sentinel Post's front-page photograph shows uniforms kneeling outside the Charles Emmanuel Dawson Community Center, the lectern toppled to the curb. Photo by Danielle Kostas. The Westport TIF sidebar shares the page.",
+      "The center was named for Charles Emmanuel Dawson — founding partner, dead six years by then. A deputy mayor was shot inside it. A seventeen-year-old was arrested before midnight. And when Leo Davidson stood on the Mitchell courthouse steps nine months later to speak about this case, he never finished the sentence. The Westport TIF sidebar shares the front page. Nobody read it that morning. Jordan Grey did.",
     tags: ["Matt Garrick", "shooting", "Dawson Center", "Sentinel Post"],
     featured: false,
     image: "garrick-shooting-sentinel",
@@ -109,7 +109,7 @@ export const records: RecordEntry[] = [
     displayDate: "Sealed 14 March 2006",
     institution: "Worcester County Circuit Court",
     excerpt:
-      "Sealed by court order three weeks before opening statements. The grantee survived the redaction because the Pinnacle name was already on the public side of the transaction. Everything else went under black bar. The Worcester County Clerk who processed the seal signed the bottom in blue ballpoint. P. Bates.",
+      "Sealed by court order three weeks before opening statements. The Pinnacle name survived the redaction only because it was already on the public side of the transaction. Everything else went under black bar — grantor, consideration, the names behind the names. The Worcester County Clerk who processed the seal signed the bottom in blue ballpoint: P. Bates. The founding partner's surname. In a courthouse where his son sat on the bench. Coincidence is a word people use when they'd rather not look.",
     tags: ["Azure Horizons", "Pinnacle Investments", "Westport", "TIF"],
     featured: false,
     image: "azure-horizons-parcel-transfer",
@@ -126,7 +126,7 @@ export const records: RecordEntry[] = [
     displayDate: "January 9, 2006",
     institution: "The Baltimore Sentinel Post",
     excerpt:
-      "Six months of work. Seventeen parcels. One byline. Grey's investigation into how the Baltimore harbor renewal moved through a small group of attorneys whose names recurred with statistical impossibility. The yellow highlight is his. The margin notes — Pinnacle, Azure deed, Bates connection, Davidson & Assoc. — are his.",
+      "Six months of work. Seventeen parcels. One byline. Grey followed the money through a small group of attorneys whose names recurred with statistical impossibility — and arrived at a firm whose founding partner was about to stand on courthouse steps for the last time. The yellow highlight is Grey's. The margin notes are Grey's. The question the article couldn't answer — who approved the transfers inside City Hall — is the one that kept him awake.",
     tags: ["Jordan Grey", "Westport", "Sentinel Post", "investigation"],
     featured: true,
     image: "sentinel-editorial-grey-byline",
@@ -143,7 +143,7 @@ export const records: RecordEntry[] = [
     displayDate: "September 18, 2004",
     institution: "BPD Professional Standards Bureau",
     excerpt:
-      "The cover sheet of the file the city sealed. Detective Grade III to Grade I, effective 09/18/04. Reviewed by Lt. Michael Crane, Homicide. Approved by Capt. R. Harley, IA Liaison. The yellow legal pad in the corner is the supervisor's checklist.",
+      "What did Phillip Han do that cost him two grades in a single action? The city sealed the answer. But the cover sheet survived — and the name at the bottom is Capt. R. Harley, the same Harley who authorized the release of Daniel Han's file to outside counsel twenty-six days later. A brother demoted. A brother's file handed to a law firm. Same approving officer. No one in the department has explained why.",
     tags: ["Han", "Internal Affairs", "BPD", "demotion"],
     featured: false,
     image: "han-internal-affairs-summary",
@@ -160,7 +160,7 @@ export const records: RecordEntry[] = [
     displayDate: "October 14, 2004",
     institution: "BPD Central Records Division",
     excerpt:
-      "Forty-seven pages, full file: incident report, witness statements, arresting officer notes, medical exam, prosecutor correspondence. Requested by Davidson & Associates, attention V. Barber. Authorized by Capt. R. Harley, IA Liaison. Stamped released to outside counsel at 2:47 PM on October 14, 2004.",
+      "Why does a law firm need a detective's brother's assault file? Forty-seven pages — incident report, witness statements, medical exam — released to Davidson & Associates at 2:47 PM on October 14, 2004. The same afternoon Shawn Davidson signed his resignation and left Baltimore for Snow Hill. Same authorizing officer as the IA demotion: Capt. R. Harley. Someone needed this file badly enough to move it the day the firm lost its heir. The question is whether it was leverage or cleanup.",
     tags: ["Daniel Han", "Richards", "BPD", "assault", "Highlandtown"],
     featured: false,
     image: "daniel-han-richards-assault",
@@ -177,7 +177,7 @@ export const records: RecordEntry[] = [
     displayDate: "October 14, 2004",
     institution: "Davidson & Associates LLC",
     excerpt:
-      "Two paperclipped documents. Leo's internal memo to Vincent Barber, signed in violet ink: No reason given. None asked for. The Court of Appeals registration change beneath it, filed the same day. New filing address: 215 Broad Street, Snow Hill, Maryland. Worcester County.",
+      "Leo's memo to Vincent Barber, signed in violet ink: No reason given. None asked for. Beneath it, the Court of Appeals registration change — filed the same day. New address: 215 Broad Street, Snow Hill, Maryland. Two hours east. A different world. When Chapter One opens, Shawn has been there for two years, practicing law in a courthouse small enough to sentence the man you see at the gas station. Leo never visited. The memo never asked him to.",
     tags: ["Shawn Davidson", "Maryland Bar", "Snow Hill", "Worcester County"],
     featured: false,
     image: "shawn-bar-registration",
@@ -194,7 +194,7 @@ export const records: RecordEntry[] = [
     displayDate: "circa 2003",
     institution: "Eddie's Boxing Club · Est. 1978 · 1847 Montford Avenue",
     excerpt:
-      "Found in the glove compartment of Han's Crown Vic. The handwritten note is Eddie O'Connell's: Phil — Key under the mat. — E. A polaroid edge in the corner. State of Maryland vehicle registration to one side. Latex gloves to the other.",
+      "Found in the glove compartment of Han's city-issued Crown Vic, between a vehicle registration and a pair of latex gloves. The handwritten note is Eddie O'Connell's: Phil — Key under the mat. — E. A polaroid edge peeks from underneath. The boxing club is where Han went when the badge stopped making sense. Eddie never asked why he came in at 5 AM. The latex gloves are harder to explain. No one at the precinct has tried.",
     tags: ["Han", "Eddie O'Connell", "boxing", "Highlandtown"],
     featured: false,
     image: "eddies-boxing-club",
@@ -211,7 +211,7 @@ export const records: RecordEntry[] = [
     displayDate: "November 14, 2005",
     institution: "Baltimore City Booking and Intake Center",
     excerpt:
-      "Booked at the Baltimore City Booking and Intake Center at 22:47 on November 14, 2005. Eight hours and thirteen minutes after Garrick was pronounced dead at the scene. Charges: Murder 1, Handgun Crimes. The mugshot still shows the cheek wound fresh.",
+      "He was seventeen. Born on Valentine's Day. His property at intake: fourteen dollars in cash and a pair of brown shoelaces. That's everything Antonio Moretti owned when the state of Maryland charged him with killing a deputy mayor. Eight hours and thirteen minutes between the shooting and the booking photo. The cheek wound is still fresh in the mugshot. Nobody asked how he got it. Leo Davidson would take this case all the way to the courthouse steps — and never come back down.",
     tags: ["Antonio Moretti", "intake", "BCBIC", "booking"],
     featured: false,
     image: "antonio-moretti-intake-form",
@@ -228,7 +228,7 @@ export const records: RecordEntry[] = [
     displayDate: "August 14, 2006",
     institution: "The Baltimore Sentinel Post",
     excerpt:
-      "Maya kept it. Taped at four corners into a leather book. Rosemary sprig pressed beside it for remembrance. The funeral program from August 17 to the right. The blue note in her hand at the lower-left: He hated the photo they used. — M.",
+      "Maya kept it. Taped at four corners into a leather book she never showed anyone. Rosemary pressed beside it — for remembrance, the old way. The funeral program from August 17 to the right. In the lower-left corner, a blue note in her hand: He hated the photo they used. — M. She was there when he fell. She was there when the cameras arrived. She was there when they stopped. The scrapbook is the only record that remembers him the way she did.",
     tags: ["Leo Davidson", "obituary", "Davidson & Associates", "memorial"],
     featured: true,
     image: "leo-davidson-obituary",
@@ -245,7 +245,7 @@ export const records: RecordEntry[] = [
     displayDate: "April 14, 1996",
     institution: "The Baltimore Sentinel Post",
     excerpt:
-      "Where the archive gets its name. Jordan Grey filed this dispatch from Dhahran, Saudi Arabia, on April 12, 1996. He took a round under the left rib just after the second blast. He kept working. The record mattered more than the hand holding it. Pulitzer 1997.",
+      "Where the archive gets its name. Jordan Grey filed this dispatch from Dhahran, Saudi Arabia, on April 12, 1996 — a soldier carrying a child through rubble that used to be a market. Grey took a round under the left rib just after the second blast. He kept shooting. He kept writing. The record mattered more than the hand holding it. Pulitzer, 1997. Nine years later he'd aim that same instinct at Baltimore, and Baltimore would aim back.",
     tags: ["Jordan Grey", "Pulitzer", "Dhahran", "foreign correspondence"],
     featured: true,
     image: "jordan-grey-pulitzer",
