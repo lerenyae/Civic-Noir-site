@@ -199,6 +199,7 @@ export default function TheRecordIndex() {
 
       {/* ===== CURATOR'S NOTE ===== */}
       <div
+        className="curators-note"
         style={{
           maxWidth: 700,
           margin: "0 auto",
@@ -245,6 +246,7 @@ export default function TheRecordIndex() {
 
       {/* ===== FILTER BAR ===== */}
       <nav
+        className="filter-bar"
         style={{
           maxWidth: 1400,
           margin: "0 auto",
@@ -267,6 +269,7 @@ export default function TheRecordIndex() {
           <span key={f.key} style={{ display: "flex", alignItems: "center" }}>
             {i > 0 && (
               <span
+                className="filter-divider"
                 style={{
                   width: 1,
                   height: 16,
@@ -310,6 +313,7 @@ export default function TheRecordIndex() {
 
       {/* ===== HERO IMAGE ===== */}
       <div
+        className="hero-wrap"
         style={{
           maxWidth: 1400,
           margin: "0 auto 80px",
@@ -345,6 +349,7 @@ export default function TheRecordIndex() {
             }}
           />
           <div
+            className="hero-overlay"
             style={{
               position: "absolute",
               bottom: 0,
@@ -369,6 +374,7 @@ export default function TheRecordIndex() {
               Featured Artifact &middot; Record No. 009
             </div>
             <div
+              className="hero-title"
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: 32,
@@ -383,6 +389,7 @@ export default function TheRecordIndex() {
               The Westport Files: What the City Sold and Who Paid
             </div>
             <div
+              className="hero-subtitle"
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontStyle: "italic",
@@ -407,6 +414,7 @@ export default function TheRecordIndex() {
           <div key={section.id}>
             {/* Section Divider */}
             <div
+              className="section-divider"
               style={{
                 maxWidth: 1400,
                 margin: "60px auto",
@@ -478,6 +486,7 @@ export default function TheRecordIndex() {
 
             {/* Gallery Grid */}
             <div
+              className="gallery-grid"
               style={{
                 maxWidth: 1400,
                 margin: "0 auto",
@@ -563,6 +572,7 @@ export default function TheRecordIndex() {
           }}
         >
           <button
+            className="lightbox-close"
             onClick={closeLightbox}
             style={{
               position: "fixed",
@@ -582,7 +592,7 @@ export default function TheRecordIndex() {
             &times;
           </button>
 
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div className="lightbox-inner" style={{ maxWidth: 1200, margin: "0 auto" }}>
             <img
               src={getSrc(lightbox.image!)}
               srcSet={getSrcSet(lightbox.image!)}
@@ -628,6 +638,7 @@ export default function TheRecordIndex() {
               </h2>
               {lightbox.subtitle && (
                 <div
+                  className="lb-subtitle"
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontStyle: "italic",
@@ -685,13 +696,114 @@ export default function TheRecordIndex() {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @media (max-width: 900px) {
-          header h1 {
-            font-size: 56px !important;
-            letter-spacing: 6px !important;
+
+        /* ===== MOBILE: 768px and below ===== */
+        @media (max-width: 768px) {
+          /* Header */
+          header {
+            padding: 60px 20px 48px !important;
           }
+          header h1 {
+            font-size: 44px !important;
+            letter-spacing: 4px !important;
+          }
+
+          /* Curator's note */
+          .curators-note {
+            padding: 40px 20px 0 !important;
+          }
+
+          /* Filter bar */
+          .filter-bar {
+            padding: 32px 12px 36px !important;
+            gap: 4px !important;
+            justify-content: center !important;
+          }
+          .filter-bar button {
+            padding: 10px 14px !important;
+            font-size: 9px !important;
+            letter-spacing: 2px !important;
+          }
+          .filter-bar .filter-divider {
+            display: none !important;
+          }
+
+          /* Hero image */
+          .hero-wrap {
+            padding: 0 16px !important;
+            margin-bottom: 48px !important;
+          }
+          .hero-overlay {
+            padding: 60px 20px 28px !important;
+          }
+          .hero-title {
+            font-size: 22px !important;
+            letter-spacing: 1px !important;
+          }
+          .hero-subtitle {
+            font-size: 13px !important;
+          }
+
+          /* Section dividers */
+          .section-divider {
+            margin: 36px auto !important;
+            padding: 0 20px !important;
+          }
+          .section-divider h2 {
+            font-size: 26px !important;
+            letter-spacing: 3px !important;
+          }
+
+          /* Gallery grid — single column */
           .gallery-grid {
             grid-template-columns: 1fr !important;
+            padding: 0 16px 48px !important;
+            gap: 48px !important;
+          }
+
+          /* Card text */
+          .record-card h2 {
+            font-size: 24px !important;
+          }
+          .record-card .card-excerpt {
+            font-size: 14px !important;
+          }
+
+          /* Lightbox */
+          .lightbox-inner {
+            padding: 48px 16px !important;
+          }
+          .lightbox-inner h2 {
+            font-size: 32px !important;
+          }
+          .lightbox-inner .lb-subtitle {
+            font-size: 17px !important;
+          }
+          .lightbox-close {
+            top: 16px !important;
+            right: 16px !important;
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 20px !important;
+          }
+
+          /* Footer */
+          footer {
+            padding: 40px 20px 32px !important;
+          }
+        }
+
+        /* ===== TABLET: 769-1024px ===== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          header h1 {
+            font-size: 64px !important;
+            letter-spacing: 8px !important;
+          }
+          .gallery-grid {
+            gap: 40px 32px !important;
+          }
+          .lightbox-inner h2 {
+            font-size: 42px !important;
           }
         }
       `}</style>
@@ -710,6 +822,7 @@ function RecordCard({
 
   return (
     <article
+      className="record-card"
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -842,6 +955,7 @@ function RecordCard({
           }}
         />
         <p
+          className="card-excerpt"
           style={{
             fontSize: record.featured ? 16 : 15,
             lineHeight: 1.7,
