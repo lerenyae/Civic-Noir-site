@@ -24,22 +24,46 @@ export async function POST(req: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
+          email: email.trim().toLowerCase(),
           reactivate_existing: true,
-          send_welcome_email: true,
           utm_source: "lerenyaewatkins.com",
           utm_medium: "organic",
         }),
       }
     );
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Beehiiv error:", err);
-      return NextResponse.json({ error: "Subscription failed" }, { status: 502 });
+    // Treat 2xx as success
+    if (res.ok) {
+      return NextResponse.json({ ok: true });
     }
 
-    return NextResponse.json({ ok: true });
+    // Parse the error body
+    let errText = "";
+    try {
+      errText = await res.text();
+    } catch {
+      errText = "";
+    }
+
+    // Log the full error for server-side debugging
+    console.error("Beehiiv API error:", res.status, errText);
+
+    // If the subscriber already exists, treat it as success from the user's POV
+    const lower = errText.toLowerCase();
+    if (
+      res.status === 400 &&
+      (lower.includes("already") ||
+        lower.includes("exists") ||
+        lower.includes("duplicate"))
+    ) {
+      return NextResponse.json({ ok: true, alreadySubscribed: true });
+    }
+
+    // Otherwise surface a clean error to the client
+    return NextResponse.json(
+      { error: "Subscription failed" },
+      { status: 502 }
+    );
   } catch (e) {
     console.error("Subscribe route error:", e);
     return NextResponse.json({ error: "Unexpected error" }, { status: 500 });
