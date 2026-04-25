@@ -33,7 +33,6 @@ const sections = [
     slugs: [
       "garrick-shooting-sentinel",
       "azure-horizons-parcel-transfer",
-      "sentinel-editorial-grey-byline",
     ],
   },
   {
@@ -351,9 +350,9 @@ export default function TheRecordIndex() {
               bottom: 0,
               left: 0,
               right: 0,
-              padding: "80px 48px 40px",
+              padding: "100px 48px 44px",
               background:
-                "linear-gradient(transparent, rgba(0,0,0,0.85))",
+                "linear-gradient(transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.88) 100%)",
             }}
           >
             <div
@@ -364,6 +363,7 @@ export default function TheRecordIndex() {
                 color: "#c9a961",
                 textTransform: "uppercase",
                 marginBottom: 12,
+                textShadow: "0 1px 4px rgba(0,0,0,0.9), 0 2px 12px rgba(0,0,0,0.6)",
               }}
             >
               Featured Artifact &middot; Record No. 009
@@ -377,6 +377,7 @@ export default function TheRecordIndex() {
                 fontVariant: "small-caps",
                 letterSpacing: 2,
                 lineHeight: 1.2,
+                textShadow: "0 2px 8px rgba(0,0,0,0.95), 0 4px 20px rgba(0,0,0,0.7)",
               }}
             >
               The Westport Files: What the City Sold and Who Paid
@@ -388,6 +389,7 @@ export default function TheRecordIndex() {
                 fontSize: 16,
                 color: "#a8a39a",
                 marginTop: 8,
+                textShadow: "0 1px 6px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)",
               }}
             >
               Baltimore Sentinel Post &middot; January 9, 2006
