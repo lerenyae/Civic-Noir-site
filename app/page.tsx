@@ -14,7 +14,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-noir-950 via-noir-900/50 to-noir-950" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[120px]" />
         <div className="relative max-w-4xl mx-auto text-center">
-          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in">{siteConfig.tagline}</p>
+          <Link href="/civic-noir" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in hover:text-gold/80 transition-colors duration-300 block">{siteConfig.tagline}</Link>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h1>
           <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
           <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
@@ -52,10 +52,11 @@ export default function Home() {
 
       <section className="py-24 px-6 border-t border-b border-bone-300/5">
         <SectionReveal>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">What is Civic Noir</p>
-            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
-          </div>
+          <Link href="/civic-noir" className="block max-w-2xl mx-auto text-center group">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 group-hover:text-gold/80 transition-colors duration-300">What is Civic Noir</p>
+            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic group-hover:text-bone-300/80 transition-colors duration-300">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/30 mt-6 group-hover:text-gold/60 transition-colors duration-300">Read the full definition &rarr;</p>
+          </Link>
         </SectionReveal>
       </section>
 
@@ -70,7 +71,7 @@ export default function Home() {
             <p className="font-serif text-base text-bone-300/30 font-light italic mb-14">Excerpts from Contempt</p>
             <QuoteCarousel />
             <div className="mt-12">
-              <Link href="/chapter-one" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 hover:text-gold/70 transition-colors duration-300">Read Chapter One →</Link>
+              <Link href="/chapter-one" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 hover:text-gold/70 transition-colors duration-300">Read Chapter One &rarr;</Link>
             </div>
           </div>
         </SectionReveal>
