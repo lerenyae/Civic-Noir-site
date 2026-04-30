@@ -14,7 +14,7 @@ export default function Home() {
       {/* ======================================== */}
       {/*  LAUNCH HERO — Contempt pre-order        */}
       {/* ======================================== */}
-      <section className="relative min-h-[100vh] flex items-center justify-center px-6 overflow-hidden">
+      <section className="relative min-h-[100vh] flex items-center justify-center px-4 sm:px-6 overflow-hidden w-full max-w-full">
         {/* Background photo */}
         <Image
           src="/images/contempt-launch-hero.jpg"
@@ -33,7 +33,7 @@ export default function Home() {
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-10 animate-fade-in">
             Forthcoming &mdash; June 21, 2026
           </p>
-          <h1 className="font-serif text-7xl sm:text-8xl md:text-9xl text-bone-100 font-light tracking-wide uppercase leading-[0.95] mb-6 animate-fade-up [text-shadow:_0_2px_24px_rgba(0,0,0,0.7)]">
+          <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl text-bone-100 font-light tracking-tight sm:tracking-wide uppercase leading-[0.95] mb-6 animate-fade-up [text-shadow:_0_2px_24px_rgba(0,0,0,0.7)]">
             Contempt
           </h1>
           <p className="font-serif italic text-base md:text-lg text-bone-300/85 tracking-widest uppercase mb-6 animate-fade-in delay-200 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
@@ -52,7 +52,7 @@ export default function Home() {
               href={PREORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-10 py-4 bg-burgundy text-bone-100 text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
             >
               Pre-order on Kindle &mdash; June 21, 2026
             </a>
