@@ -6,16 +6,76 @@ import SectionReveal from "@/components/SectionReveal";
 import QuoteCarousel from "@/components/QuoteCarousel";
 
 const contempt = books[0];
+const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9?ref=sp_email";
 
 export default function Home() {
   return (
     <>
-      <section className="relative min-h-[90vh] flex items-center justify-center px-6">
+      {/* ======================================== */}
+      {/*  LAUNCH HERO — Contempt pre-order        */}
+      {/* ======================================== */}
+      <section className="relative min-h-[100vh] flex items-center justify-center px-6 overflow-hidden">
+        {/* Background photo */}
+        <Image
+          src="/images/contempt-launch-hero.jpg"
+          alt="Contempt hardback under the Domino Sugars neon at the Baltimore Inner Harbor"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Dark gradient overlays for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-noir-950/70 via-noir-950/40 to-noir-950/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-noir-950/30 via-transparent to-noir-950/30" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-10 animate-fade-in">
+            Forthcoming &mdash; June 21, 2026
+          </p>
+          <h1 className="font-serif text-7xl sm:text-8xl md:text-9xl text-bone-100 font-light tracking-wide uppercase leading-[0.95] mb-6 animate-fade-up [text-shadow:_0_2px_24px_rgba(0,0,0,0.7)]">
+            Contempt
+          </h1>
+          <p className="font-serif italic text-base md:text-lg text-bone-300/85 tracking-widest uppercase mb-6 animate-fade-in delay-200 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+            A Civic Noir Novel
+          </p>
+          <div className="w-16 h-px bg-gold/50 mx-auto mb-6 animate-line-grow origin-center delay-300" />
+          <p className="text-[11px] font-sans font-light tracking-ultra uppercase text-bone-300/80 mb-10 animate-fade-in delay-300 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+            LeRenyae Watkins
+          </p>
+          <p className="font-serif text-lg md:text-xl text-bone-300/80 font-light italic leading-relaxed max-w-xl mx-auto mb-12 animate-fade-in delay-500 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+            Baltimore, 2006. Defense attorney Shawn Davidson inherits his dead father&rsquo;s murder trial and discovers the case was never built to find the truth. It was built to protect the people who own it.
+          </p>
+
+          <div className="flex flex-col items-center gap-10 animate-fade-in delay-700">
+            <a
+              href={PREORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-10 py-4 bg-burgundy text-bone-100 text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+            >
+              Pre-order on Kindle &mdash; June 21, 2026
+            </a>
+
+            <div className="w-full max-w-md">
+              <p className="font-serif italic text-sm text-bone-300/70 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                Get launch updates and Founders Edition access.
+              </p>
+              <Newsletter variant="compact" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================== */}
+      {/*  Existing sections preserved below       */}
+      {/* ======================================== */}
+      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-noir-950 via-noir-900/50 to-noir-950" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[120px]" />
         <div className="relative max-w-4xl mx-auto text-center">
           <Link href="/civic-noir" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in hover:text-gold/80 transition-colors duration-300 block">{siteConfig.tagline}</Link>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h1>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h2>
           <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
           <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
