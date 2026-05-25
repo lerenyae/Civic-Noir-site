@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { records, RecordEntry } from "@/lib/records";
 
 const collectionLabels: Record<string, string> = {
@@ -75,6 +75,7 @@ function getSrc(slug: string) {
 export default function TheRecordIndex() {
   const [filter, setFilter] = useState("all");
   const [lightbox, setLightbox] = useState<RecordEntry | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   const closeLightbox = useCallback(() => {
     setLightbox(null);
@@ -100,6 +101,15 @@ export default function TheRecordIndex() {
       const r = records.find((rec) => rec.slug === slug);
       return r?.collection === filter;
     });
+
+  const handleFilter = (key: string) => {
+    setFilter(key);
+    if (key !== "all" && galleryRef.current) {
+      setTimeout(() => {
+        galleryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+  };
 
   return (
     <div
@@ -198,6 +208,7 @@ export default function TheRecordIndex() {
       </header>
 
       {/* ===== CURATOR'S NOTE ===== */}
+      {filter === "all" && (
       <div
         className="curators-note"
         style={{
@@ -243,6 +254,7 @@ export default function TheRecordIndex() {
           }}
         />
       </div>
+      )}
 
       {/* ===== FILTER BAR ===== */}
       <nav
@@ -278,7 +290,7 @@ export default function TheRecordIndex() {
               />
             )}
             <button
-              onClick={() => setFilter(f.key)}
+              onClick={() => handleFilter(f.key)}
               style={{
                 background: "transparent",
                 border: "none",
@@ -312,6 +324,7 @@ export default function TheRecordIndex() {
       </nav>
 
       {/* ===== HERO IMAGE ===== */}
+      {filter === "all" && (
       <div
         className="hero-wrap"
         style={{
@@ -339,7 +352,7 @@ export default function TheRecordIndex() {
             src={getSrc("sentinel-editorial-grey-byline")}
             srcSet={getSrcSet("sentinel-editorial-grey-byline")}
             sizes="(max-width: 900px) 100vw, 1400px"
-            alt="The Westport Files — Baltimore Sentinel Post front page, January 9, 2006"
+            alt="The Westport Files â Baltimore Sentinel Post front page, January 9, 2006"
             style={{
               width: "100%",
               height: "auto",
@@ -404,6 +417,10 @@ export default function TheRecordIndex() {
           </div>
         </div>
       </div>
+      )}
+
+      {/* ===== GALLERY SCROLL TARGET ===== */}
+      <div ref={galleryRef} />
 
       {/* ===== SECTIONS ===== */}
       {sections.map((section) => {
@@ -754,7 +771,7 @@ export default function TheRecordIndex() {
             letter-spacing: 3px !important;
           }
 
-          /* Gallery grid — single column */
+          /* Gallery grid â single column */
           .gallery-grid {
             grid-template-columns: 1fr !important;
             padding: 0 16px 48px !important;
