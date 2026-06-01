@@ -13,54 +13,57 @@ type Track = {
 };
 
 const ALBUM_ID = "6OVH9ZeRu3A2p3SoxTkCgk";
-const albumEmbed = `https://open.spotify.com/embed/album/${ALBUM_ID}?utm_source=generator&theme=0`;
 const trackEmbed = (id: string) =>
   `https://open.spotify.com/embed/track/${id}?utm_source=generator&theme=0`;
 const COVER = "https://i.scdn.co/image/ab67616d0000b27394a1f3aeb2e36d78a05b28c2";
 
 export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
-  const [activeNum, setActiveNum] = useState<string | null>(null);
-  const [src, setSrc] = useState(albumEmbed);
+  const [activeNum, setActiveNum] = useState<string>(tracks[0]?.num ?? "01");
+  const [src, setSrc] = useState<string>(
+    tracks[0]?.spotifyId ? trackEmbed(tracks[0].spotifyId) : ""
+  );
 
-  const active = tracks.find((t) => t.num === activeNum) || null;
-  const cued = active ? `${active.num} — ${active.title}` : "Sounds of CONTEMPT — full album";
+  const active = tracks.find((t) => t.num === activeNum) ?? tracks[0];
 
   function select(t: Track) {
-    if (activeNum === t.num) {
-      setActiveNum(null);
-      setSrc(albumEmbed);
-      return;
-    }
     setActiveNum(t.num);
-    setSrc(t.spotifyId ? trackEmbed(t.spotifyId) : albumEmbed);
+    if (t.spotifyId) setSrc(trackEmbed(t.spotifyId));
   }
 
   return (
     <section className="max-w-3xl mx-auto px-6 pb-24">
-      {/* LIVE PLAYER — present on entry */}
+      {/* NOW PLAYING — the styled list below IS the player; this is the active track */}
       <SectionReveal>
-        <div className="grid grid-cols-1 sm:grid-cols-[176px_1fr] gap-7 items-start border-t border-b border-bone-300/10 py-8 mb-14">
-          <div className="w-[176px] max-w-full aspect-square overflow-hidden border border-bone-300/10 bg-noir-900 shadow-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] gap-8 items-start border-t border-b border-bone-300/10 py-10 mb-12">
+          <div className="w-[240px] max-w-full aspect-square overflow-hidden border border-bone-300/10 bg-noir-900 shadow-2xl mx-auto sm:mx-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={COVER} alt="Sounds of CONTEMPT — cover art" className="w-full h-full object-cover" />
           </div>
-          <div className="flex flex-col gap-4 min-w-0">
-            <div className="flex items-baseline gap-3 flex-wrap">
-              <span className="inline-flex items-center gap-2 text-[10px] font-sans font-light tracking-ultra uppercase text-gold/60">
+          <div className="flex flex-col gap-5 min-w-0">
+            <div>
+              <p className="inline-flex items-center gap-2 text-[10px] font-sans font-light tracking-ultra uppercase text-gold/60 mb-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-burgundy-light animate-pulse" />
                 Now Playing
-              </span>
-              <span className="font-serif text-lg text-bone-200 font-light">{cued}</span>
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl text-bone-100 font-light leading-tight">
+                {active.title}
+              </h2>
+              <p className="text-[11px] font-sans font-light tracking-ultra uppercase text-burgundy-light mt-2">
+                {active.character}
+                <span className="text-bone-300/30">&nbsp; · &nbsp;{active.time}</span>
+              </p>
             </div>
-            <iframe
-              key={src}
-              title="Spotify — Sounds of CONTEMPT"
-              src={src}
-              height={152}
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              className="w-full border-0"
-            />
+            {src && (
+              <iframe
+                key={src}
+                title="Spotify — Sounds of CONTEMPT"
+                src={src}
+                height={152}
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                className="w-full border-0"
+              />
+            )}
             <div className="flex flex-wrap gap-2.5">
               <a
                 href={`https://open.spotify.com/album/${ALBUM_ID}`}
@@ -110,7 +113,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
         </div>
       </SectionReveal>
 
-      {/* TRACKS — click to play */}
+      {/* TRACKS — click any row to play it above */}
       <div className="flex flex-col">
         {tracks.map((track, i) => {
           const isActive = activeNum === track.num;
