@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import SectionReveal from "@/components/SectionReveal";
 import SoundtrackPlayer from "@/components/SoundtrackPlayer";
 
 export const metadata: Metadata = {
@@ -31,35 +29,5 @@ const tracks = [
 ];
 
 export default function SoundtrackPage() {
-  return (
-    <>
-      {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-noir-950 via-noir-900/50 to-noir-950" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-burgundy/[0.06] rounded-full blur-[140px]" />
-        <div className="relative max-w-3xl mx-auto text-center">
-          <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">Original Novel Soundtrack</p>
-          </SectionReveal>
-          <SectionReveal delay={100}>
-            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-bone-100 font-light leading-[1.05] mb-4">
-              SOUNDS OF<br /><span className="text-bone-300/80">CONTEMPT</span>
-            </h1>
-          </SectionReveal>
-          <SectionReveal delay={200}>
-            <div className="w-16 h-px bg-gold/40 mx-auto mb-6 animate-line-grow origin-center" />
-          </SectionReveal>
-          <SectionReveal delay={300}>
-            <p className="text-xs font-sans font-light tracking-ultra uppercase text-bone-300/40 mb-8">18 Tracks &nbsp;|&nbsp; LeRenyae Watkins</p>
-          </SectionReveal>
-          <SectionReveal delay={400}>
-            <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic">...the temperature of the pages in sound.</p>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* LIVE PLAYER + TRACKLIST (click any track to play) */}
-      <SoundtrackPlayer tracks={tracks} />
-    </>
-  );
+  return <SoundtrackPlayer tracks={tracks} />;
 }
