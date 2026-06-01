@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SectionReveal from "@/components/SectionReveal";
 
 type Track = {
@@ -12,30 +12,120 @@ type Track = {
   spotifyId?: string;
 };
 
+type EmbedController = {
+  loadUri: (uri: string) => void;
+  play: () => void;
+  resume: () => void;
+  pause: () => void;
+  togglePlay: () => void;
+};
+
+type SpotifyIFrameAPI = {
+  createController: (
+    element: HTMLElement,
+    options: { uri: string; width: string | number; height: string | number },
+    callback: (controller: EmbedController) => void
+  ) => void;
+};
+
+declare global {
+  interface Window {
+    onSpotifyIframeApiReady?: (api: SpotifyIFrameAPI) => void;
+    __spotifyIFrameAPI?: SpotifyIFrameAPI;
+  }
+}
+
 const ALBUM_ID = "6OVH9ZeRu3A2p3SoxTkCgk";
-const trackEmbed = (id: string) =>
-  `https://open.spotify.com/embed/track/${id}?utm_source=generator&theme=0`;
 const COVER = "https://i.scdn.co/image/ab67616d0000b27394a1f3aeb2e36d78a05b28c2";
+const trackUri = (id: string) => `spotify:track:${id}`;
+
+/**
+ * Holds the Spotify IFrame-API embed. Rendered once (via useMemo in the parent)
+ * so React never re-renders it and never touches the node Spotify replaces.
+ */
+function PlayerEmbed({
+  firstUri,
+  onReady,
+}: {
+  firstUri: string;
+  onReady: (controller: EmbedController) => void;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    function make(api: SpotifyIFrameAPI) {
+      if (cancelled || !ref.current) return;
+      api.createController(
+        ref.current,
+        { uri: firstUri, width: "100%", height: 152 },
+        (controller) => {
+          if (!cancelled) onReady(controller);
+        }
+      );
+    }
+    if (window.__spotifyIFrameAPI) {
+      make(window.__spotifyIFrameAPI);
+    } else {
+      window.onSpotifyIframeApiReady = (api: SpotifyIFrameAPI) => {
+        window.__spotifyIFrameAPI = api;
+        make(api);
+      };
+      if (!document.getElementById("spotify-iframe-api-script")) {
+        const s = document.createElement("script");
+        s.id = "spotify-iframe-api-script";
+        s.src = "https://open.spotify.com/embed/iframe-api/v1";
+        s.async = true;
+        document.body.appendChild(s);
+      }
+    }
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return <div ref={ref} />;
+}
 
 export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
   const [activeNum, setActiveNum] = useState<string>(tracks[0]?.num ?? "01");
-  const [src, setSrc] = useState<string>(
-    tracks[0]?.spotifyId ? trackEmbed(tracks[0].spotifyId) : ""
-  );
-
+  const controllerRef = useRef<EmbedController | null>(null);
   const active = tracks.find((t) => t.num === activeNum) ?? tracks[0];
+
+  // created once — never re-renders, so the Spotify iframe stays mounted
+  const embed = useMemo(
+    () => (
+      <PlayerEmbed
+        firstUri={trackUri(tracks[0]?.spotifyId ?? "")}
+        onReady={(controller) => {
+          controllerRef.current = controller;
+        }}
+      />
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   function select(t: Track) {
     setActiveNum(t.num);
-    if (t.spotifyId) setSrc(trackEmbed(t.spotifyId));
+    const c = controllerRef.current;
+    if (c && t.spotifyId) {
+      // called inside the click gesture so browsers allow autoplay
+      c.loadUri(trackUri(t.spotifyId));
+      c.play();
+    }
   }
 
   return (
-    <section className="max-w-3xl mx-auto px-6 pb-24">
-      {/* NOW PLAYING — the styled list below IS the player; this is the active track */}
+    <section className="max-w-3xl mx-auto px-6 pt-32 pb-24">
+      <h1 className="sr-only">Sounds of CONTEMPT — Original Novel Soundtrack by LeRenyae Watkins</h1>
+
+      {/* GREETING — album cover + live player */}
       <SectionReveal>
-        <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] gap-8 items-start border-t border-b border-bone-300/10 py-10 mb-12">
-          <div className="w-[240px] max-w-full aspect-square overflow-hidden border border-bone-300/10 bg-noir-900 shadow-2xl mx-auto sm:mx-0">
+        <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 text-center sm:text-left">
+          Original Novel Soundtrack &nbsp;·&nbsp; 18 Tracks
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-[260px_1fr] gap-8 items-start pb-10 mb-12 border-b border-bone-300/10">
+          <div className="w-[260px] max-w-full aspect-square overflow-hidden border border-bone-300/10 bg-noir-900 shadow-2xl mx-auto sm:mx-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={COVER} alt="Sounds of CONTEMPT — cover art" className="w-full h-full object-cover" />
           </div>
@@ -53,17 +143,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
                 <span className="text-bone-300/30">&nbsp; · &nbsp;{active.time}</span>
               </p>
             </div>
-            {src && (
-              <iframe
-                key={src}
-                title="Spotify — Sounds of CONTEMPT"
-                src={src}
-                height={152}
-                loading="lazy"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                className="w-full border-0"
-              />
-            )}
+            <div className="w-full overflow-hidden">{embed}</div>
             <div className="flex flex-wrap gap-2.5">
               <a
                 href={`https://open.spotify.com/album/${ALBUM_ID}`}
