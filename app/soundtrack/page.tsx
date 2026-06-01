@@ -53,18 +53,7 @@ export default function SoundtrackPage() {
             <p className="text-xs font-sans font-light tracking-ultra uppercase text-bone-300/40 mb-8">18 Tracks &nbsp;|&nbsp; LeRenyae Watkins</p>
           </SectionReveal>
           <SectionReveal delay={400}>
-            <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic mb-12">...the temperature of the pages in sound.</p>
-          </SectionReveal>
-          <SectionReveal delay={500}>
-            <a
-              href="https://distrokid.com/hyperfollow/lerenyaewatkins/sounds-of-contempt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-3 border border-burgundy/60 text-bone bg-burgundy/20 text-xs font-sans font-light tracking-ultra uppercase hover:bg-burgundy/30 hover:border-burgundy transition-all duration-300"
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d="M8 5v14l11-7z" /></svg>
-              Listen on Your Platform
-            </a>
+            <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic">...the temperature of the pages in sound.</p>
           </SectionReveal>
         </div>
       </section>
