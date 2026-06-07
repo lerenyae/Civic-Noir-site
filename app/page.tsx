@@ -61,15 +61,15 @@ export default function Home() {
             </a>
 
             <div id="reserve" className="w-full max-w-md scroll-mt-24">
-              <p className="font-serif italic text-sm text-bone-300/70 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
-                Want it in hardcover? Reserve the signed Founders Edition &mdash; the ordering window opens by email.
+              <p className="font-serif italic text-sm text-bone-300/80 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                Reserve the print edition &mdash; the signed Founders Edition hardcover or the first-run paperback. The ordering window opens by email.
               </p>
               <Newsletter
                 variant="compact"
                 campaign="hardcover-reserve"
                 successLine={"You’re on the hardcover list. The first ordering window comes to your inbox."}
               />
-              <p className="text-[9px] font-sans font-light tracking-ultra uppercase text-gold/45 mt-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+              <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/90 mt-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
                 Numbered 1 of 50 &middot; Signed &amp; personalized &middot; Case File packaging
               </p>
             </div>
