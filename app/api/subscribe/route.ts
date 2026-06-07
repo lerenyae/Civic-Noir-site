@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, campaign } = await req.json();
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
@@ -28,6 +28,10 @@ export async function POST(req: Request) {
           reactivate_existing: true,
           utm_source: "lerenyaewatkins.com",
           utm_medium: "organic",
+          utm_campaign:
+            typeof campaign === "string" && campaign.trim()
+              ? campaign.trim().slice(0, 64)
+              : "site",
         }),
       }
     );
