@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Newsletter({ variant = "default" }: { variant?: "default" | "compact" }) {
+export default function Newsletter({ variant = "default", campaign, successLine }: { variant?: "default" | "compact"; campaign?: string; successLine?: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -15,7 +15,7 @@ export default function Newsletter({ variant = "default" }: { variant?: "default
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, campaign }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -33,7 +33,7 @@ export default function Newsletter({ variant = "default" }: { variant?: "default
     return (
       <div className={variant === "compact" ? "py-4" : "py-12"}>
         <p className="text-gold text-sm font-light tracking-wide text-center">
-          You&rsquo;re on the record. Watch your inbox.
+          {successLine ?? "You’re on the record. Watch your inbox."}
         </p>
       </div>
     );
