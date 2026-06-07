@@ -4,6 +4,7 @@ import { siteConfig, books } from "@/lib/content";
 import Newsletter from "@/components/Newsletter";
 import SectionReveal from "@/components/SectionReveal";
 import QuoteCarousel from "@/components/QuoteCarousel";
+import CountdownTicker from "@/components/CountdownTicker";
 
 const contempt = books[0];
 const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9?ref=sp_email";
@@ -30,9 +31,12 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-10 animate-fade-in">
+          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-6 animate-fade-in">
             Forthcoming &mdash; June 21, 2026
           </p>
+          <div className="mb-10 animate-fade-in delay-200">
+            <CountdownTicker />
+          </div>
           <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl text-bone-100 font-light tracking-tight sm:tracking-wide uppercase leading-[0.95] mb-6 animate-fade-up [text-shadow:_0_2px_24px_rgba(0,0,0,0.7)]">
             Contempt
           </h1>
@@ -59,9 +63,13 @@ export default function Home() {
 
             <div className="w-full max-w-md">
               <p className="font-serif italic text-sm text-bone-300/70 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
-                Get launch updates and Founders Edition access.
+                Want it in hardcover? Reserve the signed Founders Edition &mdash; the ordering window opens by email.
               </p>
-              <Newsletter variant="compact" />
+              <Newsletter
+                variant="compact"
+                campaign="hardcover-reserve"
+                successLine={"You’re on the hardcover list. The first ordering window comes to your inbox."}
+              />
             </div>
           </div>
         </div>
