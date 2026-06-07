@@ -5,6 +5,8 @@ import Newsletter from "@/components/Newsletter";
 import SectionReveal from "@/components/SectionReveal";
 import QuoteCarousel from "@/components/QuoteCarousel";
 import CountdownTicker from "@/components/CountdownTicker";
+import Reviews from "@/components/Reviews";
+import StickyBar from "@/components/StickyBar";
 
 const contempt = books[0];
 const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9?ref=sp_email";
@@ -16,7 +18,6 @@ export default function Home() {
       {/*  LAUNCH HERO — Contempt pre-order        */}
       {/* ======================================== */}
       <section className="relative min-h-[100vh] flex items-center justify-center px-4 sm:px-6 overflow-hidden w-full max-w-full">
-        {/* Background photo */}
         <Image
           src="/images/contempt-launch-hero.jpg"
           alt="Contempt hardback under the Domino Sugars neon at the Baltimore Inner Harbor"
@@ -25,11 +26,9 @@ export default function Home() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Dark gradient overlays for legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-noir-950/70 via-noir-950/40 to-noir-950/85" />
         <div className="absolute inset-0 bg-gradient-to-r from-noir-950/30 via-transparent to-noir-950/30" />
 
-        {/* Content */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-6 animate-fade-in">
             Forthcoming &mdash; June 21, 2026
@@ -61,7 +60,7 @@ export default function Home() {
               Pre-order on Kindle &mdash; June 21, 2026
             </a>
 
-            <div className="w-full max-w-md">
+            <div id="reserve" className="w-full max-w-md scroll-mt-24">
               <p className="font-serif italic text-sm text-bone-300/70 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
                 Want it in hardcover? Reserve the signed Founders Edition &mdash; the ordering window opens by email.
               </p>
@@ -70,64 +69,22 @@ export default function Home() {
                 campaign="hardcover-reserve"
                 successLine={"You’re on the hardcover list. The first ordering window comes to your inbox."}
               />
+              <p className="text-[9px] font-sans font-light tracking-ultra uppercase text-gold/45 mt-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
+                Numbered 1 of 50 &middot; Signed &amp; personalized &middot; Case File packaging
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ======================================== */}
-      {/*  Existing sections preserved below       */}
+      {/*  Early reader reviews                    */}
       {/* ======================================== */}
-      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-noir-950 via-noir-900/50 to-noir-950" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[120px]" />
-        <div className="relative max-w-4xl mx-auto text-center">
-          <Link href="/civic-noir" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in hover:text-gold/80 transition-colors duration-300 block">{siteConfig.tagline}</Link>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h2>
-          <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
-          <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
-            <Link href="/books" className="btn-primary">The Work</Link>
-            <a href="#newsletter" className="btn-secondary">Stay in the circuit</a>
-          </div>
-        </div>
-      </section>
+      <Reviews />
 
-      <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-12">Forthcoming &mdash; {contempt.year}</p></SectionReveal>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-16 items-start">
-            <SectionReveal delay={100}>
-              <div className="relative aspect-[2/3] overflow-hidden border border-bone-300/5">
-                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
-                  <source src="/covers/contempt-loop.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </SectionReveal>
-            <SectionReveal delay={200}>
-              <div>
-                <h2 className="font-serif text-4xl md:text-5xl text-bone-200 font-light mb-2">{contempt.title}</h2>
-                <p className="text-xs text-bone-300/40 font-sans font-light tracking-widest uppercase mb-8">{contempt.genre}</p>
-                <p className="font-serif text-2xl md:text-3xl text-bone-300/70 font-light italic leading-relaxed mb-8">&ldquo;{contempt.hookLine}&rdquo;</p>
-                <div className="gold-rule mb-8" />
-                <p className="text-sm text-bone-300/50 font-light leading-[1.8] mb-8">{contempt.synopsis.split("\n\n")[0]}</p>
-                <Link href="/books" className="btn-primary">Read more</Link>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-6 border-t border-b border-bone-300/5">
-        <SectionReveal>
-          <Link href="/civic-noir" className="block max-w-2xl mx-auto text-center group">
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 group-hover:text-gold/80 transition-colors duration-300">What is Civic Noir</p>
-            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic group-hover:text-bone-300/80 transition-colors duration-300">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/30 mt-6 group-hover:text-gold/60 transition-colors duration-300">Read the full definition &rarr;</p>
-          </Link>
-        </SectionReveal>
-      </section>
-
+      {/* ======================================== */}
+      {/*  Cold Read — taste the prose             */}
+      {/* ======================================== */}
       <section className="py-24 px-6">
         <SectionReveal>
           <div className="max-w-2xl mx-auto text-center">
@@ -145,7 +102,95 @@ export default function Home() {
         </SectionReveal>
       </section>
 
+      {/* ======================================== */}
+      {/*  The Score — the differentiator          */}
+      {/* ======================================== */}
+      <section className="py-24 px-6 border-t border-bone-300/5">
+        <SectionReveal>
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">The Score</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-bone-200 font-light mb-5">A novel with its own soundtrack.</h2>
+            <p className="text-sm text-bone-300/50 font-light leading-relaxed max-w-md mx-auto mb-10">
+              Eighteen original tracks, composed for the book. Character-driven. Chapter-mapped. Press play, then read.
+            </p>
+            <div className="mb-8">
+              <iframe
+                src="https://open.spotify.com/embed/track/19mI0I7RtCszJezE8zZNJq?theme=0"
+                width="100%"
+                height="80"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Contempt — title track"
+              />
+            </div>
+            <Link href="/soundtrack" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 hover:text-gold/70 transition-colors duration-300">Hear the full score &rarr;</Link>
+          </div>
+        </SectionReveal>
+      </section>
+
+      {/* ======================================== */}
+      {/*  The book                                */}
+      {/* ======================================== */}
+      <section className="py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-12">Forthcoming &mdash; {contempt.year}</p></SectionReveal>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-16 items-start">
+            <SectionReveal delay={100}>
+              <div className="relative aspect-[2/3] overflow-hidden border border-bone-300/5">
+                <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+                  <source src="/covers/contempt-loop-2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </SectionReveal>
+            <SectionReveal delay={200}>
+              <div>
+                <h2 className="font-serif text-4xl md:text-5xl text-bone-200 font-light mb-2">{contempt.title}</h2>
+                <p className="text-xs text-bone-300/40 font-sans font-light tracking-widest uppercase mb-8">{contempt.genre}</p>
+                <p className="font-serif text-2xl md:text-3xl text-bone-300/70 font-light italic leading-relaxed mb-8">&ldquo;{contempt.hookLine}&rdquo;</p>
+                <div className="gold-rule mb-8" />
+                <p className="text-sm text-bone-300/50 font-light leading-[1.8] mb-8">{contempt.synopsis.split("\n\n")[0]}</p>
+                <Link href="/books" className="btn-primary">Read more</Link>
+              </div>
+            </SectionReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================== */}
+      {/*  Author                                  */}
+      {/* ======================================== */}
+      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-noir-950 via-noir-900/50 to-noir-950" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/[0.02] rounded-full blur-[120px]" />
+        <div className="relative max-w-4xl mx-auto text-center">
+          <Link href="/civic-noir" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 animate-fade-in hover:text-gold/80 transition-colors duration-300 block">{siteConfig.tagline}</Link>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-bone-100 font-light leading-[1.1] mb-6 animate-fade-up">LeRenyae<br /><span className="text-bone-300/80">Lawrence Watkins</span></h2>
+          <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
+          <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
+            <Link href="/books" className="btn-primary">The Work</Link>
+            <a href="#newsletter" className="btn-secondary">Stay in the circuit</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================== */}
+      {/*  What is Civic Noir                      */}
+      {/* ======================================== */}
+      <section className="py-24 px-6 border-t border-b border-bone-300/5">
+        <SectionReveal>
+          <Link href="/civic-noir" className="block max-w-2xl mx-auto text-center group">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 group-hover:text-gold/80 transition-colors duration-300">What is Civic Noir</p>
+            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic group-hover:text-bone-300/80 transition-colors duration-300">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/30 mt-6 group-hover:text-gold/60 transition-colors duration-300">Read the full definition &rarr;</p>
+          </Link>
+        </SectionReveal>
+      </section>
+
       <Newsletter />
+
+      <StickyBar />
     </>
   );
 }
