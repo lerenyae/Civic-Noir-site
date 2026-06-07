@@ -27,8 +27,8 @@ export default function CoverLoop() {
   return (
     <video
       ref={ref}
-      src="/covers/contempt-loop-2.mp4"
-      poster="/covers/contempt-loop-poster.jpg"
+      src="/covers/contempt-loop-3.mp4"
+      poster="/covers/contempt-loop-poster-3.jpg"
       autoPlay
       loop
       muted
