@@ -22,8 +22,16 @@ Shawn Davidson spent the last two years trying to outrun Baltimore. Now he’s b
 Across town, a demoted detective trades favors with the same dirty hands that built the case — because the only way to protect the people he loves is to play the game that can bury them. And in the margins, a journalist chasing a missing trial witness discovers that some stories don’t want exposure.
 
 No heroes. No clean wins. Just pressure and what it makes people do.`,
-  buyLinks: [], pullQuote: null,
+  buyLinks: [
+    { label: "Pre-order on Kindle", url: "https://www.amazon.com/dp/B0GYVVSFH9" },
+    { label: "Reserve the Signed Hardcover", url: "/#reserve" },
+  ], pullQuote: null,
 }];
+
+export const reviews = [
+  { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads" },
+  { quote: "Such a great read. The story takes many twists and turns, keeping you on the edge of your seat the whole time. For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads" },
+];
 
 export const bio = {
   short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. A father of three based in Plano, Texas, he spent over 15 years in cybersecurity before transitioning to writing full time. His debut novel, Contempt, is forthcoming in 2026 alongside an 18-track original soundtrack he composed for the book.",
