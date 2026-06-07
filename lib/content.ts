@@ -29,8 +29,8 @@ No heroes. No clean wins. Just pressure and what it makes people do.`,
 }];
 
 export const reviews = [
-  { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads" },
-  { quote: "Such a great read. The story takes many twists and turns, keeping you on the edge of your seat the whole time. For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads" },
+  { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8620489243" },
+  { quote: "For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
 ];
 
 export const bio = {
