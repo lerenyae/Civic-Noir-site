@@ -16,6 +16,14 @@ export default function Reviews() {
             <figcaption className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/40">
               {r.author} &mdash; <span className="text-gold/40">{r.source}</span>
             </figcaption>
+            <a
+              href={r.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-3 text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 hover:text-gold/90 transition-colors duration-300"
+            >
+              See full review &rarr;
+            </a>
           </figure>
         ))}
       </div>

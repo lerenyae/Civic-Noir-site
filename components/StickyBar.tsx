@@ -30,7 +30,7 @@ export default function StickyBar() {
             Pre-order Kindle
           </a>
           <a href="/#reserve" className="px-4 py-2 border border-bone-300/20 hover:border-gold/50 transition-colors text-bone-300 text-[10px] font-sans font-light tracking-widest uppercase whitespace-nowrap hidden sm:block">
-            Reserve Hardcover
+            Reserve Print Edition
           </a>
         </div>
       </div>
