@@ -23,6 +23,7 @@ Across town, a demoted detective trades favors with the same dirty hands that bu
 
 No heroes. No clean wins. Just pressure and what it makes people do.`,
   buyLinks: [
+    { label: "Pre-order on Barnes & Noble", url: "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104" },
     { label: "Pre-order on Kindle", url: "https://www.amazon.com/dp/B0GYVVSFH9" },
     { label: "Reserve the Signed Hardcover", url: "/#reserve" },
   ], pullQuote: null,
