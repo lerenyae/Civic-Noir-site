@@ -11,6 +11,7 @@ import StickyBar from "@/components/StickyBar";
 
 const contempt = books[0];
 const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9?ref=sp_email";
+const BN_URL = "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104";
 
 export default function Home() {
   return (
@@ -52,6 +53,14 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col items-center gap-10 animate-fade-in delay-700">
+            <a
+              href={BN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+            >
+              Pre-order on Barnes &amp; Noble &mdash; June 21, 2026
+            </a>
             <a
               href={PREORDER_URL}
               target="_blank"
