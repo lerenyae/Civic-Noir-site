@@ -1,1001 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>The City &mdash; Contempt</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The City — Contempt · Baltimore, 2006</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<style>
+:root{
+  --gold:#B8963E; --han:#4A8EC2; --jordan:#C44A2A; --inst:#D4CFC4;
+  --bg:#070706; --panel:rgba(10,10,9,.93); --line:rgba(184,150,62,.16);
+  --text:#E8E4DA; --dim:#97917f; --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow:hidden}
+#cesium{position:fixed;inset:0}
+#cesium .cesium-viewer-bottom{left:auto !important;right:10px;bottom:6px;opacity:.55;filter:grayscale(.4)}
+#cesium .cesium-widget-credits a{color:#9a958a !important}
 
-    :root {
-      --black: #080808;
-      --ink: #1a1814;
-      --bone: #d4cfc4;
-      --bone-bright: #f0ece3;
-      --gold: #B8963E;
-      --gold-dim: #8a6e2a;
-      --steel: #4a8ec2;
-      --steel-dim: #34658a;
-      --red: #c44a2a;
-      --red-dim: #8a3520;
-      --muted: #5a5448;
-      --panel: #0f0e0b;
-      --border: #1e1c18;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-ui: 'Outfit', sans-serif;
-    }
+header{position:fixed;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px;z-index:30;background:linear-gradient(180deg,rgba(7,7,6,.92),rgba(7,7,6,0));pointer-events:none}
+header .brand{font-family:var(--sans);font-size:10.5px;letter-spacing:.32em;color:var(--text);text-transform:uppercase;text-decoration:none;pointer-events:auto}
+header .brand:hover{color:var(--gold)}
+header .mid{font-family:var(--serif);font-size:16px;color:var(--text)}
+header .mid i{color:var(--gold)}
+header .right{font-size:10px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
 
-    html, body { height: 100%; background: var(--black); color: var(--bone); font-family: var(--font-ui); overflow: hidden; overflow-x: hidden; max-width: 100vw; }
+aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var(--panel);
+  border-right:1px solid var(--line);display:flex;flex-direction:column;padding-top:58px;backdrop-filter:blur(6px)}
+.side-head{padding:14px 20px 12px;border-bottom:1px solid var(--line)}
+.kicker{font-size:9.5px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.side-head h1{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.08;color:var(--text)}
+.side-head p.sub{font-size:11px;color:var(--dim);margin-top:7px;font-weight:300}
+.filters{padding:12px 20px 4px;border-bottom:1px solid var(--line)}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+  background:none;border:1px solid rgba(151,145,127,.3);padding:5px 9px;cursor:pointer;transition:all .18s}
+.chip:hover{color:var(--text);border-color:rgba(184,150,62,.5)}
+.chip.on{color:var(--gold);border-color:var(--gold)}
+.cchip{display:inline-flex;align-items:center;gap:6px}
+.cchip .d{width:7px;height:7px;border-radius:50%;flex:none}
+.cchip.off{opacity:.32}
+.count{font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;padding:0 0 10px}
+#list{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(184,150,62,.25) transparent}
+#list::-webkit-scrollbar{width:5px}#list::-webkit-scrollbar-thumb{background:rgba(184,150,62,.22)}
+.card{padding:13px 20px 14px;border-bottom:1px solid rgba(151,145,127,.08);cursor:pointer;border-left:2px solid transparent;transition:background .15s,border-color .15s}
+.card:hover{background:rgba(184,150,62,.045)}
+.card.on{background:rgba(184,150,62,.07);border-left-color:var(--gold)}
+.card .meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.card .d{width:6px;height:6px;border-radius:50%}
+.card .area{font-size:8.5px;letter-spacing:.28em;color:var(--dim);text-transform:uppercase}
+.card h3{font-family:var(--serif);font-weight:600;font-size:17.5px;color:var(--text);line-height:1.15}
+.card p{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--dim);margin-top:3px;line-height:1.35}
+.note{padding:10px 20px;font-size:9px;letter-spacing:.12em;color:rgba(151,145,127,.6);text-transform:uppercase;border-top:1px solid rgba(151,145,127,.08)}
 
-    /* — NAV — */
-    .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: var(--black); border-bottom: 1px solid var(--border);
-      padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; height: 52px;
-    }
-    .nav-brand { font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
-    .nav-center { position: absolute; left: 50%; transform: translateX(-50%); font-family: var(--font-serif); font-size: 0.95rem; font-weight: 300; color: var(--bone-bright); letter-spacing: 0.08em; }
-    .nav-center em { font-style: italic; color: #8a8070; }
-    .nav-right { font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+#detail{position:fixed;right:22px;bottom:34px;width:340px;max-width:calc(100vw - 44px);z-index:26;background:var(--panel);
+  border:1px solid var(--line);padding:18px 20px 14px;transform:translateY(14px);opacity:0;pointer-events:none;transition:all .28s;backdrop-filter:blur(6px)}
+#detail.show{opacity:1;transform:none;pointer-events:auto}
+#detail .meta{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+#detail .area{font-size:9px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+#detail .who{font-size:9px;letter-spacing:.24em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+#detail .who .d{width:7px;height:7px;border-radius:50%}
+#detail h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.1}
+#detail .desc{font-family:var(--serif);font-style:italic;font-size:14.5px;color:#bdb7a8;margin-top:6px;line-height:1.4}
+#detail .nav{display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:11px;border-top:1px solid rgba(151,145,127,.14)}
+#detail .nav button{background:none;border:1px solid rgba(151,145,127,.3);color:var(--dim);font-size:12px;width:30px;height:26px;cursor:pointer;transition:all .15s}
+#detail .nav button:hover{color:var(--gold);border-color:var(--gold)}
+#detail .idx{font-size:9.5px;letter-spacing:.3em;color:var(--dim)}
+#closeD{position:absolute;top:8px;right:10px;background:none;border:none;color:var(--dim);font-size:17px;cursor:pointer;line-height:1}
+#closeD:hover{color:var(--gold)}
 
-    /* — LAYOUT — */
-    .layout { display: flex; height: 100vh; padding-top: 52px; }
+#tip{position:fixed;z-index:24;pointer-events:none;background:rgba(8,8,7,.94);border:1px solid var(--line);
+  padding:6px 11px;font-family:var(--serif);font-size:14px;color:var(--text);transform:translate(-50%,-130%);
+  opacity:0;transition:opacity .12s;white-space:nowrap}
+#tip .a{display:block;font-family:var(--sans);font-size:8px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;margin-bottom:1px}
 
-    /* — SIDEBAR — */
-    .sidebar {
-      width: 360px; flex-shrink: 0; background: var(--panel);
-      border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; z-index: 100;
-    }
-    .sidebar-header { padding: 28px 28px 20px; border-bottom: 1px solid var(--border); }
-    .sidebar-label { font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; font-weight: 400; }
-    .sidebar-title { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300; color: var(--bone-bright); line-height: 1.15; letter-spacing: 0.02em; }
-    .sidebar-subtitle { margin-top: 8px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; font-weight: 300; }
+#hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:22;font-size:9.5px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--dim);background:rgba(7,7,6,.6);padding:7px 16px;border:1px solid rgba(151,145,127,.14);
+  transition:opacity 1s;pointer-events:none}
 
-    /* — FILTER TABS — */
-    .filter-bar { padding: 14px 28px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
-    .filter-btn {
-      font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 5px 10px; border: 1px solid var(--border); background: transparent; color: var(--muted);
-      cursor: pointer; transition: all 0.2s; font-weight: 400;
-    }
-    .filter-btn:hover, .filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184, 150, 62, 0.06); }
+#intro{position:fixed;inset:0;z-index:60;background:radial-gradient(ellipse at 50% 62%,rgba(20,16,8,.96),rgba(4,4,4,.99) 70%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 1.1s}
+#intro.gone{opacity:0;pointer-events:none}
+#intro .k{font-size:11px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+#intro h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,62px);line-height:1.06;max-width:700px}
+#intro .yr{font-size:10px;letter-spacing:.44em;color:var(--dim);text-transform:uppercase;margin-top:20px}
+#enter{margin-top:38px;background:none;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;padding:13px 34px;cursor:pointer;transition:all .25s}
+#enter:hover:not(:disabled){background:var(--gold);color:#0a0908}
+#enter:disabled{opacity:.45;cursor:wait}
+#loadnote{font-size:9px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-top:16px;min-height:12px}
+#keyerr{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:rgba(5,5,4,.96);text-align:center;padding:30px}
+#keyerr .box{max-width:520px;border:1px solid var(--line);padding:34px 38px;background:var(--panel)}
+#keyerr h3{font-family:var(--serif);font-size:24px;margin-bottom:10px}
+#keyerr p{font-size:12px;color:var(--dim);line-height:1.6}
+#err{position:fixed;left:10px;bottom:8px;z-index:99;color:#c44;font:11px monospace;max-width:60vw;white-space:pre-wrap}
 
-    /* — LOCATION LIST — */
-    .location-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
-    .location-list::-webkit-scrollbar { width: 4px; }
-    .location-list::-webkit-scrollbar-track { background: transparent; }
-    .location-list::-webkit-scrollbar-thumb { background: var(--border); }
-
-    .location-item {
-      padding: 18px 28px; border-bottom: 1px solid var(--border); cursor: pointer;
-      transition: background 0.2s; position: relative;
-    }
-    .location-item::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-      background: var(--gold); transform: scaleY(0); transition: transform 0.2s; transform-origin: bottom;
-    }
-    .location-item[data-color="steel"]::before { background: var(--steel); }
-    .location-item[data-color="red"]::before { background: var(--red); }
-    .location-item[data-color="bone"]::before { background: var(--bone); }
-
-    .location-item:hover, .location-item.active { background: rgba(184, 150, 62, 0.04); }
-    .location-item:hover::before, .location-item.active::before { transform: scaleY(1); }
-
-    .loc-tag {
-      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-      margin-bottom: 5px; font-weight: 400; display: flex; align-items: center; gap: 6px;
-    }
-    .loc-tag-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .loc-name { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; color: var(--bone-bright); line-height: 1.2; margin-bottom: 4px; }
-    .loc-excerpt { font-size: 0.8rem; color: var(--muted); line-height: 1.5; font-style: italic; font-family: var(--font-serif); }
-
-    /* — DETAIL PANEL — */
-    .detail-panel {
-      position: absolute; bottom: 0; left: 360px; right: 0;
-      background: var(--black); border-top: 1px solid var(--border);
-      padding: 24px 36px; transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); z-index: 200; max-height: 40vh; overflow-y: auto;
-    }
-    .detail-panel.open { transform: translateY(0); }
-    .detail-close { position: absolute; top: 16px; right: 24px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; font-family: var(--font-ui); transition: color 0.2s; }
-    .detail-close:hover { color: var(--bone-bright); }
-    .detail-tag { font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 400; display: flex; align-items: center; gap: 8px; }
-    .detail-tag-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .detail-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 300; color: var(--bone-bright); margin-bottom: 6px; letter-spacing: 0.02em; }
-    .detail-address { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 300; }
-    .detail-body { font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.7; color: #c8c0b0; max-width: 680px; }
-    .detail-body em { color: var(--bone-bright); font-style: italic; }
-    .detail-chapter { margin-top: 12px; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); font-weight: 300; }
-
-    /* — MAP — */
-    #map { flex: 1; height: 100%; background: #0a0908; }
-    .leaflet-container { background: #0a0908 !important; font-family: var(--font-ui) !important; }
-    .leaflet-control-zoom a { background: var(--panel) !important; color: var(--bone) !important; border-color: var(--border) !important; }
-    .leaflet-control-zoom a:hover { background: var(--ink) !important; }
-
-    /* Custom SVG pin */
-    .custom-pin { cursor: pointer; transition: transform 0.2s; }
-    .custom-pin:hover { transform: scale(1.25); }
-    .custom-pin.active { transform: scale(1.3); }
-
-    /* Map labels */
-    .map-label {
-      font-family: var(--font-serif); font-size: 11px; color: var(--bone);
-      white-space: nowrap; text-shadow: 0 0 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);
-      pointer-events: none; opacity: 0; transition: opacity 0.3s;
-    }
-    .map-label.visible { opacity: 1; }
-
-    /* Leaflet popup */
-    .leaflet-popup-content-wrapper { background: var(--panel) !important; border: 1px solid var(--border) !important; border-radius: 0 !important; box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important; padding: 0 !important; }
-    .leaflet-popup-content { margin: 0 !important; font-family: var(--font-ui) !important; }
-    .leaflet-popup-tip-container { display: none; }
-    .leaflet-popup-close-button { display: none !important; }
-    .map-popup { padding: 16px 20px; min-width: 200px; }
-    .map-popup-tag { font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 6px; font-weight: 400; display: flex; align-items: center; gap: 6px; }
-    .map-popup-tag-dot { width: 5px; height: 5px; border-radius: 50%; }
-    .map-popup-name { font-family: var(--font-serif); font-size: 1rem; color: var(--bone-bright); font-weight: 400; margin-bottom: 4px; }
-    .map-popup-sub { font-size: 0.7rem; color: var(--muted); font-style: italic; font-family: var(--font-serif); }
-
-    /* — CHARACTER LEGEND — */
-    .map-legend {
-      position: fixed; top: 52px; left: 360px; right: 0; z-index: 900;
-      background: rgba(15, 14, 11, 0.95); border-bottom: 1px solid var(--border);
-      padding: 8px 18px; display: flex; gap: 20px; align-items: center; justify-content: center;
-      backdrop-filter: blur(8px);
-    }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .legend-label { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
-
-    /* — SHEET HANDLE (hidden on desktop) — */
-    .sheet-handle { display: none; }
-
-    /* — MOBILE FAB + MENU (hidden on desktop) — */
-    .mobile-fab { display: none; }
-    .mobile-menu-overlay { display: none; }
-    .mobile-menu-panel { display: none; }
-
-    /* — MOBILE — */
-    @media (max-width: 768px) {
-      .site-nav { padding: 10px 16px; height: 44px; }
-      .layout { padding-top: 44px; position: relative; overflow: hidden; width: 100vw; max-width: 100%; }
-      .nav-center { display: none; }
-
-      /* Map fills viewport below nav + legend */
-      #map { position: absolute; top: 72px; left: 0; right: 0; bottom: 0; height: auto; flex: none; z-index: 1; width: 100%; max-width: 100vw; }
-
-      /* Hide desktop sidebar on mobile entirely */
-      .sidebar { display: none !important; }
-
-      /* — Floating Action Button — */
-      .mobile-fab {
-        display: flex; align-items: center; justify-content: center;
-        position: fixed; bottom: 24px; right: 16px; z-index: 450;
-        width: 50px; height: 50px; border-radius: 50%;
-        background: var(--panel); border: 1px solid var(--gold-dim);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-        cursor: pointer; -webkit-tap-highlight-color: transparent;
-        transition: transform 0.2s, background 0.2s;
-      }
-      .mobile-fab:active { transform: scale(0.92); }
-      .mobile-fab svg { width: 20px; height: 20px; }
-      .mobile-fab .fab-lines line { stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
-      .mobile-fab .fab-close { display: none; }
-      .mobile-fab.open .fab-lines { display: none; }
-      .mobile-fab.open .fab-close { display: block; color: var(--gold); font-size: 1.4rem; line-height: 1; }
-
-      /* — Menu Overlay — */
-      .mobile-menu-overlay {
-        display: none; position: fixed; inset: 0; z-index: 430;
-        background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-      }
-      .mobile-menu-overlay.visible { display: block; }
-
-      /* — Slide-up Menu Panel — */
-      .mobile-menu-panel {
-        display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 440;
-        background: var(--panel); border-top: 1px solid var(--gold-dim);
-        border-radius: 14px 14px 0 0;
-        max-height: 65vh; overflow: hidden;
-        transform: translateY(100%);
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-        box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
-      }
-      .mobile-menu-panel.open { transform: translateY(0); }
-
-      .mobile-menu-header {
-        padding: 16px 20px 0; display: flex; align-items: center; justify-content: space-between;
-      }
-      .mobile-menu-title {
-        font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300;
-        color: var(--bone-bright); letter-spacing: 0.02em;
-      }
-      .mobile-menu-count {
-        font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
-        color: var(--muted); font-weight: 400;
-      }
-      .mobile-menu-filters {
-        padding: 12px 20px; display: flex; gap: 6px; flex-wrap: wrap;
-        border-bottom: 1px solid var(--border);
-      }
-      .mobile-filter-bar { display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 14px; }
-      .mobile-filter-btn {
-        font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
-        padding: 6px 12px; border: 1px solid var(--border); background: transparent; color: var(--muted);
-        cursor: pointer; transition: all 0.2s; font-weight: 400; border-radius: 2px;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .mobile-filter-btn:active, .mobile-filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184, 150, 62, 0.08); }
-
-      .mobile-location-list {
-        overflow-y: auto; max-height: calc(65vh - 110px);
-        scrollbar-width: thin; scrollbar-color: var(--border) transparent;
-      }
-      .mobile-location-list::-webkit-scrollbar { width: 3px; }
-      .mobile-location-list::-webkit-scrollbar-track { background: transparent; }
-      .mobile-location-list::-webkit-scrollbar-thumb { background: var(--border); }
-
-      .mobile-loc-item {
-        padding: 14px 20px; border-bottom: 1px solid var(--border);
-        cursor: pointer; transition: background 0.15s;
-        display: flex; align-items: center; gap: 12px;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .mobile-loc-item:active { background: rgba(184, 150, 62, 0.06); }
-      .mobile-loc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-      .mobile-loc-info { flex: 1; min-width: 0; }
-      .mobile-loc-name {
-        font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400;
-        color: var(--bone-bright); line-height: 1.2; margin-bottom: 2px;
-      }
-      .mobile-loc-sub {
-        font-size: 0.65rem; color: var(--muted); font-weight: 300;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      }
-      .mobile-loc-arrow { color: var(--muted); font-size: 0.7rem; flex-shrink: 0; }
-
-      /* Detail panel: centered modal overlay */
-      .detail-overlay {
-        display: none; position: fixed; inset: 0; z-index: 499;
-        background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-      }
-      .detail-overlay.visible { display: block; }
-      .detail-panel {
-        position: fixed; left: 16px; right: 16px; top: auto; bottom: auto;
-        top: 50%; transform: translateY(-50%) scale(0.95);
-        opacity: 0; pointer-events: none;
-        max-height: 70vh; overflow-y: auto;
-        padding: 24px 20px 20px; z-index: 500; width: auto;
-        border-radius: 10px;
-        border: 1px solid var(--gold-dim);
-        background: var(--panel);
-        box-shadow: 0 16px 48px rgba(0,0,0,0.7);
-        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
-      }
-      .detail-panel.open {
-        transform: translateY(-50%) scale(1);
-        opacity: 1; pointer-events: auto;
-      }
-      .detail-panel::before { display: none; }
-      .detail-close { top: 16px; right: 16px; font-size: 1.4rem; }
-      .detail-tag { font-size: 0.5rem; margin-bottom: 6px; }
-      .detail-name { font-size: 1.15rem; margin-bottom: 4px; }
-      .detail-address { font-size: 0.65rem; margin-bottom: 12px; }
-      .detail-body { font-size: 0.82rem; line-height: 1.65; }
-      .detail-chapter { font-size: 0.5rem; margin-top: 10px; }
-
-      /* Legend fixed at top on mobile */
-      .map-legend {
-        top: 44px; left: 0; right: 0;
-        padding: 6px 12px; gap: 10px; flex-wrap: nowrap; justify-content: center;
-        font-size: 0.5rem; border-bottom: 1px solid var(--border);
-      }
-      .map-legend.pushed { bottom: auto; top: 44px; }
-
-      /* Prevent anything from exceeding viewport */
-      .site-nav { max-width: 100vw; }
-
-      /* Hide FAB when detail panel is open */
-      .detail-panel.open ~ .mobile-fab { opacity: 0; pointer-events: none; }
-    }
-  </style>
+@media (max-width:900px){aside{width:272px} header .mid{display:none}}
+@media (max-width:680px){
+  aside{top:auto;bottom:0;width:100%;height:44vh;padding-top:0;border-top:1px solid var(--line);border-right:none}
+  #detail{right:10px;bottom:calc(44vh + 10px);width:auto;left:10px}
+  #hint{display:none}
+}
+</style>
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="/" class="nav-brand">LeRenyae Watkins</a>
-    <span class="nav-center"><em>Contempt</em> &mdash; The City</span>
-    <span class="nav-right">Baltimore, 2006</span>
-  </nav>
+<div id="cesium"></div>
+<header>
+  <a class="brand" href="/">LeRenyae Watkins</a>
+  <div class="mid"><i>Contempt</i> — The City</div>
+  <div class="right">Baltimore, 2006</div>
+</header>
 
-  <div class="layout">
-    <aside class="sidebar collapsed" id="sidebar">
-      <div class="sheet-handle" id="sheetHandle">
-        <div class="sheet-handle-bar"></div>
-      </div>
-      <div class="sheet-toggle-label" id="sheetLabel">Locations</div>
-      <div class="sidebar-header">
-        <span class="sidebar-label">Field Map</span>
-        <div class="sidebar-title">The Places<br>That Held Them</div>
-        <p class="sidebar-subtitle">Every location in Contempt. Click to place it.</p>
-      </div>
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="baltimore">Baltimore</button>
-        <button class="filter-btn" data-filter="ocean-city">Ocean City</button>
-        <button class="filter-btn" data-filter="snow-hill">Snow Hill</button>
-      </div>
-      <div class="location-list" id="locationList"></div>
-    </aside>
-
-    <div id="map"></div>
-
-    <div class="detail-overlay" id="detailOverlay"></div>
-    <div class="detail-panel" id="detailPanel">
-      <button class="detail-close" id="detailClose">&times;</button>
-      <div class="detail-tag" id="detailTag"></div>
-      <div class="detail-name" id="detailName"></div>
-      <div class="detail-address" id="detailAddress"></div>
-      <div class="detail-body" id="detailBody"></div>
-      <div class="detail-chapter" id="detailChapter"></div>
+<aside>
+  <div class="side-head">
+    <div class="kicker">Field Map — Photoreal 3D</div>
+    <h1>The Places<br>That Held Them</h1>
+    <p class="sub">Every location in Contempt, on the real city. Click a light to fly to it.</p>
+  </div>
+  <div class="filters">
+    <div class="chiprow" id="areas">
+      <button class="chip on" data-a="ALL">All</button>
+      <button class="chip" data-a="BALTIMORE">Baltimore</button>
+      <button class="chip" data-a="OCEAN CITY">Ocean City</button>
+      <button class="chip" data-a="SNOW HILL">Snow Hill</button>
     </div>
-  </div>
-
-  <!-- Character Legend -->
-  <div class="map-legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#B8963E"></div><span class="legend-label">Shawn</span></div>
-    <div class="legend-item"><div class="legend-dot" style="background:#4a8ec2"></div><span class="legend-label">Han</span></div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c44a2a"></div><span class="legend-label">Jordan</span></div>
-    <div class="legend-item"><div class="legend-dot" style="background:#d4cfc4"></div><span class="legend-label">Institutional</span></div>
-  </div>
-
-  <!-- Mobile FAB + Menu -->
-  <div class="mobile-fab" id="mobileFab">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </div>
-
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-
-  <div class="mobile-menu-panel" id="mobileMenuPanel">
-    <div style="padding: 20px 20px 0; border-bottom: 1px solid var(--border);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <div>
-          <div style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--bone-bright); font-weight: 400;">Locations</div>
-          <div style="font-size: 0.6rem; color: var(--muted); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;">The Places That Held Them</div>
-        </div>
-        <button id="mobileMenuClose" style="background: none; border: none; color: var(--muted); font-size: 1.6rem; cursor: pointer; padding: 4px 8px; line-height: 1;">&times;</button>
-      </div>
-      <div class="mobile-filter-bar" id="mobileFilterBar">
-        <button class="mobile-filter-btn active" data-filter="all">All</button>
-        <button class="mobile-filter-btn" data-filter="baltimore">Baltimore</button>
-        <button class="mobile-filter-btn" data-filter="ocean-city">Ocean City</button>
-        <button class="mobile-filter-btn" data-filter="snow-hill">Snow Hill</button>
-      </div>
+    <div class="chiprow" id="chars">
+      <button class="chip cchip on" data-c="shawn"><span class="d" style="background:var(--gold)"></span>Shawn</button>
+      <button class="chip cchip on" data-c="han"><span class="d" style="background:var(--han)"></span>Han</button>
+      <button class="chip cchip on" data-c="jordan"><span class="d" style="background:var(--jordan)"></span>Jordan</button>
+      <button class="chip cchip on" data-c="inst"><span class="d" style="background:var(--inst)"></span>Institutional</button>
     </div>
-    <div class="mobile-location-list" id="mobileLocationList"></div>
+    <div class="count" id="count"></div>
   </div>
+  <div id="list"></div>
+  <div class="note">Photoreal imagery renders the city as it stands today.</div>
+</aside>
+
+<div id="detail">
+  <button id="closeD">×</button>
+  <div class="meta"><span class="area" id="dArea"></span><span class="who" id="dWho"><span class="d"></span><span id="dWhoT"></span></span></div>
+  <h2 id="dName"></h2>
+  <p class="desc" id="dDesc"></p>
+  <div class="nav"><button id="prevL">←</button><span class="idx" id="dIdx"></span><button id="nextL">→</button></div>
+</div>
+
+<div id="tip"><span class="a" id="tipA"></span><span id="tipN"></span></div>
+<div id="hint">Drag to move &nbsp;·&nbsp; Right-drag to tilt &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Click a light</div>
+
+<div id="intro">
+  <div class="k">Contempt — A Civic Noir Novel</div>
+  <h2>The Places<br>That Held Them</h2>
+  <div class="yr">Baltimore · 2006</div>
+  <button id="enter" disabled>Enter the City</button>
+  <div id="loadnote">Loading the city…</div>
+</div>
+<div id="keyerr"><div class="box">
+  <h3>The city is unavailable</h3>
+  <p>The photoreal map could not load. This usually means the Google Maps API key is missing, unrestricted for this domain, or over quota. Check the Map Tiles API key in Google Cloud Console.</p>
+</div></div>
+<div id="err"></div>
 
 <script>
-const COLORS = {
-  gold:  { hex: '#B8963E', dim: '#8a6e2a', label: 'Shawn' },
-  steel: { hex: '#4a8ec2', dim: '#34658a', label: 'Han' },
-  red:   { hex: '#c44a2a', dim: '#8a3520', label: 'Jordan' },
-  bone:  { hex: '#d4cfc4', dim: '#8a857a', label: 'Institutional' }
-};
+window.onerror=function(m,s,l){document.getElementById('err').textContent=m+' @'+l;};
+(function(){
+"use strict";
+/* ============ KEY ============ */
+var GMAPS_KEY=new URLSearchParams(location.search).get('key')||'AIzaSyBQf_b6CMUCLRySM5pTQdxBdPP9gKGIkAs';
 
-const LOCATIONS = [
-  // — BALTIMORE (24) —
-  {
-    id: 1, name: "Mitchell Courthouse Steps",
-    address: "100 N Calvert St, Baltimore MD 21202",
-    lat: 39.29042, lng: -76.61507, tag: "Baltimore", filter: "baltimore", color: "gold",
-    excerpt: "Leo collapses at the microphones.",
-    body: "The seal at his back. Uniforms packed tight at the shoulders. Microphones crowded in close, foam tips nearly touching, hungry in the way only a first day can be. <em>Attorney Leo Davidson collapses during statement.</em> The crawl moved through every lobby in the state before Shawn could decide what to do with his hands.",
-    chapter: "Chapter One \u2014 Tuesday, August 15, 2006"
-  },
-  {
-    id: 2, name: "Baltimore City Circuit Court",
-    address: "111 N Calvert St, Baltimore MD 21202",
-    lat: 39.29098, lng: -76.61462, tag: "Baltimore", filter: "baltimore", color: "gold",
-    excerpt: "The Moretti trial. Leo\u2019s docket. The room Shawn inherits.",
-    body: "Antonio Moretti, nineteen years old, West Baltimore. Charged November 14, 2005 \u2014 the same morning Deputy Mayor Garrick was shot at the Dawson Community Center. The case moves through this building on its own logic, absorbing whoever stands at the table.",
-    chapter: "Moretti Intake \u2014 November 14, 2005"
-  },
-  {
-    id: 3, name: "Davidson & Associates",
-    address: "100 E Pratt St, Baltimore MD 21202",
-    lat: 39.28648, lng: -76.61340, tag: "Baltimore", filter: "baltimore", color: "gold",
-    excerpt: "Founded October 20, 1982. The name that opened rooms.",
-    body: "Leo Davidson built the firm the way he built everything: with accumulated weight. Forty years of names lined up like receipts. Pinnacle merger, 1998 \u2014 Shawn lead counsel, $4.2 million. <em>Your name is either clean, or it\u2019s useful.</em> Shawn left October 14, 2004. The door stayed open behind him.",
-    chapter: "Davidson & Associates Founding \u2014 October 20, 1982"
-  },
-  {
-    id: 4, name: "North Avenue",
-    address: "1356 W North Ave, Baltimore MD 21217",
-    lat: 39.31117, lng: -76.63560, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "The photograph. Three men who thought process could outpace consequence.",
-    body: "Black and white. Three men on the steps \u2014 Leo in the middle, already arguing with someone out of frame. Dawson smiling like the job hadn\u2019t started charging interest yet. Bates at the edge, suit borrowed, posture exact, eyes already somewhere else. The photo sat crooked in Snow Hill for years.",
-    chapter: "Referenced \u2014 Chapter One"
-  },
-  {
-    id: 5, name: "BPD Property Crimes Unit",
-    address: "601 E Fayette St, Baltimore MD 21202",
-    lat: 39.29049, lng: -76.60539, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "The paperwork runs on half-memory and habit.",
-    body: "Reports arrive like weather \u2014 constant, bearing down, expected. Officer Han\u2019s commendation sits in a drawer that never quite closes. The property crimes desk holds the city\u2019s ledger of what gets lost and what gets found. Nothing reconciles cleanly.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 6, name: "O\u2019Connell\u2019s Boxing \u2014 Eutaw St",
-    address: "Near Eutaw St, Baltimore MD 21217",
-    lat: 39.29850, lng: -76.62350, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "Where bodies learn the cost of motion.",
-    body: "Speed bag rhythm, breath counting down the rounds. The gym doesn\u2019t keep time \u2014 it counts what people owe. Names carved into tape on the heavy bags. Some stick around long enough to answer for themselves.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 7, name: "Red Orchid",
-    address: "1700 Block Eastern Ave, Baltimore MD 21231",
-    lat: 39.28833, lng: -76.58750, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "A name that carries more weight than the building can hold.",
-    body: "The address is mostly memory now. What the city forgets, the buildings remember. The orchid fades the same way everything does in Baltimore \u2014 not all at once, but steadily, as though the city itself is teaching a lesson about impermanence.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 8, name: "Kramer\u2019s Camera Repair",
-    address: "25th St & N Charles St, Baltimore MD 21218",
-    lat: 39.31663, lng: -76.61555, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "Preserving what the eye has already seen.",
-    body: "An old shop where photographs come back to life \u2014 or don\u2019t. Some images don\u2019t survive development. Some don\u2019t deserve to. Kramer works in silver and light, fixing what breaks before the moment disappears entirely.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 9, name: "The Baltimore Sentinel Post",
-    address: "300 E Lombard St, Baltimore MD 21202",
-    lat: 39.28720, lng: -76.61066, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "Jordan Grey. Pulitzer, Foreign Correspondence, 1996.",
-    body: "Jordan Grey took the Dhahran assignment in 1996 and came back with a Pulitzer. The Sentinel Post gives her the Westport files next. She doesn\u2019t cover politics \u2014 she covers what the politics leave behind. What the city calls development and what it actually moves.",
-    chapter: "Jordan Grey \u2014 Chesapeake Civic Wire, November 12, 2005"
-  },
-  {
-    id: 10, name: "Sandtown-Winchester",
-    address: "1700 W North Ave, Baltimore MD 21217",
-    lat: 39.30994, lng: -76.64266, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "Eve Franklin drive-by. Han takes two to the vest.",
-    body: "August 19, 2002. Officer Philip Han responds to shots fired on the 1700 block. Eve Franklin, caught outside. Han takes two vest impacts and keeps moving. The commendation reads clean. The debt it creates does not.",
-    chapter: "Han Commendation \u2014 August 19, 2002"
-  },
-  {
-    id: 11, name: "Sinai Hospital",
-    address: "2401 W Belvedere Ave, Baltimore MD 21215",
-    lat: 39.33798, lng: -76.66220, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Where the city sends its damage.",
-    body: "The building stands north of Downtown, catching what the city breaks. Doctors move through corridors that have seen more violence than most courtrooms. The hospital doesn\u2019t judge \u2014 it just fixes, bills, and forgets.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 12, name: "New Harbor Construction Site",
-    address: "400 Key Hwy, Baltimore MD 21230",
-    lat: 39.27751, lng: -76.60868, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Progress written in steel and concrete against the water.",
-    body: "The site keeps changing shape. What the city plans and what it builds rarely match. By the time the cranes leave, nothing remembers what was there before. The water laps at the edges, indifferent.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 13, name: "Charles Emmanuel Dawson Community Center",
-    address: "2601 W North Ave, Baltimore MD 21216",
-    lat: 39.30973, lng: -76.65474, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Where Garrick was shot. November 14, 2005.",
-    body: "Deputy Mayor Matt Garrick. The same morning Antonio Moretti is booked. The same morning the Azure Horizons parcel transfers. The city decides who gets charged and who gets mourned \u2014 and it doesn\u2019t always get that right. Garrick\u2019s name moves through every docket that follows.",
-    chapter: "Garrick Shooting \u2014 November 14, 2005"
-  },
-  {
-    id: 14, name: "Pinnacle Investments",
-    address: "100 Light St, Baltimore MD 21202",
-    lat: 39.28670, lng: -76.61621, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "The merger that made Shawn\u2019s name. The money that moved without him.",
-    body: "Pinnacle merger, 1998. Shawn lead counsel. $4.2 million fee, clean close. The kind of work that builds a name before the name knows what it costs. Six years later, Shawn walks. The money stays.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 15, name: "Iron Rail",
-    address: "2507 N Charles St, Baltimore MD 21218",
-    lat: 39.31762, lng: -76.61574, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "The bar where Baltimore talks to itself after hours.",
-    body: "A narrow room with long memory. The kind of place where reporters drink beside the people they\u2019re writing about. Jordan Grey holds a booth here like a lease. The jukebox plays what the city can\u2019t say out loud.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 21, name: "Frank\u2019s Lotto / Franklin Mini Mart",
-    address: "Fayette St & Guilford Ave, Baltimore MD 21202",
-    lat: 39.29150, lng: -76.61050, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "The corner that sees everything and says nothing.",
-    body: "Bulletproof glass and lottery tickets. The kind of store that stays open because the neighborhood needs it, not because anyone\u2019s getting rich. What happens on this corner doesn\u2019t make the paper. It just makes the block remember.",
-    chapter: "Chapter Twelve"
-  },
-  {
-    id: 22, name: "Lexington Market",
-    address: "400 W Lexington St, Baltimore MD 21201",
-    lat: 39.29170, lng: -76.62100, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "Knuckles on counters, pigeons bold enough to steal.",
-    body: "Oldest continuously operating market in the country. Knuckles on counters, pigeons bold enough to steal. The west wall bench holds the people who aren\u2019t shopping \u2014 they\u2019re waiting. For what, the market doesn\u2019t ask. It just stays open.",
-    chapter: "Chapter Ten"
-  },
-
-  {
-    id: 23, name: "City Hall",
-    address: "100 N Holliday St, Baltimore MD 21202",
-    lat: 39.29101, lng: -76.60968, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Second floor. Close enough to read the signs.",
-    body: "The building sits at the center of everything the city decides. Second floor, close enough to read the signs. What happens here moves through every office, every docket, every neighborhood that can\u2019t afford to watch but can\u2019t afford not to.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 24, name: "Leo\u2019s Brownstone",
-    address: "Thames St area, Fells Point, Baltimore MD 21231",
-    lat: 39.28180, lng: -76.59200, tag: "Baltimore", filter: "baltimore", color: "gold",
-    excerpt: "Same rusting gate. Same warped stoop.",
-    body: "The brownstone sits in Fells Point like an argument no one finished. Same rusting gate. Same warped stoop. Leo built a life here that outlasted everything except the house itself. The door still sticks the same way it did in 1986.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 25, name: "Penn Station",
-    address: "1500 N Charles St, Baltimore MD 21201",
-    lat: 39.30780, lng: -76.61550, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "The city had been fixing it for years.",
-    body: "The city had been fixing Penn Station for years. Scaffolding up, scaffolding down, the Beaux-Arts facade holding on like a promise nobody planned to keep. Where Nico arrives in the finale \u2014 stepping off the train into a city that doesn\u2019t explain itself to newcomers.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 26, name: "Domino Sugars",
-    address: "1100 Key Hwy, Baltimore MD 21230",
-    lat: 39.27520, lng: -76.60060, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "The red haze over the harbor. First thing you see coming in.",
-    body: "The neon sign bleeds across the harbor at night \u2014 the red haze that tells you where you are before the city does. First thing you see coming in. Last thing you see leaving. The sugar refinery outlasted everything around it because sweetness is the last industry Baltimore abandoned.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 27, name: "BCBIC \u2014 Central Booking",
-    address: "300 E Madison St, Baltimore MD 21202",
-    lat: 39.29600, lng: -76.60700, tag: "Baltimore", filter: "baltimore", color: "steel",
-    excerpt: "Property: wallet, shoelaces. Not listed: recorder device.",
-    body: "Baltimore Central Booking and Intake Center. The line starts before sunrise. Property: wallet, shoelaces. Not listed: recorder device. The building processes people the way the city processes everything \u2014 slowly, impersonally, with paperwork that outlives the sentence.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 28, name: "City Archives / DHCD",
-    address: "396 N Gay St, Baltimore MD 21202",
-    lat: 39.29350, lng: -76.60750, tag: "Baltimore", filter: "baltimore", color: "red",
-    excerpt: "The paper trail starts in the basement.",
-    body: "Department of Housing and Community Development. The paper trail starts in the basement. Deed transfers, zoning variances, permits that moved faster than they should have. Jordan Grey pulls the Westport files here. What the city buries, the archives remember.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 29, name: "War Memorial",
-    address: "101 N Gay St, Baltimore MD 21202",
-    lat: 39.29050, lng: -76.60780, tag: "Baltimore", filter: "baltimore", color: "bone",
-    excerpt: "Signs punching through umbrellas that weren\u2019t winning.",
-    body: "The War Memorial stands across from City Hall like a conscience the building tries to ignore. Signs punching through umbrellas that weren\u2019t winning. The protests gather here because the steps face the right direction \u2014 toward the people who are supposed to be listening.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-
-  // — OCEAN CITY (3) —
-  {
-    id: 16, name: "Elaine Davidson\u2019s Grave",
-    address: "Coastal Ocean City, MD 21842",
-    lat: 38.35247, lng: -75.07807, tag: "Ocean City", filter: "ocean-city", color: "gold",
-    excerpt: "The only piece of Ocean City that ever felt like home.",
-    body: "The markers lean into the salt wind, names worn smooth by decades of weather. Elaine Davidson rests here \u2014 the only piece of Ocean City that ever felt like home. The ocean doesn\u2019t distinguish between the remembered and forgotten. It just keeps arriving.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-  {
-    id: 17, name: "Azure Horizons Gallery",
-    address: "Dorchester St & Baltimore Ave, Ocean City MD 21842",
-    lat: 38.32783, lng: -75.08447, tag: "Ocean City", filter: "ocean-city", color: "gold",
-    excerpt: "The parcel that moved on the same day everything else did.",
-    body: "A gallery space where the city\u2019s hands reach down into the shore. The Azure Horizons parcel transferred November 14, 2005 \u2014 the same morning as the shooting, the same moment as the courtroom booking. Nothing that changes hands in Baltimore stays still.",
-    chapter: "Westport Files \u2014 January 9, 2006"
-  },
-  {
-    id: 18, name: "Ocean City Circuit Court",
-    address: "4501 Coastal Hwy, Ocean City MD 21842",
-    lat: 38.36183, lng: -75.07137, tag: "Ocean City", filter: "ocean-city", color: "gold",
-    excerpt: "Law enforcement where the water meets jurisdiction.",
-    body: "The circuit court here handles the margin cases \u2014 tourists, summer disputes, the boundary lines. The ocean doesn\u2019t respect boundaries, but the law tries. Someone has to draw the line where water ends and property begins.",
-    chapter: "Referenced \u2014 Contempt"
-  },
-
-  // — SNOW HILL (3) —
-  {
-    id: 19, name: "Worcester District Court",
-    address: "1 W Market St, Snow Hill MD 21863",
-    lat: 38.17686, lng: -75.39278, tag: "Snow Hill", filter: "snow-hill", color: "gold",
-    excerpt: "Shawn transfers his bar. Bates holds his docket.",
-    body: "Route 50 eats miles without giving anything back. Snow Hill is flat, ordered, awake in a way Baltimore never bothered with early. Law before coffee. Judge Richard Bates, forty-one years on the bench, retiring end of month. The room he\u2019s offering Shawn is one Leo has never been allowed to enter.",
-    chapter: "Chapter One \u2014 Worcester District Court"
-  },
-  {
-    id: 30, name: "Judge Bates Residence",
-    address: "Federal & Market St area, Snow Hill MD 21863",
-    lat: 38.17700, lng: -75.39350, tag: "Snow Hill", filter: "snow-hill", color: "gold",
-    excerpt: "Forty-one years in that courthouse.",
-    body: "The house sits close enough to the courthouse that Bates could walk it in four minutes, and did, every morning for forty-one years. Federal Street to Market, the same route, the same pace. Retirement means the walk stops. The house stays.",
-    chapter: "Referenced \u2014 Chapter One"
-  },
-  {
-    id: 20, name: "The Pocomoke River",
-    address: "Snow Hill MD 21863",
-    lat: 38.17382, lng: -75.38630, tag: "Snow Hill", filter: "snow-hill", color: "bone",
-    excerpt: "The water that knows no judgment.",
-    body: "The river moves through Snow Hill like time moves through the Eastern Shore \u2014 slowly, relentlessly, without apology. It carries what the land can\u2019t hold. The current doesn\u2019t distinguish between the innocent and guilty \u2014 it just moves.",
-    chapter: "Referenced \u2014 Contempt"
-  }
+/* ============ DATA — locations & copy from lerenyaewatkins.com/the-map ============ */
+var CHAR={shawn:{css:'#B8963E',n:'Shawn'},han:{css:'#4A8EC2',n:'Han'},
+          jordan:{css:'#C44A2A',n:'Jordan'},inst:{css:'#D4CFC4',n:'Institutional'}};
+var LOCS=[
+ {n:"Mitchell Courthouse Steps",a:"BALTIMORE",w:"shawn",lat:39.29080,lng:-76.61240,d:"Leo collapses at the microphones."},
+ {n:"Baltimore City Circuit Court",a:"BALTIMORE",w:"shawn",lat:39.29093,lng:-76.61324,d:"The Moretti trial. Leo’s docket. The room Shawn inherits."},
+ {n:"Davidson & Associates",a:"BALTIMORE",w:"shawn",lat:39.28800,lng:-76.61130,d:"Founded October 20, 1982. The name that opened rooms."},
+ {n:"North Avenue",a:"BALTIMORE",w:"inst",lat:39.31075,lng:-76.63615,d:"The photograph. Three men who thought process could outpace consequence."},
+ {n:"BPD Property Crimes Unit",a:"BALTIMORE",w:"han",lat:39.29020,lng:-76.60769,d:"The paperwork runs on half-memory and habit."},
+ {n:"O’Connell’s Boxing — Eutaw St",a:"BALTIMORE",w:"han",lat:39.29760,lng:-76.62225,d:"Where bodies learn the cost of motion."},
+ {n:"Red Orchid",a:"BALTIMORE",w:"jordan",lat:39.28715,lng:-76.58660,d:"A name that carries more weight than the building can hold."},
+ {n:"Kramer’s Camera Repair",a:"BALTIMORE",w:"jordan",lat:39.31565,lng:-76.61560,d:"Preserving what the eye has already seen."},
+ {n:"The Baltimore Sentinel Post",a:"BALTIMORE",w:"jordan",lat:39.29520,lng:-76.61195,d:"Jordan Grey. Pulitzer, Foreign Correspondence, 1996."},
+ {n:"Sandtown-Winchester",a:"BALTIMORE",w:"han",lat:39.30450,lng:-76.64398,d:"Eve Franklin drive-by. Han takes two to the vest."},
+ {n:"Sinai Hospital",a:"BALTIMORE",w:"inst",lat:39.35290,lng:-76.66300,d:"Where the city sends its damage."},
+ {n:"New Harbor Construction Site",a:"BALTIMORE",w:"inst",lat:39.27590,lng:-76.60660,d:"Progress written in steel and concrete against the water."},
+ {n:"Charles Emmanuel Dawson Community Center",a:"BALTIMORE",w:"inst",lat:39.30544,lng:-76.65478,d:"Where Garrick was shot. November 14, 2005."},
+ {n:"Pinnacle Investments",a:"BALTIMORE",w:"inst",lat:39.28690,lng:-76.61285,d:"The merger that made Shawn’s name. The money that moved without him."},
+ {n:"Iron Rail",a:"BALTIMORE",w:"jordan",lat:39.31700,lng:-76.61555,d:"The bar where Baltimore talks to itself after hours."},
+ {n:"Frank’s Lotto / Franklin Mini Mart",a:"BALTIMORE",w:"jordan",lat:39.29450,lng:-76.60550,d:"The corner that sees everything and says nothing."},
+ {n:"Lexington Market",a:"BALTIMORE",w:"han",lat:39.29155,lng:-76.62100,d:"Knuckles on counters, pigeons bold enough to steal."},
+ {n:"City Hall",a:"BALTIMORE",w:"inst",lat:39.29110,lng:-76.61050,d:"Second floor. Close enough to read the signs."},
+ {n:"Leo’s Brownstone",a:"BALTIMORE",w:"shawn",lat:39.28195,lng:-76.59305,d:"Same rusting gate. Same warped stoop."},
+ {n:"Penn Station",a:"BALTIMORE",w:"inst",lat:39.30742,lng:-76.61566,d:"The city had been fixing it for years."},
+ {n:"Domino Sugars",a:"BALTIMORE",w:"inst",lat:39.27250,lng:-76.60160,d:"The red haze over the harbor. First thing you see coming in."},
+ {n:"BCBIC — Central Booking",a:"BALTIMORE",w:"han",lat:39.29919,lng:-76.61046,d:"Property: wallet, shoelaces. Not listed: recorder device."},
+ {n:"City Archives / DHCD",a:"BALTIMORE",w:"jordan",lat:39.29040,lng:-76.60913,d:"The paper trail starts in the basement."},
+ {n:"War Memorial",a:"BALTIMORE",w:"inst",lat:39.29115,lng:-76.60955,d:"Signs punching through umbrellas that weren’t winning."},
+ {n:"Elaine Davidson’s Grave",a:"OCEAN CITY",w:"shawn",lat:38.31951,lng:-75.19737,d:"The only piece of Ocean City that ever felt like home."},
+ {n:"Azure Horizons Gallery",a:"OCEAN CITY",w:"shawn",lat:38.32950,lng:-75.08620,d:"The parcel that moved on the same day everything else did."},
+ {n:"Ocean City Circuit Court",a:"OCEAN CITY",w:"shawn",lat:38.38830,lng:-75.06710,d:"Law enforcement where the water meets jurisdiction."},
+ {n:"Worcester District Court",a:"SNOW HILL",w:"shawn",lat:38.17656,lng:-75.39313,d:"Shawn transfers his bar. Bates holds his docket."},
+ {n:"Judge Bates Residence",a:"SNOW HILL",w:"shawn",lat:38.17665,lng:-75.39200,d:"Forty-one years in that courthouse."},
+ {n:"The Pocomoke River",a:"SNOW HILL",w:"inst",lat:38.17811,lng:-75.39581,d:"The water that knows no judgment."}
 ];
+LOCS.forEach(function(L,i){L.id=i;L.h=L.a==='BALTIMORE'?12:(L.a==='OCEAN CITY'?3:6);});
 
-// — SVG Pin Factory —
-function pinSVG(color) {
-  const hex = COLORS[color].hex;
-  return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="10" stroke="${hex}" stroke-opacity="0.25" stroke-width="1"/>
-    <circle cx="12" cy="12" r="6" stroke="${hex}" stroke-opacity="0.5" stroke-width="0.75"/>
-    <circle cx="12" cy="12" r="3.5" fill="${hex}"/>
-  </svg>`;
-}
+/* ============ VIEWER ============ */
+var viewer=new Cesium.Viewer('cesium',{
+  animation:false,timeline:false,baseLayerPicker:false,geocoder:false,homeButton:false,
+  sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,
+  selectionIndicator:false,infoBox:false,baseLayer:false,terrainProvider:undefined,
+  requestRenderMode:false,msaaSamples:2
+});
+var scene=viewer.scene;
+scene.globe.show=false;
+scene.skyAtmosphere.show=true;
+scene.skyAtmosphere.brightnessShift=-0.7;
+scene.skyAtmosphere.saturationShift=-0.25;
+if(scene.skyBox)scene.skyBox.show=false;
+scene.backgroundColor=Cesium.Color.fromCssColorString('#05060a');
+scene.moon&& (scene.moon.show=false);
+scene.sun&&(scene.sun.show=false);
+scene.fog.enabled=true;
+scene.highDynamicRange=true;
+scene.screenSpaceCameraController.minimumZoomDistance=55;
+scene.screenSpaceCameraController.maximumZoomDistance=900000;
+viewer.resolutionScale=Math.min(window.devicePixelRatio,2);
 
-function pinSVGActive(color) {
-  const hex = COLORS[color].hex;
-  return `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="15" cy="15" r="13" stroke="${hex}" stroke-opacity="0.3" stroke-width="1.5"/>
-    <circle cx="15" cy="15" r="8" stroke="${hex}" stroke-opacity="0.6" stroke-width="1"/>
-    <circle cx="15" cy="15" r="4.5" fill="${hex}"/>
-    <circle cx="15" cy="15" r="13" fill="${hex}" fill-opacity="0.08"/>
-  </svg>`;
-}
-
-// — Map Init —
-const marylandBounds = L.latLngBounds(
-  L.latLng(37.9, -76.8),
-  L.latLng(39.55, -74.9)
-);
-
-const map = L.map('map', {
-  center: [39.29, -76.615],
-  zoom: 13,
-  minZoom: 8,
-  maxZoom: 18,
-  maxBounds: marylandBounds,
-  maxBoundsViscosity: 0.9,
-  zoomControl: false,
-  attributionControl: false
+/* dim sun: flat dusk light */
+scene.light=new Cesium.DirectionalLight({
+  direction:new Cesium.Cartesian3(0.35,-0.25,-0.9),
+  color:Cesium.Color.fromCssColorString('#cfd6e6'),
+  intensity:1.55
 });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-  maxZoom: 19,
-  attribution: ''
-}).addTo(map);
+/* ============ NOIR DUSK GRADE ============ */
+scene.postProcessStages.add(new Cesium.PostProcessStage({
+  name:'noir_grade',
+  fragmentShader:
+   'uniform sampler2D colorTexture;\n'+
+   'in vec2 v_textureCoordinates;\n'+
+   'void main(){\n'+
+   '  vec4 c=texture(colorTexture,v_textureCoordinates);\n'+
+   '  vec3 col=c.rgb;\n'+
+   '  float l=dot(col,vec3(0.299,0.587,0.114));\n'+
+   '  col=mix(col,vec3(l),0.22);\n'+                       // desaturate
+   '  col*=vec3(0.46,0.50,0.60);\n'+                        // dusk, cool
+   '  col+=vec3(0.115,0.082,0.030)*pow(l,1.5);\n'+          // sodium-gold lift in highlights
+   '  col=pow(col,vec3(1.06));\n'+                          // slight contrast
+   '  vec2 d=v_textureCoordinates-0.5;\n'+
+   '  col*=1.0-dot(d,d)*0.85;\n'+                           // vignette
+   '  out_FragColor=vec4(col,1.0);\n'+
+   '}'
+}));
 
-L.control.zoom({ position: 'topright' }).addTo(map);
-
-// — Markers & Labels —
-const markers = {};
-const labels = {};
-let activeId = null;
-let activeFilter = 'all';
-
-function createPinIcon(loc) {
-  return L.divIcon({
-    className: '',
-    html: `<div class="custom-pin" id="pin-${loc.id}">${pinSVG(loc.color)}</div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -16]
-  });
-}
-
-function createActiveIcon(loc) {
-  return L.divIcon({
-    className: '',
-    html: `<div class="custom-pin active" id="pin-${loc.id}">${pinSVGActive(loc.color)}</div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    popupAnchor: [0, -18]
-  });
-}
-
-function buildPopupHTML(loc) {
-  const c = COLORS[loc.color];
-  return `<div class="map-popup">
-    <div class="map-popup-tag"><span class="map-popup-tag-dot" style="background:${c.hex}"></span><span style="color:${c.dim}">${c.label} \u2014 ${loc.tag}</span></div>
-    <div class="map-popup-name">${loc.name}</div>
-    <div class="map-popup-sub">${loc.excerpt}</div>
-  </div>`;
-}
-
-function openDetail(loc) {
-  // Reset previous active pin
-  if (activeId && markers[activeId]) {
-    const prev = LOCATIONS.find(l => l.id === activeId);
-    if (prev) markers[activeId].setIcon(createPinIcon(prev));
-  }
-
-  const c = COLORS[loc.color];
-  document.getElementById('detailTag').innerHTML = `<span class="detail-tag-dot" style="background:${c.hex}"></span>${c.label} \u2014 ${loc.tag}`;
-  document.getElementById('detailName').textContent = loc.name;
-  document.getElementById('detailAddress').textContent = loc.address;
-  document.getElementById('detailBody').innerHTML = loc.body;
-  document.getElementById('detailChapter').textContent = loc.chapter;
-  document.getElementById('detailPanel').classList.add('open');
-  if (window.innerWidth <= 768) document.getElementById('detailOverlay').classList.add('visible');
-
-  // Sidebar highlight
-  document.querySelectorAll('.location-item').forEach(el => el.classList.remove('active'));
-  const listItem = document.getElementById(`item-${loc.id}`);
-  if (listItem) {
-    listItem.classList.add('active');
-    listItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // Active pin style
-  markers[loc.id].setIcon(createActiveIcon(loc));
-
-  map.flyTo([loc.lat, loc.lng], Math.max(map.getZoom(), 14), { duration: 1.0, easeLinearity: 0.4 });
-  activeId = loc.id;
-}
-
-function closeDetail() {
-  document.getElementById('detailPanel').classList.remove('open');
-  document.getElementById('detailOverlay').classList.remove('visible');
-  document.querySelectorAll('.location-item').forEach(el => el.classList.remove('active'));
-  if (activeId && markers[activeId]) {
-    const prev = LOCATIONS.find(l => l.id === activeId);
-    if (prev) markers[activeId].setIcon(createPinIcon(prev));
-  }
-  activeId = null;
-}
-
-// Add markers and labels
-LOCATIONS.forEach(loc => {
-  const marker = L.marker([loc.lat, loc.lng], { icon: createPinIcon(loc) });
-  marker.bindPopup(buildPopupHTML(loc), { maxWidth: 280, className: 'contempt-popup' });
-  marker.on('click', () => { map.closePopup(); openDetail(loc); });
-  marker.on('mouseover', function() { this.openPopup(); });
-  marker.on('mouseout', function() { this.closePopup(); });
-  marker.addTo(map);
-  markers[loc.id] = marker;
-
-  // Map label (visible at zoom 14+)
-  const label = L.marker([loc.lat, loc.lng], {
-    icon: L.divIcon({
-      className: 'map-label',
-      html: loc.name,
-      iconSize: [0, 0],
-      iconAnchor: [-16, 4]
-    }),
-    interactive: false
-  });
-  label.addTo(map);
-  labels[loc.id] = label;
-});
-
-// Show/hide labels based on zoom — denser clusters need higher zoom
-const baltimoreIds = new Set(LOCATIONS.filter(l => l.filter === 'baltimore').map(l => l.id));
-
-function updateLabels() {
-  const z = map.getZoom();
-  LOCATIONS.forEach(loc => {
-    const label = labels[loc.id];
-    if (!label) return;
-    const el = label.getElement();
-    if (!el) return;
-    // Baltimore pins are dense — require zoom 16+ to show labels
-    // Ocean City / Snow Hill are spread out — show at 14+
-    const threshold = baltimoreIds.has(loc.id) ? 16 : 14;
-    if (z >= threshold) { el.classList.add('visible'); }
-    else { el.classList.remove('visible'); }
-  });
-}
-map.on('zoomend', updateLabels);
-map.whenReady(updateLabels);
-
-// — Sidebar List —
-function buildList(filter) {
-  const list = document.getElementById('locationList');
-  list.innerHTML = '';
-  const filtered = filter === 'all' ? LOCATIONS : LOCATIONS.filter(l => l.filter === filter);
-  filtered.forEach(loc => {
-    const c = COLORS[loc.color];
-    const item = document.createElement('div');
-    item.className = 'location-item';
-    item.id = `item-${loc.id}`;
-    item.dataset.color = loc.color;
-    item.innerHTML = `
-      <div class="loc-tag"><span class="loc-tag-dot" style="background:${c.hex}"></span><span style="color:${c.dim}">${loc.tag}</span></div>
-      <div class="loc-name">${loc.name}</div>
-      <div class="loc-excerpt">${loc.excerpt}</div>
-    `;
-    item.addEventListener('click', () => openDetail(loc));
-    list.appendChild(item);
-  });
-}
-buildList('all');
-
-// — Filter Buttons —
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeFilter = btn.dataset.filter;
-    buildList(activeFilter);
-    closeDetail();
-
-    LOCATIONS.forEach(loc => {
-      if (activeFilter === 'all' || loc.filter === activeFilter) {
-        markers[loc.id].addTo(map);
-        labels[loc.id].addTo(map);
-      } else {
-        map.removeLayer(markers[loc.id]);
-        map.removeLayer(labels[loc.id]);
-      }
+/* ============ GOOGLE PHOTOREALISTIC TILES ============ */
+var tilesReady=false;
+function loadCity(){
+  Cesium.GoogleMaps.defaultApiKey=GMAPS_KEY;
+  Cesium.createGooglePhotorealistic3DTileset()
+    .then(function(ts){
+      ts.maximumScreenSpaceError=14;
+      scene.primitives.add(ts);
+      tilesReady=true;
+      var en=document.getElementById('enter');
+      en.disabled=false;
+      document.getElementById('loadnote').textContent='';
+    })
+    .catch(function(e){
+      document.getElementById('keyerr').style.display='flex';
+      document.getElementById('loadnote').textContent='Map failed to load';
+      console.error(e);
     });
+}
+if(GMAPS_KEY==='PASTE_KEY_HERE'){
+  document.getElementById('keyerr').style.display='flex';
+  document.getElementById('loadnote').textContent='API key not configured';
+}else{loadCity();}
 
-    if (activeFilter === 'baltimore') {
-      map.flyTo([39.295, -76.615], 13, { duration: 1.0 });
-    } else if (activeFilter === 'ocean-city') {
-      map.flyTo([38.345, -75.078], 14, { duration: 1.0 });
-    } else if (activeFilter === 'snow-hill') {
-      map.flyTo([38.176, -75.390], 15, { duration: 1.0 });
-    } else {
-      map.flyTo([39.29, -76.615], 13, { duration: 1.0 });
+/* ============ BEACONS ============ */
+function glowCanvas(){
+  var c=document.createElement('canvas');c.width=c.height=128;
+  var g=c.getContext('2d');
+  var r=g.createRadialGradient(64,64,3,64,64,62);
+  r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(0.28,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=r;g.fillRect(0,0,128,128);return c;}
+var GLOW=glowCanvas();
+var state={selected:-1,hover:-1,area:'ALL',chars:{shawn:true,han:true,jordan:true,inst:true}};
+var beacons=[];
+var t0=performance.now();
+LOCS.forEach(function(L){
+  var col=Cesium.Color.fromCssColorString(CHAR[L.w].css);
+  var groundH=L.h;
+  var colLen=240;
+  var ent=viewer.entities.add({
+    id:'loc_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,groundH+colLen/2),
+    cylinder:{
+      length:colLen,topRadius:1.5,bottomRadius:10,numberOfVerticalLines:0,outline:false,
+      material:new Cesium.ColorMaterialProperty(new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        var sel=state.selected===L.id;
+        var p=0.5+0.5*Math.sin(t*1.8+L.id*0.61);
+        return col.withAlpha(sel?0.34:0.10+0.07*p);
+      },false))
     }
   });
+  var glow=viewer.entities.add({
+    id:'glow_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,groundH+10),
+    billboard:{
+      image:GLOW,color:col,
+      scale:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        var sel=state.selected===L.id;
+        var hov=state.hover===L.id;
+        var p=0.5+0.5*Math.sin(t*1.8+L.id*0.61);
+        return (sel?1.5:hov?1.25:0.85+0.18*p);
+      },false),
+      scaleByDistance:new Cesium.NearFarScalar(600,0.62,24000,0.2),
+      disableDepthTestDistance:Number.POSITIVE_INFINITY,
+      verticalOrigin:Cesium.VerticalOrigin.CENTER
+    }
+  });
+  var ring=viewer.entities.add({
+    id:'ring_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,0),
+    ellipse:{
+      semiMajorAxis:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        return 26+5*Math.sin(t*1.8+L.id*0.61);
+      },false),
+      semiMinorAxis:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        return 26+5*Math.sin(t*1.8+L.id*0.61);
+      },false),
+      material:col.withAlpha(0.16),
+      classificationType:Cesium.ClassificationType.CESIUM_3D_TILE
+    }
+  });
+  beacons.push({L:L,ent:ent,glow:glow,ring:ring});
 });
 
-document.getElementById('detailClose').addEventListener('click', closeDetail);
-document.getElementById('detailOverlay').addEventListener('click', closeDetail);
-map.on('click', () => { closeDetail(); collapseSidebar(); });
-
-// — Mobile Sheet Toggle —
-const sidebar = document.getElementById('sidebar');
-const sheetHandle = document.getElementById('sheetHandle');
-const sheetLabel = document.getElementById('sheetLabel');
-
-function collapseSidebar() {
-  if (window.innerWidth <= 768) {
-    sidebar.classList.add('collapsed');
-    sheetLabel.textContent = 'Locations';
-  }
-}
-
-function expandSidebar() {
-  sidebar.classList.remove('collapsed');
-  sheetLabel.textContent = '';
-}
-
-function toggleSheet() {
-  if (sidebar.classList.contains('collapsed')) {
-    expandSidebar();
-  } else {
-    collapseSidebar();
-  }
-}
-
-sheetHandle.addEventListener('click', toggleSheet);
-sheetLabel.addEventListener('click', toggleSheet);
-
-// On mobile, collapse sidebar after selecting a location
-const origOpenDetail = openDetail;
-openDetail = function(loc) {
-  origOpenDetail(loc);
-  if (window.innerWidth <= 768) collapseSidebar();
-};
-
-// On desktop, remove collapsed class
-function handleResize() {
-  if (window.innerWidth > 768) {
-    sidebar.classList.remove('collapsed');
-  } else if (!sidebar.classList.contains('collapsed')) {
-    // Starting on mobile — default to collapsed
-  }
-}
-window.addEventListener('resize', handleResize);
-
-// Init: if mobile, start collapsed
-if (window.innerWidth <= 768) {
-  sidebar.classList.add('collapsed');
-}
-
-// ——— Mobile FAB Menu ———
-const mobileFab = document.getElementById('mobileFab');
-const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-const mobileMenuPanel = document.getElementById('mobileMenuPanel');
-const mobileMenuClose = document.getElementById('mobileMenuClose');
-const mobileLocationList = document.getElementById('mobileLocationList');
-let mobileFilter = 'all';
-
-function openMobileMenu() {
-  mobileMenuOverlay.classList.add('open');
-  mobileMenuPanel.classList.add('open');
-  mobileFab.style.display = 'none';
-}
-
-function closeMobileMenu() {
-  mobileMenuOverlay.classList.remove('open');
-  mobileMenuPanel.classList.remove('open');
-  mobileFab.style.display = '';
-}
-
-function buildMobileList(filter) {
-  mobileLocationList.innerHTML = '';
-  const filtered = filter === 'all' ? LOCATIONS : LOCATIONS.filter(l => l.filter === filter);
-  filtered.forEach(loc => {
-    const c = COLORS[loc.color];
-    const item = document.createElement('div');
-    item.className = 'mobile-loc-item';
-    item.innerHTML = `
-      <div class="mobile-loc-dot" style="background:${c.hex}"></div>
-      <div class="mobile-loc-info">
-        <div class="mobile-loc-name">${loc.name}</div>
-        <div class="mobile-loc-sub">${loc.excerpt}</div>
-      </div>
-      <div class="mobile-loc-arrow">&rsaquo;</div>
-    `;
-    item.addEventListener('click', () => {
-      closeMobileMenu();
-      openDetail(loc);
+/* sample real terrain heights once tiles are in, re-seat beacons */
+function reseat(){
+  if(!tilesReady){setTimeout(reseat,1500);return;}
+  var cartos=LOCS.map(function(L){return Cesium.Cartographic.fromDegrees(L.lng,L.lat);});
+  scene.sampleHeightMostDetailed ? scene.sampleHeightMostDetailed(cartos.slice()).then(apply).catch(function(){}) : null;
+  function apply(updated){
+    updated.forEach(function(c,i){
+      if(!c||!Cesium.defined(c.height))return;
+      var L=LOCS[i];var h=Math.max(0,c.height);L.h=h;
+      beacons[i].ent.position=Cesium.Cartesian3.fromDegrees(L.lng,L.lat,h+120);
+      beacons[i].glow.position=Cesium.Cartesian3.fromDegrees(L.lng,L.lat,h+12);
     });
-    mobileLocationList.appendChild(item);
-  });
+  }
+}
+setTimeout(reseat,2500);
+
+/* ============ CAMERA ============ */
+function hpr(hDeg,pDeg,range){return new Cesium.HeadingPitchRange(Cesium.Math.toRadians(hDeg),Cesium.Math.toRadians(pDeg),range);}
+function flyArea(name,dur){
+  var d=dur||3.4;
+  if(name==='BALTIMORE'||name==='ALL'&&false){}
+  if(name==='BALTIMORE'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-76.6105,39.2880,40),900),
+      {duration:d,offset:hpr(322,-26,5600)});
+  }else if(name==='OCEAN CITY'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.1260,38.3430,5),900),
+      {duration:d,offset:hpr(300,-30,16500)});
+  }else if(name==='SNOW HILL'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.3905,38.1760,10),400),
+      {duration:d,offset:hpr(15,-32,2800)});
+  }else{ // ALL — the Chesapeake span
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.95,38.78,0),90000),
+      {duration:d,offset:hpr(330,-44,235000)});
+  }
+}
+function flyLoc(L){
+  var heading=scene.camera.heading;
+  scene.camera.flyToBoundingSphere(
+    new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(L.lng,L.lat,L.h+20),60),
+    {duration:2.6,offset:new Cesium.HeadingPitchRange(heading,Cesium.Math.toRadians(-31),520)});
 }
 
-if (mobileFab) {
-  mobileFab.addEventListener('click', openMobileMenu);
-  mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-  mobileMenuClose.addEventListener('click', closeMobileMenu);
-
-  // Mobile filter buttons
-  document.querySelectorAll('.mobile-filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.mobile-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      mobileFilter = btn.dataset.filter;
-      buildMobileList(mobileFilter);
-
-      // Also update map markers
-      LOCATIONS.forEach(loc => {
-        if (mobileFilter === 'all' || loc.filter === mobileFilter) {
-          markers[loc.id].addTo(map);
-          labels[loc.id].addTo(map);
-        } else {
-          map.removeLayer(markers[loc.id]);
-          map.removeLayer(labels[loc.id]);
-        }
-      });
-
-      if (mobileFilter === 'baltimore') {
-        map.flyTo([39.295, -76.615], 13, { duration: 1.0 });
-      } else if (mobileFilter === 'ocean-city') {
-        map.flyTo([38.345, -75.078], 14, { duration: 1.0 });
-      } else if (mobileFilter === 'snow-hill') {
-        map.flyTo([38.176, -75.390], 15, { duration: 1.0 });
-      } else {
-        map.flyTo([39.29, -76.615], 13, { duration: 1.0 });
-      }
-    });
+/* ============ UI ============ */
+var listEl=document.getElementById('list'),countEl=document.getElementById('count');
+var detail=document.getElementById('detail');
+var tip=document.getElementById('tip'),tipN=document.getElementById('tipN'),tipA=document.getElementById('tipA');
+var cards=[];
+LOCS.forEach(function(L){
+  var c=document.createElement('div');c.className='card';c.dataset.id=L.id;
+  c.innerHTML='<div class="meta"><span class="d" style="background:'+CHAR[L.w].css+'"></span>'+
+    '<span class="area">'+L.a+'</span></div><h3>'+L.n+'</h3><p>'+L.d+'</p>';
+  c.addEventListener('click',function(){select(L.id,true);});
+  listEl.appendChild(c);cards.push(c);
+});
+function visible(L){return (state.area==='ALL'||L.a===state.area)&&state.chars[L.w];}
+function visList(){return LOCS.filter(visible);}
+function refresh(){
+  var n=0;
+  LOCS.forEach(function(L,i){
+    var v=visible(L);if(v)n++;
+    cards[i].style.display=v?'':'none';
+    beacons[i].ent.show=v;beacons[i].glow.show=v;beacons[i].ring.show=v;
   });
-
-  // Build initial mobile list
-  buildMobileList('all');
+  countEl.textContent='Showing '+n+' of '+LOCS.length+' locations';
+  if(state.selected>=0&&!visible(LOCS[state.selected]))closeDetail();
 }
+function select(id,fly){
+  state.selected=id;var L=LOCS[id];
+  cards.forEach(function(c){c.classList.toggle('on',+c.dataset.id===id);});
+  if(cards[id].scrollIntoView)cards[id].scrollIntoView({block:'nearest',behavior:'smooth'});
+  document.getElementById('dArea').textContent=L.a;
+  document.getElementById('dWhoT').textContent=CHAR[L.w].n;
+  document.querySelector('#dWho .d').style.background=CHAR[L.w].css;
+  document.getElementById('dName').textContent=L.n;
+  document.getElementById('dDesc').textContent=L.d;
+  var vl=visList();var pos=vl.indexOf(L)+1;
+  document.getElementById('dIdx').textContent=(pos<10?'0':'')+pos+' / '+(vl.length<10?'0':'')+vl.length;
+  detail.classList.add('show');
+  if(fly)flyLoc(L);
+}
+function closeDetail(){
+  detail.classList.remove('show');
+  cards.forEach(function(c){c.classList.remove('on');});
+  var was=state.selected;state.selected=-1;
+  if(was>=0)flyArea(state.area==='ALL'?LOCS[was].a:state.area,3);
+}
+document.getElementById('closeD').addEventListener('click',closeDetail);
+window.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail();});
+function step(dirn){
+  var vl=visList();if(!vl.length)return;
+  var idx=state.selected>=0?vl.findIndex(function(L){return L.id===state.selected;}):-1;
+  var nx=vl[(idx+dirn+vl.length)%vl.length];select(nx.id,true);}
+document.getElementById('prevL').addEventListener('click',function(){step(-1);});
+document.getElementById('nextL').addEventListener('click',function(){step(1);});
+document.querySelectorAll('#areas .chip').forEach(function(b){
+  b.addEventListener('click',function(){
+    state.area=b.dataset.a;
+    document.querySelectorAll('#areas .chip').forEach(function(x){x.classList.toggle('on',x===b);});
+    refresh();flyArea(state.area,3.6);
+  });});
+document.querySelectorAll('#chars .chip').forEach(function(b){
+  b.addEventListener('click',function(){
+    state.chars[b.dataset.c]=!state.chars[b.dataset.c];
+    b.classList.toggle('on',state.chars[b.dataset.c]);
+    b.classList.toggle('off',!state.chars[b.dataset.c]);
+    refresh();
+  });});
+refresh();
+
+/* ============ PICKING ============ */
+var handler=new Cesium.ScreenSpaceEventHandler(scene.canvas);
+function idFromPick(p){
+  if(!Cesium.defined(p)||!p.id)return -1;
+  var eid=p.id.id||'';
+  var m=String(eid).match(/^(?:loc|glow|ring)_(\d+)$/);
+  return m?+m[1]:-1;
+}
+handler.setInputAction(function(mv){
+  var id=idFromPick(scene.pick(mv.endPosition));
+  if(id>=0&&!visible(LOCS[id]))id=-1;
+  state.hover=id;
+  scene.canvas.style.cursor=id>=0?'pointer':'default';
+  if(id>=0){
+    var L=LOCS[id];
+    tipN.textContent=L.n;tipA.textContent=L.a+' — '+CHAR[L.w].n;
+    var wp=Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene,Cesium.Cartesian3.fromDegrees(L.lng,L.lat,L.h+34));
+    if(wp){tip.style.left=wp.x+'px';tip.style.top=wp.y+'px';tip.style.opacity=1;}
+  }else{tip.style.opacity=0;}
+},Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+handler.setInputAction(function(clk){
+  var id=idFromPick(scene.pick(clk.position));
+  if(id>=0&&visible(LOCS[id]))select(id,true);
+},Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+/* ============ INTRO ============ */
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+scene.camera.setView({
+  destination:Cesium.Cartesian3.fromDegrees(-76.28,39.02,26000),
+  orientation:{heading:Cesium.Math.toRadians(322),pitch:Cesium.Math.toRadians(-16),roll:0}
+});
+document.getElementById('enter').addEventListener('click',function(){
+  document.getElementById('intro').classList.add('gone');
+  flyArea('BALTIMORE',REDUCED?1.2:6.5);
+  setTimeout(function(){var h=document.getElementById('hint');if(h)h.style.opacity=0;},9000);
+});
+window.__V={viewer:viewer,scene:scene,flyArea:flyArea,flyLoc:flyLoc,select:select,LOCS:LOCS,state:state};
+})();
 </script>
 </body>
 </html>
