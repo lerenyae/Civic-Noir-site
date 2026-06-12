@@ -281,8 +281,8 @@ var shoreXZ=SHORE.map(function(p){return ll2(p[0],p[1]);});
   var oc=STAGE['OCEAN CITY'].off;
   var sea=new THREE.Mesh(new THREE.PlaneGeometry(1400,1600),waterMat());
   sea.rotation.x=-Math.PI/2;sea.position.set(oc[0]+760,0.02,oc[1]+0);scene.add(sea);
-  var bay=new THREE.Mesh(new THREE.PlaneGeometry(700,1500),waterMat());
-  bay.rotation.x=-Math.PI/2;bay.position.set(oc[0]-460,0.02,oc[1]+40);scene.add(bay);
+  var bay=new THREE.Mesh(new THREE.PlaneGeometry(300,620),waterMat());
+  bay.rotation.x=-Math.PI/2;bay.position.set(oc[0]-245,0.02,oc[1]+40);scene.add(bay);
 })();
 /* Pocomoke river */
 (function(){
