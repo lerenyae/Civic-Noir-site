@@ -321,7 +321,7 @@ LOCS.forEach(function(L){
         var p=0.5+0.5*Math.sin(t*1.8+L.id*0.61);
         return (sel?1.5:hov?1.25:0.85+0.18*p);
       },false),
-      scaleByDistance:new Cesium.NearFarScalar(900,1.5,300000,0.5),
+      scaleByDistance:new Cesium.NearFarScalar(600,0.62,24000,0.2),
       disableDepthTestDistance:Number.POSITIVE_INFINITY,
       verticalOrigin:Cesium.VerticalOrigin.CENTER
     }
