@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <style>
 :root{
   --gold:#B8963E; --han:#4A8EC2; --jordan:#C44A2A; --inst:#D4CFC4;
@@ -15,8 +17,9 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow:hidden}
-canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab}
-canvas#c.drag{cursor:grabbing}canvas#c.pick{cursor:pointer}
+#cesium{position:fixed;inset:0}
+#cesium .cesium-viewer-bottom{left:auto !important;right:10px;bottom:6px;opacity:.55;filter:grayscale(.4)}
+#cesium .cesium-widget-credits a{color:#9a958a !important}
 
 header{position:fixed;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;
   padding:0 22px;z-index:30;background:linear-gradient(180deg,rgba(7,7,6,.92),rgba(7,7,6,0));pointer-events:none}
@@ -39,7 +42,7 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 .chip:hover{color:var(--text);border-color:rgba(184,150,62,.5)}
 .chip.on{color:var(--gold);border-color:var(--gold)}
 .cchip{display:inline-flex;align-items:center;gap:6px}
-.cchip .d{width:7px;height:7px;border-radius:50%;flex:none;transition:opacity .18s}
+.cchip .d{width:7px;height:7px;border-radius:50%;flex:none}
 .cchip.off{opacity:.32}
 .count{font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;padding:0 0 10px}
 #list{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(184,150,62,.25) transparent}
@@ -52,8 +55,9 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 .card .area{font-size:8.5px;letter-spacing:.28em;color:var(--dim);text-transform:uppercase}
 .card h3{font-family:var(--serif);font-weight:600;font-size:17.5px;color:var(--text);line-height:1.15}
 .card p{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--dim);margin-top:3px;line-height:1.35}
+.note{padding:10px 20px;font-size:9px;letter-spacing:.12em;color:rgba(151,145,127,.6);text-transform:uppercase;border-top:1px solid rgba(151,145,127,.08)}
 
-#detail{position:fixed;right:22px;bottom:22px;width:340px;max-width:calc(100vw - 44px);z-index:26;background:var(--panel);
+#detail{position:fixed;right:22px;bottom:34px;width:340px;max-width:calc(100vw - 44px);z-index:26;background:var(--panel);
   border:1px solid var(--line);padding:18px 20px 14px;transform:translateY(14px);opacity:0;pointer-events:none;transition:all .28s;backdrop-filter:blur(6px)}
 #detail.show{opacity:1;transform:none;pointer-events:auto}
 #detail .meta{display:flex;align-items:center;gap:8px;margin-bottom:7px}
@@ -77,7 +81,6 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 #hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:22;font-size:9.5px;letter-spacing:.26em;
   text-transform:uppercase;color:var(--dim);background:rgba(7,7,6,.6);padding:7px 16px;border:1px solid rgba(151,145,127,.14);
   transition:opacity 1s;pointer-events:none}
-#views{position:fixed;top:64px;right:22px;z-index:23;display:flex;gap:6px}
 
 #intro{position:fixed;inset:0;z-index:60;background:radial-gradient(ellipse at 50% 62%,rgba(20,16,8,.96),rgba(4,4,4,.99) 70%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 1.1s}
@@ -87,13 +90,16 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 #intro .yr{font-size:10px;letter-spacing:.44em;color:var(--dim);text-transform:uppercase;margin-top:20px}
 #enter{margin-top:38px;background:none;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);
   font-size:10px;letter-spacing:.34em;text-transform:uppercase;padding:13px 34px;cursor:pointer;transition:all .25s}
-#enter:hover{background:var(--gold);color:#0a0908}
+#enter:hover:not(:disabled){background:var(--gold);color:#0a0908}
+#enter:disabled{opacity:.45;cursor:wait}
+#loadnote{font-size:9px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-top:16px;min-height:12px}
+#keyerr{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:rgba(5,5,4,.96);text-align:center;padding:30px}
+#keyerr .box{max-width:520px;border:1px solid var(--line);padding:34px 38px;background:var(--panel)}
+#keyerr h3{font-family:var(--serif);font-size:24px;margin-bottom:10px}
+#keyerr p{font-size:12px;color:var(--dim);line-height:1.6}
 #err{position:fixed;left:10px;bottom:8px;z-index:99;color:#c44;font:11px monospace;max-width:60vw;white-space:pre-wrap}
 
-@media (max-width:900px){
-  aside{width:272px}
-  header .mid{display:none}
-}
+@media (max-width:900px){aside{width:272px} header .mid{display:none}}
 @media (max-width:680px){
   aside{top:auto;bottom:0;width:100%;height:44vh;padding-top:0;border-top:1px solid var(--line);border-right:none}
   #detail{right:10px;bottom:calc(44vh + 10px);width:auto;left:10px}
@@ -102,6 +108,7 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 </style>
 </head>
 <body>
+<div id="cesium"></div>
 <header>
   <a class="brand" href="/">LeRenyae Watkins</a>
   <div class="mid"><i>Contempt</i> — The City</div>
@@ -110,9 +117,9 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 
 <aside>
   <div class="side-head">
-    <div class="kicker">Field Map — Interactive 3D</div>
+    <div class="kicker">Field Map — Photoreal 3D</div>
     <h1>The Places<br>That Held Them</h1>
-    <p class="sub">Every location in Contempt. Click a light to fly to it.</p>
+    <p class="sub">Every location in Contempt, on the real city. Click a light to fly to it.</p>
   </div>
   <div class="filters">
     <div class="chiprow" id="areas">
@@ -130,6 +137,7 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
     <div class="count" id="count"></div>
   </div>
   <div id="list"></div>
+  <div class="note">Photoreal imagery renders the city as it stands today.</div>
 </aside>
 
 <div id="detail">
@@ -141,668 +149,245 @@ aside{position:fixed;top:0;left:0;bottom:0;width:324px;z-index:25;background:var
 </div>
 
 <div id="tip"><span class="a" id="tipA"></span><span id="tipN"></span></div>
-<div id="hint">Drag to orbit &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Click a light to place it</div>
+<div id="hint">Drag to move &nbsp;·&nbsp; Right-drag to tilt &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Click a light</div>
 
 <div id="intro">
   <div class="k">Contempt — A Civic Noir Novel</div>
   <h2>The Places<br>That Held Them</h2>
   <div class="yr">Baltimore · 2006</div>
-  <button id="enter">Enter the City</button>
+  <button id="enter" disabled>Enter the City</button>
+  <div id="loadnote">Loading the city…</div>
 </div>
+<div id="keyerr"><div class="box">
+  <h3>The city is unavailable</h3>
+  <p>The photoreal map could not load. This usually means the Google Maps API key is missing, unrestricted for this domain, or over quota. Check the Map Tiles API key in Google Cloud Console.</p>
+</div></div>
 <div id="err"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 window.onerror=function(m,s,l){document.getElementById('err').textContent=m+' @'+l;};
 (function(){
 "use strict";
-/* ================= DATA — locations & copy from lerenyaewatkins.com/the-map ================= */
-var CHAR={shawn:{c:0xB8963E,css:'#B8963E',n:'Shawn'},han:{c:0x4A8EC2,css:'#4A8EC2',n:'Han'},
-          jordan:{c:0xC44A2A,css:'#C44A2A',n:'Jordan'},inst:{c:0xD4CFC4,css:'#D4CFC4',n:'Institutional'}};
+/* ============ KEY ============ */
+var GMAPS_KEY=new URLSearchParams(location.search).get('key')||'PASTE_KEY_HERE';
+
+/* ============ DATA — locations & copy from lerenyaewatkins.com/the-map ============ */
+var CHAR={shawn:{css:'#B8963E',n:'Shawn'},han:{css:'#4A8EC2',n:'Han'},
+          jordan:{css:'#C44A2A',n:'Jordan'},inst:{css:'#D4CFC4',n:'Institutional'}};
 var LOCS=[
- {n:"Mitchell Courthouse Steps",a:"BALTIMORE",w:"shawn",lat:39.2897,lng:-76.6112,d:"Leo collapses at the microphones."},
- {n:"Baltimore City Circuit Court",a:"BALTIMORE",w:"shawn",lat:39.2902,lng:-76.6121,d:"The Moretti trial. Leo’s docket. The room Shawn inherits."},
- {n:"Davidson & Associates",a:"BALTIMORE",w:"shawn",lat:39.2857,lng:-76.6123,d:"Founded October 20, 1982. The name that opened rooms."},
- {n:"North Avenue",a:"BALTIMORE",w:"inst",lat:39.3104,lng:-76.6346,d:"The photograph. Three men who thought process could outpace consequence."},
- {n:"BPD Property Crimes Unit",a:"BALTIMORE",w:"han",lat:39.2897,lng:-76.6044,d:"The paperwork runs on half-memory and habit."},
- {n:"O’Connell’s Boxing — Eutaw St",a:"BALTIMORE",w:"han",lat:39.2976,lng:-76.6224,d:"Where bodies learn the cost of motion."},
- {n:"Red Orchid",a:"BALTIMORE",w:"jordan",lat:39.2875,lng:-76.5866,d:"A name that carries more weight than the building can hold."},
- {n:"Kramer’s Camera Repair",a:"BALTIMORE",w:"jordan",lat:39.3158,lng:-76.6145,d:"Preserving what the eye has already seen."},
- {n:"The Baltimore Sentinel Post",a:"BALTIMORE",w:"jordan",lat:39.2864,lng:-76.6096,d:"Jordan Grey. Pulitzer, Foreign Correspondence, 1996."},
- {n:"Sandtown-Winchester",a:"BALTIMORE",w:"han",lat:39.3092,lng:-76.6417,d:"Eve Franklin drive-by. Han takes two to the vest."},
- {n:"Sinai Hospital",a:"BALTIMORE",w:"inst",lat:39.3372,lng:-76.6612,d:"Where the city sends its damage."},
- {n:"New Harbor Construction Site",a:"BALTIMORE",w:"inst",lat:39.2767,lng:-76.6077,d:"Progress written in steel and concrete against the water."},
- {n:"Charles Emmanuel Dawson Community Center",a:"BALTIMORE",w:"inst",lat:39.3089,lng:-76.6537,d:"Where Garrick was shot. November 14, 2005."},
- {n:"Pinnacle Investments",a:"BALTIMORE",w:"inst",lat:39.2860,lng:-76.6152,d:"The merger that made Shawn’s name. The money that moved without him."},
- {n:"Iron Rail",a:"BALTIMORE",w:"jordan",lat:39.3168,lng:-76.6147,d:"The bar where Baltimore talks to itself after hours."},
- {n:"Frank’s Lotto / Franklin Mini Mart",a:"BALTIMORE",w:"jordan",lat:39.2907,lng:-76.6095,d:"The corner that sees everything and says nothing."},
- {n:"Lexington Market",a:"BALTIMORE",w:"han",lat:39.2917,lng:-76.6207,d:"Knuckles on counters, pigeons bold enough to steal."},
- {n:"City Hall",a:"BALTIMORE",w:"inst",lat:39.2911,lng:-76.6105,d:"Second floor. Close enough to read the signs."},
- {n:"Leo’s Brownstone",a:"BALTIMORE",w:"shawn",lat:39.2810,lng:-76.5910,d:"Same rusting gate. Same warped stoop."},
- {n:"Penn Station",a:"BALTIMORE",w:"inst",lat:39.3072,lng:-76.6155,d:"The city had been fixing it for years."},
- {n:"Domino Sugars",a:"BALTIMORE",w:"inst",lat:39.2722,lng:-76.6019,d:"The red haze over the harbor. First thing you see coming in."},
- {n:"BCBIC — Central Booking",a:"BALTIMORE",w:"han",lat:39.2952,lng:-76.6059,d:"Property: wallet, shoelaces. Not listed: recorder device."},
- {n:"City Archives / DHCD",a:"BALTIMORE",w:"jordan",lat:39.2927,lng:-76.6064,d:"The paper trail starts in the basement."},
- {n:"War Memorial",a:"BALTIMORE",w:"inst",lat:39.2910,lng:-76.6094,d:"Signs punching through umbrellas that weren’t winning."},
- {n:"Elaine Davidson’s Grave",a:"OCEAN CITY",w:"shawn",lat:38.3516,lng:-75.0769,d:"The only piece of Ocean City that ever felt like home."},
- {n:"Azure Horizons Gallery",a:"OCEAN CITY",w:"shawn",lat:38.3270,lng:-75.0835,d:"The parcel that moved on the same day everything else did."},
- {n:"Ocean City Circuit Court",a:"OCEAN CITY",w:"shawn",lat:38.3610,lng:-75.0702,d:"Law enforcement where the water meets jurisdiction."},
- {n:"Worcester District Court",a:"SNOW HILL",w:"shawn",lat:38.1760,lng:-75.3918,d:"Shawn transfers his bar. Bates holds his docket."},
- {n:"Judge Bates Residence",a:"SNOW HILL",w:"shawn",lat:38.1758,lng:-75.3940,d:"Forty-one years in that courthouse."},
- {n:"The Pocomoke River",a:"SNOW HILL",w:"inst",lat:38.1730,lng:-75.3852,d:"The water that knows no judgment."}
+ {n:"Mitchell Courthouse Steps",a:"BALTIMORE",w:"shawn",lat:39.28995,lng:-76.61120,d:"Leo collapses at the microphones."},
+ {n:"Baltimore City Circuit Court",a:"BALTIMORE",w:"shawn",lat:39.29010,lng:-76.61155,d:"The Moretti trial. Leo’s docket. The room Shawn inherits."},
+ {n:"Davidson & Associates",a:"BALTIMORE",w:"shawn",lat:39.28570,lng:-76.61230,d:"Founded October 20, 1982. The name that opened rooms."},
+ {n:"North Avenue",a:"BALTIMORE",w:"inst",lat:39.31040,lng:-76.63460,d:"The photograph. Three men who thought process could outpace consequence."},
+ {n:"BPD Property Crimes Unit",a:"BALTIMORE",w:"han",lat:39.28970,lng:-76.60440,d:"The paperwork runs on half-memory and habit."},
+ {n:"O’Connell’s Boxing — Eutaw St",a:"BALTIMORE",w:"han",lat:39.29760,lng:-76.62240,d:"Where bodies learn the cost of motion."},
+ {n:"Red Orchid",a:"BALTIMORE",w:"jordan",lat:39.28750,lng:-76.58660,d:"A name that carries more weight than the building can hold."},
+ {n:"Kramer’s Camera Repair",a:"BALTIMORE",w:"jordan",lat:39.31580,lng:-76.61450,d:"Preserving what the eye has already seen."},
+ {n:"The Baltimore Sentinel Post",a:"BALTIMORE",w:"jordan",lat:39.28640,lng:-76.60960,d:"Jordan Grey. Pulitzer, Foreign Correspondence, 1996."},
+ {n:"Sandtown-Winchester",a:"BALTIMORE",w:"han",lat:39.30920,lng:-76.64170,d:"Eve Franklin drive-by. Han takes two to the vest."},
+ {n:"Sinai Hospital",a:"BALTIMORE",w:"inst",lat:39.35260,lng:-76.66340,d:"Where the city sends its damage."},
+ {n:"New Harbor Construction Site",a:"BALTIMORE",w:"inst",lat:39.27670,lng:-76.60770,d:"Progress written in steel and concrete against the water."},
+ {n:"Charles Emmanuel Dawson Community Center",a:"BALTIMORE",w:"inst",lat:39.30890,lng:-76.65370,d:"Where Garrick was shot. November 14, 2005."},
+ {n:"Pinnacle Investments",a:"BALTIMORE",w:"inst",lat:39.28600,lng:-76.61520,d:"The merger that made Shawn’s name. The money that moved without him."},
+ {n:"Iron Rail",a:"BALTIMORE",w:"jordan",lat:39.31680,lng:-76.61470,d:"The bar where Baltimore talks to itself after hours."},
+ {n:"Frank’s Lotto / Franklin Mini Mart",a:"BALTIMORE",w:"jordan",lat:39.29070,lng:-76.60950,d:"The corner that sees everything and says nothing."},
+ {n:"Lexington Market",a:"BALTIMORE",w:"han",lat:39.29170,lng:-76.62070,d:"Knuckles on counters, pigeons bold enough to steal."},
+ {n:"City Hall",a:"BALTIMORE",w:"inst",lat:39.29110,lng:-76.61050,d:"Second floor. Close enough to read the signs."},
+ {n:"Leo’s Brownstone",a:"BALTIMORE",w:"shawn",lat:39.28100,lng:-76.59100,d:"Same rusting gate. Same warped stoop."},
+ {n:"Penn Station",a:"BALTIMORE",w:"inst",lat:39.30720,lng:-76.61550,d:"The city had been fixing it for years."},
+ {n:"Domino Sugars",a:"BALTIMORE",w:"inst",lat:39.27220,lng:-76.60190,d:"The red haze over the harbor. First thing you see coming in."},
+ {n:"BCBIC — Central Booking",a:"BALTIMORE",w:"han",lat:39.29520,lng:-76.60590,d:"Property: wallet, shoelaces. Not listed: recorder device."},
+ {n:"City Archives / DHCD",a:"BALTIMORE",w:"jordan",lat:39.29270,lng:-76.60640,d:"The paper trail starts in the basement."},
+ {n:"War Memorial",a:"BALTIMORE",w:"inst",lat:39.29100,lng:-76.60940,d:"Signs punching through umbrellas that weren’t winning."},
+ {n:"Elaine Davidson’s Grave",a:"OCEAN CITY",w:"shawn",lat:38.35160,lng:-75.07690,d:"The only piece of Ocean City that ever felt like home."},
+ {n:"Azure Horizons Gallery",a:"OCEAN CITY",w:"shawn",lat:38.32700,lng:-75.08350,d:"The parcel that moved on the same day everything else did."},
+ {n:"Ocean City Circuit Court",a:"OCEAN CITY",w:"shawn",lat:38.36100,lng:-75.07020,d:"Law enforcement where the water meets jurisdiction."},
+ {n:"Worcester District Court",a:"SNOW HILL",w:"shawn",lat:38.17600,lng:-75.39180,d:"Shawn transfers his bar. Bates holds his docket."},
+ {n:"Judge Bates Residence",a:"SNOW HILL",w:"shawn",lat:38.17580,lng:-75.39400,d:"Forty-one years in that courthouse."},
+ {n:"The Pocomoke River",a:"SNOW HILL",w:"inst",lat:38.17300,lng:-75.38520,d:"The water that knows no judgment."}
 ];
+LOCS.forEach(function(L,i){L.id=i;L.h=L.a==='BALTIMORE'?12:(L.a==='OCEAN CITY'?3:6);});
 
-/* ================= STAGES & PROJECTION ================= */
-var M=0.1; // scene units per meter
-var STAGE={
-  BALTIMORE:{C:{lat:39.2925,lng:-76.6125},off:[0,0]},
-  "OCEAN CITY":{C:{lat:38.345,lng:-75.078},off:[1500,760]},
-  "SNOW HILL":{C:{lat:38.176,lng:-75.392},off:[860,1180]}
-};
-function P(lat,lng,stage){var s=STAGE[stage];
-  return [ (lng-s.C.lng)*86200*M + s.off[0], -((lat-s.C.lat)*111132*M) + s.off[1] ];}
-LOCS.forEach(function(L,i){L.id=i;var p=P(L.lat,L.lng,L.a);L.x=p[0];L.z=p[1];});
+/* ============ VIEWER ============ */
+var viewer=new Cesium.Viewer('cesium',{
+  animation:false,timeline:false,baseLayerPicker:false,geocoder:false,homeButton:false,
+  sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,
+  selectionIndicator:false,infoBox:false,baseLayer:false,terrainProvider:undefined,
+  requestRenderMode:false,msaaSamples:2
+});
+var scene=viewer.scene;
+scene.globe.show=false;
+scene.skyAtmosphere.show=true;
+scene.skyAtmosphere.brightnessShift=-0.7;
+scene.skyAtmosphere.saturationShift=-0.25;
+if(scene.skyBox)scene.skyBox.show=false;
+scene.backgroundColor=Cesium.Color.fromCssColorString('#05060a');
+scene.moon&& (scene.moon.show=false);
+scene.sun&&(scene.sun.show=false);
+scene.fog.enabled=true;
+scene.highDynamicRange=true;
+scene.screenSpaceCameraController.minimumZoomDistance=55;
+scene.screenSpaceCameraController.maximumZoomDistance=900000;
+viewer.resolutionScale=Math.min(window.devicePixelRatio,2);
 
-/* ================= RENDERER / SCENE ================= */
-var canvas=document.createElement('canvas');canvas.id='c';document.body.insertBefore(canvas,document.body.firstChild);
-var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(innerWidth,innerHeight);
-renderer.outputEncoding=THREE.sRGBEncoding;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.06;
-renderer.setClearColor(0x05060a);
-var scene=new THREE.Scene();
-scene.fog=new THREE.FogExp2(0x05060a,0.00055);
-var camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,1,6000);
-camera.position.set(420,560,980);
-var controls=new THREE.OrbitControls(camera,canvas);
-controls.enableDamping=true;controls.dampingFactor=0.06;
-controls.minDistance=14;controls.maxDistance=1900;
-controls.maxPolarAngle=Math.PI*0.468;controls.target.set(0,0,40);
-controls.enablePan=true;controls.screenSpacePanning=false;
-
-scene.add(new THREE.HemisphereLight(0x141a28,0x050504,0.62));
-var moon=new THREE.DirectionalLight(0x8fa5cf,0.26);moon.position.set(300,420,-260);scene.add(moon);
-var amb=new THREE.AmbientLight(0x14130f,0.5);scene.add(amb);
-
-/* ================= HELPERS ================= */
-function glowTex(stops){var c=document.createElement('canvas');c.width=c.height=128;var g=c.getContext('2d');
-  var r=g.createRadialGradient(64,64,2,64,64,62);
-  (stops||[[0,'rgba(255,255,255,1)'],[0.25,'rgba(255,255,255,.55)'],[1,'rgba(255,255,255,0)']])
-   .forEach(function(s){r.addColorStop(s[0],s[1]);});
-  g.fillStyle=r;g.fillRect(0,0,128,128);var t=new THREE.CanvasTexture(c);return t;}
-var TEX_GLOW=glowTex();
-function sprite(color,scale,op){var m=new THREE.SpriteMaterial({map:TEX_GLOW,color:color,transparent:true,
-  opacity:op==null?0.8:op,blending:THREE.AdditiveBlending,depthWrite:false,fog:false});
-  var s=new THREE.Sprite(m);s.scale.set(scale,scale,1);return s;}
-function inPoly(x,z,poly){var inside=false;
-  for(var i=0,j=poly.length-1;i<poly.length;j=i++){
-    var xi=poly[i][0],zi=poly[i][1],xj=poly[j][0],zj=poly[j][1];
-    if(((zi>z)!=(zj>z))&&(x<(xj-xi)*(z-zi)/(zj-zi)+xi))inside=!inside;}
-  return inside;}
-function ll2(lat,lng){return P(lat,lng,'BALTIMORE');}
-
-/* ================= GROUND ================= */
-var ground=new THREE.Mesh(new THREE.PlaneGeometry(9000,9000),
-  new THREE.MeshLambertMaterial({color:0x0a0a09}));
-ground.rotation.x=-Math.PI/2;ground.position.y=-0.05;scene.add(ground);
-
-/* ================= WATER ================= */
-var waterUniforms={uTime:{value:0}};
-function waterMat(){return new THREE.ShaderMaterial({
-  uniforms:waterUniforms,transparent:false,fog:false,
-  vertexShader:"varying vec3 vW;void main(){vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}",
-  fragmentShader:"uniform float uTime;varying vec3 vW;\n"+
-   "void main(){float t=uTime;\n"+
-   " float s=sin(vW.x*0.55+t*0.9)+sin(vW.z*0.85-t*0.6)+sin((vW.x+vW.z)*0.23+t*0.35);\n"+
-   " float s2=sin(vW.x*2.1-t*1.3)*sin(vW.z*1.7+t*1.1);\n"+
-   " vec3 base=vec3(0.012,0.030,0.048);\n"+
-   " vec3 col=base+vec3(0.05,0.075,0.10)*(0.5+0.5*s/3.0)*0.45+vec3(0.10,0.12,0.14)*max(0.0,s2)*0.18;\n"+
-   " float spec=pow(max(0.0,sin(vW.x*0.9+vW.z*0.6+t*1.4)*sin(vW.z*1.2-t)),24.0);\n"+
-   " col+=vec3(0.45,0.38,0.22)*spec*0.5;\n"+
-   " float d=length(vW.xz-cameraPosition.xz);float f=1.0-exp(-pow(d*0.00055,2.0));\n"+
-   " col=mix(col,vec3(0.02,0.024,0.04),f);\n"+
-   " gl_FragColor=vec4(col,1.0);}"
-});}
-var SHORE=[ [39.2872,-76.6132],[39.2853,-76.6128],[39.2838,-76.6110],[39.2833,-76.6075],
- [39.2810,-76.6079],[39.2795,-76.6049],[39.2762,-76.6043],[39.2735,-76.6030],[39.2712,-76.6034],
- [39.2700,-76.6000],[39.2660,-76.5940],[39.2600,-76.5700],[39.2560,-76.5560],
- [39.2780,-76.5560],[39.2800,-76.5720],[39.2792,-76.5840],[39.2798,-76.5900],
- [39.2832,-76.5950],[39.2828,-76.5985],[39.2842,-76.6005],[39.2838,-76.6040],
- [39.2858,-76.6060],[39.2850,-76.6090],[39.2862,-76.6098] ];
-var shoreXZ=SHORE.map(function(p){return ll2(p[0],p[1]);});
-(function(){var sh=new THREE.Shape();
-  shoreXZ.forEach(function(p,i){ if(i===0)sh.moveTo(p[0],-p[1]); else sh.lineTo(p[0],-p[1]); });
-  var g=new THREE.ShapeGeometry(sh);g.rotateX(-Math.PI/2);
-  var m=new THREE.Mesh(g,waterMat());m.position.y=0.02;scene.add(m);})();
-/* Atlantic + bay around Ocean City stage */
-(function(){
-  var oc=STAGE['OCEAN CITY'].off;
-  var sea=new THREE.Mesh(new THREE.PlaneGeometry(1400,1600),waterMat());
-  sea.rotation.x=-Math.PI/2;sea.position.set(oc[0]+760,0.02,oc[1]+0);scene.add(sea);
-  var bay=new THREE.Mesh(new THREE.PlaneGeometry(300,620),waterMat());
-  bay.rotation.x=-Math.PI/2;bay.position.set(oc[0]-245,0.02,oc[1]+40);scene.add(bay);
-})();
-/* Pocomoke river */
-(function(){
-  var pts=[[38.1690,-75.3990],[38.1715,-75.3920],[38.1730,-75.3852],[38.1758,-75.3782],[38.1790,-75.3720]];
-  var xz=pts.map(function(p){return P(p[0],p[1],'SNOW HILL');});
-  var mat=waterMat();
-  for(var i=0;i<xz.length-1;i++){
-    var a=xz[i],b=xz[i+1];var dx=b[0]-a[0],dz=b[1]-a[1];var len=Math.sqrt(dx*dx+dz*dz);
-    var seg=new THREE.Mesh(new THREE.PlaneGeometry(len+4,9),mat);
-    seg.rotation.x=-Math.PI/2;seg.rotation.z=-Math.atan2(dz,dx);
-    seg.position.set((a[0]+b[0])/2,0.02,(a[1]+b[1])/2);scene.add(seg);}
-})();
-
-/* ================= STREETS (real Baltimore grid, simplified) ================= */
-var NS=[ // [lng, latFrom, latTo, width]
- [-76.6155,39.2790,39.3205,2.2], // Charles
- [-76.6140,39.2840,39.3180,1.5], // St Paul
- [-76.6125,39.2830,39.3100,1.6], // Calvert
- [-76.6110,39.2855,39.3000,1.3], // Guilford
- [-76.6100,39.2870,39.2945,1.3], // Holliday
- [-76.6010,39.2810,39.2930,1.6], // President
- [-76.6210,39.2840,39.3105,1.6], // Eutaw
- [-76.6190,39.2840,39.3125,1.5], // Howard
- [-76.6225,39.2845,39.3005,1.4], // Paca
- [-76.6240,39.2850,39.2985,1.3], // Greene
- [-76.6290,39.2815,39.3110,2.4], // MLK
- [-76.5930,39.2805,39.3025,1.8], // Broadway
- [-76.5980,39.2810,39.2965,1.3], // Caroline
- [-76.5870,39.2810,39.2985,1.3], // Wolfe
- [-76.6460,39.2950,39.3155,1.5], // Fulton
- [-76.6420,39.2900,39.3155,1.4]  // Monroe
-];
-var EW=[ // [lat, lngFrom, lngTo, width]
- [39.2862,-76.6400,-76.5900,2.2], // Pratt
- [39.2876,-76.6380,-76.5920,1.6], // Lombard
- [39.2896,-76.6450,-76.5850,1.9], // Baltimore St
- [39.2902,-76.6450,-76.5850,1.5], // Fayette
- [39.2917,-76.6400,-76.6000,1.4], // Lexington
- [39.2930,-76.6380,-76.6020,1.3], // Saratoga
- [39.2945,-76.6380,-76.6020,1.3], // Mulberry
- [39.2952,-76.6380,-76.6020,1.4], // Franklin
- [39.2990,-76.6360,-76.5980,1.4], // Madison
- [39.3000,-76.6340,-76.5960,1.3], // Monument
- [39.3045,-76.6320,-76.6050,1.3], // Eager
- [39.3110,-76.6560,-76.5850,2.4], // North Ave
- [39.2853,-76.6000,-76.5800,1.5], // Eastern
- [39.2837,-76.6000,-76.5820,1.3], // Fleet
- [39.3370,-76.6760,-76.6400,2.0]  // Northern Pkwy (Sinai)
-];
-var DIAG=[ // polylines [[lat,lng]...] ,width
- [[[39.2899,-76.6094],[39.2960,-76.6040],[39.3025,-76.5950]],1.7],            // Gay St
- [[[39.2965,-76.6235],[39.3040,-76.6310],[39.3110,-76.6385],[39.3165,-76.6450]],1.8], // Pennsylvania Ave
- [[[39.2800,-76.6085],[39.2772,-76.6062],[39.2745,-76.6040],[39.2722,-76.6030]],1.6], // Key Hwy
- [[[39.3110,-76.6520],[39.3215,-76.6560],[39.3300,-76.6595],[39.3372,-76.6620]],1.7], // Park Heights to Sinai
- [[[39.3072,-76.6155],[39.3110,-76.6160]],1.4] // Charles ext to North
-];
-var streetSegs=[];
-NS.forEach(function(s){var a=ll2(s[1],s[0]),b=ll2(s[2],s[0]);streetSegs.push({a:a,b:b,w:s[3]});});
-EW.forEach(function(s){var a=ll2(s[0],s[1]),b=ll2(s[0],s[2]);streetSegs.push({a:a,b:b,w:s[3]});});
-DIAG.forEach(function(d){var pts=d[0].map(function(p){return ll2(p[0],p[1]);});
-  for(var i=0;i<pts.length-1;i++)streetSegs.push({a:pts[i],b:pts[i+1],w:d[1]});});
-/* OC + Snow Hill streets */
-(function(){
-  function PP(lat,lng,st){return P(lat,lng,st);}
-  var cs=[[38.318,-75.0760],[38.366,-75.0760]];
-  streetSegs.push({a:PP(cs[0][0],cs[0][1],'OCEAN CITY'),b:PP(cs[1][0],cs[1][1],'OCEAN CITY'),w:2.0});
-  for(var lt=38.320;lt<=38.362;lt+=0.006)
-    streetSegs.push({a:PP(lt,-75.0900,'OCEAN CITY'),b:PP(lt,-75.0705,'OCEAN CITY'),w:0.9});
-  [[38.1773,-75.4010,38.1773,-75.3830,1.5],[38.1760,-75.4000,38.1760,-75.3840,1.2],
-   [38.1786,-75.3990,38.1786,-75.3850,1.0]].forEach(function(s){
-    streetSegs.push({a:PP(s[0],s[1],'SNOW HILL'),b:PP(s[2],s[3],'SNOW HILL'),w:s[4]});});
-  [[-75.3940],[-75.3905],[-75.3870]].forEach(function(g){
-    streetSegs.push({a:PP(38.1730,g[0],'SNOW HILL'),b:PP(38.1800,g[0],'SNOW HILL'),w:1.0});});
-})();
-(function(){
-  var geo=new THREE.BoxGeometry(1,1,1);
-  var mat=new THREE.MeshLambertMaterial({color:0x191917});
-  var im=new THREE.InstancedMesh(geo,mat,streetSegs.length);
-  var m4=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler(),sc=new THREE.Vector3(),pv=new THREE.Vector3();
-  streetSegs.forEach(function(s,i){
-    var dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1];var len=Math.sqrt(dx*dx+dz*dz);
-    e.set(0,-Math.atan2(dz,dx),0);q.setFromEuler(e);
-    pv.set((s.a[0]+s.b[0])/2,0.03,(s.a[1]+s.b[1])/2);sc.set(len,0.06,s.w);
-    m4.compose(pv,q,sc);im.setMatrixAt(i,m4);});
-  scene.add(im);
-})();
-
-/* ================= STREETLIGHTS ================= */
-(function(){
-  var pts=[];var col=[];var cW=new THREE.Color(0xffb066);
-  streetSegs.forEach(function(s){
-    var dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1];var len=Math.sqrt(dx*dx+dz*dz);
-    if(s.w<1.3)return;
-    var n=Math.floor(len/7);
-    for(var i=1;i<n;i++){var t=i/n;
-      pts.push(s.a[0]+dx*t,1.6,s.a[1]+dz*t);col.push(cW.r,cW.g,cW.b);}
-  });
-  var g=new THREE.BufferGeometry();
-  g.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
-  g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
-  var m=new THREE.PointsMaterial({size:1.05,map:TEX_GLOW,transparent:true,opacity:0.75,
-    vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
-  m.fog=false;
-  scene.add(new THREE.Points(g,m));
-})();
-
-/* ================= BUILDINGS ================= */
-var DTC=ll2(39.2898,-76.6135); // downtown core
-var landmarkSpots=[];           // cleared zones
-function clearSpot(x,z,r){landmarkSpots.push([x,z,r]);}
-LOCS.forEach(function(L){clearSpot(L.x,L.z,5.5);});
-/* extra clearance for modeled landmarks */
-[[39.2890,-76.6204,5],[39.2872,-76.6128,6],[39.2899,-76.6132,5],[39.2867,-76.6105,5],
- [39.2901,-76.6035,4],[39.2843,-76.6195,14],[39.2780,-76.6227,17],[39.2839,-76.6217,13],
- [39.2911,-76.6105,7],[39.2902,-76.6121,9],[39.3072,-76.6155,9],[39.2722,-76.6019,9],
- [39.2917,-76.6207,8],[39.2767,-76.6077,11]].forEach(function(s){
-  var p=ll2(s[0],s[1]);clearSpot(p[0],p[1],s[2]);});
-[[38.3225,-75.0710,9,'OCEAN CITY'],[38.3516,-75.0769,6,'OCEAN CITY']].forEach(function(s){
-  var p=P(s[0],s[1],s[3]);clearSpot(p[0],p[1],s[2]);});
-function nearSpot(x,z){for(var i=0;i<landmarkSpots.length;i++){var s=landmarkSpots[i];
-  var dx=x-s[0],dz=z-s[1];if(dx*dx+dz*dz<s[2]*s[2])return true;}return false;}
-function nearStreet(x,z,pad){
-  for(var i=0;i<streetSegs.length;i++){var s=streetSegs[i];
-    var dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1];var L2=dx*dx+dz*dz;if(L2<1)continue;
-    var t=((x-s.a[0])*dx+(z-s.a[1])*dz)/L2;if(t<0||t>1)continue;
-    var px=s.a[0]+dx*t-x,pz=s.a[1]+dz*t-z;var d2=px*px+pz*pz;var w=s.w/2+pad;
-    if(d2<w*w)return true;}
-  return false;}
-var rng=(function(){var s=42;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646;};})();
-var towers=[],rows=[];
-var winPts=[],winCol=[];
-var WARM=new THREE.Color(0xffc97a),COOL=new THREE.Color(0xb8cfe6);
-function addWindows(x,y0,h,z,sx,sz,density){
-  var floors=Math.max(1,Math.floor(h/3.2));
-  var perFloor=Math.max(1,Math.floor((sx+sz)*0.55*density));
-  for(var f=0;f<floors;f++){
-    var fy=y0+(f+0.5)*(h/floors);
-    for(var k=0;k<perFloor;k++){
-      if(rng()>0.34)continue;
-      var side=Math.floor(rng()*4);var wx,wz;
-      if(side===0){wx=x-sx/2-0.06;wz=z+(rng()-0.5)*sz;}
-      else if(side===1){wx=x+sx/2+0.06;wz=z+(rng()-0.5)*sz;}
-      else if(side===2){wz=z-sz/2-0.06;wx=x+(rng()-0.5)*sx;}
-      else {wz=z+sz/2+0.06;wx=x+(rng()-0.5)*sx;}
-      winPts.push(wx,fy,wz);
-      var c=rng()<0.78?WARM:COOL;var b=0.5+rng()*0.5;
-      winCol.push(c.r*b,c.g*b,c.b*b);
-    }
-  }
-}
-/* Baltimore building field */
-(function(){
-  var landPoly=null; // water check via shoreXZ polygon
-  for(var gx=-460;gx<=460;gx+=9){
-    for(var gz=-560;gz<=420;gz+=9){
-      var x=gx+(rng()-0.5)*5,z=gz+(rng()-0.5)*5;
-      var dx=x-DTC[0],dz=z-DTC[1];var d=Math.sqrt(dx*dx+dz*dz);
-      if(d>430)continue;
-      if(inPoly(x,z,shoreXZ))continue;
-      if(nearStreet(x,z,1.1))continue;
-      if(nearSpot(x,z))continue;
-      var r=rng();
-      if(d<60){ // core towers
-        if(r<0.30)continue;
-        var h=6+Math.pow(rng(),2.2)*30+(d<30?Math.pow(rng(),3)*16:0);
-        var sx=3.6+rng()*3.4,sz=3.6+rng()*3.4;
-        towers.push({x:x,z:z,h:h,sx:sx,sz:sz});
-        addWindows(x,0,h,z,sx,sz,0.9);
-      } else if(d<150){ // midrise
-        if(r<0.45)continue;
-        var h2=2.5+Math.pow(rng(),2)*9;
-        var sx2=3.4+rng()*3.2,sz2=3.4+rng()*3.2;
-        towers.push({x:x,z:z,h:h2,sx:sx2,sz:sz2});
-        if(rng()<0.6)addWindows(x,0,h2,z,sx2,sz2,0.6);
-      } else { // rowhouse belts
-        var keep=0.62*(1-(d-150)/300);
-        if(rng()>keep)continue;
-        var len=5.5+rng()*4,wid=2.0+rng()*0.7,h3=1.7+rng()*1.1;
-        var horiz=rng()<0.5;
-        rows.push({x:x,z:z,h:h3,sx:horiz?len:wid,sz:horiz?wid:len});
-        if(rng()<0.30)addWindows(x,0,h3,z,horiz?len:wid,horiz?wid:len,0.4);
-      }
-    }
-  }
-  /* Sinai cluster + OC + Snow Hill small fields */
-  var sin=ll2(39.3372,-76.6612);
-  for(var i=0;i<46;i++){var ang=rng()*6.283,rr=4+rng()*46;
-    var x2=sin[0]+Math.cos(ang)*rr,z2=sin[1]+Math.sin(ang)*rr;
-    if(nearSpot(x2,z2)||nearStreet(x2,z2,1.0))continue;
-    var h4=1.8+rng()*3.4;rows.push({x:x2,z:z2,h:h4,sx:3+rng()*3,sz:3+rng()*3});
-    if(rng()<0.4)addWindows(x2,0,h4,z2,4,4,0.5);}
-  var oc=STAGE['OCEAN CITY'].off;
-  for(var lt=38.317;lt<=38.366;lt+=0.0028){
-    for(var ln=-75.0890;ln<=-75.0715;ln+=0.0028){
-      if(rng()<0.42)continue;
-      var p2=P(lt+(rng()-0.5)*0.001,ln+(rng()-0.5)*0.001,'OCEAN CITY');
-      if(nearSpot(p2[0],p2[1])||nearStreet(p2[0],p2[1],0.9))continue;
-      var hO=1.6+Math.pow(rng(),2)*7;
-      rows.push({x:p2[0],z:p2[1],h:hO,sx:2.6+rng()*2.6,sz:2.6+rng()*2.6});
-      if(rng()<0.5)addWindows(p2[0],0,hO,p2[1],3,3,0.5);
-    }}
-  for(var lt2=38.1735;lt2<=38.1800;lt2+=0.0016){
-    for(var ln2=-75.3990;ln2<=-75.3845;ln2+=0.0018){
-      if(rng()<0.5)continue;
-      var p3=P(lt2,ln2,'SNOW HILL');
-      if(nearSpot(p3[0],p3[1])||nearStreet(p3[0],p3[1],0.9))continue;
-      var hS=1.4+rng()*1.8;
-      rows.push({x:p3[0],z:p3[1],h:hS,sx:2.2+rng()*2,sz:2.2+rng()*2});
-      if(rng()<0.35)addWindows(p3[0],0,hS,p3[1],3,3,0.4);
-    }}
-  function buildInstanced(list,baseCol){
-    var geo=new THREE.BoxGeometry(1,1,1);geo.translate(0,0.5,0);
-    var mat=new THREE.MeshLambertMaterial({color:0xffffff});
-    var im=new THREE.InstancedMesh(geo,mat,list.length);
-    var m4=new THREE.Matrix4(),c=new THREE.Color();
-    list.forEach(function(b,i){
-      m4.makeScale(b.sx,b.h,b.sz);m4.setPosition(b.x,0,b.z);
-      im.setMatrixAt(i,m4);
-      var v=0.75+rng()*0.5;
-      c.setRGB(baseCol.r*v,baseCol.g*v,baseCol.b*v);
-      im.setColorAt(i,c);
-    });
-    if(im.instanceColor)im.instanceColor.needsUpdate=true;
-    scene.add(im);return im;}
-  buildInstanced(towers,new THREE.Color(0x161512));
-  buildInstanced(rows,new THREE.Color(0x131110));
-  /* window lights */
-  var g=new THREE.BufferGeometry();
-  g.setAttribute('position',new THREE.Float32BufferAttribute(winPts,3));
-  g.setAttribute('color',new THREE.Float32BufferAttribute(winCol,3));
-  var m=new THREE.PointsMaterial({size:0.62,map:TEX_GLOW,transparent:true,opacity:0.85,
-    vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false});
-  m.fog=false;
-  scene.add(new THREE.Points(g,m));
-})();
-
-window.__CITY={scene:scene,camera:camera,renderer:renderer,controls:controls,canvas:canvas,
-  LOCS:LOCS,CHAR:CHAR,STAGE:STAGE,P:P,ll2:ll2,sprite:sprite,TEX_GLOW:TEX_GLOW,
-  waterUniforms:waterUniforms,DTC:DTC,streetSegs:streetSegs};
-})();
-</script>
-<script>
-/* ============ PART 2: landmarks, beacons, cars, UI, camera ============ */
-(function(){
-"use strict";
-var S=window.__CITY;if(!S){document.getElementById('err').textContent='engine failed to init';return;}
-var scene=S.scene,camera=S.camera,renderer=S.renderer,controls=S.controls,canvas=S.canvas,
-    LOCS=S.LOCS,CHAR=S.CHAR,STAGE=S.STAGE,P=S.P,ll2=S.ll2,sprite=S.sprite,TEX_GLOW=S.TEX_GLOW,
-    waterUniforms=S.waterUniforms,DTC=S.DTC;
-var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var darkMat=function(c){return new THREE.MeshLambertMaterial({color:c});};
-var blinkers=[],spinners=[],flickers=[];
-
-/* ================= LANDMARKS ================= */
-function box(x,z,sx,h,sz,c,ry){var m=new THREE.Mesh(new THREE.BoxGeometry(sx,h,sz),darkMat(c));
-  m.position.set(x,h/2,z);if(ry)m.rotation.y=ry;scene.add(m);return m;}
-/* City Hall — dome lit gold */
-(function(){var p=ll2(39.2911,-76.6105);
-  box(p[0],p[1],9,3.4,6.5,0x1b1916);
-  var drum=new THREE.Mesh(new THREE.CylinderGeometry(1.7,1.9,2.6,12),darkMat(0x1d1b16));
-  drum.position.set(p[0],3.4+1.3,p[1]);scene.add(drum);
-  var dome=new THREE.Mesh(new THREE.SphereGeometry(1.7,14,10,0,Math.PI*2,0,Math.PI/2),
-    new THREE.MeshLambertMaterial({color:0x2a2415,emissive:0x6b5418,emissiveIntensity:0.55}));
-  dome.position.set(p[0],6.0,p[1]);scene.add(dome);
-  var s=sprite(0xB8963E,7,0.34);s.position.set(p[0],7.2,p[1]);scene.add(s);
-  var pl=new THREE.PointLight(0xB8963E,0.7,34);pl.position.set(p[0],8,p[1]);scene.add(pl);})();
-/* Mitchell Courthouse — colonnade, institutional uplight */
-(function(){var p=ll2(39.2902,-76.6121);
-  box(p[0],p[1],11,4.6,7.5,0x1c1a17);
-  box(p[0],p[1]+4.2,12.5,0.7,1.6,0x191713); // steps
-  for(var i=0;i<8;i++){var col=new THREE.Mesh(new THREE.CylinderGeometry(0.22,0.24,3.6,8),darkMat(0x262219));
-    col.position.set(p[0]-4.2+i*1.2,1.8,p[1]+3.85);scene.add(col);}
-  var s=sprite(0xD4CFC4,9,0.20);s.position.set(p[0],3.4,p[1]+3.6);scene.add(s);})();
-/* Penn Station — arch glow */
-(function(){var p=ll2(39.3072,-76.6155);
-  box(p[0],p[1],13,3.2,5.5,0x1d1b18);
-  for(var i=-1;i<=1;i++){
-    var a=new THREE.Mesh(new THREE.PlaneGeometry(1.7,2.1),
-      new THREE.MeshBasicMaterial({color:0xffd9a0,transparent:true,opacity:0.8,blending:THREE.AdditiveBlending,fog:false}));
-    a.position.set(p[0]+i*2.6,1.25,p[1]+2.79);scene.add(a);}
-  var s=sprite(0xffd9a0,8,0.3);s.position.set(p[0],2.4,p[1]+3.4);scene.add(s);})();
-/* Domino Sugars — the red neon */
-(function(){var p=ll2(39.2722,-76.6019);
-  box(p[0],p[1],9,5.2,12,0x16130f);
-  box(p[0]-6.2,p[1]+2,3,3.4,7,0x141110);
-  var c=document.createElement('canvas');c.width=1024;c.height=512;var g=c.getContext('2d');
-  g.clearRect(0,0,1024,512);g.fillStyle='#ff2616';g.shadowColor='#ff2616';g.shadowBlur=46;
-  g.font='italic 600 150px Georgia,serif';g.textAlign='center';
-  g.fillText('Domino',512,210);g.font='italic 600 124px Georgia,serif';g.fillText('Sugars',512,372);
-  var tex=new THREE.CanvasTexture(c);
-  var sign=new THREE.Mesh(new THREE.PlaneGeometry(10.5,5.25),
-    new THREE.MeshBasicMaterial({map:tex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,fog:false,side:THREE.DoubleSide}));
-  sign.position.set(p[0],5.2+3.2,p[1]);sign.rotation.y=Math.PI*0.78;scene.add(sign);
-  [[-4.6,0],[4.6,0]].forEach(function(o){var pole=new THREE.Mesh(new THREE.BoxGeometry(0.16,3.4,0.16),darkMat(0x221512));
-    pole.position.set(p[0]+o[0]*Math.cos(Math.PI*0.78-Math.PI/2),5.2+1.7,p[1]+o[0]*Math.sin(Math.PI*0.78-Math.PI/2));scene.add(pole);});
-  var halo=sprite(0xff2212,30,0.30);halo.position.set(p[0],8.6,p[1]);scene.add(halo);
-  var halo2=sprite(0xff2212,60,0.12);halo2.position.set(p[0],8,p[1]);scene.add(halo2);
-  var pl=new THREE.PointLight(0xff2010,1.25,85,2);pl.position.set(p[0],8,p[1]);scene.add(pl);
-  flickers.push({m:sign.material,base:1,amp:0.07,f:7.3});
-  flickers.push({m:halo.material,base:0.30,amp:0.05,f:1.1});})();
-/* Bromo Seltzer tower — blue clock */
-(function(){var p=ll2(39.2890,-76.6204);
-  box(p[0],p[1],2.6,8.8,2.6,0x1c1813);
-  box(p[0],p[1],3.2,1.1,3.2,0x1e1a14);
-  for(var i=0;i<4;i++){var s=sprite(0x9fd8ff,2.6,0.85);
-    var a=i*Math.PI/2;s.position.set(p[0]+Math.sin(a)*1.45,7.7,p[1]+Math.cos(a)*1.45);scene.add(s);}
-  var top=sprite(0x9fd8ff,4,0.22);top.position.set(p[0],9.2,p[1]);scene.add(top);})();
-/* Shot Tower / WTC / Legg Mason / BofA deco / Camden warehouse + parks */
-(function(){var p=ll2(39.2901,-76.6035);
-  var t=new THREE.Mesh(new THREE.CylinderGeometry(0.9,1.25,6.6,12),darkMat(0x231512));
-  t.position.set(p[0],3.3,p[1]);scene.add(t);})();
-(function(){var p=ll2(39.2867,-76.6105);
-  var t=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.9,12.4,5),darkMat(0x181a1d));
-  t.position.set(p[0],6.2,p[1]);scene.add(t);
-  var s=sprite(0xcfe2ff,3,0.3);s.position.set(p[0],12.8,p[1]);scene.add(s);})();
-(function(){var p=ll2(39.2872,-76.6128);
-  box(p[0],p[1],4.6,16,4.6,0x131418);
-  var s=sprite(0xffeecc,3.4,0.4);s.position.set(p[0],16.3,p[1]);scene.add(s);})();
-(function(){var p=ll2(39.2899,-76.6132);
-  box(p[0],p[1],4.2,9.5,4.2,0x1b1710);box(p[0],p[1],3,12.6,3,0x1b1710);box(p[0],p[1],1.8,15,1.8,0x1d1812);
-  var s=sprite(0xffb14e,5,0.5);s.position.set(p[0],15.4,p[1]);scene.add(s);
-  flickers.push({m:s.material,base:0.5,amp:0.08,f:2.2});})();
-(function(){var p=ll2(39.2843,-76.6195);
-  box(p[0],p[1],3.4,3.8,24,0x1f130e); // Camden warehouse
-  var f=ll2(39.2839,-76.6217);
-  var ring=new THREE.Mesh(new THREE.CylinderGeometry(8,8.6,1.5,24,1,true),
-    new THREE.MeshLambertMaterial({color:0x15140f,side:THREE.DoubleSide}));
-  ring.position.set(f[0]-6,0.75,f[1]);scene.add(ring);
-  var m=ll2(39.2780,-76.6227);
-  var ring2=new THREE.Mesh(new THREE.CylinderGeometry(10,11,1.8,24,1,true),
-    new THREE.MeshLambertMaterial({color:0x14130e,side:THREE.DoubleSide}));
-  ring2.position.set(m[0],0.9,m[1]);scene.add(ring2);})();
-/* Lexington Market shed */
-(function(){var p=ll2(39.2917,-76.6207);
-  box(p[0],p[1],9,1.7,4,0x1e1a13);
-  var glow=new THREE.Mesh(new THREE.PlaneGeometry(8.4,0.5),
-    new THREE.MeshBasicMaterial({color:0xffc97a,transparent:true,opacity:0.5,blending:THREE.AdditiveBlending,fog:false}));
-  glow.position.set(p[0],1.0,p[1]+2.02);scene.add(glow);})();
-/* New Harbor Construction — Chesapeake Landing cranes (the antagonist's skyline) */
-(function(){var p=ll2(39.2767,-76.6077);
-  function crane(ox,oz,rot,h,jl){
-    var g=new THREE.Group();g.position.set(p[0]+ox,0,p[1]+oz);g.rotation.y=rot;
-    var mast=new THREE.Mesh(new THREE.BoxGeometry(0.45,h,0.45),darkMat(0x232320));mast.position.y=h/2;g.add(mast);
-    var jib=new THREE.Mesh(new THREE.BoxGeometry(jl,0.3,0.3),darkMat(0x232320));jib.position.set(jl/2-0.8,h,0);g.add(jib);
-    var cj=new THREE.Mesh(new THREE.BoxGeometry(2.6,0.3,0.3),darkMat(0x232320));cj.position.set(-2,h,0);g.add(cj);
-    var wt=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.9,0.7),darkMat(0x1c1c1a));wt.position.set(-3,h-0.5,0);g.add(wt);
-    var tip=sprite(0xff3322,1.8,0.9);tip.position.set(jl-0.9,h+0.2,0);g.add(tip);
-    blinkers.push({m:tip.material,phase:Math.random()*6.28});
-    spinners.push({g:g,speed:(Math.random()*0.5+0.25)*(Math.random()<0.5?-1:1)});
-    scene.add(g);return g;}
-  crane(-4,2,0.4,10,7);crane(3,-3,2.2,12,8);crane(7,4,4.4,8.6,6);
-  /* steel skeletons */
-  [[-1,5,4,4,3],[5,0,5,6,4],[-6,-3,3.4,3,3]].forEach(function(b){
-    var geo=new THREE.BoxGeometry(b[2],b[3],b[4]);
-    var edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo),
-      new THREE.LineBasicMaterial({color:0x3d3b34,transparent:true,opacity:0.8}));
-    edges.position.set(p[0]+b[0],b[3]/2,p[1]+b[1]);scene.add(edges);});
-  var fl=sprite(0xfff3d0,16,0.13);fl.position.set(p[0],1.2,p[1]);scene.add(fl);
-  var pl=new THREE.PointLight(0xffe9b8,0.5,40);pl.position.set(p[0],6,p[1]);scene.add(pl);})();
-/* Ocean City — boardwalk, ferris wheel, grave */
-(function(){
-  var pts=[];for(var lt=38.317;lt<=38.337;lt+=0.0008){var q=P(lt,-75.0706,'OCEAN CITY');pts.push(q[0],0.8,q[1]);}
-  var g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
-  var m=new THREE.PointsMaterial({size:1.0,map:TEX_GLOW,color:0xffd9a0,transparent:true,opacity:0.85,
-    blending:THREE.AdditiveBlending,depthWrite:false});m.fog=false;
-  scene.add(new THREE.Points(g,m));
-  var w=P(38.3225,-75.0712,'OCEAN CITY');
-  var wheel=new THREE.Group();wheel.position.set(w[0],5.2,w[1]);
-  var rimPts=[];var lightPts=[];var lightCol=[];
-  var palette=[0xffd07a,0xff8a7a,0x9fd8ff,0xc9ff9f];
-  for(var i=0;i<48;i++){var a=i/48*6.283;rimPts.push(new THREE.Vector3(Math.cos(a)*4.4,Math.sin(a)*4.4,0));}
-  var rim=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(rimPts),
-    new THREE.LineBasicMaterial({color:0x554a33,transparent:true,opacity:0.8}));wheel.add(rim);
-  for(var i2=0;i2<16;i2++){var a2=i2/16*6.283;
-    lightPts.push(Math.cos(a2)*4.4,Math.sin(a2)*4.4,0);
-    var c=new THREE.Color(palette[i2%4]);lightCol.push(c.r,c.g,c.b);
-    var spoke=new THREE.Line(new THREE.BufferGeometry().setFromPoints(
-      [new THREE.Vector3(0,0,0),new THREE.Vector3(Math.cos(a2)*4.4,Math.sin(a2)*4.4,0)]),
-      new THREE.LineBasicMaterial({color:0x3a3527,transparent:true,opacity:0.6}));wheel.add(spoke);}
-  var lg=new THREE.BufferGeometry();
-  lg.setAttribute('position',new THREE.Float32BufferAttribute(lightPts,3));
-  lg.setAttribute('color',new THREE.Float32BufferAttribute(lightCol,3));
-  var lm=new THREE.PointsMaterial({size:1.3,map:TEX_GLOW,vertexColors:true,transparent:true,opacity:0.95,
-    blending:THREE.AdditiveBlending,depthWrite:false});lm.fog=false;
-  wheel.add(new THREE.Points(lg,lm));
-  var legs=new THREE.Mesh(new THREE.BoxGeometry(0.3,5.2,0.3),darkMat(0x1d1b16));legs.position.y=-2.6;wheel.add(legs);
-  scene.add(wheel);spinners.push({g:wheel,speed:0.10,axis:'z'});
-  var gr=P(38.3516,-75.0769,'OCEAN CITY');
-  var stone=box(gr[0],gr[1],0.5,0.8,0.18,0x2a2722);
-  var tr=new THREE.Mesh(new THREE.ConeGeometry(1.1,3.2,8),darkMat(0x0b110c));tr.position.set(gr[0]-1.6,1.9,gr[1]+0.8);scene.add(tr);
-  var trunk=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.16,0.8,6),darkMat(0x16110c));trunk.position.set(gr[0]-1.6,0.4,gr[1]+0.8);scene.add(trunk);
-  var glow=sprite(0xB8963E,6,0.16);glow.position.set(gr[0],0.6,gr[1]);scene.add(glow);})();
-/* Snow Hill — courthouse cupola, cypress, mist */
-(function(){var p=P(38.1773,-75.3918,'SNOW HILL');
-  box(p[0],p[1],4,2.6,3,0x1e1812);
-  var cup=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.5,1.1,8),darkMat(0x221c14));cup.position.set(p[0],3.2,p[1]);scene.add(cup);
-  var dome=new THREE.Mesh(new THREE.SphereGeometry(0.5,8,6,0,6.283,0,1.57),
-    new THREE.MeshLambertMaterial({color:0x2a2415,emissive:0x584415,emissiveIntensity:0.4}));
-  dome.position.set(p[0],3.75,p[1]);scene.add(dome);
-  var rv=[[38.1700,-75.3960],[38.1718,-75.3905],[38.1732,-75.3856],[38.1752,-75.3800]];
-  rv.forEach(function(q){var w=P(q[0],q[1],'SNOW HILL');
-    for(var i=0;i<3;i++){
-      var c=new THREE.Mesh(new THREE.ConeGeometry(0.7+Math.random()*0.5,2.4+Math.random()*1.6,7),darkMat(0x0a0f0b));
-      c.position.set(w[0]+(Math.random()-0.5)*8,1.4,w[1]+5+(Math.random()-0.5)*4);scene.add(c);}});
-  for(var i2=0;i2<4;i2++){
-    var mist=sprite(0x303b4a,40+i2*16,0.05);
-    mist.position.set(p[0]+(Math.random()-0.5)*60,2.5,p[1]+24+(Math.random()-0.5)*30);
-    scene.add(mist);spinners.push({g:mist,speed:0,drift:0.25+Math.random()*0.3});}})();
-/* distant farm lights between stages */
-(function(){var pts=[],col=[];var c1=new THREE.Color(0x4a5468),c2=new THREE.Color(0x6b5b3a);
-  for(var i=0;i<150;i++){
-    var x=380+Math.random()*1280,z=520+Math.random()*820;
-    var nearStage=false;
-    [[0,0],[1500,760],[860,1180]].forEach(function(o){var dx=x-o[0],dz=z-o[1];
-      if(dx*dx+dz*dz<260*260)nearStage=true;});
-    if(nearStage)continue;
-    pts.push(x,0.5,z);var c=Math.random()<0.5?c1:c2;var b=0.3+Math.random()*0.5;
-    col.push(c.r*b,c.g*b,c.b*b);}
-  var g=new THREE.BufferGeometry();
-  g.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
-  g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
-  var m=new THREE.PointsMaterial({size:1.4,map:TEX_GLOW,vertexColors:true,transparent:true,opacity:0.5,
-    blending:THREE.AdditiveBlending,depthWrite:false});m.fog=false;
-  scene.add(new THREE.Points(g,m));})();
-/* drifting haze sprites over Baltimore */
-var hazes=[];
-for(var hz=0;hz<6;hz++){
-  var h=sprite(0x141a26,260+hz*60,0.05);
-  h.position.set((Math.random()-0.5)*500,26+hz*8,(Math.random()-0.5)*500);
-  scene.add(h);hazes.push({s:h,vx:(Math.random()-0.5)*0.5,vz:(Math.random()-0.5)*0.5});}
-
-/* ================= BEACONS ================= */
-var beacons=[],hitMeshes=[];
-LOCS.forEach(function(L){
-  var col=CHAR[L.w].c;
-  var g=new THREE.Group();g.position.set(L.x,0,L.z);
-  var ring=new THREE.Mesh(new THREE.RingGeometry(1.05,1.5,40),
-    new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0.5,side:THREE.DoubleSide,
-      blending:THREE.AdditiveBlending,depthWrite:false,fog:false}));
-  ring.rotation.x=-Math.PI/2;ring.position.y=0.06;g.add(ring);
-  var colGeo=new THREE.CylinderGeometry(0.14,0.5,21,10,1,true);
-  var colm=new THREE.Mesh(colGeo,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0.13,
-    side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false,fog:false}));
-  colm.position.y=10.5;g.add(colm);
-  var core=new THREE.Mesh(new THREE.SphereGeometry(0.34,12,10),
-    new THREE.MeshBasicMaterial({color:col,fog:false}));
-  core.position.y=0.95;g.add(core);
-  var halo=sprite(col,5,0.7);halo.position.y=1.05;g.add(halo);
-  var hit=new THREE.Mesh(new THREE.SphereGeometry(3.6,8,8),
-    new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));
-  hit.position.y=2;hit.userData.id=L.id;g.add(hit);
-  scene.add(g);hitMeshes.push(hit);
-  beacons.push({g:g,ring:ring,col:colm,core:core,halo:halo,hit:hit,phase:L.id*0.61,active:true,L:L});
+/* dim sun: flat dusk light */
+scene.light=new Cesium.DirectionalLight({
+  direction:new Cesium.Cartesian3(0.35,-0.25,-0.9),
+  color:Cesium.Color.fromCssColorString('#cfd6e6'),
+  intensity:1.55
 });
 
-/* ================= CARS ================= */
-var carPaths=[];
-function pathFromLL(arr){var pts=arr.map(function(p){return ll2(p[0],p[1]);});
-  var segs=[],total=0;
-  for(var i=0;i<pts.length-1;i++){var dx=pts[i+1][0]-pts[i][0],dz=pts[i+1][1]-pts[i][1];
-    var len=Math.sqrt(dx*dx+dz*dz);segs.push({a:pts[i],dx:dx,dz:dz,len:len,start:total});total+=len;}
-  carPaths.push({segs:segs,total:total});}
-pathFromLL([[39.2862,-76.6400],[39.2862,-76.5900]]);
-pathFromLL([[39.2896,-76.6450],[39.2896,-76.5850]]);
-pathFromLL([[39.2790,-76.6155],[39.3205,-76.6155]]);
-pathFromLL([[39.2815,-76.6290],[39.3110,-76.6290]]);
-pathFromLL([[39.3110,-76.6560],[39.3110,-76.5850]]);
-pathFromLL([[39.2805,-76.5930],[39.3025,-76.5930]]);
-pathFromLL([[39.2800,-76.6085],[39.2772,-76.6062],[39.2745,-76.6040],[39.2722,-76.6030]]);
-pathFromLL([[39.2965,-76.6235],[39.3040,-76.6310],[39.3110,-76.6385],[39.3165,-76.6450]]);
-pathFromLL([[39.2840,-76.6210],[39.3105,-76.6210]]);
-var cars=[];var NCAR=26;
-for(var ci=0;ci<NCAR;ci++){
-  var pth=carPaths[ci%carPaths.length];
-  cars.push({p:pth,d:Math.random()*pth.total,v:(6+Math.random()*8)*(REDUCED?0.5:1),dir:Math.random()<0.5?1:-1});}
-var headG=new THREE.BufferGeometry(),tailG=new THREE.BufferGeometry();
-var headArr=new Float32Array(NCAR*3),tailArr=new Float32Array(NCAR*3);
-headG.setAttribute('position',new THREE.BufferAttribute(headArr,3));
-tailG.setAttribute('position',new THREE.BufferAttribute(tailArr,3));
-var headM=new THREE.PointsMaterial({size:0.95,map:TEX_GLOW,color:0xfff2da,transparent:true,opacity:0.95,
-  blending:THREE.AdditiveBlending,depthWrite:false});headM.fog=false;
-var tailM=new THREE.PointsMaterial({size:0.8,map:TEX_GLOW,color:0xff3522,transparent:true,opacity:0.9,
-  blending:THREE.AdditiveBlending,depthWrite:false});tailM.fog=false;
-scene.add(new THREE.Points(headG,headM));scene.add(new THREE.Points(tailG,tailM));
-function carPos(c,out){
-  var d=((c.d%c.p.total)+c.p.total)%c.p.total;
-  for(var i=0;i<c.p.segs.length;i++){var s=c.p.segs[i];
-    if(d>=s.start&&d<=s.start+s.len+0.001){
-      var t=(d-s.start)/s.len;
-      var fx=s.dx/s.len,fz=s.dz/s.len;
-      var px=-fz*0.55*c.dir,pz=fx*0.55*c.dir;
-      out.x=s.a[0]+s.dx*t+px;out.z=s.a[1]+s.dz*t+pz;out.fx=fx*c.dir;out.fz=fz*c.dir;return;}}
-  out.x=0;out.z=0;out.fx=1;out.fz=0;}
+/* ============ NOIR DUSK GRADE ============ */
+scene.postProcessStages.add(new Cesium.PostProcessStage({
+  name:'noir_grade',
+  fragmentShader:
+   'uniform sampler2D colorTexture;\n'+
+   'in vec2 v_textureCoordinates;\n'+
+   'void main(){\n'+
+   '  vec4 c=texture(colorTexture,v_textureCoordinates);\n'+
+   '  vec3 col=c.rgb;\n'+
+   '  float l=dot(col,vec3(0.299,0.587,0.114));\n'+
+   '  col=mix(col,vec3(l),0.22);\n'+                       // desaturate
+   '  col*=vec3(0.46,0.50,0.60);\n'+                        // dusk, cool
+   '  col+=vec3(0.115,0.082,0.030)*pow(l,1.5);\n'+          // sodium-gold lift in highlights
+   '  col=pow(col,vec3(1.06));\n'+                          // slight contrast
+   '  vec2 d=v_textureCoordinates-0.5;\n'+
+   '  col*=1.0-dot(d,d)*0.85;\n'+                           // vignette
+   '  out_FragColor=vec4(col,1.0);\n'+
+   '}'
+}));
 
-/* ================= CAMERA SYSTEM ================= */
-var VIEWS={
-  ALL:{t:[760,0,560],o:[540,430,660]},
-  BALTIMORE:{t:[ll2(39.2890,-76.6105)[0],4,ll2(39.2890,-76.6105)[1]],o:[170,150,235]},
-  "OCEAN CITY":{t:[P(38.341,-75.078,'OCEAN CITY')[0],2,P(38.341,-75.078,'OCEAN CITY')[1]],o:[85,62,105]},
-  "SNOW HILL":{t:[P(38.176,-75.390,'SNOW HILL')[0],1.5,P(38.176,-75.390,'SNOW HILL')[1]],o:[55,42,72]}
-};
-var tween=null;
-function ease(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
-function flyTo(pos,tar,dur){
-  tween={t:0,dur:REDUCED?Math.min(dur*0.3,0.6):dur,
-    p0:camera.position.clone(),p1:new THREE.Vector3(pos[0],pos[1],pos[2]),
-    t0:controls.target.clone(),t1:new THREE.Vector3(tar[0],tar[1],tar[2])};}
-function flyView(name,dur){var v=VIEWS[name];
-  flyTo([v.t[0]+v.o[0],v.t[1]+v.o[1],v.t[2]+v.o[2]],v.t,dur||2.2);}
+/* ============ GOOGLE PHOTOREALISTIC TILES ============ */
+var tilesReady=false;
+function loadCity(){
+  Cesium.GoogleMaps.defaultApiKey=GMAPS_KEY;
+  Cesium.createGooglePhotorealistic3DTileset()
+    .then(function(ts){
+      ts.maximumScreenSpaceError=14;
+      scene.primitives.add(ts);
+      tilesReady=true;
+      var en=document.getElementById('enter');
+      en.disabled=false;
+      document.getElementById('loadnote').textContent='';
+    })
+    .catch(function(e){
+      document.getElementById('keyerr').style.display='flex';
+      document.getElementById('loadnote').textContent='Map failed to load';
+      console.error(e);
+    });
+}
+if(GMAPS_KEY==='PASTE_KEY_HERE'){
+  document.getElementById('keyerr').style.display='flex';
+  document.getElementById('loadnote').textContent='API key not configured';
+}else{loadCity();}
+
+/* ============ BEACONS ============ */
+function glowCanvas(){
+  var c=document.createElement('canvas');c.width=c.height=128;
+  var g=c.getContext('2d');
+  var r=g.createRadialGradient(64,64,3,64,64,62);
+  r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(0.28,'rgba(255,255,255,.5)');r.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=r;g.fillRect(0,0,128,128);return c;}
+var GLOW=glowCanvas();
+var state={selected:-1,hover:-1,area:'ALL',chars:{shawn:true,han:true,jordan:true,inst:true}};
+var beacons=[];
+var t0=performance.now();
+LOCS.forEach(function(L){
+  var col=Cesium.Color.fromCssColorString(CHAR[L.w].css);
+  var groundH=L.h;
+  var colLen=240;
+  var ent=viewer.entities.add({
+    id:'loc_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,groundH+colLen/2),
+    cylinder:{
+      length:colLen,topRadius:1.5,bottomRadius:10,numberOfVerticalLines:0,outline:false,
+      material:new Cesium.ColorMaterialProperty(new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        var sel=state.selected===L.id;
+        var p=0.5+0.5*Math.sin(t*1.8+L.id*0.61);
+        return col.withAlpha(sel?0.34:0.10+0.07*p);
+      },false))
+    }
+  });
+  var glow=viewer.entities.add({
+    id:'glow_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,groundH+10),
+    billboard:{
+      image:GLOW,color:col,
+      scale:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        var sel=state.selected===L.id;
+        var hov=state.hover===L.id;
+        var p=0.5+0.5*Math.sin(t*1.8+L.id*0.61);
+        return (sel?1.5:hov?1.25:0.85+0.18*p);
+      },false),
+      scaleByDistance:new Cesium.NearFarScalar(900,1.5,300000,0.5),
+      disableDepthTestDistance:Number.POSITIVE_INFINITY,
+      verticalOrigin:Cesium.VerticalOrigin.CENTER
+    }
+  });
+  var ring=viewer.entities.add({
+    id:'ring_'+L.id,
+    position:Cesium.Cartesian3.fromDegrees(L.lng,L.lat,0),
+    ellipse:{
+      semiMajorAxis:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        return 26+5*Math.sin(t*1.8+L.id*0.61);
+      },false),
+      semiMinorAxis:new Cesium.CallbackProperty(function(){
+        var t=(performance.now()-t0)/1000;
+        return 26+5*Math.sin(t*1.8+L.id*0.61);
+      },false),
+      material:col.withAlpha(0.16),
+      classificationType:Cesium.ClassificationType.CESIUM_3D_TILE
+    }
+  });
+  beacons.push({L:L,ent:ent,glow:glow,ring:ring});
+});
+
+/* sample real terrain heights once tiles are in, re-seat beacons */
+function reseat(){
+  if(!tilesReady){setTimeout(reseat,1500);return;}
+  var cartos=LOCS.map(function(L){return Cesium.Cartographic.fromDegrees(L.lng,L.lat);});
+  scene.sampleHeightMostDetailed ? scene.sampleHeightMostDetailed(cartos.slice()).then(apply).catch(function(){}) : null;
+  function apply(updated){
+    updated.forEach(function(c,i){
+      if(!c||!Cesium.defined(c.height))return;
+      var L=LOCS[i];var h=Math.max(0,c.height);L.h=h;
+      beacons[i].ent.position=Cesium.Cartesian3.fromDegrees(L.lng,L.lat,h+120);
+      beacons[i].glow.position=Cesium.Cartesian3.fromDegrees(L.lng,L.lat,h+12);
+    });
+  }
+}
+setTimeout(reseat,2500);
+
+/* ============ CAMERA ============ */
+function hpr(hDeg,pDeg,range){return new Cesium.HeadingPitchRange(Cesium.Math.toRadians(hDeg),Cesium.Math.toRadians(pDeg),range);}
+function flyArea(name,dur){
+  var d=dur||3.4;
+  if(name==='BALTIMORE'||name==='ALL'&&false){}
+  if(name==='BALTIMORE'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-76.6105,39.2880,40),900),
+      {duration:d,offset:hpr(322,-26,5600)});
+  }else if(name==='OCEAN CITY'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.0790,38.3420,5),700),
+      {duration:d,offset:hpr(285,-24,7200)});
+  }else if(name==='SNOW HILL'){
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.3905,38.1760,10),400),
+      {duration:d,offset:hpr(15,-32,2800)});
+  }else{ // ALL — the Chesapeake span
+    scene.camera.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(-75.95,38.78,0),90000),
+      {duration:d,offset:hpr(330,-44,235000)});
+  }
+}
 function flyLoc(L){
-  var az=Math.atan2(camera.position.x-controls.target.x,camera.position.z-controls.target.z);
-  var D=30,H=17;
-  var dist=camera.position.distanceTo(new THREE.Vector3(L.x,0,L.z));
-  flyTo([L.x+Math.sin(az)*D,H,L.z+Math.cos(az)*D],[L.x,1.6,L.z],Math.min(1.2+dist*0.0026,4.2));}
-canvas.addEventListener('pointerdown',function(){tween=null;canvas.classList.add('drag');});
-window.addEventListener('pointerup',function(){canvas.classList.remove('drag');});
+  var heading=scene.camera.heading;
+  scene.camera.flyToBoundingSphere(
+    new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(L.lng,L.lat,L.h+20),60),
+    {duration:2.6,offset:new Cesium.HeadingPitchRange(heading,Cesium.Math.toRadians(-31),520)});
+}
 
-/* ================= UI ================= */
-var AREA='ALL';var charsOn={shawn:true,han:true,jordan:true,inst:true};
-var selected=-1;
+/* ============ UI ============ */
 var listEl=document.getElementById('list'),countEl=document.getElementById('count');
 var detail=document.getElementById('detail');
 var tip=document.getElementById('tip'),tipN=document.getElementById('tipN'),tipA=document.getElementById('tipA');
@@ -814,25 +399,22 @@ LOCS.forEach(function(L){
   c.addEventListener('click',function(){select(L.id,true);});
   listEl.appendChild(c);cards.push(c);
 });
-function visible(L){return (AREA==='ALL'||L.a===AREA)&&charsOn[L.w];}
+function visible(L){return (state.area==='ALL'||L.a===state.area)&&state.chars[L.w];}
 function visList(){return LOCS.filter(visible);}
 function refresh(){
   var n=0;
   LOCS.forEach(function(L,i){
     var v=visible(L);if(v)n++;
     cards[i].style.display=v?'':'none';
-    var b=beacons[i];b.active=v;
-    var op=v?1:0.07;
-    b.ring.material.opacity=0.5*op;b.col.material.opacity=0.13*op;
-    b.halo.material.opacity=0.7*op;b.core.material.color.setHex(v?CHAR[L.w].c:0x222222);
+    beacons[i].ent.show=v;beacons[i].glow.show=v;beacons[i].ring.show=v;
   });
   countEl.textContent='Showing '+n+' of '+LOCS.length+' locations';
-  if(selected>=0&&!visible(LOCS[selected]))closeDetail();
+  if(state.selected>=0&&!visible(LOCS[state.selected]))closeDetail();
 }
 function select(id,fly){
-  selected=id;var L=LOCS[id];
+  state.selected=id;var L=LOCS[id];
   cards.forEach(function(c){c.classList.toggle('on',+c.dataset.id===id);});
-  var card=cards[id];if(card.scrollIntoView)card.scrollIntoView({block:'nearest',behavior:'smooth'});
+  if(cards[id].scrollIntoView)cards[id].scrollIntoView({block:'nearest',behavior:'smooth'});
   document.getElementById('dArea').textContent=L.a;
   document.getElementById('dWhoT').textContent=CHAR[L.w].n;
   document.querySelector('#dWho .d').style.background=CHAR[L.w].css;
@@ -846,127 +428,68 @@ function select(id,fly){
 function closeDetail(){
   detail.classList.remove('show');
   cards.forEach(function(c){c.classList.remove('on');});
-  var was=selected;selected=-1;
-  if(was>=0)flyView(AREA==='ALL'?LOCS[was].a:AREA,2.4);
+  var was=state.selected;state.selected=-1;
+  if(was>=0)flyArea(state.area==='ALL'?LOCS[was].a:state.area,3);
 }
 document.getElementById('closeD').addEventListener('click',closeDetail);
 window.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail();});
 function step(dirn){
   var vl=visList();if(!vl.length)return;
-  var idx=selected>=0?vl.findIndex(function(L){return L.id===selected;}):-1;
+  var idx=state.selected>=0?vl.findIndex(function(L){return L.id===state.selected;}):-1;
   var nx=vl[(idx+dirn+vl.length)%vl.length];select(nx.id,true);}
 document.getElementById('prevL').addEventListener('click',function(){step(-1);});
 document.getElementById('nextL').addEventListener('click',function(){step(1);});
 document.querySelectorAll('#areas .chip').forEach(function(b){
   b.addEventListener('click',function(){
-    AREA=b.dataset.a;
+    state.area=b.dataset.a;
     document.querySelectorAll('#areas .chip').forEach(function(x){x.classList.toggle('on',x===b);});
-    refresh();flyView(AREA,2.6);
+    refresh();flyArea(state.area,3.6);
   });});
 document.querySelectorAll('#chars .chip').forEach(function(b){
   b.addEventListener('click',function(){
-    charsOn[b.dataset.c]=!charsOn[b.dataset.c];
-    b.classList.toggle('on',charsOn[b.dataset.c]);
-    b.classList.toggle('off',!charsOn[b.dataset.c]);
+    state.chars[b.dataset.c]=!state.chars[b.dataset.c];
+    b.classList.toggle('on',state.chars[b.dataset.c]);
+    b.classList.toggle('off',!state.chars[b.dataset.c]);
     refresh();
   });});
 refresh();
 
-/* hover + click picking */
-var ray=new THREE.Raycaster();var mouse=new THREE.Vector2();var hoverId=-1;
-var downAt=null;
-canvas.addEventListener('pointermove',function(e){
-  mouse.x=(e.clientX/innerWidth)*2-1;mouse.y=-(e.clientY/innerHeight)*2+1;});
-canvas.addEventListener('pointerdown',function(e){downAt=[e.clientX,e.clientY];});
-canvas.addEventListener('pointerup',function(e){
-  if(!downAt)return;
-  var dx=e.clientX-downAt[0],dy=e.clientY-downAt[1];downAt=null;
-  if(dx*dx+dy*dy>25)return;
-  if(hoverId>=0)select(hoverId,true);});
-var pv=new THREE.Vector3();
-function pick(){
-  ray.setFromCamera(mouse,camera);
-  var hits=ray.intersectObjects(hitMeshes,false);
-  var id=-1;
-  for(var i=0;i<hits.length;i++){var hid=hits[i].object.userData.id;
-    if(beacons[hid].active){id=hid;break;}}
-  if(id!==hoverId){hoverId=id;canvas.classList.toggle('pick',id>=0);
-    tip.style.opacity=id>=0?1:0;
-    if(id>=0){tipN.textContent=LOCS[id].n;tipA.textContent=LOCS[id].a+' — '+CHAR[LOCS[id].w].n;}}
-  if(hoverId>=0){
-    var L=LOCS[hoverId];pv.set(L.x,5.5,L.z);pv.project(camera);
-    tip.style.left=((pv.x+1)/2*innerWidth)+'px';
-    tip.style.top=((-pv.y+1)/2*innerHeight)+'px';}
+/* ============ PICKING ============ */
+var handler=new Cesium.ScreenSpaceEventHandler(scene.canvas);
+function idFromPick(p){
+  if(!Cesium.defined(p)||!p.id)return -1;
+  var eid=p.id.id||'';
+  var m=String(eid).match(/^(?:loc|glow|ring)_(\d+)$/);
+  return m?+m[1]:-1;
 }
+handler.setInputAction(function(mv){
+  var id=idFromPick(scene.pick(mv.endPosition));
+  if(id>=0&&!visible(LOCS[id]))id=-1;
+  state.hover=id;
+  scene.canvas.style.cursor=id>=0?'pointer':'default';
+  if(id>=0){
+    var L=LOCS[id];
+    tipN.textContent=L.n;tipA.textContent=L.a+' — '+CHAR[L.w].n;
+    var wp=Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene,Cesium.Cartesian3.fromDegrees(L.lng,L.lat,L.h+34));
+    if(wp){tip.style.left=wp.x+'px';tip.style.top=wp.y+'px';tip.style.opacity=1;}
+  }else{tip.style.opacity=0;}
+},Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+handler.setInputAction(function(clk){
+  var id=idFromPick(scene.pick(clk.position));
+  if(id>=0&&visible(LOCS[id]))select(id,true);
+},Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
-/* ================= INTRO ================= */
-var intro=document.getElementById('intro');
-var dom=ll2(39.2722,-76.6019);
-camera.position.set(dom[0]+46,7,dom[1]+98);
-controls.target.set(dom[0],6,dom[1]);
-document.getElementById('enter').addEventListener('click',function(){
-  intro.classList.add('gone');
-  flyView('BALTIMORE',REDUCED?0.8:5.2);
-  setTimeout(function(){var h=document.getElementById('hint');if(h)h.style.opacity=0;},8000);
+/* ============ INTRO ============ */
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+scene.camera.setView({
+  destination:Cesium.Cartesian3.fromDegrees(-76.28,39.02,26000),
+  orientation:{heading:Cesium.Math.toRadians(322),pitch:Cesium.Math.toRadians(-16),roll:0}
 });
-
-/* ================= LOOP ================= */
-var clock=new THREE.Clock();var tAcc=0;
-function frame(){
-  requestAnimationFrame(frame);
-  var dt=Math.min(clock.getDelta(),0.05);tAcc+=dt;
-  waterUniforms.uTime.value=tAcc;
-  if(tween){
-    tween.t+=dt/tween.dur;
-    var k=ease(Math.min(tween.t,1));
-    camera.position.lerpVectors(tween.p0,tween.p1,k);
-    controls.target.lerpVectors(tween.t0,tween.t1,k);
-    if(tween.t>=1)tween=null;
-  }
-  controls.update();
-  /* beacons pulse */
-  for(var i=0;i<beacons.length;i++){var b=beacons[i];
-    if(!b.active)continue;
-    var sel=(i===selected);
-    var p=Math.sin(tAcc*1.8+b.phase)*0.5+0.5;
-    var s=1+(REDUCED?0.04:0.14)*p+(sel?0.25:0);
-    b.ring.scale.set(s,s,1);
-    b.ring.material.opacity=(sel?0.85:0.38+0.22*p);
-    b.col.material.opacity=(sel?0.3:0.10+0.06*p);
-    b.halo.material.opacity=(sel?0.95:0.5+0.25*p);
-    var hs=sel?7.5:5;b.halo.scale.set(hs,hs,1);
-    b.col.scale.y=sel?1.35:1;
-  }
-  /* cars */
-  var out={};
-  for(var c=0;c<cars.length;c++){var cr=cars[c];
-    cr.d+=cr.v*dt*cr.dir;carPos(cr,out);
-    headArr[c*3]=out.x+out.fx*0.5;headArr[c*3+1]=0.45;headArr[c*3+2]=out.z+out.fz*0.5;
-    tailArr[c*3]=out.x-out.fx*0.5;tailArr[c*3+1]=0.45;tailArr[c*3+2]=out.z-out.fz*0.5;}
-  headG.attributes.position.needsUpdate=true;
-  tailG.attributes.position.needsUpdate=true;
-  /* blinking crane lights */
-  for(var b2=0;b2<blinkers.length;b2++){
-    blinkers[b2].m.opacity=(Math.sin(tAcc*2.4+blinkers[b2].phase)>0.55)?0.95:0.08;}
-  /* sign flicker */
-  for(var f=0;f<flickers.length;f++){var fl=flickers[f];
-    fl.m.opacity=fl.base+Math.sin(tAcc*fl.f)*fl.amp*Math.sin(tAcc*0.7*fl.f+1.3);}
-  /* spinners (cranes, ferris, mist drift) */
-  for(var sp=0;sp<spinners.length;sp++){var s2=spinners[sp];
-    if(s2.drift){s2.g.position.x+=Math.sin(tAcc*0.1+sp)*s2.drift*dt;continue;}
-    if(s2.axis==='z')s2.g.rotation.z+=s2.speed*dt;else s2.g.rotation.y+=s2.speed*dt;}
-  /* haze drift */
-  for(var hzi=0;hzi<hazes.length;hzi++){var hh=hazes[hzi];
-    hh.s.position.x+=hh.vx*dt;hh.s.position.z+=hh.vz*dt;
-    if(hh.s.position.x>320)hh.s.position.x=-320;if(hh.s.position.x<-320)hh.s.position.x=320;
-    if(hh.s.position.z>320)hh.s.position.z=-320;if(hh.s.position.z<-320)hh.s.position.z=320;}
-  pick();
-  renderer.render(scene,camera);
-}
-frame();
-window.addEventListener('resize',function(){
-  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);});
+document.getElementById('enter').addEventListener('click',function(){
+  document.getElementById('intro').classList.add('gone');
+  flyArea('BALTIMORE',REDUCED?1.2:6.5);
+  setTimeout(function(){var h=document.getElementById('hint');if(h)h.style.opacity=0;},9000);
+});
 })();
 </script>
 </body>
