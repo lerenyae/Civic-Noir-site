@@ -14,7 +14,7 @@ export default function AboutPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-16 items-start">
-            <SectionReveal><div className="relative aspect-[3/4] overflow-hidden border border-bone-300/5 sticky top-28"><Image src={bio.photo} alt={siteConfig.name} fill className="object-cover" /></div></SectionReveal>
+            <SectionReveal><div className="relative aspect-[3/4] overflow-hidden border border-bone-300/5 sticky top-28"><Image src={`${bio.photo}?v=2`} alt={siteConfig.name} fill className="object-cover" /></div></SectionReveal>
             <div>
               <SectionReveal><div className="mb-12">{bio.long.split("\n\n").map((para, i) => (<p key={i} className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6 last:mb-0">{para}</p>))}</div></SectionReveal>
               <SectionReveal delay={100}>
