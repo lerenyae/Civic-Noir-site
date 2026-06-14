@@ -16,7 +16,6 @@ export const books = [{
   synopsis: `Baltimore, 2006. A deputy mayor is dead. An eighteen-year-old sits in county because his fingerprints were on a gun that vanished from his family’s restaurant weeks before the killing. Old prints. New blame.
 
 By the following summer, he’s still waiting to begin the fight for his innocence. The attorney who took his case collapses on the courthouse steps before the trial begins — briefcase in hand, files inside — leaving behind a son who never wanted the name in the first place.
-
 Shawn Davidson spent the last two years trying to outrun Baltimore. Now he’s back holding the file, the firm, and whatever his father was carrying when he went down. The trial doesn’t pause. The docket doesn’t care. And the State already has a version of events it can live with.
 
 Across town, a demoted detective trades favors with the same dirty hands that built the case — because the only way to protect the people he loves is to play the game that can bury them. And in the margins, a journalist chasing a missing trial witness discovers that some stories don’t want exposure.
@@ -32,6 +31,7 @@ No heroes. No clean wins. Just pressure and what it makes people do.`,
 export const reviews = [
   { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8620489243" },
   { quote: "For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
+  { quote: "The story unfolds in such a vivid, cinematic way that it felt like watching a movie play out in my mind.", author: "Lakeasha Gresham", rating: 5, source: "Goodreads", url: "https://www.goodreads.com/review/show/8680547140" },
 ];
 
 export const bio = {
