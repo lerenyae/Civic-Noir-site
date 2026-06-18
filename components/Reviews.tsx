@@ -8,7 +8,7 @@ export default function Reviews() {
           <figure key={i} className="text-center">
             <p className="text-gold/70 text-xs tracking-[0.3em] mb-4" aria-label={`${r.rating} out of 5 stars`}>
               {"★".repeat(r.rating)}
-              <span className="text-bone-300/20">{"★".repeat(5 - r.rating)}</span>
+              
             </p>
             <blockquote className="font-serif text-lg md:text-xl text-bone-300/75 font-light italic leading-relaxed mb-5">
               &ldquo;{r.quote}&rdquo;
