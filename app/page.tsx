@@ -196,6 +196,18 @@ export default function Home() {
         </SectionReveal>
       </section>
 
+      {/* Acknowledgements */}
+      <section className="py-12 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="font-serif text-sm text-bone-300/40 font-light italic">
+            For <span className="text-bone-200">Lauren</span>,{" "}
+            <span className="text-bone-200">Toyia</span>,{" "}
+            <span className="text-bone-200">Monyae</span> &mdash;
+            who never let me build anything halfway.
+          </p>
+        </div>
+      </section>
+
       <Newsletter />
 
       <StickyBar />
