@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_38BWWfVTfhINFR7ADGqhw2ycQOc";
@@ -17,28 +16,8 @@ const DEFAULT_BG = backgrounds["/"];
 const MAX_OPACITY = 0.12;
 
 export default function CityGrid() {
-  const [opacity, setOpacity] = useState(0);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
-      const start = heroHeight * 0.6;
-      const end = heroHeight * 1.2;
-      if (scrollY <= start) setOpacity(0);
-      else if (scrollY >= end) setOpacity(MAX_OPACITY);
-      else setOpacity(((scrollY - start) / (end - start)) * MAX_OPACITY);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   const bg = backgrounds[pathname] || DEFAULT_BG;
-
-  if (opacity === 0) return null;
-
   return (
     <div
       className="fixed inset-0 pointer-events-none z-0"
@@ -47,8 +26,8 @@ export default function CityGrid() {
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        opacity,
-        transition: "opacity 0.3s ease-out",
+        opacity: MAX_OPACITY,
+        transition: "opacity 0.5s ease-out",
       }}
     />
   );
