@@ -2,6 +2,32 @@ export type Post = { slug: string; title: string; category: string; date: string
 
 export const posts: Post[] = [
   {
+    slug: "the-book-is-out",
+    title: "The Book Is Out",
+    category: "Publication Update",
+    date: "June 21, 2026",
+    excerpt: "Contempt is out. Father's Day, like I said it would be. The manuscript is a book now, and a book belongs to whoever's holding it.",
+    content: `Father's Day. Like I said it would be.
+
+Contempt is out. Hardcover, paperback, Kindle. The works. The thing that was fifty-four chapters in a folder eighteen months ago is a book somebody can hold now, and that's the only deadline I ever actually cared about. Not done. Out. There's a difference, and the difference is the reader.
+
+I said in an earlier post that a manuscript in a drawer isn't a book. As of today it's not in the drawer. So I'll keep this short, because the work is supposed to talk now, not me.
+
+Quick accounting, since this page has been a build-in-public log from the start. The book is a deputy mayor shot dead at a community rally, an eighteen-year-old named Antonio Moretti sitting in county on prints from a gun that went missing weeks before the murder, and a trial that was never built to find out what happened, only to settle whose version of it survives. A defense attorney inherits the case off his father's body on the courthouse steps. It's carried across more than one set of eyes, and no single one of them sees the whole machine. That was the point.
+
+A note on the date, because people keep asking if it's a gimmick. It isn't. Fatherhood and legacy are load-bearing in this book. A name handed down, what comes attached to it, what it costs to carry or refuse. Releasing it on Father's Day isn't marketing. It's the book pointing at itself. I've got three kids and I wrote about inheritance for a year and a half. Read it and you'll see why the day fits.
+
+Baltimore. I told you a trip was coming, and it's still coming. I want to stand on Fayette and Calvert with the book finished instead of the manuscript open, walk the blocks the fiction borrowed, check the few details research couldn't hand me. When it happens, you'll read about it here, same as everything else.
+
+That's it. The negotiation in the book happens in a courtroom. This part happens wherever you open it.
+
+And thank you. To everyone who waited, who watched this build in public, who kept asking when. To the readers who came early and told me the truth instead of what I wanted to hear. To my circle, the ones who believed in the work before there was a book to hold. This is out because of you, and I won't forget it.
+
+Thank you.
+
+LeRenyae`,
+  },
+  {
     slug: "the-next-thirty-days",
     title: "The Next Thirty Days",
     category: "Publication Update",
