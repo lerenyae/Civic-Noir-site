@@ -225,16 +225,32 @@ export default function Home() {
         </SectionReveal>
       </section>
 
-      {/* Acknowledgements */}
-      <section className="py-12 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="font-serif text-sm text-bone-300/40 font-light italic">
-            For <span className="text-bone-200">Lauren</span>,{" "}
-            <span className="text-bone-200">Toyia</span>,{" "}
-            <span className="text-bone-200">Monyae</span> &mdash;
-            who never let me build anything halfway.
-          </p>
-        </div>
+      {/* ======================================== */}
+      {/* Acknowledgements                        */}
+      {/* ======================================== */}
+      <section className="py-24 px-6">
+        <SectionReveal>
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">Acknowledgements</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-bone-200 font-light mb-6">This book exists because of you.</h2>
+            <p className="text-sm text-bone-300/50 font-light leading-relaxed max-w-lg mx-auto mb-12">
+              Thank you for waiting. Thank you for watching patiently. None of this moves without the people who believed in the work before there was anything to show for it.
+            </p>
+            <p className="font-serif text-base text-bone-300/60 font-light italic leading-relaxed max-w-lg mx-auto mb-12">
+              To <span className="text-bone-200">Keasha</span> &mdash; for always encouraging me to never stop writing. You kept saying it before I believed it.
+            </p>
+            <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Circle</p>
+            <p className="text-sm text-bone-300/50 font-light leading-relaxed mb-12">
+              <span className="text-bone-200">Jeremy</span>, <span className="text-bone-200">Eric</span>, <span className="text-bone-200">Asiah</span>, <span className="text-bone-200">Lauren</span> &mdash; <span className="font-serif italic">for continuous support, from the first draft to launch day.</span>
+            </p>
+            <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Readers</p>
+            <p className="text-sm text-bone-300/50 font-light leading-relaxed">
+              <span className="text-bone-200">Quiana</span>, <span className="text-bone-200">Ashley</span>, <span className="text-bone-200">Morgan</span>, <span className="text-bone-200">Layla</span> &mdash; <span className="font-serif italic">for stepping in to put eyes on the story, providing reviews and honest feedback that made this book what it is.</span>
+            </p>
+          </div>
+        </SectionReveal>
       </section>
 
       <Newsletter />
