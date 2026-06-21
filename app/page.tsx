@@ -3,7 +3,6 @@ import Image from "next/image";
 import { siteConfig, books } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
 import QuoteCarousel from "@/components/QuoteCarousel";
-import CountdownTicker from "@/components/CountdownTicker";
 import Reviews from "@/components/Reviews";
 import CoverLoop from "@/components/CoverLoop";
 import StickyBar from "@/components/StickyBar";
@@ -34,9 +33,6 @@ export default function Home() {
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-6 animate-fade-in">
             Available Now
           </p>
-          <div className="mb-10 animate-fade-in delay-200">
-            <CountdownTicker />
-          </div>
           <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl text-bone-100 font-light tracking-tight sm:tracking-wide uppercase leading-[0.95] mb-6 animate-fade-up [text-shadow:_0_2px_24px_rgba(0,0,0,0.7)]">
             Contempt
           </h1>
@@ -71,13 +67,8 @@ export default function Home() {
 
             <div id="reserve" className="w-full max-w-md scroll-mt-24">
               <p className="font-serif italic text-sm text-bone-300/80 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
-                Reserve the print edition &mdash; the signed Founders Edition hardcover or the first-run paperback. The ordering window opens by email.
+                Reserve the print edition &mdash; the signed Founders Edition hardcover or the first-run paperback.
               </p>
-              <Newsletter
-                variant="compact"
-                campaign="hardcover-reserve"
-                successLine={"You’re on the hardcover list. The first ordering window comes to your inbox."}
-              />
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/90 mt-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
                 Numbered 1 of 50 &middot; Signed &amp; personalized &middot; Case File packaging
               </p>
@@ -259,7 +250,7 @@ export default function Home() {
             <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Circle</p>
             <p className="text-sm text-bone-300/50 font-light leading-relaxed mb-12">
-              <span className="text-bone-200">Jeremy</span>, <span className="text-bone-200">Eric</span>, <span className="text-bone-200">Asiah</span>, <span className="text-bone-200">Lauren</span> &mdash; <span className="font-serif italic">for continuous support, from the first draft to launch day.</span>
+              <span className="text-bone-200">Jeremy</span>, <span className="text-bone-200">Eric</span>, <span className="text-bone-200">Asiah</span>, <span className="text-bone-200">Lauren</span>, <span className="text-bone-200">AJ</span> &mdash; <span className="font-serif italic">for continuous support, from the first draft to launch day.</span>
             </p>
             <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Readers</p>
