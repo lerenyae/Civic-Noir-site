@@ -26,6 +26,14 @@ No heroes. No clean wins. Just pressure and what it makes people do.`,
     { label: "Order on Kindle", url: "https://www.amazon.com/dp/B0GYVVSFH9" },
     { label: "Signed Hardcover", url: "/#reserve" },
   ], pullQuote: null,
+  inspiration: `Contempt was born from a single image: a young man sitting alone at the defense table while the gallery behind him filled with people who already knew how it would end.
+
+The question was never guilt or innocence. It was who gets to decide what happened — and what they are willing to bury to make their version stick.
+
+The novel draws from Baltimore's real institutional fabric: its courthouse culture, its police department's documented history of evidence handling, its neighborhoods where political power and street-level survival share the same zip code. Every zoning dispute, every chain-of-custody gap, every backroom plea negotiation in the book is grounded in procedure that exists.
+
+LeRenyae spent two years researching Maryland criminal procedure, Baltimore's political geography, and the mechanics of how cases are built — not to solve them, but to show how they are shaped before anyone ever sees a courtroom. The result is a novel where the system itself is the antagonist, and every character is just trying to survive the machinery they are caught inside.`,
+  themes: ["Institutional power", "Inherited obligation", "The cost of loyalty", "Justice as performance", "Baltimore as character"],
 }];
 
 export const reviews = [
