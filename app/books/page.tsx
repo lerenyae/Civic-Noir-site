@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { books, siteConfig } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
-import Newsletter from "@/components/Newsletter";
 
-export const metadata: Metadata = { title: "Books", description: `Contempt — a legal thriller set in Baltimore, 2006. By ${siteConfig.name}.`, openGraph: { title: `Books — ${siteConfig.name}` } };
+export const metadata: Metadata = { title: "The Book", description: `Contempt — a legal thriller set in Baltimore, 2006. By ${siteConfig.name}.`, openGraph: { title: `Books — ${siteConfig.name}` } };
 
 export default function BooksPage() {
   const contempt = books[0];
@@ -58,8 +57,6 @@ export default function BooksPage() {
           {contempt.buyLinks.length > 0 && (<div className="flex flex-wrap justify-center gap-4">{contempt.buyLinks.map((link, i) => (<a key={i} href={link.url} target={link.url.startsWith("http") ? "_blank" : undefined} rel={link.url.startsWith("http") ? "noopener noreferrer" : undefined} className="inline-block px-8 py-3 border border-bone-300/20 text-[11px] font-sans font-light tracking-ultra uppercase text-bone-300/60 hover:text-bone-100 hover:border-gold/40 transition-colors duration-300">{link.label}</a>))}</div>)}</SectionReveal>
         </div>
       </section>
-
-      <Newsletter />
     </>
   );
 }
