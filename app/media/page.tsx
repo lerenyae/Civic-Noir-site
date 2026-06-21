@@ -4,9 +4,9 @@ import SectionReveal from "@/components/SectionReveal";
 
 export const metadata: Metadata = {
   title: "Media Kit",
-  description: `Press and media resources for ${siteConfig.name}. Author of Contempt â civic noir fiction.`,
+  description: `Press and media resources for ${siteConfig.name}. Author of Contempt — civic noir fiction.`,
   openGraph: {
-    title: `Media Kit â ${siteConfig.name}`,
+    title: `Media Kit — ${siteConfig.name}`,
     description:
       "Press kit, author bio, and media resources for the author of Contempt.",
     images: [siteConfig.ogImage],
@@ -42,7 +42,7 @@ export default function MediaPage() {
               <iframe
                 className="absolute inset-0 w-full h-full"
                 src="https://www.youtube.com/embed/pqWulttn-KU"
-                title="Contempt â Official Book Trailer"
+                title="Contempt — Official Book Trailer"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
