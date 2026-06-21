@@ -10,6 +10,7 @@ import StickyBar from "@/components/StickyBar";
 const contempt = books[0];
 const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9";
 const BN_URL = "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104";
+const HC_URL = "https://www.amazon.com/dp/B0H48RHL6Z";
 
 export default function Home() {
   return (
@@ -49,6 +50,14 @@ export default function Home() {
 
           <div className="flex flex-col items-center gap-10 animate-fade-in delay-700">
             <a
+              href={HC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+            >
+              Order Hardcover
+            </a>
+            <a
               href={BN_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -64,15 +73,6 @@ export default function Home() {
             >
               Order on Kindle
             </a>
-
-            <div id="reserve" className="w-full max-w-md scroll-mt-24">
-              <p className="font-serif italic text-sm text-bone-300/80 mb-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
-                Reserve the print edition &mdash; the signed Founders Edition hardcover or the first-run paperback.
-              </p>
-              <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/90 mt-4 [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
-                Numbered 1 of 50 &middot; Signed &amp; personalized &middot; Case File packaging
-              </p>
-            </div>
           </div>
         </div>
       </section>
