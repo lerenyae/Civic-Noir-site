@@ -33,8 +33,7 @@ I wrote this book because I wanted to show what a murder trial really is: not a 
 Baltimore gave me the geography. The legal system gave me the structure. The characters gave me the nerve.`,
   themes: ["Institutional Power", "Inherited Obligation", "Civic Displacement", "The Cost of Silence", "Evidence as Leverage", "Fatherhood & Legacy"],
   buyLinks: [
-    { label: "Hardcover", url: "https://www.amazon.com/dp/B0H48RHL6Z" },
-    { label: "Kindle", url: "https://www.amazon.com/dp/B0GYVVSFH9" },
+    { label: "Amazon — Hardcover, Paperback & Kindle", url: "https://www.amazon.com/dp/B0H48RHL6Z" },
     { label: "Barnes & Noble", url: "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104" },
   ],
   pullQuote: null,
