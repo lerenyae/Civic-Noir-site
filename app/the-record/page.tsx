@@ -352,7 +352,7 @@ export default function TheRecordIndex() {
             src={getSrc("sentinel-editorial-grey-byline")}
             srcSet={getSrcSet("sentinel-editorial-grey-byline")}
             sizes="(max-width: 900px) 100vw, 1400px"
-            alt="The Westport Files â Baltimore Sentinel Post front page, January 9, 2006"
+            alt="The Westport Files — Baltimore Sentinel Post front page, January 9, 2006"
             style={{
               width: "100%",
               height: "auto",
@@ -771,7 +771,7 @@ export default function TheRecordIndex() {
             letter-spacing: 3px !important;
           }
 
-          /* Gallery grid â single column */
+          /* Gallery grid — single column */
           .gallery-grid {
             grid-template-columns: 1fr !important;
             padding: 0 16px 48px !important;
