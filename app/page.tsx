@@ -121,6 +121,24 @@ export default function Home() {
         </SectionReveal>
       </section>
 
+      
+      {/* ======================================== */}
+      {/*  The Summons                             */}
+      {/* ======================================== */}
+      <section className="py-24 px-6">
+        <SectionReveal>
+          <div className="max-w-[420px] mx-auto">
+            <Image
+              src="/images/summons-portrait.jpg"
+              alt="Official summons from Davidson and Associates, Attorneys at Law"
+              width={1080}
+              height={1920}
+              className="w-full h-auto border border-gold/30"
+            />
+          </div>
+        </SectionReveal>
+      </section>
+
       {/* ======================================== */}
       {/*  Cold Read — taste the prose             */}
       {/* ======================================== */}
