@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig, books } from "@/lib/content";
 import SectionReveal from "@/components/SectionReveal";
-import QuoteCarousel from "@/components/QuoteCarousel";
+import { ColdReadCarousel, SummonsViewer } from "@/components/HomeClient";
 import Reviews from "@/components/Reviews";
 import CoverLoop from "@/components/CoverLoop";
 import StickyBar from "@/components/StickyBar";
@@ -121,15 +121,7 @@ export default function Home() {
       {/* ======================================== */}
       <section className="py-24 px-6">
         <SectionReveal>
-          <div className="max-w-[420px] mx-auto">
-            <Image
-              src="/images/summons-portrait.jpg"
-              alt="Official summons from Davidson and Associates, Attorneys at Law"
-              width={1080}
-              height={1920}
-              className="w-full h-auto border border-gold/30"
-            />
-          </div>
+          <SummonsViewer />
         </SectionReveal>
       </section>
 
@@ -145,7 +137,7 @@ export default function Home() {
               <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
             </div>
             <p className="font-serif text-base text-bone-300/30 font-light italic mb-14">Excerpts from Contempt</p>
-            <QuoteCarousel />
+            <ColdReadCarousel />
             <div className="mt-12">
               <Link href="/chapter-one" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 hover:text-gold/70 transition-colors duration-300">Read Chapter One &rarr;</Link>
             </div>
