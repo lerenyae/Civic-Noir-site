@@ -14,9 +14,8 @@ export default function Footer() {
             {navigation.map((item) => (<Link key={item.href} href={item.href} className="nav-link">{item.label}</Link>))}
           </div>
           <div className="flex flex-col gap-4">
-            <a href="#newsletter" className="nav-link hover:text-gold">Newsletter</a>
-            <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="nav-link">Instagram</a>
-            <a href={siteConfig.links.twitter} target="_blank" rel="noopener noreferrer" className="nav-link">X / Twitter</a>
+                        <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="nav-link">Instagram</a>
+            <a href={siteConfig.links.tiktok} target="_blank" rel="noopener noreferrer" className="nav-link">TikTok</a>
           </div>
         </div>
         <div className="gold-rule mt-16 mb-8" />
