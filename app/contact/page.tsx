@@ -61,7 +61,7 @@ export default function ContactPage() {
                   <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/30 mb-2">Social</p>
                   <div className="space-y-2">
                     <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="block text-sm text-bone-300/40 font-light hover:text-gold transition-colors">Instagram</a>
-                    <a href={siteConfig.links.twitter} target="_blank" rel="noopener noreferrer" className="block text-sm text-bone-300/40 font-light hover:text-gold transition-colors">X / Twitter</a>
+                    <a href={siteConfig.links.tiktok} target="_blank" rel="noopener noreferrer" className="block text-sm text-bone-300/40 font-light hover:text-gold transition-colors">TikTok</a>
                   </div>
                 </div>
               </SectionReveal>
