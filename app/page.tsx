@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig, books } from "@/lib/content";
-import Newsletter from "@/components/Newsletter";
 import SectionReveal from "@/components/SectionReveal";
 import QuoteCarousel from "@/components/QuoteCarousel";
 import CountdownTicker from "@/components/CountdownTicker";
@@ -225,7 +224,7 @@ export default function Home() {
           <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
             <Link href="/books" className="btn-primary">The Work</Link>
-            <a href="#newsletter" className="btn-secondary">Stay in the circuit</a>
+            
           </div>
         </div>
       </section>
@@ -270,9 +269,6 @@ export default function Home() {
           </div>
         </SectionReveal>
       </section>
-
-      <Newsletter />
-
       <StickyBar />
     </>
   );
