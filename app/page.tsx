@@ -8,7 +8,6 @@ import CoverLoop from "@/components/CoverLoop";
 import StickyBar from "@/components/StickyBar";
 
 const contempt = books[0];
-const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9";
 const BN_URL = "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104";
 const HC_URL = "https://www.amazon.com/dp/B0H48RHL6Z";
 
@@ -48,14 +47,15 @@ export default function Home() {
             Baltimore, 2006. Defense attorney Shawn Davidson inherits his dead father&rsquo;s murder trial and discovers the case was never built to find the truth. It was built to protect the people who own it.
           </p>
 
-          <div className="flex flex-col items-center gap-10 animate-fade-in delay-700">
+          <div className="flex flex-col items-center gap-6 animate-fade-in delay-700">
             <a
               href={HC_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+              className="flex flex-col items-center px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
             >
-              Order Hardcover
+              <span>Order on Amazon</span>
+              <span className="text-[9px] tracking-[0.2em] text-bone-100/70 normal-case mt-1">Hardcover · Paperback · Kindle</span>
             </a>
             <a
               href={BN_URL}
@@ -64,14 +64,6 @@ export default function Home() {
               className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
             >
               Order on Barnes &amp; Noble
-            </a>
-            <a
-              href={PREORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
-            >
-              Order on Kindle
             </a>
           </div>
         </div>
