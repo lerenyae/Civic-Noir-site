@@ -83,6 +83,18 @@ export default function Home() {
       <Reviews />
 
       {/* ======================================== */}
+      {/*  Featured line                           */}
+      {/* ======================================== */}
+      <section className="py-20 px-6 border-t border-bone-300/5">
+        <SectionReveal>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="font-serif text-2xl md:text-4xl text-bone-200 font-light italic leading-snug [text-wrap:balance]">&ldquo;Your name is either clean, or it&rsquo;s useful.&rdquo;</p>
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mt-6">From Contempt</p>
+          </div>
+        </SectionReveal>
+      </section>
+
+      {/* ======================================== */}
       {/* Official Trailer */}
       {/* ======================================== */}
       <section className="py-24 px-6">
