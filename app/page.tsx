@@ -10,7 +10,7 @@ import CoverLoop from "@/components/CoverLoop";
 import StickyBar from "@/components/StickyBar";
 
 const contempt = books[0];
-const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9?ref=sp_email";
+const PREORDER_URL = "https://www.amazocom/dp/B0GYVVSFH9?ref=sp_email";
 const BN_URL = "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104";
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-6 animate-fade-in">
-            Forthcoming &mdash; June 21, 2026
+            Available Now
           </p>
           <div className="mb-10 animate-fade-in delay-200">
             <CountdownTicker />
@@ -59,7 +59,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
             >
-              Pre-order on Barnes &amp; Noble &mdash; June 21, 2026
+              Order on Barnes &amp; Noble
             </a>
             <a
               href={PREORDER_URL}
@@ -67,7 +67,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
             >
-              Pre-order on Kindle &mdash; June 21, 2026
+              Order on Kindle
             </a>
 
             <div id="reserve" className="w-full max-w-md scroll-mt-24">
@@ -144,7 +144,7 @@ export default function Home() {
       {/* ======================================== */}
       <section className="py-32 px-6">
         <div className="max-w-5xl mx-auto">
-          <SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-12">Forthcoming &mdash; {contempt.year}</p></SectionReveal>
+          <SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-12">Available Now</p></SectionReveal>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-16 items-start">
             <SectionReveal delay={100}>
               <div className="relative aspect-[2/3] overflow-hidden border border-bone-300/5">
