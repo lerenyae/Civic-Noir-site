@@ -40,6 +40,12 @@ Baltimore gave me the geography. The legal system gave me the structure. The cha
   pullQuote: null,
 }];
 
+export const reviews = [
+  { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8620489243" },
+  { quote: "For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
+  { quote: "The story unfolds in such a vivid, cinematic way that it felt like watching a movie play out in my mind.", author: "Lakeasha Gresham", rating: 5, source: "Goodreads", url: "https://www.goodreads.com/review/show/8680547140" },
+];
+
 export const bio = {
   short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. A father of three based in Plano, Texas, he spent over 15 years in cybersecurity before transitioning to writing full time. His debut novel, Contempt, is available now alongside an 18-track original soundtrack he composed for the book.",
   long: `LeRenyae Lawrence Watkins has been writing since 6th grade. Poetry first, then short stories, scripts, music, and now novels. A father of three living in Plano, Texas, just outside of Dallas, everything he writes comes back to systems. Not the hero who breaks through the wall, but the wall itself. How it was built, who benefits, and what it costs the people on both sides.
