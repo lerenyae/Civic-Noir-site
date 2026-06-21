@@ -10,7 +10,7 @@ import CoverLoop from "@/components/CoverLoop";
 import StickyBar from "@/components/StickyBar";
 
 const contempt = books[0];
-const PREORDER_URL = "https://www.amazocom/dp/B0GYVVSFH9?ref=sp_email";
+const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9";
 const BN_URL = "https://www.barnesandnoble.com/w/contempt-lerenyae-watkins/1150335221?ean=9798995333104";
 
 export default function Home() {
@@ -91,6 +91,35 @@ export default function Home() {
       {/*  Early reader reviews                    */}
       {/* ======================================== */}
       <Reviews />
+
+      {/* ======================================== */}
+      {/* Official Trailer */}
+      {/* ======================================== */}
+      <section className="py-24 px-6">
+        <SectionReveal>
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-4 mb-10">
+              <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
+              <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50">Official Trailer</p>
+              <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
+            </div>
+            <div className="relative mx-auto" style={{ maxWidth: "360px" }}>
+              <div className="relative overflow-hidden border border-bone-300/5" style={{ aspectRatio: "9/16" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/DVzU_lJ1RU0"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="Contempt — Official Trailer"
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        </SectionReveal>
+      </section>
 
       {/* ======================================== */}
       {/*  Cold Read — taste the prose             */}
