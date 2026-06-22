@@ -246,7 +246,7 @@ export default function Home() {
             <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Circle</p>
             <p className="text-sm text-bone-300/50 font-light leading-relaxed mb-12">
-              <span className="text-bone-200">Jeremy</span>, <span className="text-bone-200">Eric</span>, <span className="text-bone-200">Asiah</span>, <span className="text-bone-200">Lauren</span>, <span className="text-bone-200">AJ</span> &mdash; <span className="font-serif italic">for continuous support, from the first draft to launch day.</span>
+              <span className="text-bone-200">Jeremy</span>, <span className="text-bone-200">Eric</span>, <span className="text-bone-200">Muffyn</span>, <span className="text-bone-200">Lauren</span>, <span className="text-bone-200">AJ</span> &mdash; <span className="font-serif italic">for continuous support, from the first draft to launch day.</span>
             </p>
             <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Readers</p>
