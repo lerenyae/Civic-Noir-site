@@ -58,6 +58,8 @@ export default function ContactPage() {
                 <div>
                   <p className="text-sm text-bone-300/50 font-light leading-[1.8] mb-8">For press inquiries, adaptation interest, speaking engagements, or book club appearances.</p>
                   <div className="gold-rule mb-8" />
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/30 mb-2">Email</p>
+                  <a href="mailto:reigningwordspublishing@gmail.com" className="block text-sm text-bone-300/40 font-light hover:text-gold transition-colors mb-8 break-all">reigningwordspublishing@gmail.com</a>
                   <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/30 mb-2">Social</p>
                   <div className="space-y-2">
                     <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="block text-sm text-bone-300/40 font-light hover:text-gold transition-colors">Instagram</a>
