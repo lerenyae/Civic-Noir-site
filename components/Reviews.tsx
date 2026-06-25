@@ -16,6 +16,7 @@ export default function Reviews() {
             <figcaption className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/40">
               {r.author} &mdash; <span className="text-gold/40">{r.source}</span>
             </figcaption>
+            {r.url && (
             <a
               href={r.url}
               target="_blank"
@@ -24,6 +25,8 @@ export default function Reviews() {
             >
               See full review &rarr;
             </a>
+
+            )}
           </figure>
         ))}
       </div>
