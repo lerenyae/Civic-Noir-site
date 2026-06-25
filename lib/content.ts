@@ -41,8 +41,9 @@ Baltimore gave me the geography. The legal system gave me the structure. The cha
 
 export const reviews = [
   { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8620489243" },
-  { quote: "For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
-  { quote: "The story unfolds in such a vivid, cinematic way that it felt like watching a movie play out in my mind.", author: "Lakeasha Gresham", rating: 5, source: "Goodreads", url: "https://www.goodreads.com/review/show/8680547140" },
+  { quote: "Such a great read. The story takes many twists and turns, keeping you on the edge of your seat the whole time. For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
+  { quote: "The story unfolds in such a vivid, cinematic way that it felt like watching a movie play out in my mind.", author: "Lakeasha Gresham", rating: 5, source: "Goodreads" },
+  { quote: "An impressively crafted and thoroughly gripping thriller. Clever, tense, and genuinely hard to put down.", author: "Lee Cooper", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8712114" },
 ];
 
 export const bio = {
