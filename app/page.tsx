@@ -251,7 +251,7 @@ export default function Home() {
             <div className="w-12 h-px bg-gold/30 mx-auto mb-12" />
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-4">The Readers</p>
             <p className="text-sm text-bone-300/50 font-light leading-relaxed">
-              <span className="text-bone-200">Quiana</span>, <span className="text-bone-200">Ashley</span>, <span className="text-bone-200">Morgan</span>, <span className="text-bone-200">Layla</span> &mdash; <span className="font-serif italic">for stepping in to put eyes on the story, providing reviews and honest feedback that made this book what it is.</span>
+              <span className="text-bone-200">Quiana</span>, <span className="text-bone-200">Ashley</span>, <span className="text-bone-200">Morgan</span>, <span className="text-bone-200">Linda</span> &mdash; <span className="font-serif italic">for stepping in to put eyes on the story, providing reviews and honest feedback that made this book what it is.</span>
             </p>
           </div>
         </SectionReveal>
