@@ -181,9 +181,38 @@ export default function MediaPage() {
                   <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
                     Press
                   </p>
-                  <p className="text-sm text-bone-300/30 font-light italic">
-                    Press clippings will be added as coverage develops.
-                  </p>
+                                    {mediaKit.pressClippings.length === 0 ? (
+                    <p className="text-sm text-bone-300/30 font-light italic">
+                      Press clippings will be added as coverage develops.
+                    </p>
+                  ) : (
+                    <div className="space-y-4">
+                      {mediaKit.pressClippings.map((item, i) => (
+                        <a
+                          key={i}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block border border-bone-300/10 p-4 hover:border-gold/20 transition-colors group"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] text-gold/40 tracking-widest uppercase">
+                              {item.outlet}
+                            </span>
+                            <span className="text-[10px] text-bone-300/30 tracking-widest uppercase">
+                              {item.date}
+                            </span>
+                          </div>
+                          <p className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">
+                            {item.title}
+                          </p>
+                          <p className="text-xs text-bone-300/30 font-light leading-[1.7] mt-2">
+                            {item.description}
+                          </p>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </SectionReveal>
             </div>
