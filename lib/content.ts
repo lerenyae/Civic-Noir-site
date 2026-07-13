@@ -73,7 +73,7 @@ Contempt is available now.`,
   compTitles: "For readers of Attica Locke, S.A. Cosby, and Steph Cha. For viewers of The Wire, Presumed Innocent, and American Crime Story.",
   availableFor: ["Author interviews & profiles", "Podcast appearances", "Panel discussions", "Book club Q&As (virtual and in-person)", "Film & television adaptation inquiries"],
   highResPhotos: null, bookCoverHighRes: "/covers/contempt-cover.png",
-  pressContact: "reigningwordspublishing@gmail.com", pressClippings: [],
+  pressContact: "reigningwordspublishing@gmail.com", pressClippings: [{ outlet: "Book DNA", title: "The five crime novels that inspired Civic Noir", description: "LeRenyae Watkins on Cosby, Locke, Price, Pelecanos, and Mosley, and the books that taught him how to make a building feel dangerous.", href: "https://bookdna.com/best-books/crime-novels-where-the-system-is-the-real-villain", date: "2026" }],
 };
 
 export const navigation: { label: string; href: string; cta?: boolean; accent?: boolean }[] = [
