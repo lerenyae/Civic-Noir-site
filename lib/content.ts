@@ -63,14 +63,26 @@ He writes for adaptation. Structure, scenes, and visual language that translates
 };
 
 export const mediaKit = {
-  authorName: "LeRenyae Lawrence Watkins", genre: "Literary Thriller / Legal Thriller",
-  representation: "Unrepresented \u2014 seeking literary representation",
+  authorName: "LeRenyae Lawrence Watkins", genre: "Civic Noir / Legal Thriller",
+  representation: "Unrepresented. Seeking literary representation.",
   bio: `LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence.
 
-His debut novel, Contempt, is set in Baltimore, 2006. After a deputy mayor is killed at a community rally, an eighteen-year-old sits in county awaiting trial. When the defense attorney willing to take the case collapses on the courthouse steps, his son, Shawn Davidson, is forced to inherit the file, the firm, and the city\u2019s attention \u2014 whether he\u2019s ready or not.
+His debut novel, Contempt, is set in Baltimore, 2006. After a deputy mayor is killed at a community rally, an eighteen-year-old sits in county awaiting trial. When the defense attorney willing to take the case collapses on the courthouse steps, his son, Shawn Davidson, is forced to inherit the file, the firm, and the city\u2019s attention, whether he\u2019s ready or not.
 
 Contempt is available now.`,
   compTitles: "For readers of Attica Locke, S.A. Cosby, and Steph Cha. For viewers of The Wire, Presumed Innocent, and American Crime Story.",
+  appearances: [
+    {
+      venue: "Talking Animals Books",
+      street: "909 S. Main St., Suite 104",
+      cityStateZip: "Grapevine, TX 76051",
+      date: "2026-08-22",
+      displayDate: "Saturday, August 22, 2026",
+      time: "12:00 PM to 2:00 PM CDT",
+      rsvpUrl: "https://talkinganimalsbooks.eventcalendarapp.com/local-author-lerenyae-watkins",
+      note: "Signing copies of CONTEMPT and talking about what comes next. Part of the 2nd Annual North Texas Indie Bookstore Crawl, running all August across 32 North Texas bookstores.",
+    },
+  ],
   availableFor: ["Author interviews & profiles", "Podcast appearances", "Panel discussions", "Book club Q&As (virtual and in-person)", "Film & television adaptation inquiries"],
   highResPhotos: null, bookCoverHighRes: "/covers/contempt-cover.png",
   pressContact: "reigningwordspublishing@gmail.com", pressClippings: [{ outlet: "Book DNA", title: "The five crime novels that inspired Civic Noir", description: "LeRenyae Watkins on Cosby, Locke, Price, Pelecanos, and Mosley, and the books that taught him how to make a building feel dangerous.", href: "https://bookdna.com/best-books/crime-novels-where-the-system-is-the-real-villain", date: "2026" }],
