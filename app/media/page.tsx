@@ -4,7 +4,7 @@ import SectionReveal from "@/components/SectionReveal";
 
 export const metadata: Metadata = {
   title: "Media Kit",
-  description: `Press and media resources for ${siteConfig.name}. Author of Contempt — civic noir fiction.`,
+  description: `Press and media resources for ${siteConfig.name}. Author of Contempt. Civic noir fiction.`,
   openGraph: {
     title: `Media Kit — ${siteConfig.name}`,
     description:
@@ -25,6 +25,54 @@ export default function MediaPage() {
             <h1 className="font-serif text-4xl md:text-5xl text-bone-200 font-light">
               Media Kit
             </h1>
+          </SectionReveal>
+        </div>
+      </section>
+
+      <div className="gold-rule max-w-4xl mx-auto" />
+
+      {/* Appearances */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <SectionReveal>
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+              Appearances
+            </p>
+            <div className="space-y-6">
+              {mediaKit.appearances.map((event, i) => (
+                <div key={i} className="border border-bone-300/10 p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                    <div>
+                      <h2 className="font-serif text-2xl md:text-3xl text-bone-200 font-light mb-3">
+                        {event.venue}
+                      </h2>
+                      <p className="text-[11px] font-sans font-light tracking-widest uppercase text-gold/60 mb-1">
+                        {event.displayDate}
+                      </p>
+                      <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/40 mb-4">
+                        {event.time}
+                      </p>
+                      <p className="text-xs text-bone-300/40 font-light tracking-wide mb-4">
+                        {event.street} &middot; {event.cityStateZip}
+                      </p>
+                      <p className="text-sm text-bone-300/50 font-light leading-[1.8] max-w-xl">
+                        {event.note}
+                      </p>
+                    </div>
+                    <div className="shrink-0">
+                      <a
+                        href={event.rsvpUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block border border-gold/40 px-8 py-3 text-[11px] font-sans font-light tracking-widest uppercase text-gold hover:border-gold hover:text-gold-light transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2"
+                      >
+                        RSVP
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </SectionReveal>
         </div>
       </section>
@@ -166,7 +214,7 @@ export default function MediaPage() {
                       className="flex items-center justify-between border border-bone-300/10 p-4 hover:border-gold/20 transition-colors group"
                     >
                       <span className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">
-                        Book Cover &mdash; Contempt
+                        Book Cover: Contempt
                       </span>
                       <span className="text-[10px] text-gold/40 tracking-widest uppercase">
                         PNG
