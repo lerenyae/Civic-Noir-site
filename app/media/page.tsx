@@ -101,6 +101,29 @@ export default function MediaPage() {
 
       <div className="gold-rule max-w-4xl mx-auto" />
 
+      {/* Interviews */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <SectionReveal>
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+              Interviews &amp; Press
+            </p>
+            <div className="relative w-full overflow-hidden border border-bone-300/10" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/xGdYzD7-mXU?start=614"
+                title="LeRenyae Watkins - A60 Sit-Down Interview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/40 mt-4">
+              A60 &middot; Sit-Down Interview
+            </p>
+          </SectionReveal>
+        </div>
+      </section>
+
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
