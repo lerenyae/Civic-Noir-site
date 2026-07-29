@@ -40,6 +40,8 @@ Baltimore gave me the geography. The legal system gave me the structure. The cha
 }];
 
 export const reviews = [
+  { quote: "This was an amazing read. Reminds me of Dan Brown, the way it feels like you're watching a movie as you go, and it becomes difficult to put it down once you get started.", author: "Eric VaShon Wilson", rating: 5, source: "Amazon", url: "https://www.amazon.com/gp/customer-reviews/R3OPVRGNREBKRP" },
+  { quote: "The dialogue is sharp, witty, and engaging. The pacing is seamless. Every chapter pulls you deeper until you simply don't want to put the book down.", author: "Amazon Reader", rating: 5, source: "Amazon", url: "https://www.amazon.com/gp/customer-reviews/R34EZVG3USLT6K" },
   { quote: "Smart, compelling thriller with strong momentum and themes that feel painfully relevant.", author: "Linda Ayala", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8620489243" },
   { quote: "Such a great read. The story takes many twists and turns, keeping you on the edge of your seat the whole time. For lovers of Scandal or The Wire, this is your read.", author: "Morgan Cowart", rating: 4, source: "Goodreads", url: "https://www.goodreads.com/review/show/8605473999" },
   { quote: "The story unfolds in such a vivid, cinematic way that it felt like watching a movie play out in my mind.", author: "Lakeasha Gresham", rating: 5, source: "Goodreads" },
