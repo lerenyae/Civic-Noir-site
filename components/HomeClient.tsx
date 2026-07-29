@@ -1,76 +1,107 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-type Excerpt = { text: string; where: string; type: "prose" | "dialogue" };
+type Excerpt = { label: string; where: string; who: string; text: string };
+
+const PAGE_SIZE = 4;
 
 const excerpts: Excerpt[] = [
-  { type: "prose", where: "Chapter 1 · Shawn", text: "Most collapses don't announce themselves. They keep their appointments." },
-  { type: "prose", where: "Chapter 5 · Dawson", text: "From the second floor you lost distance. You got detail." },
-  { type: "prose", where: "Chapter 7 · Shawn", text: "Davidson & Associates didn't welcome. It measured." },
-  { type: "dialogue", where: "Chapter 10 · Jordan", text: "\"You let him put his hands on you?\"\n\"Wouldn't say 'let.'\"" },
-  { type: "prose", where: "Chapter 13 · Han", text: "Cord twisted so tight the coil had forgotten its shape." },
-  { type: "prose", where: "Chapter 17 · Han", text: "Loose strands catching the fluorescent like copper does when it hasn't been polished." },
-  { type: "prose", where: "Chapter 21 · Jordan", text: "He saw the flower on the door before he saw the smoke." },
-  { type: "prose", where: "Chapter 25 · Shawn", text: "Nobody moved it overnight. Nobody would until the jury did." },
-  { type: "prose", where: "Chapter 28 · Han", text: "He kept the water running after it was clean." },
-  { type: "prose", where: "Chapter 31 · Shawn", text: "\"You just couldn't help yourself,\" Jamie said. She pulled her chair back. Sat. Not an invitation. A position." },
-  { type: "dialogue", where: "Chapter 32 · Shawn", text: "\"Have you ever seen a zoning reclassification reversed because a resident raised his voice at a community meeting?\"\n\"No.\"" },
-  { type: "prose", where: "Chapter 34 · Han", text: "The shirt smelled like sweat and chemical and a building he'd been inside too long." },
-  { type: "prose", where: "Chapter 37 · Maria", text: "Her hand stayed on the recipe card for a second. Nonna's. Sunday gravy." },
-  { type: "dialogue", where: "Chapter 37 · Maria", text: "\"I get to hold up a recipe card for my son.\"" },
-  { type: "prose", where: "Chapter 46 · Shawn", text: "Keys found their rhythm. The sound of the system remembering what just happened one floor below." },
+  { label: "The Appointment", where: "Georgetown University, 1998", who: "Shawn, at his father's commencement", text: "Most collapses don't announce themselves. They keep their appointments." },
+  { label: "The Permission", where: "Worcester County Circuit Court", who: "Leo's last words to his son", text: "Second chair's safe. You don't have to own the room from there." },
+  { label: "The Firm", where: "Davidson & Associates", who: "Shawn, back after two years", text: "Davidson & Associates didn't welcome. It measured." },
+  { label: "The Mayor", where: "Baltimore City Hall", who: "Charles Dawson", text: "Men like Leo make messes so theirs can be seen as clean. I expect nothing different from the son. Maybe worse." },
+  { label: "The Rule", where: "The Iron Rail Diner", who: "Shawn, on his father's method", text: "Pick ground, not comfort. That was how you survived a city that hated straight lines." },
+  { label: "The Inheritance", where: "Leo's briefcase", who: "Shawn, opening what Leo left", text: "A note in his father's hand: Debt makes the honest useful. \"This isn't a case file,\" he said quietly. \"It's leverage.\"" },
+  { label: "The Narrative", where: "The Sentinel Post", who: "Donna, to Jordan Grey", text: "That's narrative. You just handed Baltimore a guy to root for." },
+  { label: "The Downpour", where: "Holliday Street", who: "Jordan, into the protest", text: "Rain that had stopped being weather and started being something the city was carrying. Not falling. Depositing." },
+  { label: "The Desk", where: "Property Crimes", who: "Detective Phil Han, reassigned", text: "City bleeding out and he's writing up the band-aids." },
+  { label: "The Brother", where: "Jessup Correctional", who: "Han, working a favor", text: "He looked at Han like you look at a bill you already opened." },
+  { label: "The Model", where: "Dawson Group Boardroom", who: "The development, in miniature", text: "Chesapeake Landing the way it was supposed to exist by 2016. Everything sterilized in miniature. No scaffolding, sirens, or memory." },
+  { label: "The Defense", where: "The War Room", who: "Jamie, building the case", text: "Chain is people. We make them people. 'Certainty' is branding." },
+  { label: "The Spine", where: "Courtroom 4C", who: "Shawn, reading the State's case", text: "They want a story that doesn't sweat. Convenience isn't certainty." },
+  { label: "The Tell", where: "Courtroom 4C", who: "Antonio Moretti, on trial", text: "Antonio opened his hand under the table. The scab cracked. A thin line of blood ran into the crease of his palm. Nobody saw. Shawn saw." },
+  { label: "The Mother", where: "Courtroom 4C", who: "Antonio's mother, on the stand", text: "I get to hold up a recipe card for my son." },
+  { label: "The Raid", where: "Sandtown-Winchester", who: "Han, 4:22 a.m.", text: "Back door gave its whole history in one touch. Crowbar scar, latch bent, frame kicked too many times to count." },
+  { label: "The Father", where: "Leo's Brownstone", who: "Shawn, alone with what he found", text: "You knew. You fucking knew." },
+  { label: "The Funeral", where: "Mount Auburn Cemetery", who: "Han", text: "A man attends enough funerals, death stops arriving. It just stands there waiting when he pulls up." },
+  { label: "The Block", where: "O'Connell's Boxing Club", who: "Han, after the shooting", text: "Twenty-eight years of running this block clean punched full of holes." },
+  { label: "The Clock", where: "Penn Station, 2007", who: "One year later", text: "He didn't trust a building that couldn't keep its own time." },
 ];
 
+const pageCount = Math.ceil(excerpts.length / PAGE_SIZE);
+
 export function ColdReadCarousel() {
-  const [i, setI] = useState(0);
+  const [page, setPage] = useState(0);
   const [shown, setShown] = useState(true);
+  const pausedRef = useRef(false);
 
   const swap = useCallback((next: number) => {
     setShown(false);
-    setTimeout(() => { setI(next); setShown(true); }, 600);
+    setTimeout(() => { setPage(next); setShown(true); }, 500);
   }, []);
 
   useEffect(() => {
+    const reduce = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
     const id = setInterval(() => {
+      if (pausedRef.current) return;
       setShown(false);
-      setTimeout(() => { setI((p) => (p + 1) % excerpts.length); setShown(true); }, 600);
-    }, 7000);
+      setTimeout(() => { setPage((p) => (p + 1) % pageCount); setShown(true); }, 500);
+    }, 25000);
     return () => clearInterval(id);
   }, []);
 
-  const e = excerpts[i];
+  const items = excerpts.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
       <div
-        className="min-h-[240px] flex flex-col items-center justify-center px-2"
-        style={{ opacity: shown ? 1 : 0, transform: shown ? "translateY(0)" : "translateY(14px)", transition: "opacity 600ms ease, transform 600ms ease" }}
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 min-h-[520px] sm:min-h-[460px]"
+        style={{ opacity: shown ? 1 : 0, transition: "opacity 500ms ease" }}
       >
-        <blockquote className="max-w-2xl mx-auto">
-          {e.type === "dialogue" ? (
-            <div className="space-y-2">
-              {e.text.split("\n").map((line, k) => (
-                <p key={k} className="font-serif text-xl md:text-2xl text-bone-200/90 font-light leading-relaxed">{line}</p>
-              ))}
+        {items.map((e, k) => (
+          <Link
+            key={k}
+            href="/chapter-one"
+            className="group flex flex-col text-left no-underline"
+            style={{ background: "#fffdf9", border: "1px solid #e7dfcf", borderRadius: "12px", padding: "20px 22px" }}
+          >
+            <div
+              className="font-sans font-medium mb-3"
+              style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#b0632f" }}
+            >
+              {e.label} &middot; {e.where}
             </div>
-          ) : (
-            <p className="font-serif text-2xl md:text-3xl text-bone-200/80 font-light italic leading-[1.5] [text-wrap:balance]">{e.text}</p>
-          )}
-        </blockquote>
-        <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mt-8">
-          {e.where} <span className="text-bone-300/30">· {e.type}</span>
-        </p>
+            <p className="font-serif flex-1" style={{ fontSize: "1.18rem", lineHeight: 1.4, color: "#1a1814" }}>
+              {e.text}
+            </p>
+            <div className="flex items-center justify-between mt-4 pt-3" style={{ borderTop: "1px solid #efe8d9" }}>
+              <span className="font-serif italic" style={{ fontSize: "0.9rem", color: "#9a9784" }}>{e.who}</span>
+              <span
+                className="font-sans font-medium"
+                style={{ fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#b0632f" }}
+              >
+                Keep reading &rarr;
+              </span>
+            </div>
+          </Link>
+        ))}
       </div>
 
-      <div className="flex flex-wrap justify-center items-center gap-2 mt-10 max-w-xs mx-auto">
-        {excerpts.map((_, k) => (
+      <div className="flex justify-center items-center gap-2.5 mt-8">
+        {Array.from({ length: pageCount }).map((_, k) => (
           <button
             key={k}
-            onClick={() => k !== i && swap(k)}
-            aria-label={`Excerpt ${k + 1}`}
-            className="h-px transition-all duration-500"
-            style={{ width: k === i ? "1.75rem" : "0.5rem", opacity: k === i ? 1 : 0.3, backgroundColor: "rgb(212 175 55 / 0.6)" }}
+            onClick={() => k !== page && swap(k)}
+            aria-label={"Page " + (k + 1)}
+            className="transition-all duration-500"
+            style={{ height: "2px", width: k === page ? "1.6rem" : "0.5rem", opacity: k === page ? 1 : 0.3, backgroundColor: "rgb(212 175 55 / 0.7)" }}
           />
         ))}
       </div>
