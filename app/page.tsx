@@ -130,7 +130,7 @@ export default function Home() {
       {/* ======================================== */}
       <section className="py-24 px-6">
         <SectionReveal>
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-10">
               <div className="h-px flex-1 max-w-[60px] bg-gold/20" />
               <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50">Cold Read</p>
