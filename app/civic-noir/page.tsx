@@ -109,7 +109,7 @@ export default function CivicNoirPage() {
               Civic noir doesn&rsquo;t promise that arc.
             </p>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
-              A civic noir novel can end with the case won and the system unchanged.
+              A civic noir can end with the case won and the system unchanged.
               It can end with the verdict the protagonist worked for and the loss
               the protagonist didn&rsquo;t see coming. It can end with the right person
               walking free and the wrong person inheriting the silence.
