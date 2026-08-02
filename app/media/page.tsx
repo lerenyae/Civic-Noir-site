@@ -223,6 +223,10 @@ export default function MediaPage() {
                     Downloads
                   </p>
                   <div className="space-y-4">
+                    <a href="/CONTEMPT_Media_Kit.pdf" download className="flex items-center justify-between border border-bone-300/10 p-4 hover:border-gold/20 transition-colors group">
+                      <span className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">Press Kit &amp; Sell Sheet</span>
+                      <span className="text-[10px] text-gold/40 tracking-widest uppercase">PDF</span>
+                    </a>
                     <div className="flex items-center justify-between border border-bone-300/10 p-4 opacity-50">
                       <span className="text-sm text-bone-300/60 font-light">
                         Author Photos (High-Res)
