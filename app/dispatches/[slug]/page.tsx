@@ -36,7 +36,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       <div className="gold-rule max-w-2xl mx-auto" />
       <article className="py-12 px-6"><div className="max-w-2xl mx-auto">
         <SectionReveal>{renderContent(post.content)}</SectionReveal>
-        <SectionReveal delay={100}><div className="gold-rule mt-12 mb-8" /><p className="text-xs text-bone-300/25 font-light italic">Contempt is a civic noir novel set in Baltimore. Follow the work at{" "}<Link href="/" className="text-gold/50 hover:text-gold transition-colors">lerenyaewatkins.com</Link>.</p></SectionReveal>
+        <SectionReveal delay={100}><div className="gold-rule mt-12 mb-8" /><p className="text-xs text-bone-300/25 font-light italic">Contempt is a civic noir set in Baltimore. Follow the work at{" "}<Link href="/" className="text-gold/50 hover:text-gold transition-colors">lerenyaewatkins.com</Link>.</p></SectionReveal>
       </div></article>
     </>
   );
