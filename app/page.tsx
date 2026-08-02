@@ -37,7 +37,7 @@ export default function Home() {
             Contempt
           </h1>
           <p className="font-serif italic text-base md:text-lg text-bone-300/85 tracking-widest uppercase mb-6 animate-fade-in delay-200 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
-            A Civic Noir Novel
+            Civic Noir
           </p>
           <div className="w-16 h-px bg-gold/50 mx-auto mb-6 animate-line-grow origin-center delay-300" />
           <p className="text-[11px] font-sans font-light tracking-ultra uppercase text-bone-300/80 mb-10 animate-fade-in delay-300 [text-shadow:_0_2px_12px_rgba(0,0,0,0.7)]">
