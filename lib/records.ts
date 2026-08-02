@@ -177,7 +177,7 @@ export const records: RecordEntry[] = [
     displayDate: "October 14, 2004",
     institution: "Davidson & Associates LLC",
     excerpt:
-      "Leo's memo to Vincent Barber, signed in violet ink: No reason given. None asked for. Beneath it, the Court of Appeals registration change — filed the same day. New address: 215 Broad Street, Snow Hill, Maryland. Two hours east. A different world. When Chapter One opens, Shawn has been there for two years, practicing law in a courthouse small enough to sentence the man you see at the gas station. Leo never visited. The memo never asked him to.",
+      "Leo's memo to Vincent Barber, signed in violet ink: No reason given. None asked for. Beneath it, the Court of Appeals registration change — filed the same day. New address: 215 Broad Street, Snow Hill, Maryland. Two hours east. A different world. By the summer the case breaks, Shawn has been there two years, practicing law in a courthouse small enough to sentence the man you see at the gas station. Leo never visited. The memo never asked him to.",
     tags: ["Shawn Davidson", "Maryland Bar", "Snow Hill", "Worcester County"],
     featured: false,
     image: "shawn-bar-registration",
@@ -224,8 +224,8 @@ export const records: RecordEntry[] = [
     type: "evidence",
     title: "In Memory of Leo Arthur Davidson",
     subtitle: "1948 — 2006 · Maya's scrapbook · taped, with rosemary",
-    date: "2006-08-14",
-    displayDate: "August 14, 2006",
+    date: "2006-08-17",
+    displayDate: "August 17, 2006",
     institution: "The Baltimore Sentinel Post",
     excerpt:
       "Maya kept it. Taped at four corners into a leather book she never showed anyone. Rosemary pressed beside it — for remembrance, the old way. The funeral program from August 17 to the right. In the lower-left corner, a blue note in her hand: He hated the photo they used. — M. She was there when he fell. She was there when the cameras arrived. She was there when they stopped. The scrapbook is the only record that remembers him the way she did.",
