@@ -128,7 +128,7 @@ LeRenyae`,
     title: "The Multi-POV Machine",
     category: "Thematic Essay",
     date: "April 21, 2026",
-    excerpt: "No single character can see a system. That's the problem a civic noir novel has to solve on page one.",
+    excerpt: "No single character can see a system. That's the problem a civic noir has to solve on page one.",
     content: `A system is too big for one pair of eyes.
 
 That's the problem Contempt had to solve before it could be written. A single protagonist, no matter how smart, how embedded, how well-placed, can only see what's in his lane. A defense attorney sees the defense. A reporter sees the story she's chasing. A detective sees the case he caught. None of them see the machine.
@@ -177,7 +177,7 @@ The novel remains on schedule for print and circulation by May 1, 2026, with a s
   },
   {
     slug: "the-architecture-of-contempt",
-    title: "The Architecture of Contempt: Building a Civic Noir Novel",
+    title: "The Architecture of Contempt: Building a Civic Noir",
     category: "Behind the Scenes",
     date: "March 2026",
     excerpt: "I stopped writing about a man and started writing about a system. Shawn Davidson doesn't drive the story. Baltimore does.",
