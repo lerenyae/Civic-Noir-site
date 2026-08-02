@@ -565,7 +565,7 @@ export default function TheRecordIndex() {
             letterSpacing: 0,
           }}
         >
-          Additional artifacts will be unsealed after June 21, 2026.
+          Additional artifacts are unsealed as the record grows.
         </div>
       </footer>
 
