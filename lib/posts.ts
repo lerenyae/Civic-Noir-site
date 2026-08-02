@@ -9,7 +9,7 @@ export const posts: Post[] = [
     excerpt: "Contempt is out. Father's Day, like I said it would be. The manuscript is a book now, and a book belongs to whoever's holding it.",
     content: `Father's Day. Like I said it would be.
 
-Contempt is out. Hardcover, paperback, Kindle. The works. The thing that was fifty-four chapters in a folder eighteen months ago is a book somebody can hold now, and that's the only deadline I ever actually cared about. Not done. Out. There's a difference, and the difference is the reader.
+Contempt is out. Hardcover, paperback, Kindle. The works. The thing that was fifty-six chapters in a folder eighteen months ago is a book somebody can hold now, and that's the only deadline I ever actually cared about. Not done. Out. There's a difference, and the difference is the reader.
 
 I said in an earlier post that a manuscript in a drawer isn't a book. As of today it's not in the drawer. So I'll keep this short, because the work is supposed to talk now, not me.
 
@@ -33,7 +33,7 @@ LeRenyae`,
     category: "Publication Update",
     date: "April 21, 2026",
     excerpt: "Manuscript is done. Cover is with the artist. The work now is different. Less writing, more showing up. Baltimore soon.",
-    content: `Fifty-four chapters. Done.
+    content: `Fifty-six chapters. Done.
 
 Not "close to done." Not "one more pass." Done. The manuscript that started as a question, what does a legal thriller look like when the system is the protagonist, closed its last page earlier this month. The cover is with the artist. Page dimensions are being sorted. Print is next.
 
@@ -87,7 +87,7 @@ The Wire aired twenty years ago. Simon is still working, and so are others, but 
 
 ## And one more. The trip is coming.
 
-I'll set foot in Baltimore before the book releases. Walking those blocks with the manuscript finished, standing in front of the courthouse I've been writing around, checking the details the research couldn't deliver. That's earned, and that's the closing loop. When it happens, you'll read about it here.
+I'll set foot in Baltimore. Walking those blocks with the manuscript finished, standing in front of the courthouse I've been writing around, checking the details the research couldn't deliver. That's earned, and that's the closing loop. When it happens, you'll read about it here.
 
 LeRenyae`,
   },
