@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 const LAUNCH = new Date("2026-06-21T00:00:00-05:00").getTime();
-const PREORDER_URL = "https://www.amazon.com/dp/B0GYVVSFH9";
+const PREORDER_URL = "https://www.amazon.com/dp/B0H48RHL6Z";
 
 export default function StickyBar() {
   const [show, setShow] = useState(false);
