@@ -75,7 +75,7 @@ export default function CivicNoirPage() {
               The Definition
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
-              Civic noir is fiction in which the system itself is the antagonist.
+              Civic noir is fiction in which the system itself is the protagonist.
             </p>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
               Not a corrupt cop. Not a single bad mayor. Not the lone bad apple the
@@ -309,14 +309,14 @@ export default function CivicNoirPage() {
             </div>
 
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
-              And, when it lands:{" "}
+              And now it&rsquo;s here:{" "}
               <Link href="/books" className="text-gold hover:text-gold/80 transition-colors">
                 <strong>CONTEMPT.</strong>
               </Link>{" "}
               My first novel. Baltimore, 2006. A deputy mayor is dead. An
               eighteen-year-old is in county. The lawyer inherited the case from the
               father who didn&rsquo;t live to try it. The system is older than all of
-              them. June 21, 2026.
+              them. Released June 21, 2026.
             </p>
           </SectionReveal>
 
@@ -327,7 +327,7 @@ export default function CivicNoirPage() {
             <p className="font-serif text-sm text-bone-300/50 font-light leading-[1.8] mb-8">
               <strong className="text-bone-300/70">
                 Lerenyae Watkins is a Dallas-based novelist working in the civic
-                noir tradition. CONTEMPT, his debut, releases June 21, 2026.
+                noir tradition. CONTEMPT, his debut, released June 21, 2026.
               </strong>
             </p>
             <div className="flex flex-wrap gap-4">
