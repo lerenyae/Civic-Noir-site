@@ -34,7 +34,7 @@ export default function LinksPage() {
     <section className="min-h-[80vh] flex items-center justify-center px-6 py-24">
       <div className="w-full max-w-md mx-auto text-center">
         <SectionReveal>
-          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
             LeRenyae Watkins
           </p>
         </SectionReveal>
