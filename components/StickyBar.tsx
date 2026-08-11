@@ -23,7 +23,7 @@ export default function StickyBar() {
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 whitespace-nowrap">
           {days !== null ? (days === 0 ? "Out Now" : `${days} days`) : ""}
-          <span className="text-bone-300/40 hidden sm:inline"> &mdash; June 21, 2026</span>
+          <span className="text-bone-300/70 hidden sm:inline"> &mdash; June 21, 2026</span>
         </p>
         <div className="flex items-center gap-3">
           <a href={PREORDER_URL} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-burgundy hover:bg-burgundy-light transition-colors text-bone-100 text-[10px] font-sans font-light tracking-widest uppercase whitespace-nowrap">
