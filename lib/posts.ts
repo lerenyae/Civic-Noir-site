@@ -35,7 +35,7 @@ LeRenyae`,
     excerpt: "Manuscript is done. Cover is with the artist. The work now is different. Less writing, more showing up. Baltimore soon.",
     content: `Fifty-six chapters. Done.
 
-Not "close to done." Not "one more pass." Done. The manuscript that started as a question, what does a legal thriller look like when the system is the protagonist, closed its last page earlier this month. The cover is with the artist. Page dimensions are being sorted. Print is next.
+Not "close to done." Not "one more pass." Done. The manuscript that started as a question, what does a legal thriller look like when the system is the antagonist, closed its last page earlier this month. The cover is with the artist. Page dimensions are being sorted. Print is next.
 
 That part, the writing part, was the long fight. I don't want to undersell it. Ninety-three thousand words of a novel that refused to settle for the easy version of itself. Chapters that got rewritten four, five times because the first attempts reached for the thriller move instead of the civic one. A main character who almost became a hero until the book made him smaller and more honest. Every locked scene earned the lock. That's the only part I'll say for now.
 
