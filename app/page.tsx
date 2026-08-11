@@ -121,7 +121,7 @@ export default function Home() {
       {/* ======================================== */}
       <section className="py-24 px-6">
         <SectionReveal>
-          <SummonsViewer />
+          <div className="max-w-2xl mx-auto text-center mb-10"><div className="flex items-center justify-center gap-4 mb-6"><div className="h-px flex-1 max-w-[60px] bg-gold/20" /><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75">The Summons</p><div className="h-px flex-1 max-w-[60px] bg-gold/20" /></div><h2 className="font-serif text-2xl md:text-3xl text-bone-200 font-light italic leading-snug mb-3">You are hereby summoned to read.</h2><p className="font-serif text-base text-bone-300/60 font-light italic">The case has been filed. Your presence is required.</p></div><SummonsViewer /><div className="mt-12 text-center"><Link href="/chapter-one" className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 hover:text-gold transition-colors duration-300">Read Chapter One &rarr;</Link></div>
         </SectionReveal>
       </section>
 
