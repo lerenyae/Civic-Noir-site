@@ -3,12 +3,12 @@ import Link from "next/link";
 import SectionReveal from "@/components/SectionReveal";
 
 export const metadata: Metadata = {
-  title: "What Is Civic Noir? A Definition — Lerenyae Watkins",
+  title: "What Is Civic Noir? A Definition — LeRenyae Watkins",
   description:
-    "Civic noir is fiction where the system is the antagonist. Lerenyae Watkins, author of CONTEMPT, defines the genre, names its lineage, and explains why it isn't just legal thriller with extra footnotes.",
+    "Civic noir is fiction where the system is the antagonist. LeRenyae Watkins, author of CONTEMPT, defines the genre, names its lineage, and explains why it isn't just legal thriller with extra footnotes.",
   alternates: { canonical: "https://lerenyaewatkins.com/civic-noir" },
   openGraph: {
-    title: "What Is Civic Noir? A Definition by Lerenyae Watkins",
+    title: "What Is Civic Noir? A Definition by LeRenyae Watkins",
     description:
       "Civic noir is fiction where the system is the antagonist. The genre, defined.",
     type: "article",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "What Is Civic Noir? A Definition by Lerenyae Watkins",
+    title: "What Is Civic Noir? A Definition by LeRenyae Watkins",
     description:
       "Civic noir is fiction where the system is the antagonist. The genre, defined.",
   },
@@ -33,7 +33,7 @@ const schema = {
   url: "https://lerenyaewatkins.com/civic-noir",
   author: {
     "@type": "Person",
-    name: "Lerenyae Watkins",
+    name: "LeRenyae Watkins",
     url: "https://lerenyaewatkins.com",
   },
 };
@@ -326,7 +326,7 @@ export default function CivicNoirPage() {
           <SectionReveal delay={100}>
             <p className="font-serif text-sm text-bone-300/50 font-light leading-[1.8] mb-8">
               <strong className="text-bone-300/70">
-                Lerenyae Watkins is a Dallas-based novelist working in the civic
+                LeRenyae Watkins is a Dallas-based novelist working in the civic
                 noir tradition. CONTEMPT, his debut, released June 21, 2026.
               </strong>
             </p>
