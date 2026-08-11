@@ -49,12 +49,14 @@ export const reviews = [
 ];
 
 export const bio = {
-  short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. A father of three based in Plano, Texas, he spent over 15 years in cybersecurity before transitioning to writing full time. His debut novel, Contempt, is available now alongside an 18-track original soundtrack he composed for the book.",
-  long: `LeRenyae Lawrence Watkins has been writing since 6th grade. Poetry first, then short stories, scripts, music, and now novels. A father of three living in Plano, Texas, just outside of Dallas, everything he writes comes back to systems. Not the hero who breaks through the wall, but the wall itself. How it was built, who benefits, and what it costs the people on both sides.
+  short: "LeRenyae Lawrence Watkins writes literary crime fiction and legal thrillers grounded in institutional realism, procedural credibility, and psychological consequence. A father of three based in Plano, Texas, he spent more than fifteen years in cybersecurity before turning to fiction full time. He writes best on the road, chasing inspiration in the places his stories live, with a standing goal to set foot in every city he writes about. His debut novel, CONTEMPT, is available now.",
+  long: `LeRenyae Lawrence Watkins has been writing since the sixth grade. Poetry first, then short stories, scripts, music, and now novels. A father of three based in Plano, Texas, just outside Dallas, everything he writes comes back to systems. Not the hero who breaks through the wall, but the wall itself. How it was built, who benefits, and what it costs the people on both sides.
 
-His background spans over 15 years in cybersecurity and enterprise technology sales before he transitioned to writing full time. Whether the work is a legal thriller or historical fiction, he leaves no stone unturned. The courtroom procedure, the zoning law, the chain of custody, the geography. He wants readers to feel like they are standing in the room. \u201CIt felt like I was there\u201D is the compliment he chases.
+His background spans more than fifteen years in cybersecurity and enterprise technology before he turned to fiction full time, and he brings that same discipline to the page. Legal thriller or historical fiction, he leaves no stone unturned. The courtroom procedure, the zoning law, the chain of custody, the geography. He wants readers to feel like they are standing in the room. \u201CIt felt like I was there\u201D is the compliment he chases.
 
-He writes for adaptation. Structure, scenes, and visual language that translates from page to screen. CONTEMPT is his debut novel, available now alongside an 18-track original soundtrack he composed for the book.`,
+He writes best on the move. He travels and cooks, and both feed the work, chasing inspiration in the places his stories live and writing on location so the streets, the light, and the food reach the page honestly. His goal is simple and stubborn: to set foot in every place he writes about.
+
+He writes for adaptation, building structure, scenes, and visual language that translate from page to screen. CONTEMPT is his debut and the first novel in the seven-book Civic Noir Universe, released with an original companion soundtrack.`,
   photo: "/covers/IMG_2374.JPG",
   howIWrite: [
     "Systems apply pressure. People absorb it.",
