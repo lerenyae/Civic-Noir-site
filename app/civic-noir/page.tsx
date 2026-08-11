@@ -50,13 +50,13 @@ export default function CivicNoirPage() {
       <section className="pt-16 pb-8 px-6">
         <div className="max-w-3xl mx-auto">
           <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
               Genre &middot; Definition
             </p>
             <h1 className="font-serif text-4xl md:text-5xl text-bone-200 font-light">
               What Is Civic Noir?
             </h1>
-            <p className="font-serif text-lg md:text-xl text-bone-300/50 font-light italic mt-4">
+            <p className="font-serif text-lg md:text-xl text-bone-300/75 font-light italic mt-4">
               A definition, a lineage, and what separates it from legal thriller.
             </p>
           </SectionReveal>
@@ -71,7 +71,7 @@ export default function CivicNoirPage() {
 
           {/* The Definition */}
           <SectionReveal>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               The Definition
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
@@ -96,7 +96,7 @@ export default function CivicNoirPage() {
 
           {/* What Separates It */}
           <SectionReveal delay={100}>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               What Separates Civic Noir from Legal Thriller
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
@@ -132,7 +132,7 @@ export default function CivicNoirPage() {
 
           {/* The Lineage */}
           <SectionReveal delay={100}>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               The Lineage
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
@@ -161,7 +161,7 @@ export default function CivicNoirPage() {
 
           {/* What It Demands */}
           <SectionReveal delay={100}>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               What Civic Noir Demands of the Writer
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-8">
@@ -170,7 +170,7 @@ export default function CivicNoirPage() {
 
             <div className="space-y-10">
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">01</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">01</span>
                 <div>
                   <p className="text-sm text-bone-200/80 font-sans font-light tracking-wide uppercase mb-3">
                     Systems apply pressure. People absorb it.
@@ -185,7 +185,7 @@ export default function CivicNoirPage() {
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">02</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">02</span>
                 <div>
                   <p className="text-sm text-bone-200/80 font-sans font-light tracking-wide uppercase mb-3">
                     Dialogue is subtext first.
@@ -199,7 +199,7 @@ export default function CivicNoirPage() {
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">03</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">03</span>
                 <div>
                   <p className="text-sm text-bone-200/80 font-sans font-light tracking-wide uppercase mb-3">
                     Procedure is never background.
@@ -215,7 +215,7 @@ export default function CivicNoirPage() {
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">04</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">04</span>
                 <div>
                   <p className="text-sm text-bone-200/80 font-sans font-light tracking-wide uppercase mb-3">
                     No clean endings.
@@ -234,7 +234,7 @@ export default function CivicNoirPage() {
 
           {/* Why It Matters Now */}
           <SectionReveal delay={100}>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               Why It Matters Now
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
@@ -261,7 +261,7 @@ export default function CivicNoirPage() {
 
           {/* Where to Begin */}
           <SectionReveal delay={100}>
-            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8">
+            <h2 className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8">
               Where to Begin
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-8">
@@ -270,28 +270,28 @@ export default function CivicNoirPage() {
 
             <div className="space-y-6 mb-10">
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">&mdash;</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">&mdash;</span>
                 <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8]">
                   <strong className="text-bone-200/80">Walter Mosley</strong> &mdash; <em>Devil in a Blue Dress.</em> The
                   system as gravitational field. Easy Rawlins inside it.
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">&mdash;</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">&mdash;</span>
                 <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8]">
                   <strong className="text-bone-200/80">George Pelecanos</strong> &mdash; <em>The Sweet Forever.</em> DC.
                   The trade. The cost.
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">&mdash;</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">&mdash;</span>
                 <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8]">
                   <strong className="text-bone-200/80">Attica Locke</strong> &mdash; <em>Bluebird, Bluebird.</em> East
                   Texas. Race. Land. Procedure.
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">&mdash;</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">&mdash;</span>
                 <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8]">
                   <strong className="text-bone-200/80">S.A. Cosby</strong> &mdash; <em>All the Sinners Bleed.</em> The
                   current generation. Sheriff. Small town. The real machinery
@@ -299,7 +299,7 @@ export default function CivicNoirPage() {
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <span className="text-gold/30 text-xs mt-1 font-light">&mdash;</span>
+                <span className="text-gold/60 text-xs mt-1 font-light">&mdash;</span>
                 <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8]">
                   <strong className="text-bone-200/80">Richard Wright</strong> &mdash; <em>Native Son.</em> The original
                   argument that the system makes the man before the man makes the
@@ -324,7 +324,7 @@ export default function CivicNoirPage() {
 
           {/* Bio + Links */}
           <SectionReveal delay={100}>
-            <p className="font-serif text-sm text-bone-300/50 font-light leading-[1.8] mb-8">
+            <p className="font-serif text-sm text-bone-300/75 font-light leading-[1.8] mb-8">
               <strong className="text-bone-300/70">
                 LeRenyae Watkins is a Dallas-based novelist working in the civic
                 noir tradition. CONTEMPT, his debut, released June 21, 2026.
