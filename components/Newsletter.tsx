@@ -50,7 +50,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
             placeholder="Email"
             required
             disabled={status === "loading"}
-            className="flex-1 bg-transparent border-b border-bone-300/20 text-bone text-sm font-light py-2 px-0 placeholder:text-bone-300/30 focus:outline-none focus:border-gold/50 transition-colors disabled:opacity-50"
+            className="flex-1 bg-transparent border-b border-bone-300/20 text-bone text-sm font-light py-2 px-0 placeholder:text-bone-300/60 focus:outline-none focus:border-gold/50 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
@@ -71,13 +71,13 @@ export default function Newsletter({ variant = "default", campaign, successLine 
     <section id="newsletter" className="py-24 px-6 border-t border-bone-300/5">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-14">
-          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
             The Circuit
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-bone-200 font-light mb-5">
             Stay in the circuit.
           </h2>
-          <p className="text-sm text-bone-300/50 font-light leading-relaxed max-w-md mx-auto">
+          <p className="text-sm text-bone-300/75 font-light leading-relaxed max-w-md mx-auto">
             Subscribers get early access to everything before it goes public.
             No algorithms. No noise. Just the work.
           </p>
@@ -85,7 +85,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-14">
           <div className="border border-bone-300/10 p-5">
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-3">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-3">
               01
             </p>
             <p className="text-sm text-bone-300/60 font-light leading-relaxed">
@@ -93,7 +93,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
             </p>
           </div>
           <div className="border border-bone-300/10 p-5">
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-3">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-3">
               02
             </p>
             <p className="text-sm text-bone-300/60 font-light leading-relaxed">
@@ -101,7 +101,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
             </p>
           </div>
           <div className="border border-bone-300/10 p-5">
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/40 mb-3">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/70 mb-3">
               03
             </p>
             <p className="text-sm text-bone-300/60 font-light leading-relaxed">
@@ -121,7 +121,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
             placeholder="Your email"
             required
             disabled={status === "loading"}
-            className="flex-1 bg-noir-800/50 border border-bone-300/10 text-bone text-sm font-light py-3 px-5 placeholder:text-bone-300/30 focus:outline-none focus:border-gold/30 transition-colors disabled:opacity-50"
+            className="flex-1 bg-noir-800/50 border border-bone-300/10 text-bone text-sm font-light py-3 px-5 placeholder:text-bone-300/60 focus:outline-none focus:border-gold/30 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
@@ -136,7 +136,7 @@ export default function Newsletter({ variant = "default", campaign, successLine 
             {errorMsg}
           </p>
         )}
-        <p className="text-[10px] text-bone-300/20 mt-4 font-light text-center">
+        <p className="text-[10px] text-bone-300/55 mt-4 font-light text-center">
           No spam. Unsubscribe anytime.
         </p>
       </div>
