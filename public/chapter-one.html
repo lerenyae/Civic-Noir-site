@@ -35,6 +35,7 @@ body { background: #e8e4dc; color: var(--ink); font-family: var(--font-body); fo
 .chapter-pov { font-family: var(--font-body); font-size: 1.1rem; font-style: italic; color: var(--muted); display: block; margin-top: 8px; }
 .chapter-body p { text-indent: var(--indent); margin: 0; padding: 0; font-size: var(--body-size); line-height: var(--leading); font-weight: 400; hyphens: auto; -webkit-hyphens: auto; word-spacing: -0.01em; }
 .chapter-body > p:first-child { text-indent: 0; }
+.chapter-body > p:first-child .lead-caps { text-transform: uppercase; letter-spacing: 0.045em; font-weight: 500; }
 .scene-break + p, .scene-header + p, .scene-break + * p:first-child, .scene-header + * p:first-child { text-indent: 0; }
 .chapter-body p.no-indent { text-indent: 0; }
 .chapter-body p.beat { text-indent: 0; margin-top: 1em; margin-bottom: 0; }
@@ -77,7 +78,7 @@ body { background: #e8e4dc; color: var(--ink); font-family: var(--font-body); fo
 
 <div class="chapter-body">
 
-<p>Most collapses don&#8217;t announce themselves. They keep their appointments.</p>
+<p><span class="lead-caps">Most collapses don&#8217;t announce themselves.</span> They keep their appointments.</p>
 <p>Gaston Hall carried the heat of old institutions. Dark beams overhead, air thick with wool, cologne, money past explaining itself. Commencement programs rested on laps.</p>
 <p class="beat">Shawn sat where they&#8217;d put him.</p>
 <p>A chair off his father&#8217;s shoulder, angled for the cameras if they bothered. He wore the robe wrong. The hood at his neck, fabric too warm, the seam chewing where sweat gathered.</p>
