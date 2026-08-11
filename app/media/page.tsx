@@ -19,7 +19,7 @@ export default function MediaPage() {
       <section className="pt-16 pb-8 px-6">
         <div className="max-w-4xl mx-auto">
           <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
               Press
             </p>
             <h1 className="font-serif text-4xl md:text-5xl text-bone-200 font-light">
@@ -35,7 +35,7 @@ export default function MediaPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
               Appearances
             </p>
             <div className="space-y-6">
@@ -49,13 +49,13 @@ export default function MediaPage() {
                       <p className="text-[11px] font-sans font-light tracking-widest uppercase text-gold/60 mb-1">
                         {event.displayDate}
                       </p>
-                      <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/40 mb-4">
+                      <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/70 mb-4">
                         {event.time}
                       </p>
-                      <p className="text-xs text-bone-300/40 font-light tracking-wide mb-4">
+                      <p className="text-xs text-bone-300/70 font-light tracking-wide mb-4">
                         {event.street} &middot; {event.cityStateZip}
                       </p>
-                      <p className="text-sm text-bone-300/50 font-light leading-[1.8] max-w-xl">
+                      <p className="text-sm text-bone-300/75 font-light leading-[1.8] max-w-xl">
                         {event.note}
                       </p>
                     </div>
@@ -83,7 +83,7 @@ export default function MediaPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
               Trailer
             </p>
             <div className="relative w-full overflow-hidden border border-bone-300/10" style={{ paddingBottom: "56.25%" }}>
@@ -105,7 +105,7 @@ export default function MediaPage() {
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <SectionReveal>
-            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+            <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
               Interviews &amp; Press
             </p>
             <div className="relative w-full overflow-hidden border border-bone-300/10" style={{ paddingBottom: "56.25%" }}>
@@ -117,7 +117,7 @@ export default function MediaPage() {
                 allowFullScreen
               />
             </div>
-            <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/40 mt-4">
+            <p className="text-[11px] font-sans font-light tracking-widest uppercase text-bone-300/70 mt-4">
               A60 &middot; Sit-Down Interview
             </p>
           </SectionReveal>
@@ -130,13 +130,13 @@ export default function MediaPage() {
             <div>
               <SectionReveal>
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
                     Author
                   </p>
                   <p className="font-serif text-2xl text-bone-200 font-light mb-2">
                     {mediaKit.authorName}
                   </p>
-                  <p className="text-xs text-bone-300/40 font-light tracking-wide">
+                  <p className="text-xs text-bone-300/70 font-light tracking-wide">
                     {mediaKit.genre}
                   </p>
                 </div>
@@ -144,13 +144,13 @@ export default function MediaPage() {
 
               <SectionReveal delay={100}>
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
                     Bio
                   </p>
                   {mediaKit.bio.split("\n\n").map((para, i) => (
                     <p
                       key={i}
-                      className="text-sm text-bone-300/50 font-light leading-[1.8] mb-4 last:mb-0"
+                      className="text-sm text-bone-300/75 font-light leading-[1.8] mb-4 last:mb-0"
                     >
                       {para}
                     </p>
@@ -160,10 +160,10 @@ export default function MediaPage() {
 
               <SectionReveal delay={200}>
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
                     Representation
                   </p>
-                  <p className="text-sm text-bone-300/50 font-light italic">
+                  <p className="text-sm text-bone-300/75 font-light italic">
                     {mediaKit.representation}
                   </p>
                 </div>
@@ -171,10 +171,10 @@ export default function MediaPage() {
 
               <SectionReveal delay={250}>
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
                     Comp Titles
                   </p>
-                  <p className="text-sm text-bone-300/50 font-light italic">
+                  <p className="text-sm text-bone-300/75 font-light italic">
                     {(mediaKit as any).compTitles}
                   </p>
                 </div>
@@ -182,7 +182,7 @@ export default function MediaPage() {
 
               <SectionReveal delay={300}>
                 <div>
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">
                     Press Contact
                   </p>
                   <a
@@ -198,16 +198,16 @@ export default function MediaPage() {
             <div>
               <SectionReveal>
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
                     Available For
                   </p>
                   <div className="space-y-4">
                     {mediaKit.availableFor.map((item, i) => (
                       <div key={i} className="flex items-start gap-4">
-                        <span className="text-gold/30 text-xs mt-0.5 font-light">
+                        <span className="text-gold/60 text-xs mt-0.5 font-light">
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <p className="text-sm text-bone-300/50 font-light">
+                        <p className="text-sm text-bone-300/75 font-light">
                           {item}
                         </p>
                       </div>
@@ -219,19 +219,19 @@ export default function MediaPage() {
               <SectionReveal delay={100}>
                 <div className="gold-rule mb-12" />
                 <div className="mb-12">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
                     Downloads
                   </p>
                   <div className="space-y-4">
                     <a href="/CONTEMPT_Media_Kit.pdf" download className="flex items-center justify-between border border-bone-300/10 p-4 hover:border-gold/20 transition-colors group">
                       <span className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">Press Kit &amp; Sell Sheet</span>
-                      <span className="text-[10px] text-gold/40 tracking-widest uppercase">PDF</span>
+                      <span className="text-[10px] text-gold/70 tracking-widest uppercase">PDF</span>
                     </a>
                     <div className="flex items-center justify-between border border-bone-300/10 p-4 opacity-50">
                       <span className="text-sm text-bone-300/60 font-light">
                         Author Photos (High-Res)
                       </span>
-                      <span className="text-[10px] text-bone-300/30 tracking-widest uppercase">
+                      <span className="text-[10px] text-bone-300/60 tracking-widest uppercase">
                         Coming Soon
                       </span>
                     </div>
@@ -243,7 +243,7 @@ export default function MediaPage() {
                       <span className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">
                         Book Cover: Contempt
                       </span>
-                      <span className="text-[10px] text-gold/40 tracking-widest uppercase">
+                      <span className="text-[10px] text-gold/70 tracking-widest uppercase">
                         PNG
                       </span>
                     </a>
@@ -253,11 +253,11 @@ export default function MediaPage() {
 
               <SectionReveal delay={200}>
                 <div>
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">
                     Press
                   </p>
                                     {mediaKit.pressClippings.length === 0 ? (
-                    <p className="text-sm text-bone-300/30 font-light italic">
+                    <p className="text-sm text-bone-300/60 font-light italic">
                       Press clippings will be added as coverage develops.
                     </p>
                   ) : (
@@ -271,17 +271,17 @@ export default function MediaPage() {
                           className="block border border-bone-300/10 p-4 hover:border-gold/20 transition-colors group"
                         >
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] text-gold/40 tracking-widest uppercase">
+                            <span className="text-[10px] text-gold/70 tracking-widest uppercase">
                               {item.outlet}
                             </span>
-                            <span className="text-[10px] text-bone-300/30 tracking-widest uppercase">
+                            <span className="text-[10px] text-bone-300/60 tracking-widest uppercase">
                               {item.date}
                             </span>
                           </div>
                           <p className="text-sm text-bone-300/60 font-light group-hover:text-bone-200 transition-colors">
                             {item.title}
                           </p>
-                          <p className="text-xs text-bone-300/30 font-light leading-[1.7] mt-2">
+                          <p className="text-xs text-bone-300/60 font-light leading-[1.7] mt-2">
                             {item.description}
                           </p>
                         </a>
