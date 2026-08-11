@@ -61,7 +61,7 @@ export default function Home() {
               href={BN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-burgundy text-bone-100 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:bg-burgundy-light transition-colors duration-300 shadow-lg shadow-black/30"
+              className="inline-block px-6 py-3 sm:px-10 sm:py-4 border border-bone-300/35 text-bone-300/80 text-[11px] sm:text-xs font-sans font-light tracking-widest sm:tracking-ultra uppercase whitespace-nowrap hover:border-gold/50 hover:text-bone transition-colors duration-300"
             >
               Order on Barnes &amp; Noble
             </a>
@@ -210,7 +210,7 @@ export default function Home() {
           <div className="w-16 h-px bg-gold/40 mx-auto mb-8 animate-line-grow origin-center delay-300" />
           <p className="font-serif text-lg md:text-xl text-bone-300/75 font-light italic max-w-lg mx-auto mb-12 animate-fade-in delay-500">Systems over heroes. Subtext over speeches.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-700">
-            <Link href="/books" className="btn-primary">The Work</Link>
+            <Link href="/the-record" className="btn-primary">Enter the Record</Link>
             
           </div>
         </div>
