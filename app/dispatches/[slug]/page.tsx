@@ -28,15 +28,15 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <section className="pt-16 pb-8 px-6"><div className="max-w-2xl mx-auto"><SectionReveal>
-        <Link href="/dispatches" className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/30 hover:text-gold transition-colors mb-8 inline-block">&larr; Dispatches</Link>
-        <div className="flex items-center gap-4 mb-6"><span className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50">{post.category}</span><span className="text-[10px] text-bone-300/20">&mdash;</span><span className="text-[10px] font-sans font-light tracking-widest text-bone-300/30">{post.date}</span></div>
+        <Link href="/dispatches" className="text-[10px] font-sans font-light tracking-ultra uppercase text-bone-300/60 hover:text-gold transition-colors mb-8 inline-block">&larr; Dispatches</Link>
+        <div className="flex items-center gap-4 mb-6"><span className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75">{post.category}</span><span className="text-[10px] text-bone-300/55">&mdash;</span><span className="text-[10px] font-sans font-light tracking-widest text-bone-300/60">{post.date}</span></div>
         <h1 className="font-serif text-3xl md:text-4xl text-bone-200 font-light leading-[1.2] mb-4">{post.title}</h1>
-        <p className="text-xs text-bone-300/30 font-light">{siteConfig.name}</p>
+        <p className="text-xs text-bone-300/60 font-light">{siteConfig.name}</p>
       </SectionReveal></div></section>
       <div className="gold-rule max-w-2xl mx-auto" />
       <article className="py-12 px-6"><div className="max-w-2xl mx-auto">
         <SectionReveal>{renderContent(post.content)}</SectionReveal>
-        <SectionReveal delay={100}><div className="gold-rule mt-12 mb-8" /><p className="text-xs text-bone-300/25 font-light italic">Contempt is a civic noir set in Baltimore. Follow the work at{" "}<Link href="/" className="text-gold/50 hover:text-gold transition-colors">lerenyaewatkins.com</Link>.</p></SectionReveal>
+        <SectionReveal delay={100}><div className="gold-rule mt-12 mb-8" /><p className="text-xs text-bone-300/55 font-light italic">Contempt is a civic noir set in Baltimore. Follow the work at{" "}<Link href="/" className="text-gold/75 hover:text-gold transition-colors">lerenyaewatkins.com</Link>.</p></SectionReveal>
       </div></article>
     </>
   );
