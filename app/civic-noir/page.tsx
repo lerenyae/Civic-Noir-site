@@ -5,12 +5,12 @@ import SectionReveal from "@/components/SectionReveal";
 export const metadata: Metadata = {
   title: "What Is Civic Noir? A Definition — Lerenyae Watkins",
   description:
-    "Civic noir is fiction where the system is the protagonist. Lerenyae Watkins, author of CONTEMPT, defines the genre, names its lineage, and explains why it isn't just legal thriller with extra footnotes.",
+    "Civic noir is fiction where the system is the antagonist. Lerenyae Watkins, author of CONTEMPT, defines the genre, names its lineage, and explains why it isn't just legal thriller with extra footnotes.",
   alternates: { canonical: "https://lerenyaewatkins.com/civic-noir" },
   openGraph: {
     title: "What Is Civic Noir? A Definition by Lerenyae Watkins",
     description:
-      "Civic noir is fiction where the system is the protagonist. The genre, defined.",
+      "Civic noir is fiction where the system is the antagonist. The genre, defined.",
     type: "article",
     url: "https://lerenyaewatkins.com/civic-noir",
     images: ["https://lerenyaewatkins.com/covers/civic-noir-og.jpg"],
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "What Is Civic Noir? A Definition by Lerenyae Watkins",
     description:
-      "Civic noir is fiction where the system is the protagonist. The genre, defined.",
+      "Civic noir is fiction where the system is the antagonist. The genre, defined.",
   },
 };
 
@@ -28,7 +28,7 @@ const schema = {
   "@type": "DefinedTerm",
   name: "Civic Noir",
   description:
-    "Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.",
+    "Fiction where the system is the antagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.",
   inDefinedTermSet: { "@type": "DefinedTermSet", name: "Literary Genres" },
   url: "https://lerenyaewatkins.com/civic-noir",
   author: {
@@ -75,7 +75,7 @@ export default function CivicNoirPage() {
               The Definition
             </h2>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
-              Civic noir is fiction in which the system itself is the protagonist.
+              Civic noir is fiction in which the system itself is the antagonist.
             </p>
             <p className="font-serif text-lg text-bone-300/70 font-light leading-[1.8] mb-6">
               Not a corrupt cop. Not a single bad mayor. Not the lone bad apple the
