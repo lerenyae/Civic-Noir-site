@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "LeRenyae Lawrence Watkins",
   tagline: "Civic Noir",
-  description: "Baltimore, 2006. A deputy mayor is dead. An 18-year-old is framed. The trial is the cover story. CONTEMPT, the debut civic noir from LeRenyae Watkins.",
+  description: "Baltimore, 2006. A deputy mayor is dead. An eighteen-year-old takes the fall. His lawyer inherited the case from the father who died trying it. CONTEMPT, a civic noir by LeRenyae Watkins.",
   url: "https://lerenyaewatkins.com",
   ogImage: "/covers/contempt-cover.png",
   logo: "/logo-crown.png",
