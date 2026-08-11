@@ -29,8 +29,8 @@ export default function StickyBar() {
           <a href={PREORDER_URL} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-burgundy hover:bg-burgundy-light transition-colors text-bone-100 text-[10px] font-sans font-light tracking-widest uppercase whitespace-nowrap">
             Buy on Kindle
           </a>
-          <a href="/#reserve" className="px-4 py-2 border border-bone-300/20 hover:border-gold/50 transition-colors text-bone-300 text-[10px] font-sans font-light tracking-widest uppercase whitespace-nowrap hidden sm:block">
-            Reserve Print Edition
+          <a href="/books" className="px-4 py-2 border border-bone-300/20 hover:border-gold/50 transition-colors text-bone-300 text-[10px] font-sans font-light tracking-widest uppercase whitespace-nowrap hidden sm:block">
+            Buy Print Edition
           </a>
         </div>
       </div>
