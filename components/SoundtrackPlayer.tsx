@@ -121,7 +121,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
 
       {/* GREETING — album cover + live player */}
       <SectionReveal>
-        <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 text-center sm:text-left">
+        <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-8 text-center sm:text-left">
           Original Novel Soundtrack &nbsp;·&nbsp; 18 Tracks
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-[260px_1fr] gap-8 items-start pb-10 mb-12 border-b border-bone-300/10">
@@ -140,7 +140,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
               </h2>
               <p className="text-[11px] font-sans font-light tracking-ultra uppercase text-burgundy-light mt-2">
                 {active.character}
-                <span className="text-bone-300/30">&nbsp; · &nbsp;{active.time}</span>
+                <span className="text-bone-300/60">&nbsp; · &nbsp;{active.time}</span>
               </p>
             </div>
             <div className="w-full overflow-hidden">{embed}</div>
@@ -186,7 +186,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
       <SectionReveal>
         <div className="flex items-center gap-4 mb-10">
           <div className="h-px flex-1 bg-gold/20" />
-          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 whitespace-nowrap">
+          <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 whitespace-nowrap">
             Tracklist &mdash; Character &amp; Chapter Pairings
           </p>
           <div className="h-px flex-1 bg-gold/20" />
@@ -209,7 +209,7 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
               >
                 <span
                   className={`text-xs font-sans font-light tabular-nums pt-0.5 transition-colors duration-200 ${
-                    isActive ? "text-burgundy-light" : "text-bone-300/30 group-hover:text-burgundy-light"
+                    isActive ? "text-burgundy-light" : "text-bone-300/60 group-hover:text-burgundy-light"
                   }`}
                 >
                   {track.num}
@@ -225,13 +225,13 @@ export default function SoundtrackPlayer({ tracks }: { tracks: Track[] }) {
                   <p className="text-[11px] text-burgundy-light font-sans font-light italic mt-0.5">
                     {track.character}
                   </p>
-                  <p className="text-xs text-bone-300/40 font-light leading-relaxed mt-1.5 hidden md:block group-hover:text-bone-300/55 transition-colors duration-300">
+                  <p className="text-xs text-bone-300/70 font-light leading-relaxed mt-1.5 hidden md:block group-hover:text-bone-300/55 transition-colors duration-300">
                     {track.moment}
                   </p>
                 </div>
                 <span
                   className={`text-xs font-sans font-light tabular-nums pt-1 pl-4 transition-colors duration-200 ${
-                    isActive ? "text-burgundy-light" : "text-bone-300/25"
+                    isActive ? "text-burgundy-light" : "text-bone-300/55"
                   }`}
                 >
                   {track.time}
