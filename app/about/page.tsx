@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "About", description: `${siteConfig.n
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-16 pb-8 px-6"><div className="max-w-4xl mx-auto"><SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-4">About</p><h1 className="font-serif text-4xl md:text-5xl text-bone-200 font-light">The Author</h1></SectionReveal></div></section>
+      <section className="pt-16 pb-8 px-6"><div className="max-w-4xl mx-auto"><SectionReveal><p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-4">About</p><h1 className="font-serif text-4xl md:text-5xl text-bone-200 font-light">The Author</h1></SectionReveal></div></section>
       <div className="gold-rule max-w-4xl mx-auto" />
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -19,11 +19,11 @@ export default function AboutPage() {
               <SectionReveal delay={100}>
                 <div className="gold-rule mb-10" />
                 <div className="mb-10">
-                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-6">How I Write</p>
-                  <div className="space-y-4">{bio.howIWrite.map((tenet, i) => (<div key={i} className="flex items-start gap-4"><span className="text-gold/30 text-xs mt-1 font-light">{String(i + 1).padStart(2, "0")}</span><p className="text-sm text-bone-300/50 font-light">{tenet}</p></div>))}</div>
+                  <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/75 mb-6">How I Write</p>
+                  <div className="space-y-4">{bio.howIWrite.map((tenet, i) => (<div key={i} className="flex items-start gap-4"><span className="text-gold/60 text-xs mt-1 font-light">{String(i + 1).padStart(2, "0")}</span><p className="text-sm text-bone-300/75 font-light">{tenet}</p></div>))}</div>
                 </div>
               </SectionReveal>
-              <SectionReveal delay={200}><div className="gold-rule mb-10" /><p className="text-sm text-bone-300/40 font-light mb-6">For press inquiries, speaking, or adaptation interest:</p><a href="/contact" className="btn-primary">Get in touch</a></SectionReveal>
+              <SectionReveal delay={200}><div className="gold-rule mb-10" /><p className="text-sm text-bone-300/70 font-light mb-6">For press inquiries, speaking, or adaptation interest:</p><a href="/contact" className="btn-primary">Get in touch</a></SectionReveal>
             </div>
           </div>
         </div>
