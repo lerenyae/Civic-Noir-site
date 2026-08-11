@@ -78,13 +78,13 @@ export async function POST(req: Request) {
           from: REPLY_FROM,
           to: email,
           subject: "Received — LeRenyae Watkins",
-          text: `${name},\n\nYour message is on the record. I read every one personally and will respond when appropriate.\n\nIn the meantime, Contempt releases June 2026. You can pre-order when it goes live.\n\n— LeRenyae Watkins\nlerenyaewatkins.com`,
+          text: `${name},\n\nYour message is on the record. I read every one personally and will respond when appropriate.\n\nIn the meantime, Contempt is out now in hardcover, paperback, and Kindle. Find it at lerenyaewatkins.com.\n\n— LeRenyae Watkins\nlerenyaewatkins.com`,
           html: `
             <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 520px; margin: 0 auto; padding: 40px 24px; color: #222;">
               <p style="font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #8a6d3b; margin: 0 0 32px;">On the Record</p>
               <p style="font-size: 16px; line-height: 1.8; margin: 0 0 20px;">${escapeHtml(name)},</p>
               <p style="font-size: 16px; line-height: 1.8; margin: 0 0 20px;">Your message is on the record. I read every one personally and will respond when appropriate.</p>
-              <p style="font-size: 16px; line-height: 1.8; margin: 0 0 32px;">In the meantime, <em>Contempt</em> releases June 2026.</p>
+              <p style="font-size: 16px; line-height: 1.8; margin: 0 0 32px;">In the meantime, <em>Contempt</em> is out now, in hardcover, paperback, and Kindle.</p>
               <p style="font-size: 14px; line-height: 1.8; margin: 0; color: #555;">— LeRenyae Watkins<br/><a href="https://lerenyaewatkins.com" style="color: #8a6d3b; text-decoration: none;">lerenyaewatkins.com</a></p>
             </div>
           `,
