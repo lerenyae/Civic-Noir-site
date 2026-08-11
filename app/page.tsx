@@ -223,7 +223,7 @@ export default function Home() {
         <SectionReveal>
           <Link href="/civic-noir" className="block max-w-2xl mx-auto text-center group">
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/50 mb-8 group-hover:text-gold/80 transition-colors duration-300">What is Civic Noir</p>
-            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic group-hover:text-bone-300/80 transition-colors duration-300">&ldquo;Fiction where the system is the protagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
+            <blockquote className="font-serif text-2xl md:text-3xl text-bone-300/60 font-light leading-relaxed italic group-hover:text-bone-300/80 transition-colors duration-300">&ldquo;Fiction where the system is the antagonist, observation replaces exposition, and tension emerges from the machinery of institutions rather than the heroism of individuals.&rdquo;</blockquote>
             <p className="text-[10px] font-sans font-light tracking-ultra uppercase text-gold/30 mt-6 group-hover:text-gold/60 transition-colors duration-300">Read the full definition &rarr;</p>
           </Link>
         </SectionReveal>
