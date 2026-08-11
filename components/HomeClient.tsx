@@ -12,12 +12,12 @@ const excerpts: Excerpt[] = [
   { label: "The Permission", where: "Worcester County Circuit Court", who: "Leo's last words to his son", text: "Second chair's safe. You don't have to own the room from there." },
   { label: "The Firm", where: "Davidson & Associates", who: "Shawn, back after two years", text: "Davidson & Associates didn't welcome. It measured." },
   { label: "The Mayor", where: "Baltimore City Hall", who: "Charles Dawson", text: "Men like Leo make messes so theirs can be seen as clean. I expect nothing different from the son. Maybe worse." },
-  { label: "The Rule", where: "The Iron Rail Diner", who: "Shawn, on his father's method", text: "Pick ground, not comfort. That was how you survived a city that hated straight lines." },
-  { label: "The Inheritance", where: "Leo's briefcase", who: "Shawn, opening what Leo left", text: "A note in his father's hand: Debt makes the honest useful. \"This isn't a case file,\" he said quietly. \"It's leverage.\"" },
+  { label: "The Rule", where: "The Iron Rail Diner", who: "Shawn, on his father's method", text: "Leo had taught him that. Pick ground over comfort." },
+  { label: "The Inheritance", where: "Leo's briefcase", who: "Shawn, opening what Leo left", text: "A note, typed and initialed: Debt makes the honest useful. \"Leverage,\" he said quietly." },
   { label: "The Narrative", where: "The Sentinel Post", who: "Donna, to Jordan Grey", text: "That's narrative. You just handed Baltimore a guy to root for." },
-  { label: "The Downpour", where: "Holliday Street", who: "Jordan, into the protest", text: "Rain that had stopped being weather and started being something the city was carrying. Not falling. Depositing." },
+  { label: "The Choice", where: "Holliday Street", who: "The chant the city made", text: "Garrick. Moretti. Pick one. The city didn't care which." },
   { label: "The Desk", where: "Property Crimes", who: "Detective Phil Han, reassigned", text: "City bleeding out and he's writing up the band-aids." },
-  { label: "The Brother", where: "Jessup Correctional", who: "Han, working a favor", text: "He looked at Han like you look at a bill you already opened." },
+  { label: "The Brother", where: "Jessup Correctional", who: "Daniel Han, Han's brother", text: "Off-duty officer, Highlandtown, one swing that cost a decade." },
   { label: "The Model", where: "Dawson Group Boardroom", who: "The development, in miniature", text: "Chesapeake Landing the way it was supposed to exist by 2016. Everything sterilized in miniature. No scaffolding, sirens, or memory." },
   { label: "The Defense", where: "The War Room", who: "Jamie, building the case", text: "Chain is people. We make them people. 'Certainty' is branding." },
   { label: "The Spine", where: "Courtroom 4C", who: "Shawn, reading the State's case", text: "They want a story that doesn't sweat. Convenience isn't certainty." },
@@ -27,7 +27,7 @@ const excerpts: Excerpt[] = [
   { label: "The Father", where: "Leo's Brownstone", who: "Shawn, alone with what he found", text: "You knew. You fucking knew." },
   { label: "The Funeral", where: "Mount Auburn Cemetery", who: "Han", text: "A man attends enough funerals, death stops arriving. It just stands there waiting when he pulls up." },
   { label: "The Block", where: "O'Connell's Boxing Club", who: "Han, after the shooting", text: "Twenty-eight years of running this block clean punched full of holes." },
-  { label: "The Clock", where: "Penn Station, 2007", who: "One year later", text: "He didn't trust a building that couldn't keep its own time." },
+  { label: "The Coda", where: "Penn Station, 2007", who: "Nico, one year later", text: "Nico took the one nearest the window, where Charles Street came through the glass in long columns of morning." },
 ];
 
 const pageCount = Math.ceil(excerpts.length / PAGE_SIZE);
