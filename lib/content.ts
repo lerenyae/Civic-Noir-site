@@ -101,5 +101,5 @@ export const navigation: { label: string; href: string; cta?: boolean; accent?: 
   { label: "About", href: "/about" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
-  { label: "Soundtrack", href: "/soundtrack", accent: true },
+  { label: "Soundtrack", href: "/soundtrack" },
 ];
