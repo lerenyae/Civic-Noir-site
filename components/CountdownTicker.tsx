@@ -44,11 +44,11 @@ export default function CountdownTicker() {
   return (
     <div className="flex items-start justify-center gap-3 sm:gap-5" role="timer" aria-label="Countdown to launch, June 21, 2026">
       <Cell v={t.days} label="Days" />
-      <span className="font-serif text-2xl sm:text-3xl text-gold/50 leading-none pt-0.5">:</span>
+      <span className="font-serif text-2xl sm:text-3xl text-gold/75 leading-none pt-0.5">:</span>
       <Cell v={t.hours} label="Hours" />
-      <span className="font-serif text-2xl sm:text-3xl text-gold/50 leading-none pt-0.5">:</span>
+      <span className="font-serif text-2xl sm:text-3xl text-gold/75 leading-none pt-0.5">:</span>
       <Cell v={t.mins} label="Min" />
-      <span className="font-serif text-2xl sm:text-3xl text-gold/50 leading-none pt-0.5">:</span>
+      <span className="font-serif text-2xl sm:text-3xl text-gold/75 leading-none pt-0.5">:</span>
       <Cell v={t.secs} label="Sec" />
     </div>
   );
